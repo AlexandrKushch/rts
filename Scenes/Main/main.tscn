@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c4c412x3vut3j" path="res://Assets/Terrain/Tileset/Tilemap_color2.png" id="5_imbg2"]
 [ext_resource type="TileSet" uid="uid://ba68yn6mvywfx" path="res://Tilesets/tile_set.tres" id="6_2a143"]
 [ext_resource type="PackedScene" uid="uid://r4ncnt86o6sr" path="res://Scenes/Controllers/SelectionScenes/select_area.tscn" id="8_hryqi"]
-[ext_resource type="PackedScene" uid="uid://c5ni0fi5ycvwj" path="res://Scenes/Units/unit_base.tscn" id="8_y3v7k"]
+[ext_resource type="PackedScene" uid="uid://k7krsgxhrgo2" path="res://Scenes/Units/Pawn/pawn.tscn" id="9_hryqi"]
 [ext_resource type="Texture2D" uid="uid://duv1buute15wa" path="res://Assets/Terrain/Tileset/Water Foam.png" id="10_imbg2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hfg1r"]
@@ -158,11 +158,23 @@ end_position = Vector2(-43, -20)
 [node name="Units" type="Node2D" parent="." unique_id=183268636]
 y_sort_enabled = true
 
-[node name="UnitBase" parent="Units" unique_id=1673489485 instance=ExtResource("8_y3v7k")]
-position = Vector2(227, 114)
+[node name="Pawn" parent="Units" unique_id=1673489485 instance=ExtResource("9_hryqi")]
+position = Vector2(192, 105)
 
-[node name="UnitBase2" parent="Units" unique_id=984191810 instance=ExtResource("8_y3v7k")]
-position = Vector2(359, 107)
+[node name="Pawn2" parent="Units" unique_id=1092385501 instance=ExtResource("9_hryqi")]
+position = Vector2(335, 117)
 
-[node name="UnitBase3" parent="Units" unique_id=625753356 instance=ExtResource("8_y3v7k")]
-position = Vector2(306, 224)
+[node name="Pawn3" parent="Units" unique_id=788652478 instance=ExtResource("9_hryqi")]
+position = Vector2(330, 214)
+
+[node name="Pawn4" parent="Units" unique_id=1131832222 instance=ExtResource("9_hryqi")]
+position = Vector2(254, 173)
+
+[node name="Pawn5" parent="Units" unique_id=576303787 instance=ExtResource("9_hryqi")]
+position = Vector2(276, 24)
+
+[node name="Pawn6" parent="Units" unique_id=473000937 instance=ExtResource("9_hryqi")]
+position = Vector2(397, 62)
+
+[node name="Pawn7" parent="Units" unique_id=1238948312 instance=ExtResource("9_hryqi")]
+position = Vector2(421, 154)

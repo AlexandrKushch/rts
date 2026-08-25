@@ -34,10 +34,12 @@ public partial class UnitsController : Node2D
         
         if (Input.IsActionJustReleased(InputMapGlobal.Rmb))
         {
+            int i = 0;
             foreach (var unit in SelectedUnits)
             {
-                unit.Target = GetGlobalMousePosition();
+                unit.Target = GetGlobalMousePosition() + RandomExtension.GetRandomPointInCircle(i * 20);
                 unit.UpdatePath();
+                i++;
             }
         }
     }
@@ -55,7 +57,7 @@ public partial class UnitsController : Node2D
     private void SelectUnits()
     {
         SelectedUnits = _selectArea.GetUnits();
-        
+
         foreach (var unit in SelectedUnits)
         {
             unit.UpdateSelection(true);

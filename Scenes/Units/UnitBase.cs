@@ -4,8 +4,8 @@ public partial class UnitBase : CharacterBody2D
 {
 	private const float _movementSpeed = 100f;
 
-    private NavigationAgent2D NavigationAgent2D;
-	private Node2D Selection;
+    protected NavigationAgent2D NavigationAgent2D;
+	protected Node2D Selection;
 
 	public Vector2? Target { get; set; }
 
@@ -36,7 +36,7 @@ public partial class UnitBase : CharacterBody2D
 		Velocity = safeVelocity;
 	}
 
-	public void UpdatePath()
+	public virtual void UpdatePath()
 	{
 		if (Target == null) return;
 		NavigationAgent2D.TargetPosition = Target.Value;
