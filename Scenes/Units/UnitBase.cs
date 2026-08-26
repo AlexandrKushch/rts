@@ -5,16 +5,14 @@ public partial class UnitBase : CharacterBody2D
 	private const float _movementSpeed = 100f;
 
     protected NavigationAgent2D NavigationAgent2D;
-	protected Node2D Selection;
 
 	public Vector2? Target { get; set; }
+
+	public Node2D TargetObject { get; set; }
 
     public override void _Ready()
     {
         NavigationAgent2D = GetNode<NavigationAgent2D>(nameof(NavigationAgent2D));
-		Selection = GetNode<Node2D>(nameof(Selection));
-
-		UpdateSelection(false);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -40,10 +38,5 @@ public partial class UnitBase : CharacterBody2D
 	{
 		if (Target == null) return;
 		NavigationAgent2D.TargetPosition = Target.Value;
-	}
-
-	public void UpdateSelection(bool value)
-	{
-		Selection.Visible = value;
 	}
 }

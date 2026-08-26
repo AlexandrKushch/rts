@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bfbkv3onjobpd"]
+
+[ext_resource type="PackedScene" uid="uid://cpss5e0hxbiu8" path="res://Scenes/Resources/Wood/tree_base.tscn" id="1_w350j"]
+[ext_resource type="Texture2D" uid="uid://dqfh4lnud51yb" path="res://Assets/Terrain/Resources/Wood/Trees/Tree4.png" id="2_74gw3"]
+
+[node name="Tree4" unique_id=1936357647 instance=ExtResource("1_w350j")]
+
+[node name="SelectableComponent" parent="." index="2" unique_id=550510253]
+position = Vector2(0, -15)
+
+[node name="Visual" parent="SelectableComponent" index="0" unique_id=946751036]
+position = Vector2(0, -17)
+scale = Vector2(1, 1)
+
+[node name="Sprite2D" parent="Visual" parent_id_path=PackedInt32Array(1800092084) index="0" unique_id=413574009]
+position = Vector2(-2, 23)
+texture = ExtResource("2_74gw3")
+
+[editable path="SelectableComponent"]

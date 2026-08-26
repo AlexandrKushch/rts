@@ -42,11 +42,11 @@ public partial class SelectArea : Area2D
         CollisionRectangleShape2D = CollisionShape2D.Shape as RectangleShape2D;
     }
 
-    public HashSet<UnitBase> GetUnits()
+    public HashSet<SelectableComponent> GetSelection()
     {
-        return GetOverlappingBodies()
-            .Where(x => x is UnitBase unit && unit != null)
-            .Select(x => x as UnitBase)
+        return GetOverlappingAreas()
+            .Where(x => x is SelectableComponent unit && unit != null)
+            .Select(x => x as SelectableComponent)
             .ToHashSet();
     }
 }

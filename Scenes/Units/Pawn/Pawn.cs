@@ -2,6 +2,8 @@ using Godot;
 
 public partial class Pawn : UnitBase
 {
+    private const int MaxCollectableCapacity = 15;
+
     private PawnVisual Visual;
 
     public override void _Ready()
@@ -20,5 +22,10 @@ public partial class Pawn : UnitBase
     public override void UpdatePath()
     {
         base.UpdatePath();
+
+        if (TargetObject is ResourceBase resource)
+        {
+            GD.Print(resource.ResourceType.Name);
+        }
     }
 }

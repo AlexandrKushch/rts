@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ResourceType" format=3 uid="uid://cj7uk3l8yh8rq"]
+
+[ext_resource type="Texture2D" uid="uid://ckj0epo2gp5cd" path="res://Assets/UI Elements/UI Elements/Icons/Icon_02.png" id="1_fcucr"]
+[ext_resource type="Script" uid="uid://caks0w8rk10ox" path="res://Scenes/Resources/ResourceType.cs" id="1_g0n54"]
+
+[resource]
+script = ExtResource("1_g0n54")
+Name = "wood"
+Icon = ExtResource("1_fcucr")
+metadata/_custom_type_script = "uid://caks0w8rk10ox"
