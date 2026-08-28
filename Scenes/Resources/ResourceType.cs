@@ -7,5 +7,8 @@ public partial class ResourceType : Resource
     public string Name { get; set; }
 
     [Export]
+    public string InstrumentName { get; set; }
+
+    [Export]
     public Texture2D Icon { get; set; }
 }

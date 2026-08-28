@@ -12,8 +12,10 @@ position = Vector2(0, -15)
 position = Vector2(0, -17)
 scale = Vector2(1, 1)
 
-[node name="Sprite2D" parent="Visual" parent_id_path=PackedInt32Array(1800092084) index="0" unique_id=413574009]
-position = Vector2(-2, 23)
+[node name="Visual" parent="." index="3" unique_id=1800092084]
+position = Vector2(0, 22)
+
+[node name="Sprite2D" parent="Visual" index="0" unique_id=413574009]
 texture = ExtResource("2_74gw3")
 
 [editable path="SelectableComponent"]

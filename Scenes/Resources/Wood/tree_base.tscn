@@ -32,8 +32,9 @@ _data = {
 &"idle": SubResource("Animation_4e3nm")
 }
 
-[node name="TreeBase" type="StaticBody2D" unique_id=1936357647]
+[node name="TreeBase" type="StaticBody2D" unique_id=1936357647 node_paths=PackedStringArray("AnimationPlayer")]
 script = ExtResource("1_nbom4")
+AnimationPlayer = NodePath("Visual/AnimationPlayer")
 ResourceType = ExtResource("2_oexb5")
 Quantity = 10
 
@@ -57,13 +58,12 @@ position = Vector2(0, -38)
 shape = SubResource("RectangleShape2D_fwvsl")
 
 [node name="Visual" type="Node2D" parent="." unique_id=1800092084]
-position = Vector2(0, -86)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visual" unique_id=413574009]
+position = Vector2(0, -86)
 hframes = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" unique_id=1633978770]
 libraries/ = SubResource("AnimationLibrary_bg567")
-autoplay = &"idle"
 
 [editable path="SelectableComponent"]

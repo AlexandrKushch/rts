@@ -44,6 +44,13 @@ public partial class UnitsController : Node2D
                 unit.Target = GetGlobalMousePosition() + RandomExtension.GetRandomPointInCircle(i * 20);
                 unit.TargetObject = targetObject;
                 unit.UpdatePath();
+
+                if (unit is Pawn pawn
+                    && targetObject != null)
+                {
+                    pawn.UpdateResource();
+                }
+
                 i++;
             }
         }

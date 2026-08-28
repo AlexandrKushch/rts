@@ -5,6 +5,11 @@ public static class RandomExtension
 {
     private static Random _random = new Random();
 
+    public static double RandomDouble()
+    {
+        return _random.NextDouble();
+    }
+
     public static Vector2 GetRandomPointInCircle(float radius)
     {
         float angle = (float)_random.NextDouble() * Mathf.Pi * 2;

@@ -3,18 +3,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public partial class PawnStateManager : Node
+public partial class PawnGatheringStateManager : Node
 {
-    private Dictionary<PawnStates, PawnStateBase> _states;
+    private Dictionary<PawnGatheringStateIds, PawnStateBase> _states;
     private PawnStateBase _currentState;
 
     [Export]
-    public AnimationPlayer PawnAnimationPlayer { get; private set; }
+    public Pawn Pawn { get; private set; }
 
     public override void _Ready()
     {
-        _states = GetChildren().ToDictionary(x => Enum.Parse<PawnStates>(x.Name), x => x as PawnStateBase);
-        ChangeState(PawnStates.Idle);
+        _states = GetChildren().ToDictionary(x => Enum.Parse<PawnGatheringStateIds>(x.Name), x => x as PawnStateBase);
+        // ChangeState(PawnGatheringStateIds.MoveToResource);
+        SetProcess(false);
     }
 
     public override void _Process(double delta)
@@ -22,7 +23,7 @@ public partial class PawnStateManager : Node
         _currentState._Process(delta);
     }
 
-    public void ChangeState(PawnStates state)
+    public void ChangeState(PawnGatheringStateIds state)
     {
         if (_currentState != null)
         {

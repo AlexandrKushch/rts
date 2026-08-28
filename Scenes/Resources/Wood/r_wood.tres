@@ -6,5 +6,6 @@
 [resource]
 script = ExtResource("1_g0n54")
 Name = "wood"
+InstrumentName = "axe"
 Icon = ExtResource("1_fcucr")
 metadata/_custom_type_script = "uid://caks0w8rk10ox"
