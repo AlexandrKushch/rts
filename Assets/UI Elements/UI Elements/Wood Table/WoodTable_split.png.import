@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ciugpww0llrre"
-path="res://.godot/imported/RegularPaper.png-a388acbaddbc1842ce46952a53f7b6ff.ctex"
+uid="uid://cl5sbnnfvw3ey"
+path="res://.godot/imported/WoodTable_split.png-49c5040e892946fd9ae12492049ecd0e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI Elements/UI Elements/Papers/RegularPaper.png"
-dest_files=["res://.godot/imported/RegularPaper.png-a388acbaddbc1842ce46952a53f7b6ff.ctex"]
+source_file="res://Assets/UI Elements/UI Elements/Wood Table/WoodTable_split.png"
+dest_files=["res://.godot/imported/WoodTable_split.png-49c5040e892946fd9ae12492049ecd0e.ctex"]
 
 [params]
 

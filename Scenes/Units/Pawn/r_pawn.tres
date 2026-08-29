@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="UnitResource" format=3 uid="uid://cmmqwgiyv1amy"]
+
+[ext_resource type="Script" uid="uid://b3jham1omyu5f" path="res://Scenes/Units/UnitResource.cs" id="1_gip3s"]
+[ext_resource type="Texture2D" uid="uid://dsesm828u14vn" path="res://Assets/UI Elements/UI Elements/Human Avatars/Avatars_05.png" id="1_tiau7"]
+
+[resource]
+script = ExtResource("1_gip3s")
+Name = "pawn"
+Icon = ExtResource("1_tiau7")
+metadata/_custom_type_script = "uid://b3jham1omyu5f"

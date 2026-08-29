@@ -1,0 +1,147 @@
+[gd_scene format=3 uid="uid://cytbj5minfkwn"]
+
+[ext_resource type="Texture2D" uid="uid://dsesm828u14vn" path="res://Assets/UI Elements/UI Elements/Human Avatars/Avatars_05.png" id="1_iibyv"]
+[ext_resource type="Texture2D" uid="uid://c3txctnd07n4k" path="res://Assets/UI Elements/UI Elements/Papers/SpecialPaper.png" id="1_y0b4q"]
+[ext_resource type="Theme" uid="uid://cyud7dko8ik43" path="res://theme.tres" id="2_y0b4q"]
+
+[node name="SelectedUnitsContainer" type="Control" unique_id=2010972716]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Background" type="NinePatchRect" parent="." unique_id=1247484405]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_y0b4q")
+patch_margin_left = 48
+patch_margin_top = 48
+patch_margin_right = 48
+patch_margin_bottom = 48
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="SelectedUnitsContainer" type="HBoxContainer" parent="." unique_id=1472414034]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SelectedUnitControl" type="Control" parent="SelectedUnitsContainer" unique_id=194605359]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="TextureRect" type="TextureRect" parent="SelectedUnitsContainer/SelectedUnitControl" unique_id=7266950]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_iibyv")
+expand_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="SelectedUnitsContainer/SelectedUnitControl" unique_id=1982584439]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -36.0
+offset_top = -45.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 15
+
+[node name="Label" type="Label" parent="SelectedUnitsContainer/SelectedUnitControl/MarginContainer2" unique_id=722471344]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_y0b4q")
+text = "33"
+horizontal_alignment = 1
+
+[node name="SelectedUnitControl2" type="Control" parent="SelectedUnitsContainer" unique_id=1547725986]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="TextureRect" type="TextureRect" parent="SelectedUnitsContainer/SelectedUnitControl2" unique_id=951976218]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_iibyv")
+expand_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="SelectedUnitsContainer/SelectedUnitControl2" unique_id=405831639]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -36.0
+offset_top = -45.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 15
+
+[node name="Label" type="Label" parent="SelectedUnitsContainer/SelectedUnitControl2/MarginContainer2" unique_id=607563263]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_y0b4q")
+text = "33"
+horizontal_alignment = 1
+
+[node name="SelectedUnitControl3" type="Control" parent="SelectedUnitsContainer" unique_id=1916515381]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="TextureRect" type="TextureRect" parent="SelectedUnitsContainer/SelectedUnitControl3" unique_id=1917759669]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_iibyv")
+expand_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="SelectedUnitsContainer/SelectedUnitControl3" unique_id=1679216373]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -36.0
+offset_top = -45.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 15
+
+[node name="Label" type="Label" parent="SelectedUnitsContainer/SelectedUnitControl3/MarginContainer2" unique_id=64645498]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_y0b4q")
+text = "33"
+horizontal_alignment = 1

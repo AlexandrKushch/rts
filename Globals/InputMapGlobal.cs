@@ -13,4 +13,6 @@ public static class InputMapGlobal
 
     public const string ZoomIn = "zoom_in";
     public const string ZoomOut = "zoom_out";
+
+    public const string BuildCommand = "build_command";
 }

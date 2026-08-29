@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dxfs7l3k65nvi"]
+
+[ext_resource type="PackedScene" uid="uid://bericglgvv4m8" path="res://Scenes/Buildings/building_base.tscn" id="1_xfw4a"]
+[ext_resource type="Texture2D" uid="uid://b2obdvjv7o4ef" path="res://Assets/Buildings/Blue Buildings/Castle.png" id="2_n84d7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m6s1u"]
+radius = 56.0
+height = 270.0
+
+[node name="Castle" unique_id=548953940 instance=ExtResource("1_xfw4a")]
+
+[node name="Visual" parent="." index="0" unique_id=1679201315]
+position = Vector2(0, -68)
+texture = ExtResource("2_n84d7")
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=205489129]
+position = Vector2(0, -68)
+shape = SubResource("CapsuleShape2D_m6s1u")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="2" unique_id=82442801]
+position = Vector2(-88, -20)
+radius = 50.0
+affect_navigation_mesh = true
+
+[node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="3" unique_id=1699307201]
+position = Vector2(88, -20)
+radius = 50.0

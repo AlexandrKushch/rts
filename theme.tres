@@ -1,0 +1,7 @@
+[gd_resource type="Theme" format=3 uid="uid://cyud7dko8ik43"]
+
+[ext_resource type="FontFile" uid="uid://03wipdbhuhdx" path="res://Assets/Font/DynaPuff-VariableFont_wdth,wght.ttf" id="1_e1x85"]
+
+[resource]
+default_font = ExtResource("1_e1x85")
+default_font_size = 24

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BuildResource" format=3 uid="uid://b8ycuiugnmrri"]
+
+[ext_resource type="Texture2D" uid="uid://dumaqi6xtmqtx" path="res://Assets/Buildings/Blue Buildings/Barracks.png" id="1_wpym7"]
+[ext_resource type="Script" uid="uid://ck4k0rwiv3nec" path="res://Scenes/Buildings/BuildResource.cs" id="2_mjw4g"]
+
+[resource]
+script = ExtResource("2_mjw4g")
+Name = "barracks"
+Icon = ExtResource("1_wpym7")
+metadata/_custom_type_script = "uid://ck4k0rwiv3nec"

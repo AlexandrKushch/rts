@@ -10,6 +10,9 @@ public partial class UnitBase : CharacterBody2D
 
 	public Node2D TargetObject { get; set; }
 
+	[Export]
+	public UnitResource Meta { get; private set; }
+
 	public override void _Ready()
 	{
 		NavigationAgent2D = GetNode<NavigationAgent2D>(nameof(NavigationAgent2D));
