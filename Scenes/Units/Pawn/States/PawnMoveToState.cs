@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class PawnMoveToResourceState : PawnStateBase
+public partial class PawnMoveToState : PawnStateBase
 {
     private const float TargetDesiredDistance = 40;
     private float _defaultTargetDesiredDistance;
@@ -27,7 +27,8 @@ public partial class PawnMoveToResourceState : PawnStateBase
     {
         if (StateManager.Pawn.NavigationAgent2D.IsNavigationFinished())
         {
-            StateManager.ChangeState(PawnGatheringStateIds.GatheringResource);
+            var state = StateManager.Pawn.TargetObject is ResourceBase ? PawnGatheringStateIds.GatheringResource : PawnGatheringStateIds.BuildOrRepair;
+            StateManager.ChangeState(state);
         }
     }
 }

@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://c57j2yxf5jasx"]
+
+[ext_resource type="Script" uid="uid://kyjja1118w8s" path="res://Scenes/Buildings/BuildingBlueprint/BuildingBlueprint.cs" id="1_emfpd"]
+[ext_resource type="PackedScene" uid="uid://dxfs7l3k65nvi" path="res://Scenes/Buildings/Castle/castle.tscn" id="2_0amd5"]
+
+[node name="BuildingBlueprint" type="Node2D" unique_id=1418719669]
+script = ExtResource("1_emfpd")
+BuildingsDictionary = Dictionary[String, PackedScene]({
+"castle": ExtResource("2_0amd5")
+})

@@ -16,5 +16,6 @@ public partial class BuildingItem : Control
     public void OnClick()
     {
         GD.Print(Resource.Name);
+        BuildingController.Instance.InitBuildingBlueprint(Resource);
     }
 }

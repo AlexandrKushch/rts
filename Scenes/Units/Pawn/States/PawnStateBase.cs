@@ -2,11 +2,11 @@ using Godot;
 
 public partial class PawnStateBase : Node
 {
-    protected PawnGatheringStateManager StateManager;
+    protected PawnStateManagerBase StateManager;
 
     public override void _Ready()
     {
-        StateManager = GetParent<PawnGatheringStateManager>();
+        StateManager = GetParent<PawnStateManagerBase>();
         SetProcess(false);
     }
 

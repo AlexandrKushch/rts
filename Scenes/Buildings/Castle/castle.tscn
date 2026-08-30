@@ -7,14 +7,18 @@
 radius = 56.0
 height = 270.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d1o4y"]
+size = Vector2(284, 180)
+
 [node name="Castle" unique_id=548953940 instance=ExtResource("1_xfw4a")]
+MaxHp = 10
 
 [node name="Visual" parent="." index="0" unique_id=1679201315]
 position = Vector2(0, -68)
 texture = ExtResource("2_n84d7")
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=205489129]
-position = Vector2(0, -68)
+position = Vector2(0, -20)
 shape = SubResource("CapsuleShape2D_m6s1u")
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="2" unique_id=82442801]
@@ -25,3 +29,13 @@ affect_navigation_mesh = true
 [node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="3" unique_id=1699307201]
 position = Vector2(88, -20)
 radius = 50.0
+
+[node name="CollisionShape2D" parent="SelectableComponent" parent_id_path=PackedInt32Array(550510253) index="1" unique_id=1060696685]
+position = Vector2(0, -53)
+shape = SubResource("RectangleShape2D_d1o4y")
+
+[node name="NavigationObstacle2D3" type="NavigationObstacle2D" parent="." index="5" unique_id=724202924]
+position = Vector2(0, -20)
+radius = 50.0
+
+[editable path="SelectableComponent"]

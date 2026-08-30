@@ -27,23 +27,23 @@ public partial class PawnGatheringResourceState : PawnStateBase
     {
         if (StateManager.Pawn.ResourceCollectedCount >= MaxCollectableCapacity)
         {
-            StateManager.ChangeState(PawnGatheringStateIds.MoveToGatheringArea);
+            // Deactivate();
             return;
         }
 
-        if (!IsInstanceValid(StateManager.Pawn.TargetObject))
+        if (!IsInstanceValid(StateManager.Pawn.Resource))
         {
+            // Deactivate();
             return;
         }
 
-        StateManager.Pawn.Visual.Interact(StateManager.Pawn.Resource);
+        StateManager.Pawn.Visual.Interact(StateManager.Pawn.Resource.ResourceType.Name);
     }
 
     private void OnInteractAnimatioKeyReached()
     {
-        if (IsInstanceValid(StateManager.Pawn.TargetObject)
-            && StateManager.Pawn.TargetObject is ResourceBase resourceBase
-            && resourceBase.TryCollectOne())
+        if (IsInstanceValid(StateManager.Pawn.Resource)
+            && StateManager.Pawn.Resource.TryCollectOne())
         {
             StateManager.Pawn.ResourceCollectedCount++;
             GD.Print("Gather +1");

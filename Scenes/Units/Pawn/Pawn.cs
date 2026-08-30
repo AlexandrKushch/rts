@@ -2,48 +2,69 @@ using Godot;
 
 public partial class Pawn : UnitBase
 {
-
-    private PawnGatheringStateManager GatheringStateMachine;
+    private UpdateMovementAnimation _updateMovementAnimation;
+    private PawnStateManagerBase StateMachine;
 
     public PawnVisual Visual { get; private set; }
-    public ResourceType Resource { get; private set; }
+    public ResourceBase Resource { get; private set; }
+    public BuildingBase Building { get; private set; }
 
     public int ResourceCollectedCount { get; set; }
+
+    private delegate void UpdateMovementAnimation(Vector2 velocity, int collected);
 
     public override void _Ready()
     {
         base._Ready();
         Visual = GetNode<PawnVisual>(nameof(Visual));
-        GatheringStateMachine = GetNode<PawnGatheringStateManager>(nameof(GatheringStateMachine));
+        StateMachine = GetNode<PawnStateManagerBase>(nameof(StateMachine));
+        _updateMovementAnimation = (v, _) => { Visual.UpdateMovement(v, string.Empty); };
     }
 
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
 
-        Visual.UpdateMovement(Velocity, ResourceCollectedCount, Resource);
+        _updateMovementAnimation(Velocity, ResourceCollectedCount);
     }
 
     public override void UpdatePath()
-    {
+    {        
         base.UpdatePath();
     }
 
-    public void UpdateResource()
+    public void UpdateTargetObject()
     {
-        if (TargetObject is ResourceBase resource)
+        if (IsInstanceValid(TargetObject))
         {
-            Resource = resource.ResourceType;
+            if (TargetObject is ResourceBase resource)
+            {
+                Resource = resource;
+                _updateMovementAnimation = (v, c) => { Visual.UpdateMovement(v, c, resource.ResourceType); };
+            }
+            else if (TargetObject is BuildingBase building)
+            {
+                Building = building;
+                _updateMovementAnimation = (v, _) => { Visual.UpdateMovement(v, "build"); };
+            }
+            
+            StateMachine.ChangeState(PawnGatheringStateIds.MoveTo);
+            StateMachine.SetProcess(true);
         }
-        // else
-        // {
-        //     Resource = null;
-        // }
-
-        if (Resource != null)
+        else
         {
-            GatheringStateMachine.ChangeState(PawnGatheringStateIds.MoveToResource);
-            GatheringStateMachine.SetProcess(true);
+            Building = null;
+            StateMachine.SetProcess(false);
+
+            if (ResourceCollectedCount == 0)
+            {
+                Resource = null;
+                _updateMovementAnimation = (v, _) => { Visual.UpdateMovement(v, string.Empty); };
+            }
+            else
+            {
+                _updateMovementAnimation = (v, c) => { Visual.UpdateMovement(v, c, Resource.ResourceType); };                
+            }
         }
     }
 }

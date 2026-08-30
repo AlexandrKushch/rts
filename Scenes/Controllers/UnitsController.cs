@@ -1,4 +1,3 @@
-using Globals;
 using Godot;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,20 +8,26 @@ public partial class UnitsController : Node2D
 
     private double _clickTimer = 0.0f;
     private SelectArea _selectArea;
-    private Control _buildControl;
+    private MeshInstance2D _marker;
+    [Export] private PackedScene SelectAreaScene;
+    [Export] private PackedScene MarkerScene;
 
-    private HashSet<SelectableComponent> Selections = new HashSet<SelectableComponent>();
+    public HashSet<SelectableComponent> Selections { get; private set; } = new HashSet<SelectableComponent>();
 
-    public bool BuildOn { get; set; } = false;
+    public static UnitsController Instance { get; private set; }
 
-    [Export]
-    private PackedScene SelectAreaScene;
-
-    [Export]
-    private PackedScene BuildControlScene;
+    public override void _Ready()
+    {
+        if (!IsInstanceValid(Instance))
+        {
+            Instance = this;
+        }
+    }
 
     public override void _UnhandledInput(InputEvent input)
     {
+        if (BuildingController.Instance.BlueprintActive) return;
+
         if (input is InputEventMouseButton buttonInput)
         {
             if (buttonInput.ButtonIndex == MouseButton.Left)
@@ -39,7 +44,6 @@ public partial class UnitsController : Node2D
     public override void _Process(double delta)
     {
         SelectionProcess(delta);
-        BuildCommand();
     }
 
     private void SelectionInput(InputEventMouseButton input)
@@ -55,7 +59,7 @@ public partial class UnitsController : Node2D
 
             _clickTimer = 0.0f;
         }
-        else
+        else if (IsInstanceValid(_selectArea))
         {
             if (_clickTimer <= ClickedTimer
                 && _selectArea.Start.IsEqualApprox(_selectArea.End)
@@ -83,6 +87,26 @@ public partial class UnitsController : Node2D
         }
     }
 
+    public void MoveToBuildingCommand(BuildingBase targetObject)
+    {
+        var units = Selections.Select(x => x.EffectedOn as UnitBase).ToHashSet();
+
+        int i = 0;
+        foreach (var unit in units)
+        {
+            unit.Target = GetClosestPointToObjectBoundary(unit, targetObject);
+            unit.TargetObject = targetObject ?? null;
+            unit.UpdatePath();
+
+            if (unit is Pawn pawn)
+            {
+                pawn.UpdateTargetObject();
+            }
+
+            i++;
+        }
+    }
+
     private void MoveCommand(InputEventMouseButton input)
     {
         if (input.IsReleased())
@@ -93,46 +117,18 @@ public partial class UnitsController : Node2D
             int i = 0;
             foreach (var unit in units)
             {
-                unit.Target = GetGlobalMousePosition() + RandomExtension.GetRandomPointInCircle(i * 20);
+                unit.Target = targetObject == null
+                    ? GetGlobalMousePosition() + RandomExtension.GetRandomPointInCircle(i * 20)
+                    : GetClosestPointToObjectBoundary(unit, targetObject.EffectedOn);
                 unit.TargetObject = targetObject?.EffectedOn;
                 unit.UpdatePath();
 
-                if (unit is Pawn pawn
-                    && targetObject != null)
+                if (unit is Pawn pawn)
                 {
-                    pawn.UpdateResource();
+                    pawn.UpdateTargetObject();
                 }
 
                 i++;
-            }
-        }
-    }
-
-    private void BuildCommand()
-    {
-        if (Selections.Count == 0)
-        {
-            BuildOn = false;
-            if (IsInstanceValid(_buildControl))
-            {
-                _buildControl.QueueFree();
-            }
-            return;
-        }
-
-        if (Input.IsActionJustReleased(InputMapGlobal.BuildCommand))
-        {
-            BuildOn = !BuildOn;
-
-            if (BuildOn)
-            {
-                _buildControl = BuildControlScene.Instantiate<Control>();
-                Hud.Instance.AddChild(_buildControl);
-
-            }
-            else if (IsInstanceValid(_buildControl))
-            {
-                _buildControl.QueueFree();
             }
         }
     }
@@ -160,6 +156,17 @@ public partial class UnitsController : Node2D
         {
             unit.UpdateSelection(true);
         }
+    }
+
+    private Vector2 GetClosestPointToObjectBoundary(UnitBase unit, Node2D targetObject)
+    {
+        var obstacle = targetObject.GetChildren()
+            .Where(x => x is NavigationObstacle2D && x != null)
+            .Select(x => x as NavigationObstacle2D)
+            .MinBy(x => x.GlobalPosition.DistanceTo(unit.GlobalPosition));
+        var directionFrom = obstacle.GlobalPosition.DirectionTo(unit.GlobalPosition);
+
+        return obstacle.GlobalPosition + directionFrom * obstacle.Radius;
     }
 
     private bool TryPointCastSelectable(out SelectableComponent collider)

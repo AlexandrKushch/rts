@@ -15,6 +15,32 @@ public partial class PawnVisual : Node
         AnimationPlayer = GetNode<AnimationPlayer>(nameof(AnimationPlayer));
     }
 
+    public void UpdateMovement(Vector2 velocity, string animationLibraryName)
+    {
+        if (AnimationPlayer.CurrentAnimation.ToString().Contains(PawnAnimationNames.Interact, StringComparison.OrdinalIgnoreCase))
+        {
+            return;
+        }
+        
+        Sprite2D.FlipH = velocity.Length() > 0 ? velocity.X < 0 : Sprite2D.FlipH;
+
+        string animation = velocity.Length() > 0
+            ? PawnAnimationNames.Run
+            : PawnAnimationNames.Idle;
+
+        if (!string.IsNullOrWhiteSpace(animationLibraryName))
+        {
+            animation = $"{animationLibraryName}/{animation}";
+        }
+
+        if (AnimationPlayer.CurrentAnimation.Equals(animation))
+        {
+            return;
+        }
+
+        AnimationPlayer.Play(animation);
+    }
+
     public void UpdateMovement(Vector2 velocity, int collected, ResourceType resource)
     {
         if (AnimationPlayer.CurrentAnimation.ToString().Contains(PawnAnimationNames.Interact, StringComparison.OrdinalIgnoreCase))
@@ -44,14 +70,9 @@ public partial class PawnVisual : Node
         AnimationPlayer.Play(animation);
     }
 
-    public void Interact(ResourceType resource)
+    public void Interact(string animationLibraryName)
     {
-        if (resource == null)
-        {
-            throw new ArgumentNullException($"{nameof(ResourceType)} is null reference");
-        }
-
-        string animation = $"{resource.Name}/{PawnAnimationNames.Interact}";
+        string animation = $"{animationLibraryName}/{PawnAnimationNames.Interact}";
         
         if (AnimationPlayer.CurrentAnimation.Equals(animation))
         {

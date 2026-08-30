@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bericglgvv4m8"]
 
 [ext_resource type="Script" uid="uid://diel8vmur2fwb" path="res://Scenes/Buildings/BuildingBase.cs" id="1_8grwn"]
+[ext_resource type="PackedScene" uid="uid://000g2r01lhuu" path="res://Scenes/SelectionArea/selectable_component.tscn" id="2_d1o4y"]
 
 [node name="BuildingBase" type="StaticBody2D" unique_id=548953940]
 script = ExtResource("1_8grwn")
@@ -9,3 +10,8 @@ script = ExtResource("1_8grwn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=205489129]
 rotation = 1.5707964
+
+[node name="SelectableComponent" parent="." unique_id=550510253 node_paths=PackedStringArray("EffectedOn") instance=ExtResource("2_d1o4y")]
+EffectedOn = NodePath("..")
+
+[editable path="SelectableComponent"]

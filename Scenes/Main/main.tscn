@@ -4,16 +4,17 @@
 [ext_resource type="PackedScene" uid="uid://cq41csf5y3617" path="res://Scenes/Camera/camera_controller.tscn" id="2_lixft"]
 [ext_resource type="Script" uid="uid://baul70getpa3l" path="res://Scenes/Controllers/UnitsController.cs" id="3_hryqi"]
 [ext_resource type="Texture2D" uid="uid://muuoltgu4vdl" path="res://Assets/Terrain/Tileset/Water Background color.png" id="4_5yls4"]
+[ext_resource type="PackedScene" uid="uid://bbhqatrw843qy" path="res://Scenes/Controllers/Marker/marker.tscn" id="5_2ok46"]
 [ext_resource type="Texture2D" uid="uid://c4c412x3vut3j" path="res://Assets/Terrain/Tileset/Tilemap_color2.png" id="5_imbg2"]
 [ext_resource type="PackedScene" uid="uid://o02resxvged2" path="res://Scenes/UI/BuildControl/build_control.tscn" id="5_vk4q2"]
 [ext_resource type="TileSet" uid="uid://ba68yn6mvywfx" path="res://Tilesets/tile_set.tres" id="6_2a143"]
+[ext_resource type="Script" uid="uid://c8u764v7f4mju" path="res://Scenes/Controllers/BuildingController.cs" id="6_2ok46"]
+[ext_resource type="PackedScene" uid="uid://c57j2yxf5jasx" path="res://Scenes/Buildings/BuildingBlueprint/building_blueprint.tscn" id="7_koken"]
 [ext_resource type="PackedScene" uid="uid://r4ncnt86o6sr" path="res://Scenes/Controllers/SelectionScenes/select_area.tscn" id="8_hryqi"]
 [ext_resource type="PackedScene" uid="uid://k7krsgxhrgo2" path="res://Scenes/Units/Pawn/pawn.tscn" id="9_hryqi"]
 [ext_resource type="PackedScene" uid="uid://bdkgf5edotae0" path="res://Scenes/Resources/Wood/tree_1.tscn" id="10_6t3k2"]
 [ext_resource type="Texture2D" uid="uid://duv1buute15wa" path="res://Assets/Terrain/Tileset/Water Foam.png" id="10_imbg2"]
-[ext_resource type="PackedScene" uid="uid://cbefxm40y2qgw" path="res://Scenes/Resources/Wood/tree_2.tscn" id="11_vk4q2"]
-[ext_resource type="PackedScene" uid="uid://c2rq1i35scosp" path="res://Scenes/Resources/Wood/tree_3.tscn" id="12_wliom"]
-[ext_resource type="PackedScene" uid="uid://bfbkv3onjobpd" path="res://Scenes/Resources/Wood/tree_4.tscn" id="13_2ok46"]
+[ext_resource type="Script" uid="uid://uygj6w2ift33" path="res://Scenes/Controllers/NavigationRegionController.cs" id="11_es6iu"]
 [ext_resource type="Script" uid="uid://bmym3all5d5mm" path="res://Scenes/Main/Hud.cs" id="15_wliom"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hfg1r"]
@@ -104,8 +105,8 @@ sources/6 = SubResource("TileSetAtlasSource_hfg1r")
 sources/8 = SubResource("TileSetAtlasSource_xlvfx")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_xrivr"]
-vertices = PackedVector2Array(685.71094, 317, 1068, 276, 1132, 276, 1044, 556, 876, 556, 681.59375, 332.35156, 852, 20, 681.59375, 301.64844, 663.71094, 159, 684, 20, 659.59375, 174.35156, 670.35156, 290.40625, 648.35156, 185.59375, 655, 286.28906, 623.35156, 335.59375, 628.02344, 330.90625, 628.40625, 332.35156, 532, 428, 639.64844, 290.40625, 634.96875, 295.07813, 634.59375, 293.64844, 598.35156, 171.59375, 604.1172, 165.8125, 606.40625, 174.35156, 592.64844, 282.40625, 617.64844, 132.40625, 611.8672, 138.17969, 609.59375, 129.64844, 633, 189.71094, 623.35156, 282.40625, 532, 20, 532, -108, 684, -108, 648.35156, 132.40625, 633, 128.28906, 852, -236, 1068, -236, 659.59375, 143.64844, 598.35156, 118.40625, 583, 114.28906, 567.64844, 118.40625, 1132, 684, 1068, 684, 1068, 940, 916, 940, 916, 852, 1044, 852, 812, 620, 670.35156, 343.59375, 876, 620, 812, 684, 684, 684, 596, 596, 596, 492, 655, 347.71094, 684, 812, 532, 812, 532, 684, 364, 684, 364, 940, 148, 940, 148, 684, 172, 596, 20, 684, 20, 556, 108, 468, 172, 468, -172, 556, -172, 532, -108, 532, -108, 340, -20, 340, -20, 404, 108, 404, 532, 492, 639.64844, 343.59375, 592.64844, 335.59375, 468, 428, 468, 364, 581.40625, 324.35156, 577.28906, 309, 276, 364, 276, 236, 364, 20, 552.28906, 145, 212, 236, 212, 172, 148, 172, 148, 108, 212, 20, 20, 108, 20, 20, 212, -236, 364, -236, 608, 339.71094, 608, 278.28906, 617.64844, 185.59375, 556.40625, 129.64844, 583, 175.71094, 567.64844, 171.59375, 581.40625, 293.64844, 556.40625, 160.35156)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 1, 0, 7, 8, 9), PackedInt32Array(10, 8, 7, 11), PackedInt32Array(12, 10, 11, 13), PackedInt32Array(14, 15, 16, 17), PackedInt32Array(18, 19, 20), PackedInt32Array(21, 22, 23, 24), PackedInt32Array(25, 26, 27), PackedInt32Array(28, 12, 13, 18, 29), PackedInt32Array(30, 31, 32, 9, 33, 34), PackedInt32Array(6, 35, 36, 1), PackedInt32Array(9, 8, 37), PackedInt32Array(9, 37, 33), PackedInt32Array(30, 34, 25, 27, 38), PackedInt32Array(30, 38, 39), PackedInt32Array(30, 39, 40), PackedInt32Array(2, 41, 42, 3), PackedInt32Array(43, 44, 45, 46), PackedInt32Array(42, 43, 46, 3), PackedInt32Array(47, 48, 5, 4, 49), PackedInt32Array(48, 47, 50, 51, 52, 53, 54), PackedInt32Array(51, 55, 56, 57, 52), PackedInt32Array(58, 59, 60, 61, 62), PackedInt32Array(61, 63, 64, 65, 66, 62), PackedInt32Array(64, 67, 68, 69), PackedInt32Array(69, 70, 71, 72), PackedInt32Array(64, 69, 72, 73, 65), PackedInt32Array(58, 62, 52, 57), PackedInt32Array(54, 53, 74, 17, 75), PackedInt32Array(76, 17, 77, 78, 79), PackedInt32Array(80, 78, 81, 82, 83, 30, 84), PackedInt32Array(82, 85, 86, 83), PackedInt32Array(86, 87, 88, 89, 83), PackedInt32Array(88, 90, 91, 89), PackedInt32Array(89, 92, 93, 83), PackedInt32Array(16, 75, 17), PackedInt32Array(94, 14, 17), PackedInt32Array(76, 94, 17), PackedInt32Array(80, 79, 78), PackedInt32Array(18, 20, 29), PackedInt32Array(28, 29, 95, 96), PackedInt32Array(96, 95, 24, 23), PackedInt32Array(30, 40, 97), PackedInt32Array(98, 21, 24), PackedInt32Array(99, 98, 24, 100), PackedInt32Array(101, 99, 100, 80), PackedInt32Array(30, 97, 84), PackedInt32Array(80, 84, 101)])
+vertices = PackedVector2Array(685.71094, 317, 1068, 276, 1132, 276, 1044, 556, 876, 556, 681.59375, 332.35156, 655, 286.28906, 532, 20, 532, -108, 684, -108, 684, 20, 670.35156, 290.40625, 852, 20, 852, -236, 1068, -236, 681.59375, 301.64844, 639.64844, 290.40625, 1132, 684, 1068, 684, 1068, 940, 916, 940, 916, 852, 1044, 852, 812, 620, 670.35156, 343.59375, 876, 620, 812, 684, 684, 684, 596, 596, 596, 492, 655, 347.71094, 684, 812, 532, 812, 532, 684, 364, 684, 364, 940, 148, 940, 148, 684, 172, 596, 20, 684, 20, 556, 108, 468, 172, 468, -172, 556, -172, 532, -108, 532, -108, 340, -20, 340, -20, 404, 108, 404, 532, 492, 532, 428, 639.64844, 343.59375, 628.40625, 332.35156, 468, 428, 468, 364, 624.28906, 317, 276, 364, 276, 236, 364, 20, 628.40625, 301.64844, 212, 236, 212, 172, 148, 172, 148, 108, 212, 20, 20, 108, 20, 20, 212, -236, 364, -236)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9, 10, 11), PackedInt32Array(12, 13, 14, 1), PackedInt32Array(12, 1, 0, 15, 10), PackedInt32Array(10, 15, 11), PackedInt32Array(7, 6, 16), PackedInt32Array(2, 17, 18, 3), PackedInt32Array(19, 20, 21, 22), PackedInt32Array(18, 19, 22, 3), PackedInt32Array(23, 24, 5, 4, 25), PackedInt32Array(24, 23, 26, 27, 28, 29, 30), PackedInt32Array(27, 31, 32, 33, 28), PackedInt32Array(34, 35, 36, 37, 38), PackedInt32Array(37, 39, 40, 41, 42, 38), PackedInt32Array(40, 43, 44, 45), PackedInt32Array(45, 46, 47, 48), PackedInt32Array(40, 45, 48, 49, 41), PackedInt32Array(34, 38, 28, 33), PackedInt32Array(30, 29, 50, 51, 52), PackedInt32Array(53, 51, 54, 55, 56), PackedInt32Array(55, 57, 58, 59, 7, 16, 60), PackedInt32Array(58, 61, 62, 59), PackedInt32Array(62, 63, 64, 65, 59), PackedInt32Array(64, 66, 67, 65), PackedInt32Array(65, 68, 69, 59), PackedInt32Array(53, 52, 51), PackedInt32Array(55, 60, 56)])
 agent_radius = 20.0
 
 [node name="Main" type="Node2D" unique_id=248782512]
@@ -119,7 +120,13 @@ Camera = NodePath("../../Camera2D")
 [node name="UnitsController" type="Node2D" parent="Controllers" unique_id=1160344718]
 script = ExtResource("3_hryqi")
 SelectAreaScene = ExtResource("8_hryqi")
+MarkerScene = ExtResource("5_2ok46")
+
+[node name="BuildingController" type="Node2D" parent="Controllers" unique_id=404899581 node_paths=PackedStringArray("World")]
+script = ExtResource("6_2ok46")
 BuildControlScene = ExtResource("5_vk4q2")
+BuildingBlueprintScene = ExtResource("7_koken")
+World = NodePath("../../Map/NavigationRegion2D/World")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=891201985]
 zoom = Vector2(0.25, 0.25)
@@ -136,6 +143,7 @@ tile_set = SubResource("TileSet_xrivr")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="Map" unique_id=1583909805]
 navigation_polygon = SubResource("NavigationPolygon_xrivr")
+script = ExtResource("11_es6iu")
 
 [node name="FlatGround" type="TileMapLayer" parent="Map/NavigationRegion2D" unique_id=1300165546]
 tile_map_data = PackedByteArray("AAARAAoAAAACAAIAAAARAAkAAAACAAEAAAARAAgAAAACAAEAAAARAAcAAAACAAEAAAARAAYAAAACAAEAAAARAAUAAAACAAEAAAARAAQAAAACAAAAAAAQAAoAAAAAAAEAAAAQAAkAAAAAAAEAAAAQAAgAAAABAAEAAAAQAAcAAAABAAEAAAAQAAYAAAABAAEAAAAQAAUAAAABAAEAAAAQAAQAAAABAAEAAAAQAAMAAAACAAEAAAAQAAIAAAACAAEAAAAQAAEAAAACAAEAAAAPAAcAAAABAAEAAAAPAAYAAAABAAEAAAAPAAUAAAABAAEAAAAPAAQAAAABAAEAAAAPAAMAAAABAAEAAAAPAAIAAAABAAEAAAAPAAEAAAABAAEAAAAPAAAAAAABAAEAAAAOAAcAAAABAAEAAAAOAAYAAAABAAEAAAAOAAUAAAABAAEAAAAOAAQAAAABAAEAAAAOAAMAAAABAAEAAAAOAAIAAAABAAEAAAAOAAEAAAABAAEAAAAOAAAAAAABAAEAAAANAAcAAAABAAEAAAANAAYAAAABAAEAAAANAAUAAAABAAEAAAANAAQAAAABAAEAAAANAAMAAAABAAEAAAANAAIAAAABAAEAAAANAAEAAAABAAEAAAANAAAAAAABAAEAAAAMAAoAAAACAAIAAAAMAAkAAAABAAEAAAAMAAgAAAABAAEAAAAMAAcAAAABAAEAAAAMAAYAAAABAAEAAAAMAAMAAAABAAEAAAAMAAIAAAABAAEAAAAMAAEAAAABAAEAAAAMAAAAAAABAAAAAAALAAoAAAABAAIAAAALAAkAAAABAAEAAAALAAgAAAABAAEAAAALAAcAAAABAAEAAAALAAYAAAABAAEAAAALAAEAAAABAAEAAAALAAAAAAABAAAAAAAKAAoAAAABAAEAAAAKAAkAAAABAAEAAAAKAAgAAAABAAEAAAAKAAcAAAABAAEAAAAKAAYAAAABAAEAAAAJAAoAAAABAAEAAAAJAAkAAAABAAEAAAAJAAgAAAAAAAEAAAAJAAcAAAABAAEAAAAJAAYAAAABAAEAAAAIAAoAAAABAAEAAAAHAAoAAAABAAIAAAAHAAEAAAABAAEAAAAHAAAAAAABAAAAAAAGAAoAAAABAAIAAAAGAAQAAAABAAEAAAAGAAMAAAABAAEAAAAGAAIAAAABAAEAAAAGAAEAAAABAAEAAAAGAAAAAAABAAAAAAAFAAoAAAABAAEAAAAFAAQAAAABAAEAAAAFAAMAAAABAAEAAAAFAAIAAAABAAEAAAAFAAEAAAABAAEAAAAFAAAAAAABAAEAAAAEAAoAAAABAAEAAAAEAAQAAAAAAAEAAAAEAAMAAAABAAEAAAAEAAIAAAABAAEAAAAEAAEAAAABAAEAAAAEAAAAAAABAAEAAAADAAoAAAABAAEAAAADAAIAAAABAAEAAAADAAEAAAABAAEAAAADAAAAAAABAAEAAAACAAoAAAABAAEAAAACAAkAAAABAAEAAAACAAgAAAACAAEAAAACAAAAAAABAAAAAAABAAoAAAABAAIAAAABAAkAAAABAAEAAAABAAgAAAABAAEAAAABAAcAAAABAAEAAAABAAAAAAABAAAAAAAAAAoAAAAAAAIAAAAAAAkAAAAAAAEAAAAAAAgAAAABAAEAAAAAAAcAAAABAAEAAAAAAAAAAAAAAAAAAAAFAP//AAACAAEAAAAFAP7/AAACAAEAAAAFAP3/AAACAAEAAAAFAPz/AAACAAAAAAAEAP//AAABAAEAAAAEAP7/AAABAAEAAAAEAP3/AAABAAEAAAAEAPz/AAABAAAAAAADAP//AAAAAAEAAAADAP7/AAAAAAEAAAADAP3/AAAAAAEAAAADAPz/AAAAAAAAAAAQAP3/AAACAAEAAAAQAPz/AAACAAAAAAAPAP//AAABAAEAAAAPAP7/AAABAAEAAAAPAP3/AAABAAEAAAAPAPz/AAABAAAAAAAOAP//AAABAAEAAAAOAP7/AAABAAEAAAAOAP3/AAABAAEAAAAOAPz/AAABAAAAAAANAP//AAAAAAEAAAANAP7/AAAAAAEAAAANAP3/AAAAAAEAAAANAPz/AAAAAAAAAAAFAA4AAAACAAIAAAAFAA0AAAACAAEAAAAFAAwAAAACAAEAAAAFAAsAAAACAAEAAAAEAA4AAAABAAIAAAAEAA0AAAABAAEAAAAEAAwAAAABAAEAAAAEAAsAAAABAAEAAAADAA4AAAABAAIAAAADAA0AAAABAAEAAAADAAwAAAABAAEAAAADAAsAAAABAAEAAAACAA4AAAAAAAIAAAACAA0AAAAAAAEAAAACAAwAAAAAAAEAAAACAAsAAAAAAAEAAAAKAAwAAAACAAIAAAAKAAsAAAACAAEAAAAJAAwAAAABAAIAAAAJAAsAAAABAAEAAAAIAAwAAAAAAAIAAAAIAAsAAAAAAAEAAAAQAA4AAAACAAIAAAAQAA0AAAACAAEAAAAQAAwAAAADAAEAAAAQAAsAAAADAAEAAAAPAA4AAAABAAIAAAAPAA0AAAABAAAAAAAOAA4AAAAAAAIAAAD//wgAAAABAAIAAAD+/wgAAAABAAIAAAD9/wgAAAAAAAMAAAD//wcAAAABAAEAAAD//wYAAAABAAEAAAD+/wcAAAAAAAEAAAD+/wYAAAAAAAEAAAAOAA0AAAAAAAAAAAD+/wUAAAAAAAAAAAD//wUAAAACAAAAAAAAAAYAAAABAAAAAAABAAYAAAACAAAAAAACAAcAAAACAAAAAAADAAkAAAABAAAAAAAEAAkAAAABAAAAAAAFAAkAAAABAAAAAAAGAAkAAAABAAAAAAAHAAkAAAABAAAAAAAIAAkAAAABAAAAAAAEAAUAAAAAAAIAAAAFAAUAAAABAAIAAAAGAAUAAAABAAIAAAAIAAYAAAABAAEAAAAAAAEAAAAAAAIAAAABAAEAAAABAAIAAAACAAEAAAABAAEAAAACAAIAAAAAAAIAAAADAAMAAAAAAAIAAAAQAP7/AAACAAEAAAANAAgAAAABAAEAAAAOAAgAAAABAAIAAAAPAAgAAAABAAIAAAANAAkAAAACAAIAAAAQAP//AAACAAEAAAAQAAAAAAACAAEAAAAIAAAAAAABAAEAAAAIAAEAAAABAAEAAAAKAAAAAAABAAEAAAAKAAEAAAABAAEAAAAJAAEAAAABAAEAAAAJAAAAAAABAAEAAAAJAP//AAABAAEAAAAJAP7/AAABAAAAAAAIAP7/AAAAAAAAAAAIAP//AAAAAAEAAAAKAP//AAACAAEAAAAKAP7/AAACAAAAAAAHAAIAAAABAAEAAAAHAAMAAAABAAEAAAAHAAQAAAABAAEAAAAHAAUAAAABAAEAAAAIAAUAAAABAAEAAAAJAAUAAAABAAEAAAAKAAUAAAABAAEAAAALAAUAAAABAAEAAAAMAAUAAAABAAEAAAAMAAQAAAABAAEAAAALAAQAAAABAAEAAAAKAAQAAAABAAEAAAAJAAQAAAABAAEAAAAIAAQAAAABAAEAAAAIAAMAAAABAAEAAAAIAAIAAAABAAEAAAAJAAIAAAABAAEAAAAKAAIAAAABAAEAAAALAAIAAAABAAEAAAALAAMAAAABAAEAAAAKAAMAAAABAAEAAAAJAAMAAAABAAEAAAAHAAYAAAAAAAIAAAAIAAcAAAAAAAIAAAA=")
@@ -148,23 +156,11 @@ y_sort_enabled = true
 [node name="Pawn" parent="Map/NavigationRegion2D/World" unique_id=1673489485 instance=ExtResource("9_hryqi")]
 position = Vector2(406, 154)
 
-[node name="Pawn2" parent="Map/NavigationRegion2D/World" unique_id=1803461710 instance=ExtResource("9_hryqi")]
-position = Vector2(453, 216)
-
-[node name="Pawn3" parent="Map/NavigationRegion2D/World" unique_id=1093522921 instance=ExtResource("9_hryqi")]
-position = Vector2(463, 124)
-
 [node name="Tree1" parent="Map/NavigationRegion2D/World" unique_id=1936357647 instance=ExtResource("10_6t3k2")]
 position = Vector2(655, 317)
 
-[node name="Tree2" parent="Map/NavigationRegion2D/World" unique_id=2054943435 instance=ExtResource("11_vk4q2")]
-position = Vector2(633, 159)
-
-[node name="Tree3" parent="Map/NavigationRegion2D/World" unique_id=571310574 instance=ExtResource("12_wliom")]
-position = Vector2(608, 309)
-
-[node name="Tree4" parent="Map/NavigationRegion2D/World" unique_id=397000669 instance=ExtResource("13_2ok46")]
-position = Vector2(583, 145)
-
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1867642460]
 script = ExtResource("15_wliom")
+
+[editable path="Map/NavigationRegion2D/World/Tree1"]
+[editable path="Map/NavigationRegion2D/World/Tree1/SelectableComponent"]

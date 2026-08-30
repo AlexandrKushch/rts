@@ -9,6 +9,9 @@ public partial class BuildControl : Control
     [Export]
     public BuildResource[] AvailableBuildings { get; set; }
 
+    [Export]
+    public PackedScene BuildingBlueprintScene;
+
     public override void _Ready()
     {
         Background = GetNode<NinePatchRect>(nameof(Background));
@@ -34,10 +37,5 @@ public partial class BuildControl : Control
         float tweenDuration = 0.25f;
         tween.TweenProperty(Background, "scale", new Vector2(1.2f, 0.8f), tweenDuration * 0.5f);
         tween.TweenProperty(Background, "scale", new Vector2(1, 1), tweenDuration * 0.5f);
-    }
-
-    public void OnBuldingChoosen(BuildResource building)
-    {
-        
     }
 }

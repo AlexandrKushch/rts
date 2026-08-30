@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="BuildResource" format=3 uid="uid://3fqpdgsfv17m"]
 
-[ext_resource type="Texture2D" uid="uid://bym0fx237u6be" path="res://Assets/Buildings/Blue Buildings/Tower.png" id="1_1dutq"]
+[ext_resource type="Texture2D" uid="uid://b2obdvjv7o4ef" path="res://Assets/Buildings/Blue Buildings/Castle.png" id="1_1dutq"]
 [ext_resource type="Script" uid="uid://ck4k0rwiv3nec" path="res://Scenes/Buildings/BuildResource.cs" id="2_yp40g"]
 
 [resource]
 script = ExtResource("2_yp40g")
-Name = "tower"
+Name = "castle"
 Icon = ExtResource("1_1dutq")
 metadata/_custom_type_script = "uid://ck4k0rwiv3nec"

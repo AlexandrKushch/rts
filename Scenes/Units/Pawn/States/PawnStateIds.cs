@@ -1,6 +1,6 @@
 public enum PawnGatheringStateIds
 {
-    MoveToResource,
+    MoveTo,
     GatheringResource,
-    MoveToGatheringArea
+    BuildOrRepair
 }

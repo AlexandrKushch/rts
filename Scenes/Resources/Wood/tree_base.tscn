@@ -39,11 +39,9 @@ ResourceType = ExtResource("2_oexb5")
 Quantity = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=516973278]
-visible = false
 shape = SubResource("CircleShape2D_xrivr")
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=2047243752]
-visible = false
 radius = 10.0
 
 [node name="SelectableComponent" parent="." unique_id=550510253 node_paths=PackedStringArray("EffectedOn") instance=ExtResource("2_anx2m")]
