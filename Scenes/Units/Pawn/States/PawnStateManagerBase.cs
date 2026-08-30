@@ -26,9 +26,13 @@ public partial class PawnStateManagerBase : Node
         if (_currentState != null)
         {
             _currentState.Deactivate();
+            _currentState = null;
         }
 
-        _currentState = _states[state];
-        _currentState.Activate();
+        if (state != PawnGatheringStateIds.None)
+        {
+            _currentState = _states[state];
+            _currentState.Activate();
+        }
     }
 }

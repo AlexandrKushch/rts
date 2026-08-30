@@ -8,8 +8,8 @@ script = ExtResource("1_8grwn")
 
 [node name="Visual" type="Sprite2D" parent="." unique_id=1679201315]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=205489129]
-rotation = 1.5707964
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=168278068]
+polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
 
 [node name="SelectableComponent" parent="." unique_id=550510253 node_paths=PackedStringArray("EffectedOn") instance=ExtResource("2_d1o4y")]
 EffectedOn = NodePath("..")

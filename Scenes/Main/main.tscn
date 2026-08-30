@@ -161,6 +161,3 @@ position = Vector2(655, 317)
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1867642460]
 script = ExtResource("15_wliom")
-
-[editable path="Map/NavigationRegion2D/World/Tree1"]
-[editable path="Map/NavigationRegion2D/World/Tree1/SelectableComponent"]

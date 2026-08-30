@@ -19,6 +19,7 @@ public partial class PawnGatheringResourceState : PawnStateBase
     public override void Deactivate()
     {
         base.Deactivate();
+        StateManager.Pawn.Visual.Stop();
         StateManager.Pawn.Visual.Disconnect(PawnVisual.SignalName.OnInteractAnimationFinished, Callable.From(Gather));
         GD.Print("GATHERING OFF");
     }

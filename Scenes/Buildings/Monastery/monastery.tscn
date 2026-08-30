@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://gbgcj1ms1bp7"]
+
+[ext_resource type="PackedScene" uid="uid://bericglgvv4m8" path="res://Scenes/Buildings/building_base.tscn" id="1_l2qa8"]
+[ext_resource type="Texture2D" uid="uid://c2ol0sgjkbgie" path="res://Assets/Buildings/Blue Buildings/Monastery.png" id="2_eioss"]
+[ext_resource type="Resource" uid="uid://c3qhmxdssqwd0" path="res://Scenes/Buildings/BuildingResources/r_monastery.tres" id="2_titpi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_10o7v"]
+size = Vector2(140, 190)
+
+[node name="Monastery" unique_id=548953940 instance=ExtResource("1_l2qa8")]
+Resource = ExtResource("2_titpi")
+
+[node name="Visual" parent="." index="0" unique_id=1679201315]
+position = Vector2(0, -122)
+texture = ExtResource("2_eioss")
+
+[node name="CollisionPolygon2D" parent="." index="1" unique_id=168278068]
+polygon = PackedVector2Array(-65, -100, 65, -100, 55, 15, -55, 15)
+
+[node name="CollisionShape2D" parent="SelectableComponent" parent_id_path=PackedInt32Array(550510253) index="1" unique_id=1060696685]
+position = Vector2(0, -80)
+shape = SubResource("RectangleShape2D_10o7v")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="3" unique_id=706712859]
+position = Vector2(-36, -8)
+radius = 30.0
+
+[node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="4" unique_id=879405387]
+position = Vector2(36, -8)
+radius = 30.0
+
+[node name="NavigationObstacle2D3" type="NavigationObstacle2D" parent="." index="5" unique_id=377817090]
+position = Vector2(-41, -82)
+radius = 30.0
+
+[node name="NavigationObstacle2D4" type="NavigationObstacle2D" parent="." index="6" unique_id=2054179555]
+position = Vector2(42, -82)
+radius = 30.0
+
+[editable path="SelectableComponent"]

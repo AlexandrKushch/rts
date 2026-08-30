@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://o6ovn6r5mcae"]
+
+[ext_resource type="PackedScene" uid="uid://bericglgvv4m8" path="res://Scenes/Buildings/building_base.tscn" id="1_hclp5"]
+[ext_resource type="Resource" uid="uid://dy2ree62pofk1" path="res://Scenes/Buildings/BuildingResources/r_archery.tres" id="2_10o7v"]
+[ext_resource type="Texture2D" uid="uid://b1a0047iar2io" path="res://Assets/Buildings/Blue Buildings/Archery.png" id="2_yami0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t274w"]
+size = Vector2(164, 157)
+
+[node name="Archery" unique_id=548953940 instance=ExtResource("1_hclp5")]
+Resource = ExtResource("2_10o7v")
+
+[node name="Visual" parent="." index="0" unique_id=1679201315]
+position = Vector2(0, -44)
+texture = ExtResource("2_yami0")
+
+[node name="CollisionPolygon2D" parent="." index="1" unique_id=168278068]
+polygon = PackedVector2Array(-75, -63, 69, -63, 72, 58, -87, 60)
+
+[node name="CollisionShape2D" parent="SelectableComponent" parent_id_path=PackedInt32Array(550510253) index="1" unique_id=1060696685]
+position = Vector2(-2, -15.5)
+shape = SubResource("RectangleShape2D_t274w")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="3" unique_id=56571997]
+position = Vector2(-65, 39)
+radius = 30.0
+
+[node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="4" unique_id=810712484]
+position = Vector2(50, 38)
+radius = 30.0
+
+[node name="NavigationObstacle2D4" type="NavigationObstacle2D" parent="." index="5" unique_id=1669727675]
+position = Vector2(-9, 38)
+radius = 30.0
+
+[node name="NavigationObstacle2D3" type="NavigationObstacle2D" parent="." index="6" unique_id=577213989]
+position = Vector2(-53, -43)
+radius = 30.0
+
+[node name="NavigationObstacle2D5" type="NavigationObstacle2D" parent="." index="7" unique_id=205602783]
+position = Vector2(46, -43)
+radius = 30.0
+
+[node name="NavigationObstacle2D6" type="NavigationObstacle2D" parent="." index="8" unique_id=97219059]
+position = Vector2(-3, -43)
+radius = 30.0
+
+[node name="NavigationObstacle2D7" type="NavigationObstacle2D" parent="." index="9" unique_id=1025769287]
+position = Vector2(-53, -2)
+radius = 30.0
+
+[node name="NavigationObstacle2D8" type="NavigationObstacle2D" parent="." index="10" unique_id=1151428309]
+position = Vector2(46, -2)
+radius = 30.0
+
+[editable path="SelectableComponent"]

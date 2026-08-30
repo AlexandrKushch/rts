@@ -3,7 +3,6 @@ using System;
 
 public partial class NavigationRegionController : NavigationRegion2D
 {
-    
     public static NavigationRegionController Instance { get; private set; }
 
     public override void _Ready()

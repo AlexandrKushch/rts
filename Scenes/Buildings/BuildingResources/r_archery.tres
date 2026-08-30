@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BuildResource" format=3 uid="uid://dy2ree62pofk1"]
+
+[ext_resource type="Texture2D" uid="uid://b1a0047iar2io" path="res://Assets/Buildings/Blue Buildings/Archery.png" id="1_vpav4"]
+[ext_resource type="Script" uid="uid://ck4k0rwiv3nec" path="res://Scenes/Buildings/BuildResource.cs" id="2_5jf6j"]
+
+[resource]
+script = ExtResource("2_5jf6j")
+Name = "archery"
+Icon = ExtResource("1_vpav4")
+MaxHp = 20
+metadata/_custom_type_script = "uid://ck4k0rwiv3nec"

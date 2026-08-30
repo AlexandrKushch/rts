@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://bhwicgs7tna51"]
+
+[ext_resource type="PackedScene" uid="uid://bericglgvv4m8" path="res://Scenes/Buildings/building_base.tscn" id="1_wjwem"]
+[ext_resource type="Texture2D" uid="uid://dumaqi6xtmqtx" path="res://Assets/Buildings/Blue Buildings/Barracks.png" id="2_1uhux"]
+[ext_resource type="Resource" uid="uid://b8ycuiugnmrri" path="res://Scenes/Buildings/BuildingResources/r_barracks.tres" id="2_3q5wo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eioss"]
+size = Vector2(176, 175)
+
+[node name="Barracks" unique_id=548953940 instance=ExtResource("1_wjwem")]
+Resource = ExtResource("2_3q5wo")
+
+[node name="Visual" parent="." index="0" unique_id=1679201315]
+position = Vector2(0, -86)
+texture = ExtResource("2_1uhux")
+
+[node name="CollisionPolygon2D" parent="." index="1" unique_id=168278068]
+polygon = PackedVector2Array(-90, -60, 90, -60, 75, 16, -75, 16)
+
+[node name="CollisionShape2D" parent="SelectableComponent" parent_id_path=PackedInt32Array(550510253) index="1" unique_id=1060696685]
+position = Vector2(0, -68.5)
+shape = SubResource("RectangleShape2D_eioss")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="3" unique_id=378447270]
+position = Vector2(-27, -8)
+radius = 20.0
+
+[node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="4" unique_id=1901443247]
+position = Vector2(27, -8)
+radius = 20.0
+
+[node name="NavigationObstacle2D3" type="NavigationObstacle2D" parent="." index="5" unique_id=1654220161]
+position = Vector2(0, -8)
+radius = 20.0
+
+[editable path="SelectableComponent"]

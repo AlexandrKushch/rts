@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot;
 using Godot.Collections;
 
@@ -27,7 +28,7 @@ public partial class BuildingBlueprint : Node2D
     {
         GlobalPosition = GetGlobalMousePosition();
 
-        if (NavigationRegionController.Instance.IsPointInside(GlobalPosition))
+        if (Building.CollisionPolygon2D.Polygon.All(x => NavigationRegionController.Instance.IsPointInside(Building.GlobalPosition + x)))
         {
             Building.Modulate = Colors.Green;
             ValidToDeploy = true;
@@ -45,7 +46,7 @@ public partial class BuildingBlueprint : Node2D
 
         Building.Modulate = Colors.White;
         Building.SetProcess(true);
-        Building.CollisionShape2D.Disabled = false;
+        Building.CollisionPolygon2D.Disabled = false;
 
         foreach (var obstacle in Building.Obstacles)
         {
@@ -58,7 +59,7 @@ public partial class BuildingBlueprint : Node2D
     public void SetAsBlueprint()
     {
         Building.SetProcess(false);
-        Building.CollisionShape2D.Disabled = true;
+        Building.CollisionPolygon2D.Disabled = true;
 
         foreach (var obstacle in Building.Obstacles)
         {

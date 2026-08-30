@@ -3,16 +3,20 @@ using System.Linq;
 
 public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
 {
-    public CollisionShape2D CollisionShape2D { get; private set; }
+    public int MaxHp { get; set; }
+    public int HP { get; set; }
+
+    public CollisionPolygon2D CollisionPolygon2D { get; private set; }
     public NavigationObstacle2D[] Obstacles { get; private set; }
 
-    [Export] public int HP { get; set; }
-    [Export] public int MaxHp { get; set; }
+    [Export] public BuildResource Resource { get; private set; }
     
     public override void _Ready()
     {
-        CollisionShape2D = GetNode<CollisionShape2D>(nameof(CollisionShape2D));
+        CollisionPolygon2D = GetNode<CollisionPolygon2D>(nameof(CollisionPolygon2D));
         Obstacles = GetChildren().Where(x => x is NavigationObstacle2D).Select(x => x as NavigationObstacle2D).ToArray();
+
+        MaxHp = Resource.MaxHp;
     }
 
     public bool TryBuildProgressOne()

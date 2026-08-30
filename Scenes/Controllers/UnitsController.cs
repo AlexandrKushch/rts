@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -164,6 +165,12 @@ public partial class UnitsController : Node2D
             .Where(x => x is NavigationObstacle2D && x != null)
             .Select(x => x as NavigationObstacle2D)
             .MinBy(x => x.GlobalPosition.DistanceTo(unit.GlobalPosition));
+
+        if (obstacle == null)
+        {
+            throw new NullReferenceException("Not found any obstacle in building");
+        }
+
         var directionFrom = obstacle.GlobalPosition.DirectionTo(unit.GlobalPosition);
 
         return obstacle.GlobalPosition + directionFrom * obstacle.Radius;

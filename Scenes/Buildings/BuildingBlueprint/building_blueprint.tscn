@@ -2,9 +2,17 @@
 
 [ext_resource type="Script" uid="uid://kyjja1118w8s" path="res://Scenes/Buildings/BuildingBlueprint/BuildingBlueprint.cs" id="1_emfpd"]
 [ext_resource type="PackedScene" uid="uid://dxfs7l3k65nvi" path="res://Scenes/Buildings/Castle/castle.tscn" id="2_0amd5"]
+[ext_resource type="PackedScene" uid="uid://ciqpg25wy10i2" path="res://Scenes/Buildings/Tower/tower.tscn" id="3_0amd5"]
+[ext_resource type="PackedScene" uid="uid://bhwicgs7tna51" path="res://Scenes/Buildings/Barracks/barracks.tscn" id="4_w26bj"]
+[ext_resource type="PackedScene" uid="uid://o6ovn6r5mcae" path="res://Scenes/Buildings/Archery/archery.tscn" id="5_eymu6"]
+[ext_resource type="PackedScene" uid="uid://gbgcj1ms1bp7" path="res://Scenes/Buildings/Monastery/monastery.tscn" id="6_t274w"]
 
 [node name="BuildingBlueprint" type="Node2D" unique_id=1418719669]
 script = ExtResource("1_emfpd")
 BuildingsDictionary = Dictionary[String, PackedScene]({
-"castle": ExtResource("2_0amd5")
+"archery": ExtResource("5_eymu6"),
+"barracks": ExtResource("4_w26bj"),
+"castle": ExtResource("2_0amd5"),
+"monastery": ExtResource("6_t274w"),
+"tower": ExtResource("3_0amd5")
 })

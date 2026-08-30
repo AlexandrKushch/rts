@@ -89,4 +89,9 @@ public partial class PawnVisual : Node
             EmitSignal(SignalName.OnInteractAnimationFinished);
         }
     }
+
+    public void Stop()
+    {
+        AnimationPlayer.Stop();
+    }
 }

@@ -63,8 +63,6 @@ public partial class BuildingController : Node2D
                 _blueprint.DeployTo(World);
                 _blueprint.QueueFree();
                 BlueprintActive = false;
-
-                // UnitsController.Instance.CallDeferred(nameof(UnitsController.Instance.MoveCommand), inputButton);
             }
             else if (inputButton.ButtonIndex == MouseButton.Right
                 && !inputButton.Pressed)

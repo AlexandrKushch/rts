@@ -2,7 +2,8 @@ using Godot;
 
 public partial class PawnMoveToState : PawnStateBase
 {
-    private const float TargetDesiredDistance = 40;
+    private const float ResourceDesiredDistance = 40;
+    private const float BuildingDesiredDistance = 80;
     private float _defaultTargetDesiredDistance;
 
     public override void Activate()
@@ -10,7 +11,7 @@ public partial class PawnMoveToState : PawnStateBase
         base.Activate();
 
         _defaultTargetDesiredDistance = StateManager.Pawn.NavigationAgent2D.TargetDesiredDistance;
-        StateManager.Pawn.NavigationAgent2D.TargetDesiredDistance = TargetDesiredDistance;
+        StateManager.Pawn.NavigationAgent2D.TargetDesiredDistance = StateManager.Pawn.TargetObject is ResourceBase ? ResourceDesiredDistance : BuildingDesiredDistance;
         
         GD.Print("Move to res ON");
     }

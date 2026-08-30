@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://v0fwwhmbib22" path="res://Scenes/UI/BuildControl/BuildingItem.cs" id="4_2d7k7"]
 [ext_resource type="Resource" uid="uid://3fqpdgsfv17m" path="res://Scenes/Buildings/BuildingResources/r_tower.tres" id="4_l6m7d"]
 [ext_resource type="Texture2D" uid="uid://bmpo5ljnnnobw" path="res://Assets/UI Elements/UI Elements/Banners/Banner.png" id="5_dul30"]
+[ext_resource type="Resource" uid="uid://dy2ree62pofk1" path="res://Scenes/Buildings/BuildingResources/r_archery.tres" id="5_l6m7d"]
+[ext_resource type="Resource" uid="uid://c3qhmxdssqwd0" path="res://Scenes/Buildings/BuildingResources/r_monastery.tres" id="6_etlie"]
 [ext_resource type="Texture2D" uid="uid://dumaqi6xtmqtx" path="res://Assets/Buildings/Blue Buildings/Barracks.png" id="8_dul30"]
 
 [node name="BuildControl" type="Control" unique_id=1172690870]
@@ -26,7 +28,7 @@ grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 mouse_filter = 1
 script = ExtResource("1_h4jik")
-AvailableBuildings = Array[Object]([ExtResource("2_bnfop"), ExtResource("3_dul30"), ExtResource("4_l6m7d")])
+AvailableBuildings = Array[Object]([ExtResource("2_bnfop"), ExtResource("4_l6m7d"), ExtResource("3_dul30"), ExtResource("5_l6m7d"), ExtResource("6_etlie")])
 
 [node name="Background" type="NinePatchRect" parent="." unique_id=466969448]
 layout_mode = 1

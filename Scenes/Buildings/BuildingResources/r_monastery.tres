@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BuildResource" format=3 uid="uid://c3qhmxdssqwd0"]
+
+[ext_resource type="Texture2D" uid="uid://c2ol0sgjkbgie" path="res://Assets/Buildings/Blue Buildings/Monastery.png" id="1_ed6t8"]
+[ext_resource type="Script" uid="uid://ck4k0rwiv3nec" path="res://Scenes/Buildings/BuildResource.cs" id="2_bn8qg"]
+
+[resource]
+script = ExtResource("2_bn8qg")
+Name = "monastery"
+Icon = ExtResource("1_ed6t8")
+MaxHp = 50
+metadata/_custom_type_script = "uid://ck4k0rwiv3nec"

@@ -54,6 +54,7 @@ public partial class Pawn : UnitBase
         else
         {
             Building = null;
+            StateMachine.ChangeState(PawnGatheringStateIds.None);
             StateMachine.SetProcess(false);
 
             if (ResourceCollectedCount == 0)
