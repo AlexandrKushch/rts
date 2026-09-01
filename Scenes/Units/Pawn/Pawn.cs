@@ -4,6 +4,8 @@ using Godot;
 
 public partial class Pawn : UnitBase
 {
+    public const int MaxCollectableCapacity = 15;
+    
     private UpdateMovementAnimation _updateMovementAnimation;
     private PawnStateManagerBase StateMachine;
 
@@ -11,7 +13,7 @@ public partial class Pawn : UnitBase
     public ResourceBase TargetResource { get; private set; }
     public BuildingBase TargetBuilding { get; private set; }
 
-    public int ResourceCollectedCount { get; set; }
+    public PawnResourceToCollectData ResourceToCollectData { get; private set; }
 
     private delegate void UpdateMovementAnimation(Vector2 velocity, int collected);
 
@@ -27,7 +29,7 @@ public partial class Pawn : UnitBase
     {
         base._PhysicsProcess(delta);
 
-        _updateMovementAnimation(Velocity, ResourceCollectedCount);
+        _updateMovementAnimation(Velocity, ResourceToCollectData?.CollectedCount ?? 0);
     }
 
     public BuildingBase GetClosestResourceStorageBuilding()
@@ -37,6 +39,18 @@ public partial class Pawn : UnitBase
             .Where(x => x is BuildingBase && x != null)
             .Select(x => x as BuildingBase)
             .MinBy(x => GlobalPosition.DistanceTo(x.GlobalPosition));
+    }
+
+    public ResourceBase GetNextResource()
+    {
+        if (ResourceToCollectData == null) return null;
+
+        return GetParent()
+            .GetChildren()
+            .Where(x => x is ResourceBase && x != null)
+            .Select(x => x as ResourceBase)
+            .Where(x => x.ResourceType.Name.Equals(ResourceToCollectData.ResourceType.Name, StringComparison.OrdinalIgnoreCase))
+            .MinBy(x => ResourceToCollectData.Position.DistanceTo(x.GlobalPosition));
     }
 
     public override void UpdatePath()
@@ -51,6 +65,18 @@ public partial class Pawn : UnitBase
             if (TargetObject is ResourceBase resource)
             {
                 TargetResource = resource;
+
+                if (ResourceToCollectData == null
+                    || ResourceToCollectData.ResourceType.Name != resource.ResourceType.Name)
+                {
+                    ResourceToCollectData = new PawnResourceToCollectData
+                    {
+                        Position = resource.GlobalPosition,
+                        ResourceType = resource.ResourceType,
+                        CollectedCount = 0
+                    };
+                }
+
                 _updateMovementAnimation = (v, c) => { Visual.UpdateMovement(v, c, resource.ResourceType); };
             }
             else if (TargetObject is BuildingBase building)
@@ -71,14 +97,16 @@ public partial class Pawn : UnitBase
             TargetBuilding = null;
             StateMachine.ChangeState(PawnGatheringStateIds.None);
 
-            if (ResourceCollectedCount == 0)
+            if (ResourceToCollectData == null
+                || ResourceToCollectData.CollectedCount == 0)
             {
                 TargetResource = null;
+                ResourceToCollectData = null;
                 _updateMovementAnimation = (v, _) => { Visual.UpdateMovement(v, string.Empty); };
             }
             else
             {
-                _updateMovementAnimation = (v, c) => { Visual.UpdateMovement(v, c, TargetResource.ResourceType); };                
+                _updateMovementAnimation = (v, c) => { Visual.UpdateMovement(v, c, ResourceToCollectData.ResourceType); };                
             }
         }
     }
@@ -86,6 +114,6 @@ public partial class Pawn : UnitBase
     public void DropResources()
     {
         GD.Print("DROP RESOURCES");
-        ResourceCollectedCount = 0;
+        ResourceToCollectData.CollectedCount = 0;
     }
 }

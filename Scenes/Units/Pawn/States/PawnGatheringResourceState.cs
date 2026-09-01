@@ -2,8 +2,6 @@ using Godot;
 
 public partial class PawnGatheringResourceState : PawnStateBase
 {
-    private const int MaxCollectableCapacity = 5;
-
     public override void Activate()
     {
         base.Activate();
@@ -12,7 +10,7 @@ public partial class PawnGatheringResourceState : PawnStateBase
         StateManager.Pawn.Visual.Connect(PawnVisual.SignalName.OnInteractAnimationFinished, Callable.From(Gather));
 
         Gather();
-        
+
         GD.Print("GATHERING ON");
     }
 
@@ -26,18 +24,15 @@ public partial class PawnGatheringResourceState : PawnStateBase
 
     private void Gather()
     {
-        if (StateManager.Pawn.ResourceCollectedCount >= MaxCollectableCapacity)
+        if (StateManager.Pawn.ResourceToCollectData.CollectedCount >= Pawn.MaxCollectableCapacity)
         {
-            var building = StateManager.Pawn.GetClosestResourceStorageBuilding();
-            UnitsController.Instance.MoveToObstacleCommand(StateManager.Pawn, building);
+            StateManager.MoveToClosestBuilding();
             return;
         }
 
         if (!IsInstanceValid(StateManager.Pawn.TargetResource))
         {
-            // TO-DO find another same resource
-            // var building = StateManager.Pawn.GetClosestResourceStorageBuilding();
-            // UnitsController.Instance.MoveToObstacleCommand(StateManager.Pawn, building);
+            StateManager.MoveToClosestResourceIfNotToBuilding();
             return;
         }
 
@@ -46,11 +41,11 @@ public partial class PawnGatheringResourceState : PawnStateBase
 
     private void OnInteractAnimatioKeyReached()
     {
-        if (IsInstanceValid(StateManager.Pawn.TargetResource)
-            && StateManager.Pawn.TargetResource.TryCollectOne())
+        if (IsInstanceValid(StateManager.Pawn.TargetResource))
         {
-            StateManager.Pawn.ResourceCollectedCount++;
+            StateManager.Pawn.TargetResource.CollectOne();
+            StateManager.Pawn.ResourceToCollectData.CollectedCount++;
             GD.Print("Gather +1");
-        }        
+        }
     }
 }

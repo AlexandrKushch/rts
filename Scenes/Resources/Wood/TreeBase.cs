@@ -28,16 +28,14 @@ public partial class TreeBase : ResourceBase
         }
     }
 
-    public override bool TryCollectOne()
+    public override void CollectOne()
     {
-        var result = base.TryCollectOne();
+        base.CollectOne();
 
         var tween = CreateTween()
             .SetTrans(Tween.TransitionType.Bounce);
         float tweenDuration = 0.25f;
         tween.TweenProperty(Visual, "scale", new Vector2(0.9f, 1.1f), tweenDuration * 0.5f);
         tween.TweenProperty(Visual, "scale", new Vector2(1.0f, 1.0f), tweenDuration * 0.5f);
-
-        return result;
     }
 }

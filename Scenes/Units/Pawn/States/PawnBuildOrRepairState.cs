@@ -10,7 +10,7 @@ public partial class PawnBuildOrRepairState : PawnStateBase
         StateManager.Pawn.Visual.Connect(PawnVisual.SignalName.OnInteractAnimationFinished, Callable.From(Build));
 
         Build();
-        
+
         GD.Print("BUILDING ON");
     }
 
@@ -32,7 +32,21 @@ public partial class PawnBuildOrRepairState : PawnStateBase
 
         if (StateManager.Pawn.TargetBuilding.Build)
         {
-            // Deactivate();
+            if (StateManager.Pawn.ResourceToCollectData != null
+                && StateManager.Pawn.ResourceToCollectData.CollectedCount > 0)
+            {
+                StateManager.Pawn.DropResources();
+
+                if (IsInstanceValid(StateManager.Pawn.TargetResource))
+                {
+                    UnitsController.Instance.MoveToObstacleCommand(StateManager.Pawn, StateManager.Pawn.TargetResource);
+                }
+                else
+                {
+                    UnitsController.Instance.MoveToObstacleCommand(StateManager.Pawn, null);
+                    StateManager.ChangeState(PawnGatheringStateIds.None);
+                }
+            }
             return;
         }
 
@@ -44,6 +58,6 @@ public partial class PawnBuildOrRepairState : PawnStateBase
         if (IsInstanceValid(StateManager.Pawn.TargetBuilding))
         {
             StateManager.Pawn.TargetBuilding.TryBuildProgressOne();
-        }        
+        }
     }
 }

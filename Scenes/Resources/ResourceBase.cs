@@ -8,16 +8,13 @@ public partial class ResourceBase : Node2D
     [Export]
     public int Quantity { get; set; }
 
-    public virtual bool TryCollectOne()
+    public virtual void CollectOne()
     {
         Quantity -= 1;
 
         if (Quantity <= 0)
         {
             QueueFree();
-            return false;
         }
-
-        return true;
     }
 }

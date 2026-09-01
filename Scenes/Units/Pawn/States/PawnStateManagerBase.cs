@@ -40,4 +40,25 @@ public partial class PawnStateManagerBase : Node
             SetProcess(false);
         }
     }
+
+    public void MoveToClosestBuilding()
+    {
+        var building = Pawn.GetClosestResourceStorageBuilding();
+        UnitsController.Instance.MoveToObstacleCommand(Pawn, building);
+    }
+
+    public void MoveToClosestResourceIfNotToBuilding()
+    {
+        var resource = Pawn.GetNextResource();
+
+        if (resource != null)
+        {
+            UnitsController.Instance.MoveToObstacleCommand(Pawn, resource);
+        }
+        else
+        {
+            var building = Pawn.GetClosestResourceStorageBuilding();
+            UnitsController.Instance.MoveToObstacleCommand(Pawn, building);
+        }
+    }
 }

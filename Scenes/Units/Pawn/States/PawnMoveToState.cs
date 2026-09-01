@@ -40,7 +40,8 @@ public partial class PawnMoveToState : PawnStateBase
                 }
                 else
                 {
-                    if (StateManager.Pawn.ResourceCollectedCount > 0)
+                    if (StateManager.Pawn.ResourceToCollectData != null
+                        && StateManager.Pawn.ResourceToCollectData.CollectedCount > 0)
                     {
                         StateManager.Pawn.DropResources();
                         
@@ -50,8 +51,7 @@ public partial class PawnMoveToState : PawnStateBase
                         }
                         else
                         {
-                            UnitsController.Instance.MoveToObstacleCommand(StateManager.Pawn, null);
-                            StateManager.ChangeState(PawnGatheringStateIds.None);
+                            StateManager.MoveToClosestResourceIfNotToBuilding();
                         }
                     }
                     else

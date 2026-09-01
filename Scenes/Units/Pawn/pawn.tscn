@@ -531,8 +531,10 @@ _data = {
 script = ExtResource("2_8igw0")
 Meta = ExtResource("3_8fvhf")
 
+[node name="CollisionShape2D" parent="." index="0" unique_id=1443833613]
+position = Vector2(0, -12)
+
 [node name="NavigationAgent2D" parent="." index="1" unique_id=1325708388]
-radius = 30.0
 avoidance_layers = 0
 
 [node name="SelectableComponent" parent="." index="3" unique_id=550510253 node_paths=PackedStringArray("EffectedOn")]
