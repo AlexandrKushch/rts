@@ -28,8 +28,39 @@ public partial class PawnMoveToState : PawnStateBase
     {
         if (StateManager.Pawn.NavigationAgent2D.IsNavigationFinished())
         {
-            var state = StateManager.Pawn.TargetObject is ResourceBase ? PawnGatheringStateIds.GatheringResource : PawnGatheringStateIds.BuildOrRepair;
-            StateManager.ChangeState(state);
+            if (StateManager.Pawn.TargetObject is ResourceBase)
+            {
+                StateManager.ChangeState(PawnGatheringStateIds.GatheringResource);
+            }
+            else if (StateManager.Pawn.TargetObject is BuildingBase building)
+            {
+                if (!building.Build)
+                {
+                    StateManager.ChangeState(PawnGatheringStateIds.BuildOrRepair);
+                }
+                else
+                {
+                    if (StateManager.Pawn.ResourceCollectedCount > 0)
+                    {
+                        StateManager.Pawn.DropResources();
+                        
+                        if (IsInstanceValid(StateManager.Pawn.TargetResource))
+                        {
+                            UnitsController.Instance.MoveToObstacleCommand(StateManager.Pawn, StateManager.Pawn.TargetResource);
+                        }
+                        else
+                        {
+                            UnitsController.Instance.MoveToObstacleCommand(StateManager.Pawn, null);
+                            StateManager.ChangeState(PawnGatheringStateIds.None);
+                        }
+                    }
+                    else
+                    {
+                        UnitsController.Instance.MoveToObstacleCommand(StateManager.Pawn, null);
+                        StateManager.ChangeState(PawnGatheringStateIds.None);
+                    }
+                }
+            }
         }
     }
 }

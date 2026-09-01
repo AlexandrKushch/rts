@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class PawnBuildOrRepairState : PawnStateBase
 {
@@ -18,19 +17,20 @@ public partial class PawnBuildOrRepairState : PawnStateBase
     public override void Deactivate()
     {
         base.Deactivate();
+        StateManager.Pawn.Visual.Stop();
         StateManager.Pawn.Visual.Disconnect(PawnVisual.SignalName.OnInteractAnimationFinished, Callable.From(Build));
         GD.Print("BUILDING OFF");
     }
 
     private void Build()
     {
-        if (!IsInstanceValid(StateManager.Pawn.Building))
+        if (!IsInstanceValid(StateManager.Pawn.TargetBuilding))
         {
             // Deactivate();
             return;
         }
 
-        if (StateManager.Pawn.Building.HP >= StateManager.Pawn.Building.MaxHp)
+        if (StateManager.Pawn.TargetBuilding.Build)
         {
             // Deactivate();
             return;
@@ -41,10 +41,9 @@ public partial class PawnBuildOrRepairState : PawnStateBase
 
     private void OnInteractAnimatioKeyReached()
     {
-        if (IsInstanceValid(StateManager.Pawn.Building)
-            && StateManager.Pawn.Building.TryBuildProgressOne())
+        if (IsInstanceValid(StateManager.Pawn.TargetBuilding))
         {
-            GD.Print("Build +1");
+            StateManager.Pawn.TargetBuilding.TryBuildProgressOne();
         }        
     }
 }

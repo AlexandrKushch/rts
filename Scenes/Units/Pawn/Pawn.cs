@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using Godot;
 
 public partial class Pawn : UnitBase
@@ -6,8 +8,8 @@ public partial class Pawn : UnitBase
     private PawnStateManagerBase StateMachine;
 
     public PawnVisual Visual { get; private set; }
-    public ResourceBase Resource { get; private set; }
-    public BuildingBase Building { get; private set; }
+    public ResourceBase TargetResource { get; private set; }
+    public BuildingBase TargetBuilding { get; private set; }
 
     public int ResourceCollectedCount { get; set; }
 
@@ -28,6 +30,15 @@ public partial class Pawn : UnitBase
         _updateMovementAnimation(Velocity, ResourceCollectedCount);
     }
 
+    public BuildingBase GetClosestResourceStorageBuilding()
+    {
+        return GetParent()
+            .GetChildren()
+            .Where(x => x is BuildingBase && x != null)
+            .Select(x => x as BuildingBase)
+            .MinBy(x => GlobalPosition.DistanceTo(x.GlobalPosition));
+    }
+
     public override void UpdatePath()
     {        
         base.UpdatePath();
@@ -39,13 +50,17 @@ public partial class Pawn : UnitBase
         {
             if (TargetObject is ResourceBase resource)
             {
-                Resource = resource;
+                TargetResource = resource;
                 _updateMovementAnimation = (v, c) => { Visual.UpdateMovement(v, c, resource.ResourceType); };
             }
             else if (TargetObject is BuildingBase building)
             {
-                Building = building;
-                _updateMovementAnimation = (v, _) => { Visual.UpdateMovement(v, "build"); };
+                TargetBuilding = building;
+
+                if (!building.Build)
+                {
+                    _updateMovementAnimation = (v, _) => { Visual.UpdateMovement(v, "build"); };
+                }
             }
             
             StateMachine.ChangeState(PawnGatheringStateIds.MoveTo);
@@ -53,19 +68,24 @@ public partial class Pawn : UnitBase
         }
         else
         {
-            Building = null;
+            TargetBuilding = null;
             StateMachine.ChangeState(PawnGatheringStateIds.None);
-            StateMachine.SetProcess(false);
 
             if (ResourceCollectedCount == 0)
             {
-                Resource = null;
+                TargetResource = null;
                 _updateMovementAnimation = (v, _) => { Visual.UpdateMovement(v, string.Empty); };
             }
             else
             {
-                _updateMovementAnimation = (v, c) => { Visual.UpdateMovement(v, c, Resource.ResourceType); };                
+                _updateMovementAnimation = (v, c) => { Visual.UpdateMovement(v, c, TargetResource.ResourceType); };                
             }
         }
+    }
+
+    public void DropResources()
+    {
+        GD.Print("DROP RESOURCES");
+        ResourceCollectedCount = 0;
     }
 }

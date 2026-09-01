@@ -58,7 +58,12 @@ public partial class BuildingController : Node2D
                 && !inputButton.Pressed
                 && _blueprint.ValidToDeploy)
             {
-                UnitsController.Instance.MoveToBuildingCommand(_blueprint.Building);
+                var units = UnitsController.Instance.Selections.Select(x => x.EffectedOn as UnitBase).ToHashSet();
+
+                foreach (var unit in units)
+                {
+                    UnitsController.Instance.MoveToObstacleCommand(unit, _blueprint.Building);
+                }
                 
                 _blueprint.DeployTo(World);
                 _blueprint.QueueFree();

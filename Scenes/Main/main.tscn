@@ -154,10 +154,16 @@ navigation_enabled = false
 y_sort_enabled = true
 
 [node name="Pawn" parent="Map/NavigationRegion2D/World" unique_id=1673489485 instance=ExtResource("9_hryqi")]
-position = Vector2(406, 154)
+position = Vector2(453, 186)
 
 [node name="Tree1" parent="Map/NavigationRegion2D/World" unique_id=1936357647 instance=ExtResource("10_6t3k2")]
 position = Vector2(655, 317)
+
+[node name="Tree2" parent="Map/NavigationRegion2D/World" unique_id=520067916 instance=ExtResource("10_6t3k2")]
+position = Vector2(745, 273)
+
+[node name="Tree3" parent="Map/NavigationRegion2D/World" unique_id=1406907901 instance=ExtResource("10_6t3k2")]
+position = Vector2(726, 372)
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1867642460]
 script = ExtResource("15_wliom")

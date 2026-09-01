@@ -88,23 +88,15 @@ public partial class UnitsController : Node2D
         }
     }
 
-    public void MoveToBuildingCommand(BuildingBase targetObject)
+    public void MoveToObstacleCommand(UnitBase unit, Node2D targetObject)
     {
-        var units = Selections.Select(x => x.EffectedOn as UnitBase).ToHashSet();
+        unit.Target = targetObject != null ? GetClosestPointToObjectBoundary(unit, targetObject) : null;
+        unit.TargetObject = targetObject ?? null;
+        unit.UpdatePath();
 
-        int i = 0;
-        foreach (var unit in units)
+        if (unit is Pawn pawn)
         {
-            unit.Target = GetClosestPointToObjectBoundary(unit, targetObject);
-            unit.TargetObject = targetObject ?? null;
-            unit.UpdatePath();
-
-            if (unit is Pawn pawn)
-            {
-                pawn.UpdateTargetObject();
-            }
-
-            i++;
+            pawn.UpdateTargetObject();
         }
     }
 

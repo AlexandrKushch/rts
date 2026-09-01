@@ -7,5 +7,5 @@
 script = ExtResource("1_2dvea")
 Name = "castle"
 Icon = ExtResource("1_1px0e")
-MaxHp = 50
+MaxHp = 5
 metadata/_custom_type_script = "uid://ck4k0rwiv3nec"

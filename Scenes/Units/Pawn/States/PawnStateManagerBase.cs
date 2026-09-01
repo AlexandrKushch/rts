@@ -34,5 +34,10 @@ public partial class PawnStateManagerBase : Node
             _currentState = _states[state];
             _currentState.Activate();
         }
+
+        if (state == PawnGatheringStateIds.None)
+        {
+            SetProcess(false);
+        }
     }
 }

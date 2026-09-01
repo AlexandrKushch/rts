@@ -6,6 +6,9 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
     public int MaxHp { get; set; }
     public int HP { get; set; }
 
+    [Export]
+    public bool Build { get; private set; } = false;
+
     public CollisionPolygon2D CollisionPolygon2D { get; private set; }
     public NavigationObstacle2D[] Obstacles { get; private set; }
 
@@ -17,13 +20,18 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
         Obstacles = GetChildren().Where(x => x is NavigationObstacle2D).Select(x => x as NavigationObstacle2D).ToArray();
 
         MaxHp = Resource.MaxHp;
+
+        if (Build)
+        {
+            HP = MaxHp;
+        }
     }
 
     public bool TryBuildProgressOne()
     {
         if (HP + 1 > MaxHp)
         {
-            GD.Print("Build complete");
+            Build = true;
             return false;
         }
 

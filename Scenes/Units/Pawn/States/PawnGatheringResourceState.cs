@@ -28,23 +28,26 @@ public partial class PawnGatheringResourceState : PawnStateBase
     {
         if (StateManager.Pawn.ResourceCollectedCount >= MaxCollectableCapacity)
         {
-            // Deactivate();
+            var building = StateManager.Pawn.GetClosestResourceStorageBuilding();
+            UnitsController.Instance.MoveToObstacleCommand(StateManager.Pawn, building);
             return;
         }
 
-        if (!IsInstanceValid(StateManager.Pawn.Resource))
+        if (!IsInstanceValid(StateManager.Pawn.TargetResource))
         {
-            // Deactivate();
+            // TO-DO find another same resource
+            // var building = StateManager.Pawn.GetClosestResourceStorageBuilding();
+            // UnitsController.Instance.MoveToObstacleCommand(StateManager.Pawn, building);
             return;
         }
 
-        StateManager.Pawn.Visual.Interact(StateManager.Pawn.Resource.ResourceType.Name);
+        StateManager.Pawn.Visual.Interact(StateManager.Pawn.TargetResource.ResourceType.Name);
     }
 
     private void OnInteractAnimatioKeyReached()
     {
-        if (IsInstanceValid(StateManager.Pawn.Resource)
-            && StateManager.Pawn.Resource.TryCollectOne())
+        if (IsInstanceValid(StateManager.Pawn.TargetResource)
+            && StateManager.Pawn.TargetResource.TryCollectOne())
         {
             StateManager.Pawn.ResourceCollectedCount++;
             GD.Print("Gather +1");
