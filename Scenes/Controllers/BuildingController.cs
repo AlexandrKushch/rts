@@ -62,7 +62,7 @@ public partial class BuildingController : Node2D
 
                 foreach (var unit in units)
                 {
-                    UnitsController.Instance.MoveToObstacleCommand(unit, _blueprint.Building);
+                    UnitsController.Instance.MoveToNodeCommand(unit, _blueprint.Building);
                 }
                 
                 _blueprint.DeployTo(World);

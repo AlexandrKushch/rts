@@ -5,7 +5,7 @@ using Godot;
 public partial class Pawn : UnitBase
 {
     public const int MaxCollectableCapacity = 15;
-    
+
     private UpdateMovementAnimation _updateMovementAnimation;
     private PawnStateManagerBase StateMachine;
 
@@ -54,8 +54,22 @@ public partial class Pawn : UnitBase
     }
 
     public override void UpdatePath()
-    {        
+    {
         base.UpdatePath();
+    }
+
+    public override void SetTarget(Vector2? targetPosition, Node2D targetObject)
+    {
+        base.SetTarget(targetPosition, targetObject);
+        
+        UpdateTargetObject();
+
+        if (!NavigationAgent2D.IsTargetReachable())
+        {
+            GD.Print("NOT REACHABLE");
+            NavigationAgent2D.TargetPosition = GlobalPosition;
+            SetTarget(null, null);
+        }
     }
 
     public void UpdateTargetObject()
@@ -65,6 +79,7 @@ public partial class Pawn : UnitBase
             if (TargetObject is ResourceBase resource)
             {
                 TargetResource = resource;
+                TargetBuilding = null;
 
                 if (ResourceToCollectData == null
                     || ResourceToCollectData.ResourceType.Name != resource.ResourceType.Name)
@@ -82,13 +97,14 @@ public partial class Pawn : UnitBase
             else if (TargetObject is BuildingBase building)
             {
                 TargetBuilding = building;
+                TargetResource = null;
 
                 if (!building.Build)
                 {
                     _updateMovementAnimation = (v, _) => { Visual.UpdateMovement(v, "build"); };
                 }
             }
-            
+
             StateMachine.ChangeState(PawnGatheringStateIds.MoveTo);
             StateMachine.SetProcess(true);
         }
@@ -106,7 +122,7 @@ public partial class Pawn : UnitBase
             }
             else
             {
-                _updateMovementAnimation = (v, c) => { Visual.UpdateMovement(v, c, ResourceToCollectData.ResourceType); };                
+                _updateMovementAnimation = (v, c) => { Visual.UpdateMovement(v, c, ResourceToCollectData.ResourceType); };
             }
         }
     }

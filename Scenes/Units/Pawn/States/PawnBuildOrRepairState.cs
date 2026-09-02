@@ -39,11 +39,11 @@ public partial class PawnBuildOrRepairState : PawnStateBase
 
                 if (IsInstanceValid(StateManager.Pawn.TargetResource))
                 {
-                    UnitsController.Instance.MoveToObstacleCommand(StateManager.Pawn, StateManager.Pawn.TargetResource);
+                    UnitsController.Instance.MoveToNodeCommand(StateManager.Pawn, StateManager.Pawn.TargetResource);
                 }
                 else
                 {
-                    UnitsController.Instance.MoveToObstacleCommand(StateManager.Pawn, null);
+                    StateManager.Pawn.SetTarget(null, null);
                     StateManager.ChangeState(PawnGatheringStateIds.None);
                 }
             }

@@ -42,4 +42,11 @@ public partial class UnitBase : CharacterBody2D
 		if (Target == null) return;
 		NavigationAgent2D.TargetPosition = Target.Value;
 	}
+
+	public virtual void SetTarget(Vector2? targetPosition, Node2D targetObject)
+	{
+		Target = targetPosition;
+		TargetObject = targetObject;
+		UpdatePath();
+	}
 }

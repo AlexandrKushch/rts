@@ -37,7 +37,7 @@ public partial class UnitsController : Node2D
             }
             if (buttonInput.ButtonIndex == MouseButton.Right)
             {
-                MoveCommand(buttonInput);
+                InputMoveCommand(buttonInput);
             }
         }
     }
@@ -88,19 +88,14 @@ public partial class UnitsController : Node2D
         }
     }
 
-    public void MoveToObstacleCommand(UnitBase unit, Node2D targetObject)
+    public void MoveToNodeCommand(UnitBase unit, Node2D targetObject)
     {
-        unit.Target = targetObject != null ? GetClosestPointToObjectBoundary(unit, targetObject) : null;
-        unit.TargetObject = targetObject ?? null;
-        unit.UpdatePath();
-
-        if (unit is Pawn pawn)
-        {
-            pawn.UpdateTargetObject();
-        }
+        unit.SetTarget(
+            targetObject != null ? GetClosestPointToObjectBoundary(unit, targetObject) : null,
+            targetObject ?? null);
     }
 
-    private void MoveCommand(InputEventMouseButton input)
+    private void InputMoveCommand(InputEventMouseButton input)
     {
         if (input.IsReleased())
         {
@@ -110,15 +105,13 @@ public partial class UnitsController : Node2D
             int i = 0;
             foreach (var unit in units)
             {
-                unit.Target = targetObject == null
-                    ? GetGlobalMousePosition() + RandomExtension.GetRandomPointInCircle(i * 20)
-                    : GetClosestPointToObjectBoundary(unit, targetObject.EffectedOn);
-                unit.TargetObject = targetObject?.EffectedOn;
-                unit.UpdatePath();
-
-                if (unit is Pawn pawn)
+                if (targetObject != null)
                 {
-                    pawn.UpdateTargetObject();
+                    MoveToNodeCommand(unit, targetObject.EffectedOn);
+                }
+                else
+                {
+                    unit.SetTarget(GetGlobalMousePosition() + RandomExtension.GetRandomPointInCircle(i * 20), null);
                 }
 
                 i++;
@@ -160,6 +153,7 @@ public partial class UnitsController : Node2D
 
         if (obstacle == null)
         {
+            GD.PrintErr(targetObject.Name);
             throw new NullReferenceException("Not found any obstacle in building");
         }
 

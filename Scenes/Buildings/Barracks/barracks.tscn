@@ -22,15 +22,19 @@ position = Vector2(0, -68.5)
 shape = SubResource("RectangleShape2D_eioss")
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="3" unique_id=378447270]
-position = Vector2(-27, -8)
-radius = 20.0
+position = Vector2(-58, -9)
+radius = 30.0
 
 [node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="4" unique_id=1901443247]
-position = Vector2(27, -8)
-radius = 20.0
+position = Vector2(60, -10)
+radius = 30.0
 
 [node name="NavigationObstacle2D3" type="NavigationObstacle2D" parent="." index="5" unique_id=1654220161]
-position = Vector2(0, -8)
-radius = 20.0
+position = Vector2(68, -49)
+radius = 25.0
+
+[node name="NavigationObstacle2D4" type="NavigationObstacle2D" parent="." index="6" unique_id=76312338]
+position = Vector2(-68, -49)
+radius = 25.0
 
 [editable path="SelectableComponent"]
