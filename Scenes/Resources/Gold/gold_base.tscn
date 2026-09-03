@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://c4h614j6kq5yr"]
+
+[ext_resource type="Script" uid="uid://cke7evi2wytya" path="res://Scenes/Resources/Gold/GoldBase.cs" id="1_oy27y"]
+[ext_resource type="Resource" uid="uid://wjt3mfk3hveg" path="res://Scenes/Resources/Types/r_gold.tres" id="2_s42g8"]
+[ext_resource type="PackedScene" uid="uid://dmh6f0dnp4ebk" path="res://Scenes/SelectionArea/BuildingSelectableComponent/building_selectable_component.tscn" id="3_akyrr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xrivr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t0wh3"]
+
+[sub_resource type="Animation" id="Animation_4e3nm"]
+resource_name = "idle"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bxcdg"]
+_data = {
+&"idle": SubResource("Animation_4e3nm")
+}
+
+[node name="GoldBase" type="StaticBody2D" unique_id=1085272693 node_paths=PackedStringArray("AnimationPlayer")]
+script = ExtResource("1_oy27y")
+AnimationPlayer = NodePath("Visual/AnimationPlayer")
+ResourceType = ExtResource("2_s42g8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=750160817]
+shape = SubResource("RectangleShape2D_xrivr")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=1261690952]
+radius = 10.0
+
+[node name="BuildingSelectableComponent" parent="." unique_id=550510253 node_paths=PackedStringArray("EffectedOn") instance=ExtResource("3_akyrr")]
+EffectedOn = NodePath("..")
+
+[node name="CollisionShape2D" parent="BuildingSelectableComponent" index="1" unique_id=1060696685]
+shape = SubResource("RectangleShape2D_t0wh3")
+
+[node name="Visual" type="Node2D" parent="." unique_id=4682082]
+
+[node name="Sprite2D" type="Sprite2D" parent="Visual" unique_id=686199178]
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" unique_id=54686699]
+libraries/ = SubResource("AnimationLibrary_bxcdg")
+
+[editable path="BuildingSelectableComponent"]

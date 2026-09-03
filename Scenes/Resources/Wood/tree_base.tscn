@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cpss5e0hxbiu8"]
 
 [ext_resource type="Script" uid="uid://d2ur4jmshldh1" path="res://Scenes/Resources/Wood/TreeBase.cs" id="1_nbom4"]
-[ext_resource type="Resource" uid="uid://cj7uk3l8yh8rq" path="res://Scenes/Resources/Wood/r_wood.tres" id="2_oexb5"]
+[ext_resource type="Resource" uid="uid://cj7uk3l8yh8rq" path="res://Scenes/Resources/Types/r_wood.tres" id="2_oexb5"]
 [ext_resource type="PackedScene" uid="uid://c1skwp03bakoh" path="res://Scenes/SelectionArea/UnitSelectableComponent/unit_selectable_component.tscn" id="3_oexb5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xrivr"]

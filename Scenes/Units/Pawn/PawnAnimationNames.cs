@@ -6,4 +6,6 @@ public class PawnAnimationNames
     public const string Run = "run";
 
     public const string Interact = "interact";
+
+    public const string Instrument = "instrument";
 }

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ResourceType" format=3 uid="uid://ct36o5f4apb73"]
+
+[ext_resource type="Texture2D" uid="uid://cy65egeo8n55w" path="res://Assets/Terrain/Resources/Meat/Meat Resource/Meat Resource.png" id="1_gcvob"]
+[ext_resource type="Script" uid="uid://caks0w8rk10ox" path="res://Scenes/Resources/ResourceType.cs" id="2_h645n"]
+
+[resource]
+script = ExtResource("2_h645n")
+Name = "meat"
+Icon = ExtResource("1_gcvob")
+metadata/_custom_type_script = "uid://caks0w8rk10ox"

@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://bdj83x5vkxdjx"]
+
+[ext_resource type="PackedScene" uid="uid://b2khqdo8t3agy" path="res://Scenes/Resources/Gold/gold_m.tscn" id="1_wfr5h"]
+[ext_resource type="PackedScene" uid="uid://cwmar2g8uyc5w" path="res://Scenes/Resources/Gold/gold_l.tscn" id="2_mdvnf"]
+[ext_resource type="PackedScene" uid="uid://dpjsny8jsmyxp" path="res://Scenes/Resources/Gold/gold_xxl.tscn" id="3_051eu"]
+[ext_resource type="PackedScene" uid="uid://10iu7akqmve2" path="res://Scenes/Resources/Gold/gold_s.tscn" id="4_u0o7l"]
+[ext_resource type="PackedScene" uid="uid://cayxdltveqe5h" path="res://Scenes/Resources/Gold/gold_xs.tscn" id="5_5h4ic"]
+[ext_resource type="PackedScene" uid="uid://jcp0jsdqqvj1" path="res://Scenes/Resources/Gold/gold_xl.tscn" id="6_qt2vy"]
+
+[node name="GoldPreset" type="Node2D" unique_id=304495028]
+y_sort_enabled = true
+
+[node name="Gold_M" parent="." unique_id=1085272693 instance=ExtResource("1_wfr5h")]
+position = Vector2(-40, 20)
+
+[node name="Gold_L" parent="." unique_id=911735788 instance=ExtResource("2_mdvnf")]
+position = Vector2(-55, 0)
+
+[node name="Gold_L2" parent="." unique_id=76827470 instance=ExtResource("2_mdvnf")]
+position = Vector2(0, 35)
+
+[node name="Gold_L3" parent="." unique_id=1398662538 instance=ExtResource("2_mdvnf")]
+position = Vector2(43, 5)
+
+[node name="Gold_L4" parent="." unique_id=491225084 instance=ExtResource("2_mdvnf")]
+position = Vector2(0, -39)
+
+[node name="Gold_XXL" parent="." unique_id=615666549 instance=ExtResource("3_051eu")]
+
+[node name="Gold_S" parent="." unique_id=1043008075 instance=ExtResource("4_u0o7l")]
+position = Vector2(-39, -25)
+
+[node name="Gold_XS" parent="." unique_id=738444701 instance=ExtResource("5_5h4ic")]
+position = Vector2(34, 28)
+
+[node name="Gold_XL" parent="." unique_id=521840857 instance=ExtResource("6_qt2vy")]
+position = Vector2(37, -32)

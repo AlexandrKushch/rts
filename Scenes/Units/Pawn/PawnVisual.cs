@@ -57,7 +57,7 @@ public partial class PawnVisual : Node
         if (resource != null)
         {
             string resourceName = $"{resource.Name}/";
-            string handItem = collected == 0 ? $"{resource.InstrumentName}_": string.Empty;
+            string handItem = collected == 0 ? $"{PawnAnimationNames.Instrument}_": string.Empty;
 
             animation = $"{resourceName}{handItem}{animation}";
         }

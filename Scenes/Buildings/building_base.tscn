@@ -6,7 +6,8 @@
 [node name="BuildingBase" type="StaticBody2D" unique_id=548953940]
 script = ExtResource("1_8grwn")
 
-[node name="BuildingSelectableComponent" parent="." unique_id=550510253 instance=ExtResource("2_d1o4y")]
+[node name="BuildingSelectableComponent" parent="." unique_id=550510253 node_paths=PackedStringArray("EffectedOn") instance=ExtResource("2_d1o4y")]
+EffectedOn = NodePath("..")
 
 [node name="Visual" type="Sprite2D" parent="." unique_id=1679201315]
 
