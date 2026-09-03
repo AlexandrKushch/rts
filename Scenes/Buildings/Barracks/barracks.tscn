@@ -10,31 +10,46 @@ size = Vector2(176, 175)
 [node name="Barracks" unique_id=548953940 instance=ExtResource("1_wjwem")]
 Resource = ExtResource("2_3q5wo")
 
-[node name="Visual" parent="." index="0" unique_id=1679201315]
-position = Vector2(0, -86)
-texture = ExtResource("2_1uhux")
+[node name="BuildingSelectableComponent" parent="." index="0" unique_id=550510253 node_paths=PackedStringArray("EffectedOn")]
+EffectedOn = NodePath("..")
 
-[node name="CollisionPolygon2D" parent="." index="1" unique_id=168278068]
-polygon = PackedVector2Array(-90, -60, 90, -60, 75, 16, -75, 16)
+[node name="NinePatchRect" parent="BuildingSelectableComponent/Visual" parent_id_path=PackedInt32Array(550510253, 946751036) index="0" unique_id=584840865]
+offset_left = -98.0
+offset_top = -18.0
+offset_right = 98.0
+offset_bottom = 65.48889
 
-[node name="CollisionShape2D" parent="SelectableComponent" parent_id_path=PackedInt32Array(550510253) index="1" unique_id=1060696685]
+[node name="CollisionShape2D" parent="BuildingSelectableComponent" index="1" unique_id=1060696685]
+visible = false
 position = Vector2(0, -68.5)
 shape = SubResource("RectangleShape2D_eioss")
 
+[node name="Visual" parent="." index="1" unique_id=1679201315]
+position = Vector2(0, -86)
+texture = ExtResource("2_1uhux")
+
+[node name="CollisionPolygon2D" parent="." index="2" unique_id=168278068]
+visible = false
+polygon = PackedVector2Array(-90, -60, 90, -60, 75, 16, -75, 16)
+
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="3" unique_id=378447270]
+visible = false
 position = Vector2(-58, -9)
 radius = 30.0
 
 [node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="4" unique_id=1901443247]
+visible = false
 position = Vector2(60, -10)
 radius = 30.0
 
 [node name="NavigationObstacle2D3" type="NavigationObstacle2D" parent="." index="5" unique_id=1654220161]
+visible = false
 position = Vector2(68, -49)
 radius = 25.0
 
 [node name="NavigationObstacle2D4" type="NavigationObstacle2D" parent="." index="6" unique_id=76312338]
+visible = false
 position = Vector2(-68, -49)
 radius = 25.0
 
-[editable path="SelectableComponent"]
+[editable path="BuildingSelectableComponent"]

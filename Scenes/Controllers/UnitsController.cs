@@ -100,7 +100,7 @@ public partial class UnitsController : Node2D
         if (input.IsReleased())
         {
             TryPointCastSelectable(out SelectableComponent targetObject);
-            var units = Selections.Select(x => x.EffectedOn as UnitBase).ToHashSet();
+            var units = Selections.Select(x => x.EffectedOn as UnitBase).Where(x => x != null).ToHashSet();
 
             int i = 0;
             foreach (var unit in units)

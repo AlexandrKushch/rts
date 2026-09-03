@@ -19,6 +19,9 @@
 [ext_resource type="Script" uid="uid://bmgpnt585r8qg" path="res://Scenes/Units/Pawn/States/PawnStateManagerBase.cs" id="15_5n0ob"]
 [ext_resource type="Script" uid="uid://cukibtuwlw4pa" path="res://Scenes/Units/Pawn/States/PawnBuildOrRepairState.cs" id="18_5n0ob"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_5n0ob"]
+radius = 20.0
+
 [sub_resource type="Animation" id="Animation_scesx"]
 length = 0.001
 tracks/0/type = "value"
@@ -538,11 +541,15 @@ position = Vector2(0, -12)
 radius = 20.0
 avoidance_layers = 0
 
-[node name="SelectableComponent" parent="." index="3" unique_id=550510253 node_paths=PackedStringArray("EffectedOn")]
+[node name="UnitSelectableComponent" parent="." index="3" unique_id=550510253 node_paths=PackedStringArray("EffectedOn")]
 EffectedOn = NodePath("..")
 
-[node name="Visual" parent="SelectableComponent" index="0" unique_id=946751036]
-position = Vector2(0, -29)
+[node name="Visual" parent="UnitSelectableComponent" index="0" unique_id=946751036]
+position = Vector2(0, -28)
+
+[node name="CollisionShape2D" parent="UnitSelectableComponent" index="1" unique_id=1060696685]
+position = Vector2(0, -9)
+shape = SubResource("CircleShape2D_5n0ob")
 
 [node name="Visual" type="Node2D" parent="." index="4" unique_id=105057415]
 script = ExtResource("3_fwvsl")
@@ -573,4 +580,4 @@ script = ExtResource("18_5n0ob")
 
 [connection signal="animation_finished" from="Visual/AnimationPlayer" to="Visual" method="OnAnimationFinished"]
 
-[editable path="SelectableComponent"]
+[editable path="UnitSelectableComponent"]

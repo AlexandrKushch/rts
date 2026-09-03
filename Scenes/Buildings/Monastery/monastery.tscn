@@ -10,16 +10,22 @@ size = Vector2(140, 190)
 [node name="Monastery" unique_id=548953940 instance=ExtResource("1_l2qa8")]
 Resource = ExtResource("2_titpi")
 
-[node name="Visual" parent="." index="0" unique_id=1679201315]
+[node name="NinePatchRect" parent="BuildingSelectableComponent/Visual" parent_id_path=PackedInt32Array(550510253, 946751036) index="0" unique_id=584840865]
+offset_left = -86.0
+offset_top = -15.0
+offset_right = 86.0
+offset_bottom = 65.0
+
+[node name="CollisionShape2D" parent="BuildingSelectableComponent" parent_id_path=PackedInt32Array(550510253) index="1" unique_id=1060696685]
+position = Vector2(0, -80)
+shape = SubResource("RectangleShape2D_10o7v")
+
+[node name="Visual" parent="." index="1" unique_id=1679201315]
 position = Vector2(0, -122)
 texture = ExtResource("2_eioss")
 
-[node name="CollisionPolygon2D" parent="." index="1" unique_id=168278068]
+[node name="CollisionPolygon2D" parent="." index="2" unique_id=168278068]
 polygon = PackedVector2Array(-65, -100, 65, -100, 55, 15, -55, 15)
-
-[node name="CollisionShape2D" parent="SelectableComponent" parent_id_path=PackedInt32Array(550510253) index="1" unique_id=1060696685]
-position = Vector2(0, -80)
-shape = SubResource("RectangleShape2D_10o7v")
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="3" unique_id=706712859]
 position = Vector2(-36, -8)
@@ -37,4 +43,4 @@ radius = 30.0
 position = Vector2(42, -82)
 radius = 30.0
 
-[editable path="SelectableComponent"]
+[editable path="BuildingSelectableComponent"]

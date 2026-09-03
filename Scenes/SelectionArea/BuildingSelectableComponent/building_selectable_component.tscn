@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dmh6f0dnp4ebk"]
+
+[ext_resource type="PackedScene" uid="uid://000g2r01lhuu" path="res://Scenes/SelectionArea/selectable_component.tscn" id="1_20dgu"]
+[ext_resource type="Script" uid="uid://dv4hjo0ok03dg" path="res://Scenes/SelectionArea/BuildingSelectableComponent/BuildingSelectableComponent.cs" id="2_4kki1"]
+[ext_resource type="Texture2D" uid="uid://majrpwmcg8h2" path="res://Assets/UI Elements/UI Elements/Cursors/Cursor_04.png" id="2_7m3we"]
+
+[node name="BuildingSelectableComponent" unique_id=550510253 node_paths=PackedStringArray("Visual") instance=ExtResource("1_20dgu")]
+script = ExtResource("2_4kki1")
+Visual = NodePath("Visual/NinePatchRect")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Visual" parent_id_path=PackedInt32Array(946751036) index="0" unique_id=584840865]
+offset_left = -32.0
+offset_top = -1.0
+offset_right = 32.0
+offset_bottom = 63.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_7m3we")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32

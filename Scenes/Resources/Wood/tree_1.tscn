@@ -3,16 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://cpss5e0hxbiu8" path="res://Scenes/Resources/Wood/tree_base.tscn" id="1_vvgtf"]
 [ext_resource type="Texture2D" uid="uid://1k8u10pmt2xg" path="res://Assets/Terrain/Resources/Wood/Trees/Tree1.png" id="2_xd05q"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vvgtf"]
-size = Vector2(70, 165)
-
 [node name="Tree1" unique_id=1936357647 instance=ExtResource("1_vvgtf")]
-
-[node name="CollisionShape2D" parent="SelectableComponent" parent_id_path=PackedInt32Array(550510253) index="1" unique_id=1060696685]
-position = Vector2(0, -62.5)
-shape = SubResource("RectangleShape2D_vvgtf")
 
 [node name="Sprite2D" parent="Visual" parent_id_path=PackedInt32Array(1800092084) index="0" unique_id=413574009]
 texture = ExtResource("2_xd05q")
 
-[editable path="SelectableComponent"]
+[editable path="UnitSelectableComponent"]

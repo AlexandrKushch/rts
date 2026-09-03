@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://c1skwp03bakoh"]
+
+[ext_resource type="PackedScene" uid="uid://000g2r01lhuu" path="res://Scenes/SelectionArea/selectable_component.tscn" id="1_6uo5u"]
+[ext_resource type="Texture2D" uid="uid://3yd3tbchay7f" path="res://Assets/UI Elements/selection.png" id="2_uo83k"]
+
+[sub_resource type="Animation" id="Animation_opd4l"]
+resource_name = "default"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual/SelectionSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-2.2351742e-08, 0.09999998, 0.19999999, 0.29999998, 0.39999998, 0.5, 0.59999996, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_luj8k"]
+_data = {
+&"default": SubResource("Animation_opd4l")
+}
+
+[node name="UnitSelectableComponent" unique_id=550510253 instance=ExtResource("1_6uo5u")]
+
+[node name="SelectionSprite" type="Sprite2D" parent="Visual" parent_id_path=PackedInt32Array(946751036) index="0" unique_id=408367134]
+texture = ExtResource("2_uo83k")
+hframes = 12
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" parent_id_path=PackedInt32Array(946751036) index="1" unique_id=1401795538]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_luj8k")
+autoplay = &"default"
