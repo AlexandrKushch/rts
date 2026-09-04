@@ -46,7 +46,7 @@ public partial class Pawn : UnitBase
         if (ResourceToCollectData == null) return null;
 
         return GetParent()
-            .GetChildren()
+            .FindChildren("*")
             .Where(x => x is ResourceBase && x != null)
             .Select(x => x as ResourceBase)
             .Where(x => x.ResourceType.Name.Equals(ResourceToCollectData.ResourceType.Name, StringComparison.OrdinalIgnoreCase))
@@ -105,13 +105,13 @@ public partial class Pawn : UnitBase
                 }
             }
 
-            StateMachine.ChangeState(PawnGatheringStateIds.MoveTo);
+            StateMachine.ChangeState(PawnStateIds.MoveTo);
             StateMachine.SetProcess(true);
         }
         else
         {
             TargetBuilding = null;
-            StateMachine.ChangeState(PawnGatheringStateIds.None);
+            StateMachine.ChangeState(PawnStateIds.None);
 
             if (ResourceToCollectData == null
                 || ResourceToCollectData.CollectedCount == 0)

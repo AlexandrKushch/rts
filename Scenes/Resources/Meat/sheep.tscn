@@ -1,0 +1,228 @@
+[gd_scene format=3 uid="uid://defkh2wiunq4g"]
+
+[ext_resource type="Texture2D" uid="uid://go3eu6amb4f7" path="res://Assets/Terrain/Resources/Meat/Sheep/Sheep_Grass.png" id="1_1ffw7"]
+[ext_resource type="Script" uid="uid://qxapu7neyxx5" path="res://Scenes/Resources/Meat/Sheep.cs" id="1_8louv"]
+[ext_resource type="Texture2D" uid="uid://bmivy0oyg5wqb" path="res://Assets/Terrain/Resources/Meat/Sheep/Sheep_Idle.png" id="1_d1k6x"]
+[ext_resource type="Texture2D" uid="uid://csuinv1qxftxb" path="res://Assets/Terrain/Resources/Meat/Sheep/Sheep_Move.png" id="1_rya4n"]
+[ext_resource type="PackedScene" uid="uid://c1skwp03bakoh" path="res://Scenes/SelectionArea/UnitSelectableComponent/unit_selectable_component.tscn" id="2_5savk"]
+[ext_resource type="Script" uid="uid://8fm6fauxtot" path="res://Scenes/Resources/Meat/SheepVisual.cs" id="3_c3se6"]
+[ext_resource type="Resource" uid="uid://ct36o5f4apb73" path="res://Scenes/Resources/Types/r_meat.tres" id="6_5savk"]
+[ext_resource type="Script" uid="uid://uuk7t4f3ag7r" path="res://Scenes/Resources/Meat/MeatResourceBase.cs" id="7_c3se6"]
+[ext_resource type="Script" uid="uid://c27dwm3x8mii4" path="res://Scenes/Resources/Meat/SheepStateMachine/SheepStateMachine.cs" id="8_fbmh2"]
+[ext_resource type="Script" uid="uid://cs48ychew8beq" path="res://Scenes/Resources/Meat/SheepStateMachine/SheepIdleState.cs" id="9_00pu4"]
+[ext_resource type="Script" uid="uid://7mt0wwcx4e1i" path="res://Scenes/Resources/Meat/SheepStateMachine/SheepMoveState.cs" id="10_104yu"]
+[ext_resource type="Script" uid="uid://dl5ep55d2svw1" path="res://Scenes/Resources/Meat/SheepEatState.cs" id="12_xv0un"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q3rmq"]
+radius = 8.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fbmh2"]
+size = Vector2(46, 43)
+
+[sub_resource type="Animation" id="Animation_rya4n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_1ffw7"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_d1k6x")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_g60uk"]
+resource_name = "eat"
+length = 1.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_1ffw7")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [12]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_8louv"]
+resource_name = "move"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_rya4n")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8louv"]
+_data = {
+&"RESET": SubResource("Animation_rya4n"),
+&"idle": SubResource("Animation_1ffw7"),
+&"interact": SubResource("Animation_g60uk"),
+&"run": SubResource("Animation_8louv")
+}
+
+[node name="Sheep" type="CharacterBody2D" unique_id=499778597]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_8louv")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=177581029]
+avoidance_enabled = true
+radius = 12.0
+avoidance_layers = 0
+debug_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1349841420]
+shape = SubResource("CircleShape2D_q3rmq")
+
+[node name="UnitSelectableComponent" parent="." unique_id=550510253 node_paths=PackedStringArray("EffectedOn") instance=ExtResource("2_5savk")]
+EffectedOn = NodePath("../Resource")
+
+[node name="Visual" parent="UnitSelectableComponent" index="0" unique_id=946751036]
+position = Vector2(-2, -20)
+
+[node name="CollisionShape2D" parent="UnitSelectableComponent" index="1" unique_id=1060696685]
+position = Vector2(0, -4.5)
+shape = SubResource("RectangleShape2D_fbmh2")
+
+[node name="Visual" type="Node2D" parent="." unique_id=296800109]
+script = ExtResource("3_c3se6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Visual" unique_id=1000010458]
+texture = ExtResource("1_d1k6x")
+hframes = 6
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" unique_id=1262780307]
+libraries/ = SubResource("AnimationLibrary_8louv")
+autoplay = &"idle"
+
+[node name="Resource" type="Node2D" parent="." unique_id=1411045899 node_paths=PackedStringArray("Visual")]
+script = ExtResource("7_c3se6")
+Visual = NodePath("../Visual")
+ResourceType = ExtResource("6_5savk")
+Quantity = 100
+
+[node name="StateMachine" type="Node" parent="." unique_id=1994220742 node_paths=PackedStringArray("Sheep")]
+script = ExtResource("8_fbmh2")
+Sheep = NodePath("..")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1932412988]
+script = ExtResource("9_00pu4")
+
+[node name="Move" type="Node" parent="StateMachine" unique_id=100765661]
+script = ExtResource("10_104yu")
+
+[node name="Eat" type="Node" parent="StateMachine" unique_id=1539724554]
+script = ExtResource("12_xv0un")
+
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="OnVelocityComputed"]
+[connection signal="animation_finished" from="Visual/AnimationPlayer" to="Visual" method="OnAnimationFinished"]
+
+[editable path="UnitSelectableComponent"]

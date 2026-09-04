@@ -1014,6 +1014,7 @@ position = Vector2(0, -12)
 [node name="NavigationAgent2D" parent="." index="1" unique_id=1325708388]
 radius = 20.0
 avoidance_layers = 0
+avoidance_mask = 3
 
 [node name="UnitSelectableComponent" parent="." index="3" unique_id=550510253 node_paths=PackedStringArray("EffectedOn")]
 EffectedOn = NodePath("..")

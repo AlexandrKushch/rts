@@ -6,45 +6,42 @@ public partial class PawnGatheringResourceState : PawnStateBase
     {
         base.Activate();
 
-        StateManager.Pawn.Target = null;
-        StateManager.Pawn.Visual.Connect(PawnVisual.SignalName.OnInteractAnimationFinished, Callable.From(Gather));
+        PawnStateMachine.Pawn.Target = null;
+        PawnStateMachine.Pawn.Visual.Connect(PawnVisual.SignalName.OnInteractAnimationFinished, Callable.From(Gather));
 
         Gather();
-
-        GD.Print("GATHERING ON");
     }
 
     public override void Deactivate()
     {
         base.Deactivate();
-        StateManager.Pawn.Visual.Stop();
-        StateManager.Pawn.Visual.Disconnect(PawnVisual.SignalName.OnInteractAnimationFinished, Callable.From(Gather));
-        GD.Print("GATHERING OFF");
+        PawnStateMachine.Pawn.Visual.Stop();
+        PawnStateMachine.Pawn.Visual.Disconnect(PawnVisual.SignalName.OnInteractAnimationFinished, Callable.From(Gather));
     }
 
     private void Gather()
     {
-        if (StateManager.Pawn.ResourceToCollectData.CollectedCount >= Pawn.MaxCollectableCapacity)
+        if (PawnStateMachine.Pawn.ResourceToCollectData.CollectedCount >= Pawn.MaxCollectableCapacity)
         {
-            StateManager.MoveToClosestBuilding();
+            PawnStateMachine.MoveToClosestBuilding();
             return;
         }
 
-        if (!IsInstanceValid(StateManager.Pawn.TargetResource))
+        if (!IsInstanceValid(PawnStateMachine.Pawn.TargetResource))
         {
-            StateManager.MoveToClosestResourceIfNotToBuilding();
+            PawnStateMachine.MoveToClosestResourceIfNotToBuilding();
             return;
         }
 
-        StateManager.Pawn.Visual.Interact(StateManager.Pawn.TargetResource.ResourceType.Name);
+        PawnStateMachine.Pawn.Visual.Interact(PawnStateMachine.Pawn.TargetResource.ResourceType.Name);
     }
 
     private void OnInteractAnimatioKeyReached()
     {
-        if (IsInstanceValid(StateManager.Pawn.TargetResource))
+        if (IsInstanceValid(PawnStateMachine.Pawn.TargetResource))
         {
-            StateManager.Pawn.TargetResource.CollectOne();
-            StateManager.Pawn.ResourceToCollectData.CollectedCount++;
+            PawnStateMachine.Pawn.TargetResource.CollectOne();
+            PawnStateMachine.Pawn.ResourceToCollectData.CollectedCount++;
             GD.Print("Gather +1");
         }
     }

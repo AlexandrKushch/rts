@@ -1,4 +1,4 @@
-public enum PawnGatheringStateIds
+public enum PawnStateIds
 {
     None,
     MoveTo,

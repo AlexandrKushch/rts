@@ -153,8 +153,15 @@ public partial class UnitsController : Node2D
 
         if (obstacle == null)
         {
-            GD.PrintErr(targetObject.Name);
-            throw new NullReferenceException("Not found any obstacle in building");
+            if (targetObject is BuildingBase)
+            {
+                GD.PrintErr(targetObject.Name);
+                throw new NullReferenceException("Not found any obstacle in building");
+            }
+            else
+            {
+                return targetObject.GlobalPosition;
+            }
         }
 
         var directionFrom = obstacle.GlobalPosition.DirectionTo(unit.GlobalPosition);

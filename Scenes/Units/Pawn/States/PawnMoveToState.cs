@@ -10,54 +10,51 @@ public partial class PawnMoveToState : PawnStateBase
     {
         base.Activate();
 
-        _defaultTargetDesiredDistance = StateManager.Pawn.NavigationAgent2D.TargetDesiredDistance;
-        StateManager.Pawn.NavigationAgent2D.TargetDesiredDistance = StateManager.Pawn.TargetObject is ResourceBase ? ResourceDesiredDistance : BuildingDesiredDistance;
-        
-        GD.Print("Move to res ON");
+        _defaultTargetDesiredDistance = PawnStateMachine.Pawn.NavigationAgent2D.TargetDesiredDistance;
+        PawnStateMachine.Pawn.NavigationAgent2D.TargetDesiredDistance = PawnStateMachine.Pawn.TargetObject is ResourceBase ? ResourceDesiredDistance : BuildingDesiredDistance;
     }
 
     public override void Deactivate()
     {
         base.Deactivate();
 
-        StateManager.Pawn.NavigationAgent2D.TargetDesiredDistance = _defaultTargetDesiredDistance;
-        GD.Print("Move to res OFF");
+        PawnStateMachine.Pawn.NavigationAgent2D.TargetDesiredDistance = _defaultTargetDesiredDistance;
     }
 
     public override void _Process(double delta)
     {
-        if (StateManager.Pawn.NavigationAgent2D.IsNavigationFinished())
+        if (PawnStateMachine.Pawn.NavigationAgent2D.IsNavigationFinished())
         {
-            if (StateManager.Pawn.TargetObject is ResourceBase)
+            if (PawnStateMachine.Pawn.TargetObject is ResourceBase)
             {
-                StateManager.ChangeState(PawnGatheringStateIds.GatheringResource);
+                PawnStateMachine.ChangeState(PawnStateIds.GatheringResource);
             }
-            else if (StateManager.Pawn.TargetObject is BuildingBase building)
+            else if (PawnStateMachine.Pawn.TargetObject is BuildingBase building)
             {
                 if (!building.Build)
                 {
-                    StateManager.ChangeState(PawnGatheringStateIds.BuildOrRepair);
+                    PawnStateMachine.ChangeState(PawnStateIds.BuildOrRepair);
                 }
                 else
                 {
-                    if (StateManager.Pawn.ResourceToCollectData != null
-                        && StateManager.Pawn.ResourceToCollectData.CollectedCount > 0)
+                    if (PawnStateMachine.Pawn.ResourceToCollectData != null
+                        && PawnStateMachine.Pawn.ResourceToCollectData.CollectedCount > 0)
                     {
-                        StateManager.Pawn.DropResources();
+                        PawnStateMachine.Pawn.DropResources();
                         
-                        if (IsInstanceValid(StateManager.Pawn.TargetResource))
+                        if (IsInstanceValid(PawnStateMachine.Pawn.TargetResource))
                         {
-                            UnitsController.Instance.MoveToNodeCommand(StateManager.Pawn, StateManager.Pawn.TargetResource);
+                            UnitsController.Instance.MoveToNodeCommand(PawnStateMachine.Pawn, PawnStateMachine.Pawn.TargetResource);
                         }
                         else
                         {
-                            StateManager.MoveToClosestResourceIfNotToBuilding();
+                            PawnStateMachine.MoveToClosestResourceIfNotToBuilding();
                         }
                     }
                     else
                     {
-                        StateManager.Pawn.SetTarget(null, null);
-                        StateManager.ChangeState(PawnGatheringStateIds.None);
+                        PawnStateMachine.Pawn.SetTarget(null, null);
+                        PawnStateMachine.ChangeState(PawnStateIds.None);
                     }
                 }
             }

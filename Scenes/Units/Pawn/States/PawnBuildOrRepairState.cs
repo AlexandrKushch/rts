@@ -6,58 +6,54 @@ public partial class PawnBuildOrRepairState : PawnStateBase
     {
         base.Activate();
 
-        StateManager.Pawn.Target = null;
-        StateManager.Pawn.Visual.Connect(PawnVisual.SignalName.OnInteractAnimationFinished, Callable.From(Build));
+        PawnStateMachine.Pawn.Target = null;
+        PawnStateMachine.Pawn.Visual.Connect(PawnVisual.SignalName.OnInteractAnimationFinished, Callable.From(Build));
 
         Build();
-
-        GD.Print("BUILDING ON");
     }
 
     public override void Deactivate()
     {
         base.Deactivate();
-        StateManager.Pawn.Visual.Stop();
-        StateManager.Pawn.Visual.Disconnect(PawnVisual.SignalName.OnInteractAnimationFinished, Callable.From(Build));
-        GD.Print("BUILDING OFF");
+        PawnStateMachine.Pawn.Visual.Stop();
+        PawnStateMachine.Pawn.Visual.Disconnect(PawnVisual.SignalName.OnInteractAnimationFinished, Callable.From(Build));
     }
 
     private void Build()
     {
-        if (!IsInstanceValid(StateManager.Pawn.TargetBuilding))
+        if (!IsInstanceValid(PawnStateMachine.Pawn.TargetBuilding))
         {
-            // Deactivate();
             return;
         }
 
-        if (StateManager.Pawn.TargetBuilding.Build)
+        if (PawnStateMachine.Pawn.TargetBuilding.Build)
         {
-            if (StateManager.Pawn.ResourceToCollectData != null
-                && StateManager.Pawn.ResourceToCollectData.CollectedCount > 0)
+            if (PawnStateMachine.Pawn.ResourceToCollectData != null
+                && PawnStateMachine.Pawn.ResourceToCollectData.CollectedCount > 0)
             {
-                StateManager.Pawn.DropResources();
+                PawnStateMachine.Pawn.DropResources();
 
-                if (IsInstanceValid(StateManager.Pawn.TargetResource))
+                if (IsInstanceValid(PawnStateMachine.Pawn.TargetResource))
                 {
-                    UnitsController.Instance.MoveToNodeCommand(StateManager.Pawn, StateManager.Pawn.TargetResource);
+                    UnitsController.Instance.MoveToNodeCommand(PawnStateMachine.Pawn, PawnStateMachine.Pawn.TargetResource);
                 }
                 else
                 {
-                    StateManager.Pawn.SetTarget(null, null);
-                    StateManager.ChangeState(PawnGatheringStateIds.None);
+                    PawnStateMachine.Pawn.SetTarget(null, null);
+                    PawnStateMachine.ChangeState(PawnStateIds.None);
                 }
             }
             return;
         }
 
-        StateManager.Pawn.Visual.Interact("build");
+        PawnStateMachine.Pawn.Visual.Interact("build");
     }
 
     private void OnInteractAnimatioKeyReached()
     {
-        if (IsInstanceValid(StateManager.Pawn.TargetBuilding))
+        if (IsInstanceValid(PawnStateMachine.Pawn.TargetBuilding))
         {
-            StateManager.Pawn.TargetBuilding.TryBuildProgressOne();
+            PawnStateMachine.Pawn.TargetBuilding.TryBuildProgressOne();
         }
     }
 }
