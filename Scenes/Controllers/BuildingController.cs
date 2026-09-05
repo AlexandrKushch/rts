@@ -12,6 +12,7 @@ public partial class BuildingController : Node2D
     [Export] private PackedScene BuildControlScene;
     [Export] private PackedScene BuildingBlueprintScene;
     [Export] public Node2D World;
+    [Export] public TileMapLayer Ground;
 
     public bool ShowBuildingControl
     {
@@ -64,7 +65,7 @@ public partial class BuildingController : Node2D
                 {
                     UnitsController.Instance.MoveToNodeCommand(unit, _blueprint.Building);
                 }
-                
+
                 _blueprint.DeployTo(World);
                 _blueprint.QueueFree();
                 BlueprintActive = false;
@@ -89,6 +90,25 @@ public partial class BuildingController : Node2D
             && UnitsController.Instance.Selections.Any(x => x.EffectedOn is Pawn))
         {
             ShowBuildingControl = !ShowBuildingControl;
+        }
+
+        if (IsInstanceValid(_blueprint) && !_blueprint.Deployed)
+        {
+            var mousePosOnTileMap = Ground.LocalToMap(GetLocalMousePosition());
+            var mousePos = ToGlobal(Ground.MapToLocal(mousePosOnTileMap));
+            float weight = 1f - Mathf.Exp(-25 * (float)delta);
+            _blueprint.GlobalPosition = _blueprint.GlobalPosition.Lerp(mousePos, weight);
+
+            if (_blueprint.Building.CollisionPolygon2D.Polygon.All(x => NavigationRegionController.Instance.IsPointInside(_blueprint.Building.GlobalPosition + x)))
+            {
+                _blueprint.Building.Modulate = Colors.Green;
+                _blueprint.ValidToDeploy = true;
+            }
+            else
+            {
+                _blueprint.Building.Modulate = Colors.Red;
+                _blueprint.ValidToDeploy = false;
+            }
         }
     }
 

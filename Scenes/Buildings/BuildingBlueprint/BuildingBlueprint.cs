@@ -6,7 +6,9 @@ public partial class BuildingBlueprint : Node2D
 {
     public BuildingBase Building { get; private set; }
 
-    public bool ValidToDeploy { get; private set; } = false;
+    public bool ValidToDeploy { get; set; } = false;
+    public bool Deployed { get; private set; } = false;
+
     public BuildResource Resource { get; set; }
 
     [Export]
@@ -24,25 +26,9 @@ public partial class BuildingBlueprint : Node2D
         }
     }
 
-    public override void _Process(double delta)
-    {
-        GlobalPosition = GetGlobalMousePosition();
-
-        if (Building.CollisionPolygon2D.Polygon.All(x => NavigationRegionController.Instance.IsPointInside(Building.GlobalPosition + x)))
-        {
-            Building.Modulate = Colors.Green;
-            ValidToDeploy = true;
-        }
-        else
-        {
-            Building.Modulate = Colors.Red;
-            ValidToDeploy = false;
-        }
-    }
-
     public void DeployTo(Node2D to)
     {
-        SetProcess(false);
+        Deployed = true;
 
         Building.Modulate = Colors.White;
         Building.SetProcess(true);
