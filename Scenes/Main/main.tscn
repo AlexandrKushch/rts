@@ -4,20 +4,41 @@
 [ext_resource type="PackedScene" uid="uid://cq41csf5y3617" path="res://Scenes/Camera/camera_controller.tscn" id="2_lixft"]
 [ext_resource type="Script" uid="uid://baul70getpa3l" path="res://Scenes/Controllers/UnitsController.cs" id="3_hryqi"]
 [ext_resource type="Texture2D" uid="uid://muuoltgu4vdl" path="res://Assets/Terrain/Tileset/Water Background color.png" id="4_5yls4"]
-[ext_resource type="PackedScene" uid="uid://bbhqatrw843qy" path="res://Scenes/Controllers/Marker/marker.tscn" id="5_2ok46"]
 [ext_resource type="Texture2D" uid="uid://c4c412x3vut3j" path="res://Assets/Terrain/Tileset/Tilemap_color2.png" id="5_imbg2"]
 [ext_resource type="PackedScene" uid="uid://o02resxvged2" path="res://Scenes/UI/BuildControl/build_control.tscn" id="5_vk4q2"]
 [ext_resource type="TileSet" uid="uid://ba68yn6mvywfx" path="res://Tilesets/tile_set.tres" id="6_2a143"]
 [ext_resource type="Script" uid="uid://c8u764v7f4mju" path="res://Scenes/Controllers/BuildingController.cs" id="6_2ok46"]
 [ext_resource type="PackedScene" uid="uid://c57j2yxf5jasx" path="res://Scenes/Buildings/BuildingBlueprint/building_blueprint.tscn" id="7_koken"]
 [ext_resource type="PackedScene" uid="uid://r4ncnt86o6sr" path="res://Scenes/Controllers/SelectionScenes/select_area.tscn" id="8_hryqi"]
+[ext_resource type="Script" uid="uid://dhau4800s5smp" path="res://Scenes/Controllers/ResourceController.cs" id="8_tdwxr"]
+[ext_resource type="Resource" uid="uid://wjt3mfk3hveg" path="res://Scenes/Resources/Types/r_gold.tres" id="9_4o5wv"]
 [ext_resource type="PackedScene" uid="uid://k7krsgxhrgo2" path="res://Scenes/Units/Pawn/pawn.tscn" id="9_hryqi"]
+[ext_resource type="Resource" uid="uid://ct36o5f4apb73" path="res://Scenes/Resources/Types/r_meat.tres" id="10_4a3kt"]
 [ext_resource type="PackedScene" uid="uid://bdkgf5edotae0" path="res://Scenes/Resources/Wood/tree_1.tscn" id="10_6t3k2"]
 [ext_resource type="Texture2D" uid="uid://duv1buute15wa" path="res://Assets/Terrain/Tileset/Water Foam.png" id="10_imbg2"]
 [ext_resource type="Script" uid="uid://uygj6w2ift33" path="res://Scenes/Controllers/NavigationRegionController.cs" id="11_es6iu"]
+[ext_resource type="Resource" uid="uid://cj7uk3l8yh8rq" path="res://Scenes/Resources/Types/r_wood.tres" id="11_ifk88"]
 [ext_resource type="Script" uid="uid://bmym3all5d5mm" path="res://Scenes/Main/Hud.cs" id="15_wliom"]
 [ext_resource type="PackedScene" uid="uid://bdj83x5vkxdjx" path="res://Scenes/Resources/Gold/gold_preset.tscn" id="16_koken"]
 [ext_resource type="PackedScene" uid="uid://defkh2wiunq4g" path="res://Scenes/Resources/Meat/sheep.tscn" id="17_es6iu"]
+[ext_resource type="PackedScene" uid="uid://b231gr2h4tst0" path="res://Scenes/UI/UIResources/ui_resources.tscn" id="22_4o5wv"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_xrivr"]
+
+[sub_resource type="PackedScene" id="PackedScene_8sujb"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"id_paths": [],
+"names": PackedStringArray("Marker", "MeshInstance2D", "position", "scale", "mesh"),
+"node_count": 1,
+"node_ids": PackedInt32Array(137684674),
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 3, 2, 0, 3, 1, 4, 2, 0),
+"variants": [Vector2(0, -27), Vector2(4, 58), SubResource("QuadMesh_xrivr")],
+"version": 3
+}
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hfg1r"]
 texture = ExtResource("10_imbg2")
@@ -122,13 +143,17 @@ Camera = NodePath("../../Camera2D")
 [node name="UnitsController" type="Node2D" parent="Controllers" unique_id=1160344718]
 script = ExtResource("3_hryqi")
 SelectAreaScene = ExtResource("8_hryqi")
-MarkerScene = ExtResource("5_2ok46")
+MarkerScene = SubResource("PackedScene_8sujb")
 
 [node name="BuildingController" type="Node2D" parent="Controllers" unique_id=404899581 node_paths=PackedStringArray("World")]
 script = ExtResource("6_2ok46")
 BuildControlScene = ExtResource("5_vk4q2")
 BuildingBlueprintScene = ExtResource("7_koken")
 World = NodePath("../../Map/NavigationRegion2D/World")
+
+[node name="ResourceController" type="Node2D" parent="Controllers" unique_id=1531060020]
+script = ExtResource("8_tdwxr")
+AvailableResources = Array[Object]([ExtResource("9_4o5wv"), ExtResource("10_4a3kt"), ExtResource("11_ifk88")])
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=891201985]
 zoom = Vector2(0.25, 0.25)
@@ -266,3 +291,5 @@ position = Vector2(690, 192)
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1867642460]
 script = ExtResource("15_wliom")
+
+[node name="UIResources" parent="HUD" unique_id=1441542678 instance=ExtResource("22_4o5wv")]

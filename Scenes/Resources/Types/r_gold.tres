@@ -5,6 +5,8 @@
 
 [resource]
 script = ExtResource("2_bcba8")
+Id = 3
+DefaultValue = 100
 Name = "gold"
 Icon = ExtResource("1_6t8ju")
 metadata/_custom_type_script = "uid://caks0w8rk10ox"

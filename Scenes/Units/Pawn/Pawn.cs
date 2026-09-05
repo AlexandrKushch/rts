@@ -61,7 +61,7 @@ public partial class Pawn : UnitBase
     public override void SetTarget(Vector2? targetPosition, Node2D targetObject)
     {
         base.SetTarget(targetPosition, targetObject);
-        
+
         UpdateTargetObject();
 
         if (!NavigationAgent2D.IsTargetReachable())
@@ -129,7 +129,24 @@ public partial class Pawn : UnitBase
 
     public void DropResources()
     {
-        GD.Print("DROP RESOURCES");
+        var label = new Label()
+        {
+            HorizontalAlignment = HorizontalAlignment.Center,
+            Text = $"+{ResourceToCollectData.CollectedCount}",
+            PivotOffsetRatio = Vector2.One / 2,
+        };
+        label.AddThemeColorOverride("font_color", new Color("63b7ba"));
+        label.AddThemeConstantOverride("outline_size", 4);
+        label.Position += Vector2.Up * 50;
+        AddChild(label);
+
+        var tween = CreateTween().SetParallel();
+        float tweenDuration = 1f;
+        tween.TweenProperty(label, "position", new Vector2((float)(RandomExtension.RandomDouble() - 0.5f) * 10, label.Position.Y + label.Position.Y / 2), tweenDuration / 2);
+        tween.TweenProperty(label, "rotation", RandomExtension.RandomDouble() - 0.5f, tweenDuration / 2);
+        tween.Finished += label.QueueFree;
+
+        ResourceController.Instance.Collect(ResourceToCollectData.ResourceType.Id, ResourceToCollectData.CollectedCount);
         ResourceToCollectData.CollectedCount = 0;
     }
 }

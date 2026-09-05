@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class Hud : CanvasLayer
 {
@@ -12,5 +11,4 @@ public partial class Hud : CanvasLayer
             Instance = this;
         }
     }
-
 }

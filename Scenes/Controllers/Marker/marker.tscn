@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://bbhqatrw843qy"]
-
-[sub_resource type="QuadMesh" id="QuadMesh_xrivr"]
-
-[node name="Marker" type="MeshInstance2D" unique_id=137684674]
-position = Vector2(0, -27)
-scale = Vector2(4, 58)
-mesh = SubResource("QuadMesh_xrivr")

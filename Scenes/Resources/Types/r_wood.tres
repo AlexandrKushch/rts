@@ -1,11 +1,12 @@
 [gd_resource type="Resource" script_class="ResourceType" format=3 uid="uid://cj7uk3l8yh8rq"]
 
-[ext_resource type="Texture2D" uid="uid://ckj0epo2gp5cd" path="res://Assets/UI Elements/UI Elements/Icons/Icon_02.png" id="1_fcucr"]
 [ext_resource type="Script" uid="uid://caks0w8rk10ox" path="res://Scenes/Resources/ResourceType.cs" id="1_g0n54"]
+[ext_resource type="Texture2D" uid="uid://c7wh3baa3ydj0" path="res://Assets/Terrain/Resources/Wood/Wood Resource/Wood Resource.png" id="1_xvwhr"]
 
 [resource]
 script = ExtResource("1_g0n54")
+Id = 1
+DefaultValue = 250
 Name = "wood"
-InstrumentName = "axe"
-Icon = ExtResource("1_fcucr")
+Icon = ExtResource("1_xvwhr")
 metadata/_custom_type_script = "uid://caks0w8rk10ox"

@@ -29,6 +29,10 @@ folder_colors={
 "res://Globals/": "yellow"
 }
 
+[gui]
+
+theme/custom="uid://cyud7dko8ik43"
+
 [input]
 
 up={

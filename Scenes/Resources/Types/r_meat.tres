@@ -5,6 +5,8 @@
 
 [resource]
 script = ExtResource("2_h645n")
+Id = 2
+DefaultValue = 250
 Name = "meat"
 Icon = ExtResource("1_gcvob")
 metadata/_custom_type_script = "uid://caks0w8rk10ox"

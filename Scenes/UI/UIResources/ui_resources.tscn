@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://b231gr2h4tst0"]
+
+[ext_resource type="Script" uid="uid://dmiq1emlc0wuo" path="res://Scenes/UI/UIResources/UiResources.cs" id="1_3ymef"]
+[ext_resource type="Texture2D" uid="uid://c7wh3baa3ydj0" path="res://Assets/Terrain/Resources/Wood/Wood Resource/Wood Resource.png" id="1_337v5"]
+[ext_resource type="Script" uid="uid://dlc2g6vqboxqa" path="res://Scenes/UI/UIResources/UIResourceItem.cs" id="2_isdm4"]
+[ext_resource type="Texture2D" uid="uid://c7f5s730yfvnb" path="res://Assets/Terrain/Resources/Gold/Gold Resource/Gold_Resource.png" id="3_7gymg"]
+[ext_resource type="Texture2D" uid="uid://cy65egeo8n55w" path="res://Assets/Terrain/Resources/Meat/Meat Resource/Meat Resource.png" id="4_wdaot"]
+
+[node name="UIResources" type="HBoxContainer" unique_id=1464336252]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 65.0
+grow_horizontal = 2
+script = ExtResource("1_3ymef")
+
+[node name="Item" type="HBoxContainer" parent="." unique_id=973634208]
+layout_mode = 2
+script = ExtResource("2_isdm4")
+
+[node name="Icon" type="TextureRect" parent="Item" unique_id=1312758204]
+layout_mode = 2
+texture = ExtResource("3_7gymg")
+expand_mode = 2
+stretch_mode = 3
+
+[node name="Value" type="Label" parent="Item" unique_id=1310506623]
+layout_mode = 2
+text = "250"
+
+[node name="Item2" type="HBoxContainer" parent="." unique_id=391713699]
+layout_mode = 2
+script = ExtResource("2_isdm4")
+
+[node name="Icon" type="TextureRect" parent="Item2" unique_id=897113367]
+layout_mode = 2
+texture = ExtResource("4_wdaot")
+expand_mode = 2
+stretch_mode = 3
+
+[node name="Value" type="Label" parent="Item2" unique_id=2018131977]
+layout_mode = 2
+text = "250"
+
+[node name="Item3" type="HBoxContainer" parent="." unique_id=1381999139]
+layout_mode = 2
+script = ExtResource("2_isdm4")
+
+[node name="Icon" type="TextureRect" parent="Item3" unique_id=1272245111]
+layout_mode = 2
+texture = ExtResource("1_337v5")
+expand_mode = 2
+stretch_mode = 3
+
+[node name="Value" type="Label" parent="Item3" unique_id=1355821164]
+layout_mode = 2
+text = "250"
