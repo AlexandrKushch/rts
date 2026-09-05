@@ -11,7 +11,7 @@ size = Vector2(284, 180)
 Resource = ExtResource("2_4g0xq")
 
 [node name="BuildingSelectableComponent" parent="." index="0" unique_id=550510253]
-position = Vector2(0, 33)
+position = Vector2(0, -4)
 
 [node name="NinePatchRect" parent="BuildingSelectableComponent/Visual" parent_id_path=PackedInt32Array(550510253, 946751036) index="0" unique_id=584840865]
 offset_left = -156.0
@@ -24,23 +24,35 @@ position = Vector2(0, -53)
 shape = SubResource("RectangleShape2D_d1o4y")
 
 [node name="Visual" parent="." index="1" unique_id=1679201315]
-position = Vector2(0, -34)
+position = Vector2(0, -71)
 texture = ExtResource("2_n84d7")
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="2" unique_id=82442801]
-position = Vector2(-88, 13)
-radius = 45.0
+position = Vector2(-109, -12)
+radius = 30.0
 
 [node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="3" unique_id=1699307201]
-position = Vector2(88, 13)
-radius = 45.0
+position = Vector2(109, -12)
+radius = 30.0
 
 [node name="NavigationObstacle2D3" type="NavigationObstacle2D" parent="." index="4" unique_id=724202924]
-position = Vector2(0, 13)
-radius = 45.0
+position = Vector2(0, -12)
+radius = 30.0
 
-[node name="CollisionPolygon2D" parent="." index="5" unique_id=168278068]
-position = Vector2(0, 13)
-polygon = PackedVector2Array(-120, 40, -140, -40, 140, -40, 120, 40)
+[node name="NavigationObstacle2D4" type="NavigationObstacle2D" parent="." index="5" unique_id=263264735]
+position = Vector2(-53, -12)
+radius = 30.0
+
+[node name="NavigationObstacle2D5" type="NavigationObstacle2D" parent="." index="6" unique_id=1526617462]
+position = Vector2(-53, -12)
+radius = 30.0
+
+[node name="NavigationObstacle2D6" type="NavigationObstacle2D" parent="." index="7" unique_id=692338129]
+position = Vector2(55, -12)
+radius = 30.0
+
+[node name="CollisionPolygon2D" parent="." index="8" unique_id=168278068]
+position = Vector2(0, -24)
+polygon = PackedVector2Array(-120, 40, -130, -10, 0, -10, 130, -10, 120, 40, 0, 40)
 
 [editable path="BuildingSelectableComponent"]

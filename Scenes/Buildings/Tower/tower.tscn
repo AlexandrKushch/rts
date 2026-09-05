@@ -25,22 +25,30 @@ position = Vector2(0, -68)
 texture = ExtResource("2_fwii4")
 
 [node name="CollisionPolygon2D" parent="." index="2" unique_id=168278068]
-polygon = PackedVector2Array(-40, -55, 40, -55, 35, 15, -35, 15)
+polygon = PackedVector2Array(-30, -10, 30, -10, 25, 10, -25, 10)
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="3" unique_id=1589404616]
-position = Vector2(-15, -7)
-radius = 30.0
+position = Vector2(-25, 4)
+radius = 15.0
 
 [node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="4" unique_id=841865287]
-position = Vector2(-19, -34)
-radius = 30.0
+position = Vector2(-28, -11)
+radius = 15.0
 
 [node name="NavigationObstacle2D3" type="NavigationObstacle2D" parent="." index="5" unique_id=2010559430]
-position = Vector2(16, -36)
-radius = 30.0
+position = Vector2(27, -12)
+radius = 15.0
 
 [node name="NavigationObstacle2D4" type="NavigationObstacle2D" parent="." index="6" unique_id=1240213447]
-position = Vector2(17, -8)
-radius = 30.0
+position = Vector2(25, 4)
+radius = 15.0
+
+[node name="NavigationObstacle2D5" type="NavigationObstacle2D" parent="." index="7" unique_id=1999380065]
+position = Vector2(0, 4)
+radius = 15.0
+
+[node name="NavigationObstacle2D6" type="NavigationObstacle2D" parent="." index="8" unique_id=157574712]
+position = Vector2(0, -11)
+radius = 15.0
 
 [editable path="BuildingSelectableComponent"]

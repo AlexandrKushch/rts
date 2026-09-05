@@ -25,26 +25,50 @@ position = Vector2(0, -86)
 texture = ExtResource("2_1uhux")
 
 [node name="CollisionPolygon2D" parent="." index="2" unique_id=168278068]
-polygon = PackedVector2Array(-70, -60, 70, -60, 55, 16, -55, 16)
+polygon = PackedVector2Array(-70, -40, 70, -40, 55, 10, -55, 10)
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="3" unique_id=378447270]
-visible = false
-position = Vector2(-58, -9)
-radius = 30.0
+position = Vector2(-50, 10)
+radius = 15.0
 
-[node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="4" unique_id=1901443247]
-visible = false
-position = Vector2(60, -10)
-radius = 30.0
+[node name="NavigationObstacle2D5" type="NavigationObstacle2D" parent="." index="4" unique_id=752972122]
+position = Vector2(-20, 10)
+radius = 15.0
 
-[node name="NavigationObstacle2D3" type="NavigationObstacle2D" parent="." index="5" unique_id=1654220161]
-visible = false
-position = Vector2(68, -49)
-radius = 25.0
+[node name="NavigationObstacle2D6" type="NavigationObstacle2D" parent="." index="5" unique_id=1964481827]
+position = Vector2(21, 10)
+radius = 15.0
 
-[node name="NavigationObstacle2D4" type="NavigationObstacle2D" parent="." index="6" unique_id=76312338]
-visible = false
-position = Vector2(-68, -49)
-radius = 25.0
+[node name="NavigationObstacle2D7" type="NavigationObstacle2D" parent="." index="6" unique_id=406155953]
+position = Vector2(31, -36)
+radius = 15.0
+
+[node name="NavigationObstacle2D8" type="NavigationObstacle2D" parent="." index="7" unique_id=264172828]
+position = Vector2(0, -36)
+radius = 15.0
+
+[node name="NavigationObstacle2D9" type="NavigationObstacle2D" parent="." index="8" unique_id=883189673]
+position = Vector2(-32, -36)
+radius = 15.0
+
+[node name="NavigationObstacle2D10" type="NavigationObstacle2D" parent="." index="9" unique_id=2004567507]
+position = Vector2(-57, -15)
+radius = 15.0
+
+[node name="NavigationObstacle2D11" type="NavigationObstacle2D" parent="." index="10" unique_id=227069426]
+position = Vector2(56, -15)
+radius = 15.0
+
+[node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="11" unique_id=826883670]
+position = Vector2(-63, -36)
+radius = 15.0
+
+[node name="NavigationObstacle2D3" type="NavigationObstacle2D" parent="." index="12" unique_id=1292076761]
+position = Vector2(64, -36)
+radius = 15.0
+
+[node name="NavigationObstacle2D4" type="NavigationObstacle2D" parent="." index="13" unique_id=389133164]
+position = Vector2(51, 9)
+radius = 15.0
 
 [editable path="BuildingSelectableComponent"]
