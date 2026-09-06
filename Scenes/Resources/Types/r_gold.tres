@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ResourceType" format=3 uid="uid://wjt3mfk3hveg"]
 
-[ext_resource type="Texture2D" uid="uid://c7f5s730yfvnb" path="res://Assets/Terrain/Resources/Gold/Gold Resource/Gold_Resource.png" id="1_6t8ju"]
+[ext_resource type="Texture2D" uid="uid://bera2oguud3bl" path="res://Assets/UI Elements/UI Elements/Icons/Icon_03.png" id="1_6t8ju"]
 [ext_resource type="Script" uid="uid://caks0w8rk10ox" path="res://Scenes/Resources/ResourceType.cs" id="2_bcba8"]
 
 [resource]

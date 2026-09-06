@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://b1djpwd2d43xr"]
+
+[ext_resource type="Script" uid="uid://sut35g1ys86l" path="res://Scenes/UI/UISelectedUnits/UiSelectedUnitItem.cs" id="1_uvogx"]
+[ext_resource type="Texture2D" uid="uid://dsesm828u14vn" path="res://Assets/UI Elements/UI Elements/Human Avatars/Avatars_05.png" id="2_4l10w"]
+[ext_resource type="Texture2D" uid="uid://b2pch1h077dfi" path="res://Assets/Terrain/Tileset/Shadow.png" id="2_rgqgl"]
+
+[node name="UISelectedUnitItem" type="Control" unique_id=319918530]
+custom_minimum_size = Vector2(176, 176)
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -176.0
+offset_right = 176.0
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("1_uvogx")
+
+[node name="Highlight" type="TextureRect" parent="." unique_id=29501989]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -23.999992
+offset_top = -223.0
+offset_right = 198.0
+offset_bottom = -1.0
+grow_vertical = 0
+scale = Vector2(1.7, 1.7)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("2_rgqgl")
+expand_mode = 2
+
+[node name="Icon" type="TextureRect" parent="." unique_id=750242976]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -223.0
+offset_right = 198.0
+offset_bottom = -1.0
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("2_4l10w")
+expand_mode = 2
+
+[node name="Button" type="Button" parent="." unique_id=1651783521]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="Count" type="Label" parent="." unique_id=1486016232]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -52.0
+offset_top = -84.0
+offset_right = -12.0
+offset_bottom = -45.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_up" from="Button" to="." method="OnClick"]
+[connection signal="mouse_entered" from="Button" to="." method="UpdateHighlight" binds= [true]]
+[connection signal="mouse_exited" from="Button" to="." method="UpdateHighlight" binds= [false]]

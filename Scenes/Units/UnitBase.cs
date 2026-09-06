@@ -11,7 +11,7 @@ public partial class UnitBase : CharacterBody2D
 	public Node2D TargetObject { get; set; }
 
 	[Export]
-	public UnitResource Meta { get; private set; }
+	public UnitType Meta { get; private set; }
 
 	public override void _Ready()
 	{

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sorkhmjux8pd"
-path="res://.godot/imported/SmallRibbons.png-82486736f585201f61f8441b9d48aff3.ctex"
+uid="uid://cyir253fixelb"
+path="res://.godot/imported/BigRibbonst.png-b9140be889fe840705f699affad56404.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI Elements/UI Elements/Ribbons/SmallRibbons.png"
-dest_files=["res://.godot/imported/SmallRibbons.png-82486736f585201f61f8441b9d48aff3.ctex"]
+source_file="res://Assets/UI Elements/UI Elements/Ribbons/BigRibbonst.png"
+dest_files=["res://.godot/imported/BigRibbonst.png-b9140be889fe840705f699affad56404.ctex"]
 
 [params]
 

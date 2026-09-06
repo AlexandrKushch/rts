@@ -13,6 +13,8 @@ public partial class UnitsController : Node2D
     [Export] private PackedScene SelectAreaScene;
     [Export] private PackedScene MarkerScene;
 
+    [Signal] public delegate void SelectionChangedEventHandler();
+
     public HashSet<SelectableComponent> Selections { get; private set; } = new HashSet<SelectableComponent>();
 
     public static UnitsController Instance { get; private set; }
@@ -74,6 +76,7 @@ public partial class UnitsController : Node2D
             }
 
             SelectUnits();
+            EmitSignal(SignalName.SelectionChanged);
             _selectArea.QueueFree();
         }
     }
@@ -93,6 +96,26 @@ public partial class UnitsController : Node2D
         unit.SetTarget(
             targetObject != null ? GetClosestPointToObjectBoundary(unit, targetObject) : null,
             targetObject ?? null);
+    }
+
+    public void ClearUnitsExcept(int unitId)
+    {
+        foreach (var unit in Selections)
+        {
+            unit.UpdateSelection(false);
+        }
+
+        Selections = Selections
+            .Where(x => x.EffectedOn is UnitBase unit && unit.Meta.Id == unitId)
+            .Where(x => x != null)
+            .ToHashSet();
+
+        foreach (var unit in Selections)
+        {
+            unit.UpdateSelection(true);
+        }
+        
+        EmitSignal(SignalName.SelectionChanged);
     }
 
     private void InputMoveCommand(InputEventMouseButton input)

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="UnitType" format=3 uid="uid://b81s8vll42xy2"]
+
+[ext_resource type="Texture2D" uid="uid://vlbifplkcaj7" path="res://Assets/UI Elements/UI Elements/Human Avatars/Avatars_01.png" id="1_pd55f"]
+[ext_resource type="Script" uid="uid://b3jham1omyu5f" path="res://Scenes/Units/UnitType.cs" id="2_svf0v"]
+
+[resource]
+script = ExtResource("2_svf0v")
+Id = 5
+Name = "warrior"
+Icon = ExtResource("1_pd55f")
+metadata/_custom_type_script = "uid://b3jham1omyu5f"

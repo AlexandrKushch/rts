@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="UnitType" format=3 uid="uid://cm5nt1ekod7b8"]
+
+[ext_resource type="Texture2D" uid="uid://dcc2hqbgtch05" path="res://Assets/UI Elements/UI Elements/Human Avatars/Avatars_02.png" id="1_qxpkb"]
+[ext_resource type="Script" uid="uid://b3jham1omyu5f" path="res://Scenes/Units/UnitType.cs" id="2_o6vy3"]
+
+[resource]
+script = ExtResource("2_o6vy3")
+Id = 2
+Name = "lancer"
+Icon = ExtResource("1_qxpkb")
+metadata/_custom_type_script = "uid://b3jham1omyu5f"

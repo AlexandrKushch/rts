@@ -17,8 +17,13 @@
 [ext_resource type="Script" uid="uid://uygj6w2ift33" path="res://Scenes/Controllers/NavigationRegionController.cs" id="11_es6iu"]
 [ext_resource type="Resource" uid="uid://cj7uk3l8yh8rq" path="res://Scenes/Resources/Types/r_wood.tres" id="11_ifk88"]
 [ext_resource type="Script" uid="uid://bmym3all5d5mm" path="res://Scenes/Main/Hud.cs" id="15_wliom"]
+[ext_resource type="Resource" uid="uid://hq8cctjvc4r1" path="res://Scenes/Units/Types/r_monk.tres" id="16_8sujb"]
 [ext_resource type="PackedScene" uid="uid://bdj83x5vkxdjx" path="res://Scenes/Resources/Gold/gold_preset.tscn" id="16_koken"]
 [ext_resource type="PackedScene" uid="uid://defkh2wiunq4g" path="res://Scenes/Resources/Meat/sheep.tscn" id="17_es6iu"]
+[ext_resource type="Resource" uid="uid://us5gsh240dda" path="res://Scenes/Units/Types/r_archer.tres" id="17_tyqxl"]
+[ext_resource type="Resource" uid="uid://cm5nt1ekod7b8" path="res://Scenes/Units/Types/r_lancer.tres" id="18_4ohmo"]
+[ext_resource type="Resource" uid="uid://b81s8vll42xy2" path="res://Scenes/Units/Types/r_warrior.tres" id="19_8oboy"]
+[ext_resource type="PackedScene" uid="uid://d01xy6skh73sa" path="res://Scenes/UI/UISelectedUnits/ui_selected_units.tscn" id="21_tdwxr"]
 [ext_resource type="PackedScene" uid="uid://b231gr2h4tst0" path="res://Scenes/UI/UIResources/ui_resources.tscn" id="22_4o5wv"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_xrivr"]
@@ -93,18 +98,41 @@ y_sort_enabled = true
 
 [node name="Pawn" parent="Map/NavigationRegion2D/World" unique_id=1673489485 instance=ExtResource("9_hryqi")]
 position = Vector2(453, 186)
+Meta = ExtResource("16_8sujb")
 
 [node name="Pawn2" parent="Map/NavigationRegion2D/World" unique_id=157610075 instance=ExtResource("9_hryqi")]
 position = Vector2(453, 186)
+Meta = ExtResource("17_tyqxl")
 
 [node name="Pawn3" parent="Map/NavigationRegion2D/World" unique_id=620398878 instance=ExtResource("9_hryqi")]
 position = Vector2(453, 186)
+Meta = ExtResource("18_4ohmo")
 
 [node name="Pawn4" parent="Map/NavigationRegion2D/World" unique_id=400829926 instance=ExtResource("9_hryqi")]
 position = Vector2(453, 186)
+Meta = ExtResource("19_8oboy")
 
 [node name="Pawn5" parent="Map/NavigationRegion2D/World" unique_id=1508332381 instance=ExtResource("9_hryqi")]
 position = Vector2(453, 186)
+
+[node name="Pawn6" parent="Map/NavigationRegion2D/World" unique_id=1289145205 instance=ExtResource("9_hryqi")]
+position = Vector2(536, 222)
+Meta = ExtResource("16_8sujb")
+
+[node name="Pawn7" parent="Map/NavigationRegion2D/World" unique_id=661561276 instance=ExtResource("9_hryqi")]
+position = Vector2(536, 222)
+Meta = ExtResource("17_tyqxl")
+
+[node name="Pawn8" parent="Map/NavigationRegion2D/World" unique_id=202999548 instance=ExtResource("9_hryqi")]
+position = Vector2(536, 222)
+Meta = ExtResource("18_4ohmo")
+
+[node name="Pawn9" parent="Map/NavigationRegion2D/World" unique_id=1492546916 instance=ExtResource("9_hryqi")]
+position = Vector2(536, 222)
+Meta = ExtResource("19_8oboy")
+
+[node name="Pawn10" parent="Map/NavigationRegion2D/World" unique_id=127626665 instance=ExtResource("9_hryqi")]
+position = Vector2(536, 222)
 
 [node name="Tree1" parent="Map/NavigationRegion2D/World" unique_id=1936357647 instance=ExtResource("10_6t3k2")]
 position = Vector2(35, 22)
@@ -204,3 +232,5 @@ position = Vector2(690, 192)
 script = ExtResource("15_wliom")
 
 [node name="UIResources" parent="HUD" unique_id=1441542678 instance=ExtResource("22_4o5wv")]
+
+[node name="UISelectedUnits" parent="HUD" unique_id=2084184452 instance=ExtResource("21_tdwxr")]
