@@ -1,0 +1,157 @@
+[gd_scene format=3 uid="uid://ri0xagskbbyu"]
+
+[ext_resource type="Texture2D" uid="uid://7hr82ohprdp4" path="res://Assets/UI Elements/UI Banners from the store page/ribbon.png" id="1_f64go"]
+[ext_resource type="Texture2D" uid="uid://chq4cjxnnhc4k" path="res://Assets/UI Elements/UI Banners from the store page/banner.png" id="2_eox38"]
+[ext_resource type="Texture2D" uid="uid://bbwms4xd0g6ij" path="res://Assets/UI Elements/UI Banners from the store page/ribbon-close.png" id="3_eox38"]
+[ext_resource type="Texture2D" uid="uid://byv6mcctl0oqa" path="res://Assets/UI Elements/UI Elements/Banners/Banner_Slots.png" id="4_21vhc"]
+[ext_resource type="Script" uid="uid://cbmw8d7urhw7l" path="res://Scenes/UI/UiBuildingControl/UiBuildingControl.cs" id="4_exx37"]
+[ext_resource type="Resource" uid="uid://u24n2a8v85ov" path="res://Scenes/Buildings/Types/r_castle.tres" id="5_gy2ql"]
+[ext_resource type="Texture2D" uid="uid://b1a0047iar2io" path="res://Assets/Buildings/Blue Buildings/Archery.png" id="5_kp43j"]
+[ext_resource type="Script" uid="uid://k0icjuia2osj" path="res://Scenes/UI/UiBuildingControl/UiBuildingsVBoxContainer.cs" id="5_nluwe"]
+[ext_resource type="Resource" uid="uid://b8ycuiugnmrri" path="res://Scenes/Buildings/Types/r_barracks.tres" id="6_nluwe"]
+[ext_resource type="Resource" uid="uid://dy2ree62pofk1" path="res://Scenes/Buildings/Types/r_archery.tres" id="7_r75i8"]
+[ext_resource type="Resource" uid="uid://c3qhmxdssqwd0" path="res://Scenes/Buildings/Types/r_monastery.tres" id="8_k15p3"]
+[ext_resource type="Resource" uid="uid://3fqpdgsfv17m" path="res://Scenes/Buildings/Types/r_tower.tres" id="9_aqrqo"]
+[ext_resource type="PackedScene" uid="uid://c57j2yxf5jasx" path="res://Scenes/Buildings/BuildingBlueprint/building_blueprint.tscn" id="10_o08uo"]
+[ext_resource type="Script" uid="uid://ft75va7n5dqd" path="res://Scenes/UI/UiBuildingControl/UiBuildingItem.cs" id="11_ur3mk"]
+[ext_resource type="Texture2D" uid="uid://b2pch1h077dfi" path="res://Assets/Terrain/Tileset/Shadow.png" id="14_nluwe"]
+
+[node name="UiBuildingControl" type="Control" unique_id=2144760334]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.6, 0.6)
+script = ExtResource("4_exx37")
+
+[node name="Banner" type="NinePatchRect" parent="." unique_id=2129582091]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -23.333332
+offset_top = 109.99999
+offset_right = 128.0
+offset_bottom = 655.6666
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("2_eox38")
+patch_margin_left = 64
+patch_margin_top = 64
+patch_margin_right = 64
+patch_margin_bottom = 64
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="Ribbon" type="TextureRect" parent="Banner" unique_id=1413503464]
+z_index = -1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -70.5
+offset_right = 70.5
+offset_bottom = 106.0
+grow_horizontal = 2
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(-0.15, -0.9)
+texture = ExtResource("1_f64go")
+
+[node name="RibbonClose" type="TextureRect" parent="Banner" unique_id=854358581]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -107.0
+offset_right = 45.0
+grow_horizontal = 2
+grow_vertical = 0
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0, 0.83)
+texture = ExtResource("3_eox38")
+
+[node name="BuildingsScrollable" type="ScrollContainer" parent="." unique_id=1748479862]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 114.99999
+offset_right = 118.0
+offset_bottom = 623.3333
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = false
+horizontal_scroll_mode = 0
+
+[node name="UiBuildingsVBoxContainer" type="VBoxContainer" parent="BuildingsScrollable" unique_id=404270777]
+layout_mode = 2
+script = ExtResource("5_nluwe")
+AvailableBuildings = Array[Object]([ExtResource("5_gy2ql"), ExtResource("6_nluwe"), ExtResource("7_r75i8"), ExtResource("8_k15p3"), ExtResource("9_aqrqo")])
+BuildingBlueprintScene = ExtResource("10_o08uo")
+
+[node name="Item" type="Control" parent="BuildingsScrollable/UiBuildingsVBoxContainer" unique_id=531670298]
+custom_minimum_size = Vector2(110, 110)
+layout_mode = 2
+script = ExtResource("11_ur3mk")
+
+[node name="Background" type="TextureRect" parent="BuildingsScrollable/UiBuildingsVBoxContainer/Item" unique_id=465388101]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_21vhc")
+expand_mode = 5
+
+[node name="Highlight" type="TextureRect" parent="BuildingsScrollable/UiBuildingsVBoxContainer/Item" unique_id=1136572080]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("14_nluwe")
+expand_mode = 2
+
+[node name="Icon" type="TextureRect" parent="BuildingsScrollable/UiBuildingsVBoxContainer/Item" unique_id=496487608]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -64.0
+offset_right = 48.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.87, 0.87)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("5_kp43j")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="BuildingsScrollable/UiBuildingsVBoxContainer/Item" unique_id=1971263189]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[connection signal="button_up" from="BuildingsScrollable/UiBuildingsVBoxContainer/Item/Button" to="BuildingsScrollable/UiBuildingsVBoxContainer/Item" method="OnClick"]
+[connection signal="mouse_entered" from="BuildingsScrollable/UiBuildingsVBoxContainer/Item/Button" to="BuildingsScrollable/UiBuildingsVBoxContainer/Item" method="UpdateHighlight" binds= [true]]
+[connection signal="mouse_exited" from="BuildingsScrollable/UiBuildingsVBoxContainer/Item/Button" to="BuildingsScrollable/UiBuildingsVBoxContainer/Item" method="UpdateHighlight" binds= [false]]

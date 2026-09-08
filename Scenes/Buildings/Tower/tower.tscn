@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ciqpg25wy10i2"]
 
 [ext_resource type="PackedScene" uid="uid://bericglgvv4m8" path="res://Scenes/Buildings/building_base.tscn" id="1_ykvt5"]
-[ext_resource type="Resource" uid="uid://3fqpdgsfv17m" path="res://Scenes/Buildings/BuildingResources/r_tower.tres" id="2_d8t17"]
+[ext_resource type="Resource" uid="uid://3fqpdgsfv17m" path="res://Scenes/Buildings/Types/r_tower.tres" id="2_d8t17"]
 [ext_resource type="Texture2D" uid="uid://bym0fx237u6be" path="res://Assets/Buildings/Blue Buildings/Tower.png" id="2_fwii4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1uhux"]

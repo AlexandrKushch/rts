@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dxfs7l3k65nvi"]
 
 [ext_resource type="PackedScene" uid="uid://bericglgvv4m8" path="res://Scenes/Buildings/building_base.tscn" id="1_xfw4a"]
-[ext_resource type="Resource" uid="uid://u24n2a8v85ov" path="res://Scenes/Buildings/BuildingResources/r_castle.tres" id="2_4g0xq"]
+[ext_resource type="Resource" uid="uid://u24n2a8v85ov" path="res://Scenes/Buildings/Types/r_castle.tres" id="2_4g0xq"]
 [ext_resource type="Texture2D" uid="uid://b2obdvjv7o4ef" path="res://Assets/Buildings/Blue Buildings/Castle.png" id="2_n84d7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d1o4y"]

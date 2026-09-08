@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dn4irxrx3kovk"
-path="res://.godot/imported/banner.png-92c2571a6b789d1b0090225511ef7022.ctex"
+uid="uid://bbwms4xd0g6ij"
+path="res://.godot/imported/ribbon-close.png-947e76b0ad9ae643b9016d5b167ce4eb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/banner.png"
-dest_files=["res://.godot/imported/banner.png-92c2571a6b789d1b0090225511ef7022.ctex"]
+source_file="res://Assets/UI Elements/UI Banners from the store page/ribbon-close.png"
+dest_files=["res://.godot/imported/ribbon-close.png-947e76b0ad9ae643b9016d5b167ce4eb.ctex"]
 
 [params]
 

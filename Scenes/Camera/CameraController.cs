@@ -7,6 +7,7 @@ public partial class CameraController : Node2D
 
 	private bool _wasdLocked = false;
 	private float _zoom = 0.5f;
+	private float _zoomRation = 0.5f;
 
 	private Vector2 _dragStart;
 	private Vector2 _dragEnd;
@@ -25,6 +26,21 @@ public partial class CameraController : Node2D
 		ProcessDrag((float)delta);
 		ProcessWasd((float)delta);
 		ProcessZoom((float)delta);
+	}
+
+    public override void _UnhandledInput(InputEvent input)
+	{
+		if (input is InputEventMouseButton inputButton)
+		{
+			if (inputButton.ButtonIndex == MouseButton.WheelUp)
+			{
+				_zoom += 0.1f * _zoomRation;
+			}
+			else if (inputButton.ButtonIndex == MouseButton.WheelDown)
+			{
+				_zoom -= 0.1f * _zoomRation;
+			}
+		}
 	}
 
 	private void ProcessDrag(float delta)
@@ -67,15 +83,6 @@ public partial class CameraController : Node2D
 
 	private void ProcessZoom(float delta)
 	{
-		if (Input.IsActionJustReleased(InputMapGlobal.ZoomIn))
-		{
-			_zoom += 0.1f;
-		}
-		else if (Input.IsActionJustReleased(InputMapGlobal.ZoomOut))
-		{
-			_zoom -= 0.1f;
-		}
-		
 		_zoom = Mathf.Clamp(_zoom, 0, 1);
 
 		var newZoom = (float)Mathf.Remap(_zoom, 0, 1, 0.25, 2);

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://o6ovn6r5mcae"]
 
 [ext_resource type="PackedScene" uid="uid://bericglgvv4m8" path="res://Scenes/Buildings/building_base.tscn" id="1_hclp5"]
-[ext_resource type="Resource" uid="uid://dy2ree62pofk1" path="res://Scenes/Buildings/BuildingResources/r_archery.tres" id="2_10o7v"]
+[ext_resource type="Resource" uid="uid://dy2ree62pofk1" path="res://Scenes/Buildings/Types/r_archery.tres" id="2_10o7v"]
 [ext_resource type="Texture2D" uid="uid://b1a0047iar2io" path="res://Assets/Buildings/Blue Buildings/Archery.png" id="2_yami0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t274w"]

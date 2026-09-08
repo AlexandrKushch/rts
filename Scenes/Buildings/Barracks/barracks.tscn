@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bericglgvv4m8" path="res://Scenes/Buildings/building_base.tscn" id="1_wjwem"]
 [ext_resource type="Texture2D" uid="uid://dumaqi6xtmqtx" path="res://Assets/Buildings/Blue Buildings/Barracks.png" id="2_1uhux"]
-[ext_resource type="Resource" uid="uid://b8ycuiugnmrri" path="res://Scenes/Buildings/BuildingResources/r_barracks.tres" id="2_3q5wo"]
+[ext_resource type="Resource" uid="uid://b8ycuiugnmrri" path="res://Scenes/Buildings/Types/r_barracks.tres" id="2_3q5wo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eioss"]
 size = Vector2(176, 175)

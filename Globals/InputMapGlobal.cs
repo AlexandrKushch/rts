@@ -10,9 +10,4 @@ public static class InputMapGlobal
     public const string Lmb = "lmb";
     public const string Mmb = "mmb";
     public const string Rmb = "rmb";
-
-    public const string ZoomIn = "zoom_in";
-    public const string ZoomOut = "zoom_out";
-
-    public const string BuildCommand = "build_command";
 }

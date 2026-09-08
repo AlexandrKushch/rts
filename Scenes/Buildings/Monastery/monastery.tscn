@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bericglgvv4m8" path="res://Scenes/Buildings/building_base.tscn" id="1_l2qa8"]
 [ext_resource type="Texture2D" uid="uid://c2ol0sgjkbgie" path="res://Assets/Buildings/Blue Buildings/Monastery.png" id="2_eioss"]
-[ext_resource type="Resource" uid="uid://c3qhmxdssqwd0" path="res://Scenes/Buildings/BuildingResources/r_monastery.tres" id="2_titpi"]
+[ext_resource type="Resource" uid="uid://c3qhmxdssqwd0" path="res://Scenes/Buildings/Types/r_monastery.tres" id="2_titpi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_10o7v"]
 size = Vector2(140, 190)

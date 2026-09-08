@@ -1,4 +1,3 @@
-using Globals;
 using Godot;
 using System.Linq;
 
@@ -9,33 +8,9 @@ public partial class BuildingController : Node2D
 
     private BuildingBlueprint _blueprint;
 
-    [Export] private PackedScene BuildControlScene;
     [Export] private PackedScene BuildingBlueprintScene;
     [Export] public Node2D World;
     [Export] public TileMapLayer Ground;
-
-    public bool ShowBuildingControl
-    {
-        get
-        {
-            return _showBuildingControl;
-        }
-        set
-        {
-            _showBuildingControl = value;
-
-            if (ShowBuildingControl)
-            {
-                _buildControl = BuildControlScene.Instantiate<Control>();
-                Hud.Instance.AddChild(_buildControl);
-
-            }
-            else if (IsInstanceValid(_buildControl))
-            {
-                _buildControl.QueueFree();
-            }
-        }
-    }
 
     public bool BlueprintActive { get; private set; }
 
@@ -82,16 +57,6 @@ public partial class BuildingController : Node2D
 
     public override void _Process(double delta)
     {
-        if (UnitsController.Instance.Selections.Count == 0)
-        {
-            ShowBuildingControl = false;
-        }
-        else if (Input.IsActionJustReleased(InputMapGlobal.BuildCommand)
-            && UnitsController.Instance.Selections.Any(x => x.EffectedOn is Pawn))
-        {
-            ShowBuildingControl = !ShowBuildingControl;
-        }
-
         if (IsInstanceValid(_blueprint) && !_blueprint.Deployed)
         {
             var mousePosOnTileMap = Ground.LocalToMap(GetLocalMousePosition());
@@ -114,8 +79,6 @@ public partial class BuildingController : Node2D
 
     public void InitBuildingBlueprint(BuildResource resource)
     {
-        ShowBuildingControl = false;
-
         _blueprint = BuildingBlueprintScene.Instantiate<BuildingBlueprint>();
         _blueprint.Resource = resource;
         GetTree().Root.AddChild(_blueprint);
