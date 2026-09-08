@@ -8,4 +8,8 @@ script = ExtResource("2_bn8qg")
 Name = "monastery"
 Icon = ExtResource("1_ed6t8")
 MaxHp = 50
+Cost = Dictionary[int, int]({
+1: 300,
+3: 300
+})
 metadata/_custom_type_script = "uid://ck4k0rwiv3nec"

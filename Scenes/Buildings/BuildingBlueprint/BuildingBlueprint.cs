@@ -1,4 +1,3 @@
-using System.Linq;
 using Godot;
 using Godot.Collections;
 
@@ -26,8 +25,13 @@ public partial class BuildingBlueprint : Node2D
         }
     }
 
-    public void DeployTo(Node2D to)
+    public bool TryDeployTo(Node2D to)
     {
+        if (!TryPayForBuilding())
+        {
+            return false;
+        }
+
         Deployed = true;
 
         Building.Modulate = Colors.White;
@@ -40,6 +44,7 @@ public partial class BuildingBlueprint : Node2D
         }
         Building.Reparent(to);
         NavigationRegionController.Instance.BakeNavigationPolygon(true);
+        return true;
     }
 
     public void SetAsBlueprint()
@@ -51,5 +56,23 @@ public partial class BuildingBlueprint : Node2D
         {
             obstacle.AvoidanceEnabled = false;
         }
+    }
+
+    private bool TryPayForBuilding()
+    {
+        foreach (var resourceType in Resource.Cost)
+        {
+            if (!ResourceController.Instance.CheckSpent(resourceType.Key, resourceType.Value))
+            {
+                return false;
+            }
+        }
+
+        foreach (var resourceType in Resource.Cost)
+        {
+            ResourceController.Instance.Spent(resourceType.Key, resourceType.Value);
+        }
+
+        return true;
     }
 }

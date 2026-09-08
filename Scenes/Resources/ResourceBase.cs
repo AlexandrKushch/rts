@@ -3,10 +3,16 @@ using Godot;
 public partial class ResourceBase : Node2D
 {
     [Export]
-    public ResourceType ResourceType { get; set; }
+    public ResourceInfo ResourceType { get; set; }
 
     [Export]
     public int Quantity { get; set; }
+
+    public override void _Ready()
+    {
+        base._Ready();
+        TreeExited += OnExitTree;
+    }
 
     public virtual void CollectOne()
     {
@@ -16,5 +22,11 @@ public partial class ResourceBase : Node2D
         {
             QueueFree();
         }
+    }
+
+    public void OnExitTree()
+    {
+        base._ExitTree();
+        NavigationRegionController.Instance.BakeNavigationPolygon(true);
     }
 }

@@ -41,7 +41,7 @@ public partial class PawnVisual : Node
         AnimationPlayer.Play(animation);
     }
 
-    public void UpdateMovement(Vector2 velocity, int collected, ResourceType resource)
+    public void UpdateMovement(Vector2 velocity, int collected, ResourceInfo resource)
     {
         if (AnimationPlayer.CurrentAnimation.ToString().Contains(PawnAnimationNames.Interact, StringComparison.OrdinalIgnoreCase))
         {

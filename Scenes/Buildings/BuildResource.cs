@@ -1,5 +1,5 @@
 using Godot;
-using System;
+using Godot.Collections;
 
 [GlobalClass]
 public partial class BuildResource : Resource
@@ -12,4 +12,7 @@ public partial class BuildResource : Resource
 
     [Export]
     public int MaxHp { get; set; }
+    
+    [Export]
+    public Dictionary<ResourceType, int> Cost { get; set; }
 }

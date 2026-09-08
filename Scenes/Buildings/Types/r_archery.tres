@@ -8,4 +8,7 @@ script = ExtResource("2_5jf6j")
 Name = "archery"
 Icon = ExtResource("1_vpav4")
 MaxHp = 20
+Cost = Dictionary[int, int]({
+1: 125
+})
 metadata/_custom_type_script = "uid://ck4k0rwiv3nec"

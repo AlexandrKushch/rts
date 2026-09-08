@@ -13,6 +13,7 @@ public partial class TreeBase : ResourceBase
 
     public override void _Ready()
     {
+        base._Ready();
         Visual = GetNode<Node2D>(nameof(Visual));
 
         _timer = RandomExtension.RandomDouble();

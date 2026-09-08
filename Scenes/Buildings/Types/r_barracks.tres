@@ -8,4 +8,7 @@ script = ExtResource("2_mjw4g")
 Name = "barracks"
 Icon = ExtResource("1_wpym7")
 MaxHp = 20
+Cost = Dictionary[int, int]({
+1: 150
+})
 metadata/_custom_type_script = "uid://ck4k0rwiv3nec"

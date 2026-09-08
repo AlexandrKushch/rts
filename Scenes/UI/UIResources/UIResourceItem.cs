@@ -3,7 +3,7 @@ using System;
 
 public partial class UIResourceItem : HBoxContainer
 {
-    public int Id { get; set; }
+    public ResourceType Type { get; set; }
 
     public TextureRect Icon { get; set; }
 

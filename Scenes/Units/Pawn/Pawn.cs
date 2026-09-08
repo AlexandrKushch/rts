@@ -99,7 +99,7 @@ public partial class Pawn : UnitBase
                 TargetBuilding = building;
                 TargetResource = null;
 
-                if (!building.Build)
+                if (!building.Built)
                 {
                     _updateMovementAnimation = (v, _) => { Visual.UpdateMovement(v, "build"); };
                 }
@@ -146,7 +146,7 @@ public partial class Pawn : UnitBase
         tween.TweenProperty(label, "rotation", RandomExtension.RandomDouble() - 0.5f, tweenDuration / 2);
         tween.Finished += label.QueueFree;
 
-        ResourceController.Instance.Collect(ResourceToCollectData.ResourceType.Id, ResourceToCollectData.CollectedCount);
+        ResourceController.Instance.Collect(ResourceToCollectData.ResourceType.Type, ResourceToCollectData.CollectedCount);
         ResourceToCollectData.CollectedCount = 0;
     }
 }

@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="ResourceType" format=3 uid="uid://ct36o5f4apb73"]
+[gd_resource type="Resource" script_class="ResourceInfo" format=3 uid="uid://ct36o5f4apb73"]
 
 [ext_resource type="Texture2D" uid="uid://bn106wh6cfjw" path="res://Assets/UI Elements/UI Elements/Icons/Icon_04.png" id="1_gcvob"]
-[ext_resource type="Script" uid="uid://caks0w8rk10ox" path="res://Scenes/Resources/ResourceType.cs" id="2_h645n"]
+[ext_resource type="Script" uid="uid://caks0w8rk10ox" path="res://Scenes/Resources/ResourceInfo.cs" id="2_gcvob"]
 
 [resource]
-script = ExtResource("2_h645n")
-Id = 2
+script = ExtResource("2_gcvob")
+Type = 2
 DefaultValue = 250
 Name = "meat"
 Icon = ExtResource("1_gcvob")

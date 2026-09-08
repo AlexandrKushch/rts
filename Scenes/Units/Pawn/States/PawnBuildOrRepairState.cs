@@ -26,7 +26,7 @@ public partial class PawnBuildOrRepairState : PawnStateBase
             return;
         }
 
-        if (PawnStateMachine.Pawn.TargetBuilding.Build)
+        if (PawnStateMachine.Pawn.TargetBuilding.Built)
         {
             if (PawnStateMachine.Pawn.ResourceToCollectData != null
                 && PawnStateMachine.Pawn.ResourceToCollectData.CollectedCount > 0)

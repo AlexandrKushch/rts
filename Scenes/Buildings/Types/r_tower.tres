@@ -8,4 +8,9 @@ script = ExtResource("2_yp40g")
 Name = "tower"
 Icon = ExtResource("1_1dutq")
 MaxHp = 25
+Cost = Dictionary[int, int]({
+1: 150,
+2: 25,
+3: 100
+})
 metadata/_custom_type_script = "uid://ck4k0rwiv3nec"

@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System.Linq;
 
 public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
@@ -6,9 +7,7 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
     public int MaxHp { get; set; }
     public int HP { get; set; }
 
-    [Export]
-    public bool Build { get; private set; } = false;
-
+    public bool Built { get; private set; } = false;
     public CollisionPolygon2D CollisionPolygon2D { get; private set; }
     public NavigationObstacle2D[] Obstacles { get; private set; }
 
@@ -21,7 +20,7 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
 
         MaxHp = Resource.MaxHp;
 
-        if (Build)
+        if (Built)
         {
             HP = MaxHp;
         }
@@ -31,7 +30,7 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
     {
         if (HP + 1 > MaxHp)
         {
-            Build = true;
+            Built = true;
             return false;
         }
 

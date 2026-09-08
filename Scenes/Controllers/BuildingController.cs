@@ -34,16 +34,18 @@ public partial class BuildingController : Node2D
                 && !inputButton.Pressed
                 && _blueprint.ValidToDeploy)
             {
-                var units = UnitsController.Instance.Selections.Select(x => x.EffectedOn as UnitBase).ToHashSet();
-
-                foreach (var unit in units)
+                if (_blueprint.TryDeployTo(World))
                 {
-                    UnitsController.Instance.MoveToNodeCommand(unit, _blueprint.Building);
-                }
+                    var units = UnitsController.Instance.Selections.Select(x => x.EffectedOn as UnitBase).ToHashSet();
 
-                _blueprint.DeployTo(World);
-                _blueprint.QueueFree();
-                BlueprintActive = false;
+                    foreach (var unit in units)
+                    {
+                        UnitsController.Instance.MoveToNodeCommand(unit, _blueprint.Building);
+                    }
+
+                    _blueprint.QueueFree();
+                    BlueprintActive = false;
+                }
             }
             else if (inputButton.ButtonIndex == MouseButton.Right
                 && !inputButton.Pressed)
@@ -79,9 +81,14 @@ public partial class BuildingController : Node2D
 
     public void InitBuildingBlueprint(BuildResource resource)
     {
+        if (IsInstanceValid(_blueprint))
+        {
+            _blueprint.QueueFree();
+        }
+
         _blueprint = BuildingBlueprintScene.Instantiate<BuildingBlueprint>();
         _blueprint.Resource = resource;
-        GetTree().Root.AddChild(_blueprint);
+        World.AddChild(_blueprint);
 
         BlueprintActive = true;
     }

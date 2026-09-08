@@ -17,10 +17,16 @@ public partial class UiBuildingControl : Control
 
     private void UpdateUI()
     {
+        bool oldVisible = Visible;
         var visible = UnitsController.Instance.Selections.Count > 0
             && UnitsController.Instance.Selections
                 .All(x => x.EffectedOn is UnitBase unit && unit.Meta.Id == UnitTypeIds.Pawn);
         BuildingsScrollable.Visible = visible;
+
+        if (oldVisible == visible)
+        {
+            return;
+        }
 
         if (visible)
         {

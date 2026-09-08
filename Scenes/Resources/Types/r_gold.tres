@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="ResourceType" format=3 uid="uid://wjt3mfk3hveg"]
+[gd_resource type="Resource" script_class="ResourceInfo" format=3 uid="uid://wjt3mfk3hveg"]
 
 [ext_resource type="Texture2D" uid="uid://bera2oguud3bl" path="res://Assets/UI Elements/UI Elements/Icons/Icon_03.png" id="1_6t8ju"]
-[ext_resource type="Script" uid="uid://caks0w8rk10ox" path="res://Scenes/Resources/ResourceType.cs" id="2_bcba8"]
+[ext_resource type="Script" uid="uid://caks0w8rk10ox" path="res://Scenes/Resources/ResourceInfo.cs" id="2_6t8ju"]
 
 [resource]
-script = ExtResource("2_bcba8")
-Id = 3
+script = ExtResource("2_6t8ju")
+Type = 3
 DefaultValue = 100
 Name = "gold"
 Icon = ExtResource("1_6t8ju")

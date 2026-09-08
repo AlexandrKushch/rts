@@ -5,9 +5,9 @@ using System.Linq;
 
 public partial class ResourceController : Node2D
 {
-    public Dictionary<int, int> CollectedResources { get; private set; }
+    public Dictionary<ResourceType, int> CollectedResources { get; private set; }
 
-    [Export] public ResourceType[] AvailableResources { get; private set; }
+    [Export] public ResourceInfo[] AvailableResources { get; private set; }
 
     public static ResourceController Instance { get; private set; }
 
@@ -20,34 +20,33 @@ public partial class ResourceController : Node2D
             Instance = this;
         }
 
-        CollectedResources = AvailableResources.ToDictionary(x => x.Id, x => x.DefaultValue);
+        CollectedResources = AvailableResources.ToDictionary(x => x.Type, x => x.DefaultValue);
     }
 
-    public void Collect(int resourceId, int value)
+    public void Collect(ResourceType resourceType, int value)
     {
-        CheckResource(resourceId);
+        CheckResource(resourceType);
 
-        CollectedResources[resourceId] += value;
+        CollectedResources[resourceType] += value;
     }
 
-    public bool CheckSpent(int resourceId, int value)
+    public bool CheckSpent(ResourceType resourceType, int value)
     {
-        CheckResource(resourceId);
-
-        return CollectedResources[resourceId] - value > 0;
+        CheckResource(resourceType);
+        return CollectedResources[resourceType] - value >= 0;
     }
 
-    public void Spent(int resourceId, int value)
+    public void Spent(ResourceType resourceType, int value)
     {
-        CheckResource(resourceId);
-        CollectedResources[resourceId] -= value;
+        CheckResource(resourceType);
+        CollectedResources[resourceType] -= value;
     }
 
-    private void CheckResource(int resourceId)
+    private void CheckResource(ResourceType resourceType)
     {
-        if (!CollectedResources.ContainsKey(resourceId))
+        if (!CollectedResources.ContainsKey(resourceType))
         {
-            throw new NullReferenceException($"Resource with id {resourceId} nout found");
+            throw new NullReferenceException($"Resource with id {resourceType} not found");
         }        
     }
 }

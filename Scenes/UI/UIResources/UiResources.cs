@@ -20,7 +20,7 @@ public partial class UiResources : HBoxContainer
         {
             var newItem = item.Duplicate() as UIResourceItem;
             AddChild(newItem);
-            newItem.Id = resource.Id;
+            newItem.Type = resource.Type;
             newItem.Icon.Texture = resource.Icon;
             newItem.Value.Text = resource.DefaultValue.ToString();
             _resouorces[i] = newItem;
@@ -32,7 +32,7 @@ public partial class UiResources : HBoxContainer
     {
         foreach (var resource in _resouorces)
         {
-            resource.Value.Text = ResourceController.Instance.CollectedResources[resource.Id].ToString();
+            resource.Value.Text = ResourceController.Instance.CollectedResources[resource.Type].ToString();
         }        
     }
 }
