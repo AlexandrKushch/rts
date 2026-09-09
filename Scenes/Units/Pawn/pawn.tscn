@@ -29,8 +29,10 @@
 [ext_resource type="Texture2D" uid="uid://bsw0alb2na82x" path="res://Assets/Units/Blue Units/Pawn/Pawn_Interact Knife.png" id="18_65j2d"]
 [ext_resource type="Texture2D" uid="uid://cdy84ksjalnea" path="res://Assets/Units/Blue Units/Pawn/Pawn_Run Meat.png" id="19_1iohd"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5n0ob"]
-radius = 20.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_1iohd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6t8ju"]
+size = Vector2(58, 69)
 
 [sub_resource type="Animation" id="Animation_scesx"]
 length = 0.001
@@ -1009,12 +1011,8 @@ script = ExtResource("2_8igw0")
 Meta = ExtResource("3_8fvhf")
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=1443833613]
-position = Vector2(0, -12)
-
-[node name="NavigationAgent2D" parent="." index="1" unique_id=1325708388]
-radius = 20.0
-avoidance_layers = 0
-avoidance_mask = 3
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_1iohd")
 
 [node name="UnitSelectableComponent" parent="." index="3" unique_id=550510253 node_paths=PackedStringArray("EffectedOn")]
 EffectedOn = NodePath("..")
@@ -1023,8 +1021,8 @@ EffectedOn = NodePath("..")
 position = Vector2(0, -28)
 
 [node name="CollisionShape2D" parent="UnitSelectableComponent" index="1" unique_id=1060696685]
-position = Vector2(0, -9)
-shape = SubResource("CircleShape2D_5n0ob")
+position = Vector2(0, -28.5)
+shape = SubResource("RectangleShape2D_6t8ju")
 
 [node name="Visual" type="Node2D" parent="." index="4" unique_id=105057415]
 script = ExtResource("3_fwvsl")

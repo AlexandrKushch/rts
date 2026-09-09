@@ -30,6 +30,25 @@ public partial class Pawn : UnitBase
         base._PhysicsProcess(delta);
 
         _updateMovementAnimation(Velocity, ResourceToCollectData?.CollectedCount ?? 0);
+
+        if (StateMachine.GetCurrentStateType() == PawnStateIds.MoveTo)
+        {
+            Node2D target;
+            Vector2? point;
+
+            if (TargetResource != null
+                && TryGetClosestTarget(TargetResource.GlobalPosition, out target, out point)
+                && target is ResourceBase resource)
+            {
+                SetTarget(point, resource);
+            }
+            else if (TargetBuilding != null
+                && TryGetClosestTarget(TargetBuilding.GlobalPosition, out target, out point)
+                && target is BuildingBase building)
+            {
+                SetTarget(point, building);
+            }
+        }
     }
 
     public BuildingBase GetClosestResourceStorageBuilding()
@@ -66,9 +85,12 @@ public partial class Pawn : UnitBase
 
         if (!NavigationAgent2D.IsTargetReachable())
         {
-            GD.Print("NOT REACHABLE");
-            NavigationAgent2D.TargetPosition = GlobalPosition;
-            SetTarget(null, null);
+            if (TargetBuilding == null && TargetResource == null)
+            {
+                GD.Print("NOT REACHABLE");
+                NavigationAgent2D.TargetPosition = GlobalPosition;
+                SetTarget(null, null);
+            }
         }
     }
 
@@ -148,5 +170,35 @@ public partial class Pawn : UnitBase
 
         ResourceController.Instance.Collect(ResourceToCollectData.ResourceType.Type, ResourceToCollectData.CollectedCount);
         ResourceToCollectData.CollectedCount = 0;
+    }
+
+    private bool TryGetClosestTarget(Vector2 to, out Node2D collider, out Vector2? collisionPoint)
+    {
+        collider = null;
+        collisionPoint = null;
+
+        var spaceState = GetWorld2D().DirectSpaceState;
+        var query = new PhysicsRayQueryParameters2D
+        {
+            From = GlobalPosition,
+            To = to,
+            CollideWithAreas = false,
+            CollideWithBodies = true,
+            CollisionMask = 1
+        };
+
+        var result = spaceState.IntersectRay(query);
+
+        if (result != null)
+        {
+            collider = result.ContainsKey("collider") ? result["collider"].As<Node2D>() : null;
+            collisionPoint = result["position"].As<Vector2>();
+            if (collider != null)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

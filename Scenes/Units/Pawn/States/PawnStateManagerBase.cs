@@ -3,17 +3,19 @@ using Godot;
 public partial class PawnStateManagerBase : StateMachineBase<PawnStateIds>
 {
     [Export] public Pawn Pawn { get; private set; }
-    
+
     public override void ChangeState(PawnStateIds state)
     {
         if (CurrentState != null)
         {
             CurrentState.Deactivate();
             CurrentState = null;
+            CurrentStateType = null;
         }
 
         if (state != PawnStateIds.None)
         {
+            CurrentStateType = state;
             CurrentState = States[state];
             CurrentState.Activate();
         }

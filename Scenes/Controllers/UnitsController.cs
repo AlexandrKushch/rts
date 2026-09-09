@@ -94,7 +94,7 @@ public partial class UnitsController : Node2D
     public void MoveToNodeCommand(UnitBase unit, Node2D targetObject)
     {
         unit.SetTarget(
-            targetObject != null ? GetClosestPointToObjectBoundary(unit, targetObject) : null,
+            targetObject?.GlobalPosition ?? null,
             targetObject ?? null);
     }
 
@@ -165,31 +165,6 @@ public partial class UnitsController : Node2D
         {
             unit.UpdateSelection(true);
         }
-    }
-
-    private Vector2 GetClosestPointToObjectBoundary(UnitBase unit, Node2D targetObject)
-    {
-        var obstacle = targetObject.GetChildren()
-            .Where(x => x is NavigationObstacle2D && x != null)
-            .Select(x => x as NavigationObstacle2D)
-            .MinBy(x => x.GlobalPosition.DistanceTo(unit.GlobalPosition));
-
-        if (obstacle == null)
-        {
-            if (targetObject is BuildingBase)
-            {
-                GD.PrintErr(targetObject.Name);
-                throw new NullReferenceException("Not found any obstacle in building");
-            }
-            else
-            {
-                return targetObject.GlobalPosition;
-            }
-        }
-
-        var directionFrom = obstacle.GlobalPosition.DirectionTo(unit.GlobalPosition);
-
-        return obstacle.GlobalPosition + directionFrom * obstacle.Radius;
     }
 
     private bool TryPointCastSelectable(out SelectableComponent collider)

@@ -20,11 +20,6 @@ public partial class UnitBase : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (NavigationAgent2D.IsNavigationFinished())
-		{
-			return;
-		}
-
 		Vector2 currentAgentPosition = GlobalPosition;
 		Vector2 nextPathPosition = NavigationAgent2D.GetNextPathPosition();
 		NavigationAgent2D.SetVelocity(currentAgentPosition.DirectionTo(nextPathPosition) * MovementSpeed);
