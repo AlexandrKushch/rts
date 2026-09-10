@@ -14,5 +14,5 @@ public partial class BuildResource : Resource
     public int MaxHp { get; set; }
     
     [Export]
-    public Dictionary<ResourceType, int> Cost { get; set; }
+    public Dictionary<ResourceTypeIds, int> Cost { get; set; }
 }

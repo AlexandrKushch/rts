@@ -91,7 +91,6 @@ horizontal_scroll_mode = 0
 [node name="UiBuildingsVBoxContainer" type="VBoxContainer" parent="BuildingsScrollable" unique_id=404270777]
 layout_mode = 2
 script = ExtResource("5_nluwe")
-AvailableBuildings = Array[Object]([ExtResource("5_gy2ql"), ExtResource("6_nluwe"), ExtResource("7_r75i8"), ExtResource("8_k15p3"), ExtResource("9_aqrqo")])
 BuildingBlueprintScene = ExtResource("10_o08uo")
 
 [node name="Item" type="Control" parent="BuildingsScrollable/UiBuildingsVBoxContainer" unique_id=531670298]
@@ -151,15 +150,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 flat = true
-
-[node name="Disabled" type="Panel" parent="BuildingsScrollable/UiBuildingsVBoxContainer/Item" unique_id=933032446]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [connection signal="button_up" from="BuildingsScrollable/UiBuildingsVBoxContainer/Item/Button" to="BuildingsScrollable/UiBuildingsVBoxContainer/Item" method="OnClick"]
 [connection signal="mouse_entered" from="BuildingsScrollable/UiBuildingsVBoxContainer/Item/Button" to="BuildingsScrollable/UiBuildingsVBoxContainer/Item" method="UpdateHighlight" binds= [true]]

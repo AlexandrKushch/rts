@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://qiy2m5y8a5no"]
+
+[ext_resource type="Script" uid="uid://dl27lihqorkc7" path="res://Scenes/UI/UiCursorTooltip/UiCursorTooltip.cs" id="1_bxqsw"]
+[ext_resource type="Texture2D" uid="uid://bera2oguud3bl" path="res://Assets/UI Elements/UI Elements/Icons/Icon_03.png" id="2_k271w"]
+[ext_resource type="Script" uid="uid://djyppgi4njp4p" path="res://Scenes/UI/UiCursorTooltip/UiResourceCostItem.cs" id="2_kvvly"]
+
+[node name="UICursorTooltip" type="Control" unique_id=1935595318 node_paths=PackedStringArray("Title", "ResourceCost")]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 240.0
+offset_bottom = 61.0
+size_flags_horizontal = 3
+script = ExtResource("1_bxqsw")
+Title = NodePath("VBoxContainer/MarginContainer/Title")
+ResourceCost = NodePath("VBoxContainer/MarginContainer/ResourceCost")
+
+[node name="Panel" type="Panel" parent="." unique_id=746290280]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1329512857]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=1470001967]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+
+[node name="Title" type="Label" parent="VBoxContainer/MarginContainer" unique_id=1144500703]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 16
+text = "Castle"
+
+[node name="ResourceCost" type="HBoxContainer" parent="VBoxContainer/MarginContainer" unique_id=1641284480]
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 2
+
+[node name="Item" type="HBoxContainer" parent="VBoxContainer/MarginContainer/ResourceCost" unique_id=1487768626]
+layout_mode = 2
+alignment = 2
+script = ExtResource("2_kvvly")
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/MarginContainer/ResourceCost/Item" unique_id=1511890156]
+layout_mode = 2
+texture = ExtResource("2_k271w")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Value" type="Label" parent="VBoxContainer/MarginContainer/ResourceCost/Item" unique_id=1723945958]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "250"
+
+[node name="Item2" type="HBoxContainer" parent="VBoxContainer/MarginContainer/ResourceCost" unique_id=1769413207]
+layout_mode = 2
+alignment = 2
+script = ExtResource("2_kvvly")
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/MarginContainer/ResourceCost/Item2" unique_id=934653690]
+layout_mode = 2
+texture = ExtResource("2_k271w")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Value" type="Label" parent="VBoxContainer/MarginContainer/ResourceCost/Item2" unique_id=2089385931]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "250"
+
+[node name="Item3" type="HBoxContainer" parent="VBoxContainer/MarginContainer/ResourceCost" unique_id=1961463786]
+layout_mode = 2
+alignment = 2
+script = ExtResource("2_kvvly")
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/MarginContainer/ResourceCost/Item3" unique_id=345355878]
+layout_mode = 2
+texture = ExtResource("2_k271w")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Value" type="Label" parent="VBoxContainer/MarginContainer/ResourceCost/Item3" unique_id=270671001]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "250"
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer" unique_id=2096848603]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer2" unique_id=1096256470]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_colors/default_color = Color(0.6955032, 0.6955031, 0.6955031, 1)
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+bbcode_enabled = true
+text = "Produces: [img=32x32]uid://vlbifplkcaj7[/img]"

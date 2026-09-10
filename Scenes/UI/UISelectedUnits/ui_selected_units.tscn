@@ -51,7 +51,6 @@ grow_vertical = 0
 mouse_filter = 2
 theme_override_constants/separation = -20
 script = ExtResource("3_hhshn")
-AvailableUnitTypes = Array[Object]([ExtResource("4_3aejb"), ExtResource("5_clnyt"), ExtResource("6_2hkck"), ExtResource("7_nmjqp"), ExtResource("8_wdh7s")])
 UiSelectedUnitItemScene = ExtResource("4_g2fc7")
 BgBanner = NodePath("../BGBanner")
 

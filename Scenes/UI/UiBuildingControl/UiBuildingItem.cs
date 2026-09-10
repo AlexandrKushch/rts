@@ -1,12 +1,14 @@
 using Godot;
 
-public partial class UiBuildingItem : Control
+public partial class UiBuildingItem : Control, IHasTooltip
 {
     private Vector2 _highlightScale;
 
     private TextureRect Background { get; set; }
     private TextureRect Highlight { get; set; }
     private TextureRect Icon { get; set; }
+    private Button Button { get; set; }
+
     public BuildResource Resource { get; set; }
 
     public override void _Ready()
@@ -14,6 +16,7 @@ public partial class UiBuildingItem : Control
         Background = GetNode<TextureRect>(nameof(Background));
         Highlight = GetNode<TextureRect>(nameof(Highlight));
         Icon = GetNode<TextureRect>(nameof(Icon));
+        Button = GetNode<Button>(nameof(Button));
 
         Highlight.Visible = false;
         _highlightScale = Highlight.Scale;
@@ -22,6 +25,9 @@ public partial class UiBuildingItem : Control
         {
             Icon.Texture = Resource.Icon;
         }
+
+        Button.MouseEntered += OnMouseEntered;
+        Button.MouseExited += OnMouseExited;
     }
 
     public void OnClick()
@@ -57,5 +63,21 @@ public partial class UiBuildingItem : Control
                 Highlight.Visible = false;
             };
         }
+    }
+
+    public void OnMouseEntered()
+    {
+        UiCursorTooltip.Instance.UpdateVisibilityAndContent(
+            true,
+            new TooltipContent
+            {
+                Title = Resource.Name.Capitalize(),
+                ResourcesCost = Resource.Cost
+            });
+    }
+
+    public void OnMouseExited()
+    {
+        UiCursorTooltip.Instance.UpdateVisibilityAndContent(false);
     }
 }

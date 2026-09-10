@@ -4,7 +4,7 @@ public partial class UiSelectedUnitItem : Control
 {
     private Vector2 _highlightScale;
 
-    public int Id { get; set; }
+    public UnitTypeIds Id { get; set; }
     public TextureRect Highlight { get; set; }
     public TextureRect Icon { get; set; }
     public Label Count { get; set; }

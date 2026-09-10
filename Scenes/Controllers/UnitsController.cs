@@ -98,7 +98,7 @@ public partial class UnitsController : Node2D
             targetObject ?? null);
     }
 
-    public void ClearUnitsExcept(int unitId)
+    public void ClearUnitsExcept(UnitTypeIds unitId)
     {
         foreach (var unit in Selections)
         {

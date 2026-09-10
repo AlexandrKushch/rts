@@ -13,16 +13,16 @@ public partial class UiResources : HBoxContainer
             child.QueueFree();
         }
 
-        _resouorces = new UIResourceItem[ResourceController.Instance.AvailableResources.Length];
+        _resouorces = new UIResourceItem[GlobalResources.Instance.GatheringResources.Count];
         int i = 0;
 
-        foreach (var resource in ResourceController.Instance.AvailableResources)
+        foreach (var resource in GlobalResources.Instance.GatheringResources)
         {
             var newItem = item.Duplicate() as UIResourceItem;
             AddChild(newItem);
-            newItem.Type = resource.Type;
-            newItem.Icon.Texture = resource.Icon;
-            newItem.Value.Text = resource.DefaultValue.ToString();
+            newItem.Type = resource.Value.Type;
+            newItem.Icon.Texture = resource.Value.Icon;
+            newItem.Value.Text = resource.Value.DefaultValue.ToString();
             _resouorces[i] = newItem;
             i++;
         }

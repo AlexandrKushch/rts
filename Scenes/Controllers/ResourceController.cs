@@ -5,9 +5,7 @@ using System.Linq;
 
 public partial class ResourceController : Node2D
 {
-    public Dictionary<ResourceType, int> CollectedResources { get; private set; }
-
-    [Export] public ResourceInfo[] AvailableResources { get; private set; }
+    public Dictionary<ResourceTypeIds, int> CollectedResources { get; private set; }
 
     public static ResourceController Instance { get; private set; }
 
@@ -20,29 +18,29 @@ public partial class ResourceController : Node2D
             Instance = this;
         }
 
-        CollectedResources = AvailableResources.ToDictionary(x => x.Type, x => x.DefaultValue);
+        CollectedResources = GlobalResources.Instance.GatheringResources.ToDictionary(x => x.Key, x => x.Value.DefaultValue);
     }
 
-    public void Collect(ResourceType resourceType, int value)
+    public void Collect(ResourceTypeIds resourceType, int value)
     {
         CheckResource(resourceType);
 
         CollectedResources[resourceType] += value;
     }
 
-    public bool CheckSpent(ResourceType resourceType, int value)
+    public bool CheckSpent(ResourceTypeIds resourceType, int value)
     {
         CheckResource(resourceType);
         return CollectedResources[resourceType] - value >= 0;
     }
 
-    public void Spent(ResourceType resourceType, int value)
+    public void Spent(ResourceTypeIds resourceType, int value)
     {
         CheckResource(resourceType);
         CollectedResources[resourceType] -= value;
     }
 
-    private void CheckResource(ResourceType resourceType)
+    private void CheckResource(ResourceTypeIds resourceType)
     {
         if (!CollectedResources.ContainsKey(resourceType))
         {

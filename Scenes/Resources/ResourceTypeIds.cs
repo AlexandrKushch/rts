@@ -1,4 +1,4 @@
-public enum ResourceType
+public enum ResourceTypeIds
 {
     Wood = 1,
     Meat = 2,

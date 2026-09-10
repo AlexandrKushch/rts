@@ -1,12 +1,8 @@
 using Godot;
-using System;
 
-public partial class UIResourceItem : HBoxContainer
+public partial class UiResourceCostItem : HBoxContainer
 {
-    public ResourceTypeIds Type { get; set; }
-
     public TextureRect Icon { get; set; }
-
     public Label Value { get; set; }
 
     public override void _Ready()

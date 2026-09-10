@@ -7,10 +7,9 @@ public partial class UiSelectedUnitsContainer : HBoxContainer
 {
     private float _bgBannerOneItemWidth;
 
-    private Dictionary<int, int> _selectedUnitsCount = new Dictionary<int, int>();
-    private Dictionary<int, UiSelectedUnitItem> _items = new Dictionary<int, UiSelectedUnitItem>();
+    private Dictionary<UnitTypeIds, int> _selectedUnitsCount = new Dictionary<UnitTypeIds, int>();
+    private Dictionary<UnitTypeIds, UiSelectedUnitItem> _items = new Dictionary<UnitTypeIds, UiSelectedUnitItem>();
 
-    [Export] private UnitType[] AvailableUnitTypes;
     [Export] private PackedScene UiSelectedUnitItemScene;
 
     [Export] private NinePatchRect BgBanner;
@@ -108,13 +107,13 @@ public partial class UiSelectedUnitsContainer : HBoxContainer
         }
     }
 
-    private void AddItem(int unitId)
+    private void AddItem(UnitTypeIds unitId)
     {
         var item = UiSelectedUnitItemScene.Instantiate<UiSelectedUnitItem>();
         AddChild(item);
 
         item.Id = unitId;
-        item.Icon.Texture = AvailableUnitTypes[unitId - 1].Icon;
+        item.Icon.Texture = GlobalResources.Instance.Units[unitId].Icon;
 
         _items.Add(unitId, item);
         
@@ -135,7 +134,7 @@ public partial class UiSelectedUnitsContainer : HBoxContainer
         tween.TweenSubtween(tweenSize);
     }
 
-    private void RemoveItem(int unitId)
+    private void RemoveItem(UnitTypeIds unitId)
     {
         var item = _items[unitId];
         _items.Remove(unitId);

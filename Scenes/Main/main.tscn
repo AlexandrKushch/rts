@@ -13,16 +13,28 @@
 [ext_resource type="PackedScene" uid="uid://k7krsgxhrgo2" path="res://Scenes/Units/Pawn/pawn.tscn" id="9_hryqi"]
 [ext_resource type="Resource" uid="uid://ct36o5f4apb73" path="res://Scenes/Resources/Types/r_meat.tres" id="10_4a3kt"]
 [ext_resource type="PackedScene" uid="uid://bdkgf5edotae0" path="res://Scenes/Resources/Wood/tree_1.tscn" id="10_6t3k2"]
+[ext_resource type="Script" uid="uid://dvhbrbxcby3w0" path="res://Globals/Resources/GlobalResources.cs" id="11_1j4pb"]
 [ext_resource type="Script" uid="uid://uygj6w2ift33" path="res://Scenes/Controllers/NavigationRegionController.cs" id="11_es6iu"]
 [ext_resource type="Resource" uid="uid://cj7uk3l8yh8rq" path="res://Scenes/Resources/Types/r_wood.tres" id="11_ifk88"]
+[ext_resource type="Resource" uid="uid://us5gsh240dda" path="res://Scenes/Units/Types/r_archer.tres" id="12_0uxpu"]
+[ext_resource type="Resource" uid="uid://cm5nt1ekod7b8" path="res://Scenes/Units/Types/r_lancer.tres" id="13_fy12w"]
+[ext_resource type="Resource" uid="uid://hq8cctjvc4r1" path="res://Scenes/Units/Types/r_monk.tres" id="14_hvw5u"]
+[ext_resource type="Resource" uid="uid://cmmqwgiyv1amy" path="res://Scenes/Units/Types/r_pawn.tres" id="15_go6uc"]
 [ext_resource type="Script" uid="uid://bmym3all5d5mm" path="res://Scenes/Main/Hud.cs" id="15_wliom"]
 [ext_resource type="Texture2D" uid="uid://ckj0epo2gp5cd" path="res://Assets/UI Elements/UI Elements/Icons/Icon_02.png" id="16_4a3kt"]
 [ext_resource type="PackedScene" uid="uid://bdj83x5vkxdjx" path="res://Scenes/Resources/Gold/gold_preset.tscn" id="16_koken"]
+[ext_resource type="Resource" uid="uid://b81s8vll42xy2" path="res://Scenes/Units/Types/r_warrior.tres" id="16_m6uf5"]
+[ext_resource type="Resource" uid="uid://dy2ree62pofk1" path="res://Scenes/Buildings/Types/r_archery.tres" id="17_37bn8"]
 [ext_resource type="PackedScene" uid="uid://defkh2wiunq4g" path="res://Scenes/Resources/Meat/sheep.tscn" id="17_es6iu"]
 [ext_resource type="Script" uid="uid://caks0w8rk10ox" path="res://Scenes/Resources/ResourceInfo.cs" id="17_ifk88"]
+[ext_resource type="Resource" uid="uid://b8ycuiugnmrri" path="res://Scenes/Buildings/Types/r_barracks.tres" id="18_gw8t2"]
+[ext_resource type="Resource" uid="uid://u24n2a8v85ov" path="res://Scenes/Buildings/Types/r_castle.tres" id="19_nsdex"]
+[ext_resource type="Resource" uid="uid://c3qhmxdssqwd0" path="res://Scenes/Buildings/Types/r_monastery.tres" id="20_eo50k"]
 [ext_resource type="PackedScene" uid="uid://d01xy6skh73sa" path="res://Scenes/UI/UISelectedUnits/ui_selected_units.tscn" id="21_tdwxr"]
+[ext_resource type="Resource" uid="uid://3fqpdgsfv17m" path="res://Scenes/Buildings/Types/r_tower.tres" id="21_vae3x"]
 [ext_resource type="PackedScene" uid="uid://ri0xagskbbyu" path="res://Scenes/UI/UiBuildingControl/ui_building_control.tscn" id="22_4a3kt"]
 [ext_resource type="PackedScene" uid="uid://b231gr2h4tst0" path="res://Scenes/UI/UIResources/ui_resources.tscn" id="22_4o5wv"]
+[ext_resource type="PackedScene" uid="uid://qiy2m5y8a5no" path="res://Scenes/UI/UiCursorTooltip/ui_cursor_tooltip.tscn" id="24_ifk88"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_xrivr"]
 
@@ -54,10 +66,32 @@ Name = "wood"
 Icon = ExtResource("16_4a3kt")
 metadata/_custom_type_script = "uid://caks0w8rk10ox"
 
-[node name="Main" type="Node2D" unique_id=248782512]
+[node name="Main" type="Node" unique_id=359721341]
 script = ExtResource("1_1r6ip")
 
 [node name="Controllers" type="Node2D" parent="." unique_id=539394763]
+
+[node name="GlobalResources" type="Node" parent="Controllers" unique_id=1934386740]
+script = ExtResource("11_1j4pb")
+Units = Dictionary[int, Object]({
+1: ExtResource("12_0uxpu"),
+2: ExtResource("13_fy12w"),
+3: ExtResource("14_hvw5u"),
+4: ExtResource("15_go6uc"),
+5: ExtResource("16_m6uf5")
+})
+GatheringResources = Dictionary[int, Object]({
+1: ExtResource("11_ifk88"),
+2: ExtResource("10_4a3kt"),
+3: ExtResource("9_4o5wv")
+})
+Buildings = Dictionary[int, Object]({
+1: ExtResource("17_37bn8"),
+2: ExtResource("18_gw8t2"),
+3: ExtResource("19_nsdex"),
+4: ExtResource("20_eo50k"),
+5: ExtResource("21_vae3x")
+})
 
 [node name="CameraController" parent="Controllers" unique_id=2145932106 node_paths=PackedStringArray("Camera") instance=ExtResource("2_lixft")]
 Camera = NodePath("../../Camera2D")
@@ -75,7 +109,6 @@ Ground = NodePath("../../Map/NavigationRegion2D/FlatGround")
 
 [node name="ResourceController" type="Node2D" parent="Controllers" unique_id=1531060020]
 script = ExtResource("8_tdwxr")
-AvailableResources = Array[Object]([ExtResource("9_4o5wv"), ExtResource("10_4a3kt"), ExtResource("11_ifk88")])
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=891201985]
 zoom = Vector2(0.25, 0.25)
@@ -172,3 +205,6 @@ script = ExtResource("15_wliom")
 [node name="UISelectedUnits" parent="HUD" unique_id=2084184452 instance=ExtResource("21_tdwxr")]
 
 [node name="UiBuildingControl" parent="HUD" unique_id=2144760334 instance=ExtResource("22_4a3kt")]
+
+[node name="UICursorTooltip" parent="HUD" unique_id=1935595318 instance=ExtResource("24_ifk88")]
+visible = false

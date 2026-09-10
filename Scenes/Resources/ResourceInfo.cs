@@ -4,7 +4,7 @@ using Godot;
 public partial class ResourceInfo : Resource
 {
     [Export]
-    public ResourceType Type { get; set; }
+    public ResourceTypeIds Type { get; set; }
 
     [Export]
     public int DefaultValue { get; set; }

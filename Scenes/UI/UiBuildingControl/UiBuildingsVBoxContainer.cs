@@ -4,9 +4,6 @@ using Godot;
 public partial class UiBuildingsVBoxContainer : Control
 {
     [Export]
-    public BuildResource[] AvailableBuildings { get; set; }
-
-    [Export]
     public PackedScene BuildingBlueprintScene;
 
     public override void _Ready()
@@ -18,10 +15,10 @@ public partial class UiBuildingsVBoxContainer : Control
             child.QueueFree();
         }
 
-        foreach (var building in AvailableBuildings)
+        foreach (var building in GlobalResources.Instance.Buildings)
         {
             var newBuildingItem = buildingItem.Duplicate() as UiBuildingItem;
-            newBuildingItem.Resource = building;
+            newBuildingItem.Resource = building.Value;
             AddChild(newBuildingItem);
         }
     }
