@@ -36,13 +36,13 @@ public partial class Pawn : UnitBase
             Node2D target;
             Vector2? point;
 
-            if (TargetResource != null
+            if (IsInstanceValid(TargetResource)
                 && TryGetClosestTarget(TargetResource.GlobalPosition, out target, out point)
                 && target is ResourceBase resource)
             {
                 SetTarget(point, resource);
             }
-            else if (TargetBuilding != null
+            else if (IsInstanceValid(TargetBuilding)
                 && TryGetClosestTarget(TargetBuilding.GlobalPosition, out target, out point)
                 && target is BuildingBase building)
             {
@@ -192,8 +192,9 @@ public partial class Pawn : UnitBase
         if (result != null)
         {
             collider = result.ContainsKey("collider") ? result["collider"].As<Node2D>() : null;
-            collisionPoint = result["position"].As<Vector2>();
-            if (collider != null)
+            collisionPoint = result.ContainsKey("position") ? result["position"].As<Vector2>() : null;
+            
+            if (collider != null && collisionPoint != null)
             {
                 return true;
             }

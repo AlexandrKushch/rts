@@ -32,6 +32,14 @@ public partial class UiBuildingItem : Control, IHasTooltip
 
     public void OnClick()
     {
+        foreach (var cost in Resource.Cost)
+        {
+            if (!ResourceController.Instance.CheckSpent(cost.Key, cost.Value))
+            {
+                return;
+            }
+        }
+        
         BuildingController.Instance.InitBuildingBlueprint(Resource);
         UpdateHighlight(false);
     }

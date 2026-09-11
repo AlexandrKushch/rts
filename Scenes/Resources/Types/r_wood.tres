@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_xvwhr")
 Type = 1
-DefaultValue = 10000
+DefaultValue = 250
 Name = "wood"
 Icon = ExtResource("1_fcucr")
 metadata/_custom_type_script = "uid://caks0w8rk10ox"

@@ -33,7 +33,7 @@ public partial class PawnGatheringResourceState : PawnStateBase
             return;
         }
 
-        PawnStateMachine.Pawn.Visual.Interact(PawnStateMachine.Pawn.TargetResource.ResourceType.Name);
+        PawnStateMachine.Pawn.Visual.Interact(PawnStateMachine.Pawn.TargetResource.ResourceType.Name, PawnStateMachine.Pawn.TargetObject?.GlobalPosition);
     }
 
     private void OnInteractAnimatioKeyReached()

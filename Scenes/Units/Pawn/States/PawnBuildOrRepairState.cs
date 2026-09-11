@@ -46,7 +46,7 @@ public partial class PawnBuildOrRepairState : PawnStateBase
             return;
         }
 
-        PawnStateMachine.Pawn.Visual.Interact("build");
+        PawnStateMachine.Pawn.Visual.Interact("build", PawnStateMachine.Pawn.TargetObject?.GlobalPosition);
     }
 
     private void OnInteractAnimatioKeyReached()

@@ -9,6 +9,9 @@ public partial class ResourceController : Node2D
 
     public static ResourceController Instance { get; private set; }
 
+    [Signal]
+    public delegate void ChangedEventHandler();
+
     public override void _Ready()
     {
         base._Ready();
@@ -24,8 +27,8 @@ public partial class ResourceController : Node2D
     public void Collect(ResourceTypeIds resourceType, int value)
     {
         CheckResource(resourceType);
-
         CollectedResources[resourceType] += value;
+        EmitSignal(SignalName.Changed);
     }
 
     public bool CheckSpent(ResourceTypeIds resourceType, int value)
@@ -38,6 +41,7 @@ public partial class ResourceController : Node2D
     {
         CheckResource(resourceType);
         CollectedResources[resourceType] -= value;
+        EmitSignal(SignalName.Changed);
     }
 
     private void CheckResource(ResourceTypeIds resourceType)

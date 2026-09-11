@@ -157,27 +157,27 @@ collision_mask = 1
 [node name="Tree1" parent="Map/NavigationRegion2D/World" unique_id=1936357647 instance=ExtResource("10_6t3k2")]
 position = Vector2(35, 22)
 ResourceType = SubResource("Resource_8sujb")
-Quantity = 20
+Quantity = 100
 
 [node name="Tree2" parent="Map/NavigationRegion2D/World" unique_id=1862420138 instance=ExtResource("10_6t3k2")]
 position = Vector2(69, 31)
 ResourceType = SubResource("Resource_8sujb")
-Quantity = 20
+Quantity = 100
 
 [node name="Tree3" parent="Map/NavigationRegion2D/World" unique_id=1659567576 instance=ExtResource("10_6t3k2")]
 position = Vector2(28, 53)
 ResourceType = SubResource("Resource_8sujb")
-Quantity = 20
+Quantity = 100
 
 [node name="Tree4" parent="Map/NavigationRegion2D/World" unique_id=1137143637 instance=ExtResource("10_6t3k2")]
 position = Vector2(69, 61)
 ResourceType = SubResource("Resource_8sujb")
-Quantity = 20
+Quantity = 100
 
 [node name="Tree5" parent="Map/NavigationRegion2D/World" unique_id=1779211396 instance=ExtResource("10_6t3k2")]
 position = Vector2(39, 80)
 ResourceType = SubResource("Resource_8sujb")
-Quantity = 20
+Quantity = 100
 
 [node name="GoldPreset" parent="Map/NavigationRegion2D/World" unique_id=304495028 instance=ExtResource("16_koken")]
 position = Vector2(809, 318)

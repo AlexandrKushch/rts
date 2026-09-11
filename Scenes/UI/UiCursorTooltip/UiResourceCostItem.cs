@@ -2,6 +2,7 @@ using Godot;
 
 public partial class UiResourceCostItem : HBoxContainer
 {
+    public ResourceTypeIds Id { get; set; }
     public TextureRect Icon { get; set; }
     public Label Value { get; set; }
 

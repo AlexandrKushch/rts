@@ -2,9 +2,10 @@
 
 [ext_resource type="FontFile" uid="uid://03wipdbhuhdx" path="res://Assets/Font/DynaPuff-VariableFont_wdth,wght.ttf" id="1_e1x85"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cjfk0"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e1x85"]
 
 [resource]
 default_font = ExtResource("1_e1x85")
 default_font_size = 24
-VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_cjfk0")
+Label/colors/font_color = Color(1, 0.92941177, 0.7254902, 1)
+VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_e1x85")

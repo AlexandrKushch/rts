@@ -1,9 +1,12 @@
+using System.Linq;
 using Godot;
 using Godot.Collections;
 
 public partial class UiCursorTooltip : Control
 {
     private readonly Vector2 OffsetToRight = new Vector2(25, 0);
+    
+    private TooltipContent _content;
 
     [Export] private Label Title;
     [Export] private HBoxContainer ResourceCost;
@@ -18,6 +21,12 @@ public partial class UiCursorTooltip : Control
         }
 
         UpdateVisibilityAndContent(false, new TooltipContent());
+        
+        ResourceController.Instance.Changed += () =>
+        {
+            if (!Visible || _content == null) return;
+            UpdateResourceCost(_content.ResourcesCost);
+        };
     }
 
     public override void _Process(double delta)
@@ -28,12 +37,13 @@ public partial class UiCursorTooltip : Control
     public void UpdateVisibilityAndContent(bool value, TooltipContent content = null)
     {
         Visible = value;
+        _content = content;
         SetProcess(value);
 
-        if (value && content != null)
+        if (value && _content != null)
         {
-            Title.Text = content.Title;
-            UpdateResourceCost(content.ResourcesCost);
+            Title.Text = _content.Title;
+            UpdateResourceCost(_content.ResourcesCost);
         }
     }
 
@@ -51,8 +61,24 @@ public partial class UiCursorTooltip : Control
             var newItem = item.Duplicate() as UiResourceCostItem;
             ResourceCost.AddChild(newItem);
 
+            newItem.Id = cost.Key;
             newItem.Icon.Texture = GlobalResources.Instance.GatheringResources[cost.Key].Icon;
             newItem.Value.Text = cost.Value.ToString();
+
+            newItem.Value.AddThemeColorOverride("font_color",
+                ResourceController.Instance.CheckSpent(cost.Key, cost.Value) ? ColorsGlobal.Default : ColorsGlobal.Error);
+        }
+    }
+
+    private void UpdateResourceCostColor(Dictionary<ResourceTypeIds, int> resourceCosts)
+    {
+        var items = ResourceCost.GetChildren().Select(x => x as UiResourceCostItem).ToArray();
+
+        foreach (var item in items)
+        {
+            var cost = _content.ResourcesCost[item.Id];
+            item.Value.AddThemeColorOverride("font_color",
+                ResourceController.Instance.CheckSpent(item.Id, cost) ? ColorsGlobal.Default : ColorsGlobal.Error);
         }
     }
 }

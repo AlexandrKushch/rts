@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-public partial class PawnVisual : Node
+public partial class PawnVisual : Node2D
 {
     private Sprite2D Sprite2D;
     private AnimationPlayer AnimationPlayer;
@@ -70,10 +70,12 @@ public partial class PawnVisual : Node
         AnimationPlayer.Play(animation);
     }
 
-    public void Interact(string animationLibraryName)
+    public void Interact(string animationLibraryName, Vector2? target)
     {
         string animation = $"{animationLibraryName}/{PawnAnimationNames.Interact}";
         
+        Sprite2D.FlipH = target.HasValue ? target.Value.X < GlobalPosition.X : Sprite2D.FlipH;
+
         if (AnimationPlayer.CurrentAnimation.Equals(animation))
         {
             return;
