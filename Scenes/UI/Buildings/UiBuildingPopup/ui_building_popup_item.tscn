@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://75y4i6gxnve3"]
+
+[ext_resource type="Script" uid="uid://wefxur340men" path="res://Scenes/UI/Buildings/UiBuildingPopup/UiBuildingPopupItem.cs" id="1_a6p73"]
+[ext_resource type="Texture2D" uid="uid://c8oits44a1wdm" path="res://Assets/UI Elements/UI Elements/Buttons/SmallBlueRoundButton_Regular.png" id="2_a6p73"]
+[ext_resource type="Texture2D" uid="uid://vlbifplkcaj7" path="res://Assets/UI Elements/UI Elements/Human Avatars/Avatars_01.png" id="3_a6p73"]
+
+[node name="UiBuildingPopupItem" type="Control" unique_id=41689300]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a6p73")
+
+[node name="Bg" type="TextureRect" parent="." unique_id=520660836]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_a6p73")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Icon" type="TextureRect" parent="." unique_id=491298616]
+custom_maximum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_a6p73")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="InQueue" type="Label" parent="." unique_id=996434758]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -30.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/outline_size = 5
+text = "13"

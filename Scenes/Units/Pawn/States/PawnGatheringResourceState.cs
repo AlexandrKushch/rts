@@ -42,7 +42,6 @@ public partial class PawnGatheringResourceState : PawnStateBase
         {
             PawnStateMachine.Pawn.TargetResource.CollectOne();
             PawnStateMachine.Pawn.ResourceToCollectData.CollectedCount++;
-            GD.Print("Gather +1");
         }
     }
 }

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b1djpwd2d43xr"]
 
-[ext_resource type="Script" uid="uid://sut35g1ys86l" path="res://Scenes/UI/UISelectedUnits/UiSelectedUnitItem.cs" id="1_uvogx"]
+[ext_resource type="Script" uid="uid://sut35g1ys86l" path="res://Scenes/UI/Units/UiSelectedUnits/UiSelectedUnitItem.cs" id="1_uvogx"]
 [ext_resource type="Texture2D" uid="uid://dsesm828u14vn" path="res://Assets/UI Elements/UI Elements/Human Avatars/Avatars_05.png" id="2_4l10w"]
 [ext_resource type="Texture2D" uid="uid://b2pch1h077dfi" path="res://Assets/Terrain/Tileset/Shadow.png" id="2_rgqgl"]
 

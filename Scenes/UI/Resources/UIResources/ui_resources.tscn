@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://b231gr2h4tst0"]
 
-[ext_resource type="Script" uid="uid://dmiq1emlc0wuo" path="res://Scenes/UI/UIResources/UiResources.cs" id="1_3ymef"]
+[ext_resource type="Script" uid="uid://dmiq1emlc0wuo" path="res://Scenes/UI/Resources/UIResources/UiResources.cs" id="1_3ymef"]
 [ext_resource type="Texture2D" uid="uid://d3d43g0p4buec" path="res://Assets/UI Elements/UI Elements/Ribbons/SmallRibbon.png" id="1_wdaot"]
-[ext_resource type="Script" uid="uid://dlc2g6vqboxqa" path="res://Scenes/UI/UIResources/UIResourceItem.cs" id="2_isdm4"]
+[ext_resource type="Script" uid="uid://dlc2g6vqboxqa" path="res://Scenes/UI/Resources/UIResources/UIResourceItem.cs" id="2_isdm4"]
 [ext_resource type="Texture2D" uid="uid://bera2oguud3bl" path="res://Assets/UI Elements/UI Elements/Icons/Icon_03.png" id="4_wdaot"]
 [ext_resource type="Texture2D" uid="uid://bn106wh6cfjw" path="res://Assets/UI Elements/UI Elements/Icons/Icon_04.png" id="5_swh2m"]
 [ext_resource type="Texture2D" uid="uid://ckj0epo2gp5cd" path="res://Assets/UI Elements/UI Elements/Icons/Icon_02.png" id="6_2rp1a"]

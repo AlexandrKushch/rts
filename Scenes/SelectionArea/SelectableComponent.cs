@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 using Godot;
 
 public partial class SelectableComponent : Area2D

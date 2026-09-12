@@ -30,11 +30,12 @@
 [ext_resource type="Resource" uid="uid://b8ycuiugnmrri" path="res://Scenes/Buildings/Types/r_barracks.tres" id="18_gw8t2"]
 [ext_resource type="Resource" uid="uid://u24n2a8v85ov" path="res://Scenes/Buildings/Types/r_castle.tres" id="19_nsdex"]
 [ext_resource type="Resource" uid="uid://c3qhmxdssqwd0" path="res://Scenes/Buildings/Types/r_monastery.tres" id="20_eo50k"]
-[ext_resource type="PackedScene" uid="uid://d01xy6skh73sa" path="res://Scenes/UI/UISelectedUnits/ui_selected_units.tscn" id="21_tdwxr"]
+[ext_resource type="PackedScene" uid="uid://d01xy6skh73sa" path="res://Scenes/UI/Units/UiSelectedUnits/ui_selected_units.tscn" id="21_tdwxr"]
 [ext_resource type="Resource" uid="uid://3fqpdgsfv17m" path="res://Scenes/Buildings/Types/r_tower.tres" id="21_vae3x"]
-[ext_resource type="PackedScene" uid="uid://ri0xagskbbyu" path="res://Scenes/UI/UiBuildingControl/ui_building_control.tscn" id="22_4a3kt"]
-[ext_resource type="PackedScene" uid="uid://b231gr2h4tst0" path="res://Scenes/UI/UIResources/ui_resources.tscn" id="22_4o5wv"]
+[ext_resource type="PackedScene" uid="uid://ri0xagskbbyu" path="res://Scenes/UI/Buildings/UiBuildingControl/ui_building_control.tscn" id="22_4a3kt"]
+[ext_resource type="PackedScene" uid="uid://b231gr2h4tst0" path="res://Scenes/UI/Resources/UIResources/ui_resources.tscn" id="22_4o5wv"]
 [ext_resource type="PackedScene" uid="uid://qiy2m5y8a5no" path="res://Scenes/UI/UiCursorTooltip/ui_cursor_tooltip.tscn" id="24_ifk88"]
+[ext_resource type="PackedScene" uid="uid://c784niqlcupmb" path="res://Scenes/UI/Buildings/UiBuildingPopup/ui_building_popup.tscn" id="36_0uxpu"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_xrivr"]
 
@@ -208,3 +209,8 @@ script = ExtResource("15_wliom")
 
 [node name="UICursorTooltip" parent="HUD" unique_id=1935595318 instance=ExtResource("24_ifk88")]
 visible = false
+
+[node name="UiBuildingPopup" parent="HUD" unique_id=540837747 instance=ExtResource("36_0uxpu")]
+visible = false
+Radius = 208.225
+Count = 5

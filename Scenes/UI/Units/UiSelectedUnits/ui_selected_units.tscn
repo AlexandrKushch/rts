@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://d01xy6skh73sa"]
 
 [ext_resource type="Texture2D" uid="uid://cyir253fixelb" path="res://Assets/UI Elements/UI Elements/Ribbons/BigRibbonst.png" id="1_5x82d"]
-[ext_resource type="Script" uid="uid://p7c28cafkouq" path="res://Scenes/UI/UISelectedUnits/UiSelectedUnits.cs" id="1_62sqa"]
-[ext_resource type="Script" uid="uid://dpjrl0oe77e3l" path="res://Scenes/UI/UISelectedUnits/UiSelectedUnitsContainer.cs" id="3_hhshn"]
+[ext_resource type="Script" uid="uid://p7c28cafkouq" path="res://Scenes/UI/Units/UiSelectedUnits/UiSelectedUnits.cs" id="1_62sqa"]
+[ext_resource type="Script" uid="uid://dpjrl0oe77e3l" path="res://Scenes/UI/Units/UiSelectedUnits/UiSelectedUnitsContainer.cs" id="3_hhshn"]
 [ext_resource type="Resource" uid="uid://us5gsh240dda" path="res://Scenes/Units/Types/r_archer.tres" id="4_3aejb"]
-[ext_resource type="PackedScene" uid="uid://b1djpwd2d43xr" path="res://Scenes/UI/UISelectedUnits/ui_selected_unit_item.tscn" id="4_g2fc7"]
+[ext_resource type="PackedScene" uid="uid://b1djpwd2d43xr" path="res://Scenes/UI/Units/UiSelectedUnits/ui_selected_unit_item.tscn" id="4_g2fc7"]
 [ext_resource type="Resource" uid="uid://cm5nt1ekod7b8" path="res://Scenes/Units/Types/r_lancer.tres" id="5_clnyt"]
 [ext_resource type="Resource" uid="uid://hq8cctjvc4r1" path="res://Scenes/Units/Types/r_monk.tres" id="6_2hkck"]
 [ext_resource type="Resource" uid="uid://cmmqwgiyv1amy" path="res://Scenes/Units/Types/r_pawn.tres" id="7_nmjqp"]

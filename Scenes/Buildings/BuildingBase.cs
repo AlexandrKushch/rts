@@ -1,9 +1,11 @@
 using Godot;
-using Godot.Collections;
 using System.Linq;
 
 public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
 {
+    private UiBuildingPopup _popup;
+    private PackedScene _uiBuildingPopup;
+
     public int MaxHp { get; set; }
     public int HP { get; set; }
 
@@ -18,12 +20,18 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
         CollisionPolygon2D = GetNode<CollisionPolygon2D>(nameof(CollisionPolygon2D));
         Obstacles = GetChildren().Where(x => x is NavigationObstacle2D).Select(x => x as NavigationObstacle2D).ToArray();
 
+        _uiBuildingPopup = ResourceLoader.Load<PackedScene>("uid://c784niqlcupmb");
+
         MaxHp = Resource.MaxHp;
 
-        if (Built)
-        {
-            HP = MaxHp;
-        }
+        UnitsController.Instance.SelectionChanged += OnSelectionChanged;
+    }
+
+    public void ShowBuildingPopup()
+    {
+        if (IsInstanceValid(_popup)) return;
+        _popup = _uiBuildingPopup.Instantiate<UiBuildingPopup>();
+        AddChild(_popup);
     }
 
     public bool TryBuildProgressOne()
@@ -51,5 +59,19 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
     public void Destroy()
     {
         QueueFree();
+    }
+
+    private void OnSelectionChanged()
+    {
+        bool show = UnitsController.Instance.Selections.Count == 1 && UnitsController.Instance.Selections.Any(x => x.EffectedOn == this);
+
+        if (show)
+        {
+            ShowBuildingPopup();
+        }
+        else if (IsInstanceValid(_popup))
+        {
+            _popup.QueueFree();
+        }
     }
 }
