@@ -28,30 +28,14 @@ position = Vector2(0, -71)
 texture = ExtResource("2_n84d7")
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="2" unique_id=82442801]
-position = Vector2(-109, -12)
+position = Vector2(-111, -12)
 radius = 30.0
 
-[node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="3" unique_id=1699307201]
-position = Vector2(109, -12)
+[node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="3" unique_id=692338129]
+position = Vector2(111, -12)
 radius = 30.0
 
-[node name="NavigationObstacle2D3" type="NavigationObstacle2D" parent="." index="4" unique_id=724202924]
-position = Vector2(0, -12)
-radius = 30.0
-
-[node name="NavigationObstacle2D4" type="NavigationObstacle2D" parent="." index="5" unique_id=263264735]
-position = Vector2(-53, -12)
-radius = 30.0
-
-[node name="NavigationObstacle2D5" type="NavigationObstacle2D" parent="." index="6" unique_id=1526617462]
-position = Vector2(-53, -12)
-radius = 30.0
-
-[node name="NavigationObstacle2D6" type="NavigationObstacle2D" parent="." index="7" unique_id=692338129]
-position = Vector2(55, -12)
-radius = 30.0
-
-[node name="CollisionPolygon2D" parent="." index="8" unique_id=168278068]
+[node name="CollisionPolygon2D" parent="." index="4" unique_id=168278068]
 position = Vector2(0, -24)
 polygon = PackedVector2Array(-120, 40, -130, -10, 0, -10, 130, -10, 120, 40, 0, 40)
 

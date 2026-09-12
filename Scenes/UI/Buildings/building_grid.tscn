@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://88o7aad1m0ln"]
+
+[ext_resource type="Texture2D" uid="uid://bmu1gqtflrxqq" path="res://Assets/UI Elements/UI Elements/Papers/build-grid-tile.png" id="1_chr3s"]
+
+[node name="BuildingGrid" type="NinePatchRect" unique_id=1308019038]
+offset_right = 1152.0
+offset_bottom = 638.0
+texture = ExtResource("1_chr3s")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1

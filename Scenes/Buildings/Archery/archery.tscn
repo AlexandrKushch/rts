@@ -31,48 +31,16 @@ polygon = PackedVector2Array(-70, -40, 69, -40, 70, 50, -75, 50)
 position = Vector2(-66, 42)
 radius = 15.0
 
-[node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="4" unique_id=542256568]
-position = Vector2(62, 42)
+[node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="4" unique_id=1306437490]
+position = Vector2(61, 42)
 radius = 15.0
 
-[node name="NavigationObstacle2D3" type="NavigationObstacle2D" parent="." index="5" unique_id=1194608311]
-position = Vector2(61, -35)
+[node name="NavigationObstacle2D3" type="NavigationObstacle2D" parent="." index="5" unique_id=754091099]
+position = Vector2(61, -31)
 radius = 15.0
 
-[node name="NavigationObstacle2D4" type="NavigationObstacle2D" parent="." index="6" unique_id=702986699]
-position = Vector2(-65, -35)
-radius = 15.0
-
-[node name="NavigationObstacle2D5" type="NavigationObstacle2D" parent="." index="7" unique_id=479934276]
-position = Vector2(-67, 4)
-radius = 15.0
-
-[node name="NavigationObstacle2D6" type="NavigationObstacle2D" parent="." index="8" unique_id=378239375]
-position = Vector2(0, -35)
-radius = 15.0
-
-[node name="NavigationObstacle2D9" type="NavigationObstacle2D" parent="." index="9" unique_id=1272520345]
-position = Vector2(-32, -35)
-radius = 15.0
-
-[node name="NavigationObstacle2D10" type="NavigationObstacle2D" parent="." index="10" unique_id=325978006]
-position = Vector2(30, -35)
-radius = 15.0
-
-[node name="NavigationObstacle2D11" type="NavigationObstacle2D" parent="." index="11" unique_id=951709176]
-position = Vector2(31, 42)
-radius = 15.0
-
-[node name="NavigationObstacle2D12" type="NavigationObstacle2D" parent="." index="12" unique_id=2050021362]
-position = Vector2(-33, 43)
-radius = 15.0
-
-[node name="NavigationObstacle2D7" type="NavigationObstacle2D" parent="." index="13" unique_id=1213733154]
-position = Vector2(0, 41)
-radius = 15.0
-
-[node name="NavigationObstacle2D8" type="NavigationObstacle2D" parent="." index="14" unique_id=768094892]
-position = Vector2(62, 4)
+[node name="NavigationObstacle2D4" type="NavigationObstacle2D" parent="." index="6" unique_id=1351582374]
+position = Vector2(-60, -33)
 radius = 15.0
 
 [editable path="BuildingSelectableComponent"]

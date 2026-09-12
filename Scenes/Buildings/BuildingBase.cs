@@ -14,7 +14,7 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
     public NavigationObstacle2D[] Obstacles { get; private set; }
 
     [Export] public BuildResource Resource { get; private set; }
-    
+
     public override void _Ready()
     {
         CollisionPolygon2D = GetNode<CollisionPolygon2D>(nameof(CollisionPolygon2D));

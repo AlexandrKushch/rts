@@ -36,11 +36,11 @@ position = Vector2(36, -8)
 radius = 30.0
 
 [node name="NavigationObstacle2D3" type="NavigationObstacle2D" parent="." index="5" unique_id=377817090]
-position = Vector2(-41, -82)
+position = Vector2(-41, -57)
 radius = 30.0
 
 [node name="NavigationObstacle2D4" type="NavigationObstacle2D" parent="." index="6" unique_id=2054179555]
-position = Vector2(42, -82)
+position = Vector2(42, -55)
 radius = 30.0
 
 [editable path="BuildingSelectableComponent"]

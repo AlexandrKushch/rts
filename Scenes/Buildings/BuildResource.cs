@@ -12,7 +12,10 @@ public partial class BuildResource : Resource
 
     [Export]
     public int MaxHp { get; set; }
-    
+
     [Export]
     public Dictionary<ResourceTypeIds, int> Cost { get; set; }
+
+    [Export]
+    public Vector2[] TileRequiresToBuild { get; set; } = [Vector2.Zero];
 }
