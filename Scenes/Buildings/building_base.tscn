@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://diel8vmur2fwb" path="res://Scenes/Buildings/BuildingBase.cs" id="1_8grwn"]
 [ext_resource type="PackedScene" uid="uid://dmh6f0dnp4ebk" path="res://Scenes/SelectionArea/BuildingSelectableComponent/building_selectable_component.tscn" id="2_d1o4y"]
+[ext_resource type="PackedScene" uid="uid://c784niqlcupmb" path="res://Scenes/UI/Buildings/UiBuildingPopup/ui_building_popup.tscn" id="3_8lk13"]
 
 [node name="BuildingBase" type="StaticBody2D" unique_id=548953940]
 script = ExtResource("1_8grwn")
@@ -13,5 +14,7 @@ EffectedOn = NodePath("..")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=168278068]
 polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
+
+[node name="UiBuildingPopup" parent="." unique_id=540837747 instance=ExtResource("3_8lk13")]
 
 [editable path="BuildingSelectableComponent"]

@@ -39,4 +39,10 @@ radius = 30.0
 position = Vector2(0, -24)
 polygon = PackedVector2Array(-120, 40, -130, -10, 0, -10, 130, -10, 120, 40, 0, 40)
 
+[node name="UiBuildingPopup" parent="." index="5" unique_id=540837747]
+offset_top = -156.0
+offset_bottom = -156.0
+Radius = 125.0
+OffsetCenter = Vector2(0, 75)
+
 [editable path="BuildingSelectableComponent"]

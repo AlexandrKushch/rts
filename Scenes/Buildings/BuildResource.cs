@@ -18,4 +18,7 @@ public partial class BuildResource : Resource
 
     [Export]
     public Vector2[] TileRequiresToBuild { get; set; } = [Vector2.Zero];
+
+    [Export]
+    public UnitType[] Produces { get; set; }
 }

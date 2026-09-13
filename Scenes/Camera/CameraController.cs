@@ -7,7 +7,7 @@ public partial class CameraController : Node2D
 
 	private bool _wasdLocked = false;
 	private float _zoom = 0.5f;
-	private float _zoomRation = 0.5f;
+	private float _zoomRatio = 0.5f;
 
 	private Vector2 _dragStart;
 	private Vector2 _dragEnd;
@@ -34,11 +34,11 @@ public partial class CameraController : Node2D
 		{
 			if (inputButton.ButtonIndex == MouseButton.WheelUp)
 			{
-				_zoom += 0.1f * _zoomRation;
+				_zoom += 0.1f * _zoomRatio;
 			}
 			else if (inputButton.ButtonIndex == MouseButton.WheelDown)
 			{
-				_zoom -= 0.1f * _zoomRation;
+				_zoom -= 0.1f * _zoomRatio;
 			}
 		}
 	}

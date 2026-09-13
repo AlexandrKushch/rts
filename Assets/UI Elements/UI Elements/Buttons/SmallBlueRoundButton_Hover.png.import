@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxfgkut0njoyg"
-path="res://.godot/imported/build-grid-tile-2.png-af6a296459a4aa92fb1fe45e033b509b.ctex"
+uid="uid://cwl5868ku73r2"
+path="res://.godot/imported/SmallBlueRoundButton_Hover.png-f8cfa0af08154956c714d815763b2aec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI Elements/UI Elements/Papers/build-grid-tile-2.png"
-dest_files=["res://.godot/imported/build-grid-tile-2.png-af6a296459a4aa92fb1fe45e033b509b.ctex"]
+source_file="res://Assets/UI Elements/UI Elements/Buttons/SmallBlueRoundButton_Hover.png"
+dest_files=["res://.godot/imported/SmallBlueRoundButton_Hover.png-f8cfa0af08154956c714d815763b2aec.ctex"]
 
 [params]
 

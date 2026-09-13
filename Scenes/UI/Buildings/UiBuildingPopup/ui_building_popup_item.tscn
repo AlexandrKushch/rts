@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://wefxur340men" path="res://Scenes/UI/Buildings/UiBuildingPopup/UiBuildingPopupItem.cs" id="1_a6p73"]
 [ext_resource type="Texture2D" uid="uid://c8oits44a1wdm" path="res://Assets/UI Elements/UI Elements/Buttons/SmallBlueRoundButton_Regular.png" id="2_a6p73"]
 [ext_resource type="Texture2D" uid="uid://vlbifplkcaj7" path="res://Assets/UI Elements/UI Elements/Human Avatars/Avatars_01.png" id="3_a6p73"]
+[ext_resource type="Texture2D" uid="uid://cwl5868ku73r2" path="res://Assets/UI Elements/UI Elements/Buttons/SmallBlueRoundButton_Hover.png" id="3_cay47"]
+[ext_resource type="Texture2D" uid="uid://hyhcukocmldk" path="res://Assets/UI Elements/UI Elements/Buttons/TinySquareRedButton.png" id="3_wtad6"]
+[ext_resource type="Texture2D" uid="uid://bfp8j5epgh40d" path="res://Assets/UI Elements/UI Elements/Buttons/TinySquareRedButton_Hover.png" id="5_bjwj2"]
 
 [node name="UiBuildingPopupItem" type="Control" unique_id=41689300]
 layout_mode = 3
@@ -17,19 +20,70 @@ offset_right = 32.0
 offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 script = ExtResource("1_a6p73")
 
-[node name="Bg" type="TextureRect" parent="." unique_id=520660836]
-custom_minimum_size = Vector2(96, 96)
+[node name="AddQueue" type="TextureButton" parent="." unique_id=595244017]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture_normal = ExtResource("2_a6p73")
+texture_hover = ExtResource("3_cay47")
+stretch_mode = 5
+
+[node name="ProgressBar" type="TextureProgressBar" parent="." unique_id=424226668]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -32.00003
+offset_right = 32.0
+offset_bottom = 31.99997
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+fill_mode = 4
+radial_center_offset = Vector2(0.5, 0.5)
+texture_progress = ExtResource("2_a6p73")
+tint_progress = Color(0.16748855, 0.9999998, 0.40862802, 1)
+
+[node name="RemoveQueue" type="TextureButton" parent="." unique_id=578075708]
+custom_maximum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -22.0
+offset_top = -21.333
+offset_right = 10.0
+offset_bottom = 10.667
+grow_horizontal = 0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture_normal = ExtResource("5_bjwj2")
+texture_hover = ExtResource("3_wtad6")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="RemoveQueue" unique_id=858782932]
+custom_minimum_size = Vector2(63, 63)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_a6p73")
-expand_mode = 3
-stretch_mode = 5
+theme_override_font_sizes/font_size = 48
+text = "-"
+horizontal_alignment = 1
 
 [node name="Icon" type="TextureRect" parent="." unique_id=491298616]
 custom_maximum_size = Vector2(64, 64)
@@ -39,6 +93,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0, -0.05)
+mouse_filter = 2
 texture = ExtResource("3_a6p73")
 expand_mode = 3
 stretch_mode = 5
@@ -55,4 +112,10 @@ offset_top = -30.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_constants/outline_size = 5
-text = "13"
+theme_override_font_sizes/font_size = 32
+text = "1"
+
+[connection signal="button_down" from="AddQueue" to="." method="AddButtonDown"]
+[connection signal="button_up" from="AddQueue" to="." method="OnAddButton"]
+[connection signal="button_down" from="RemoveQueue" to="." method="RemoveButtonDown"]
+[connection signal="button_up" from="RemoveQueue" to="." method="OnRemoveButton"]

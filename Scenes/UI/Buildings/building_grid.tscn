@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bmu1gqtflrxqq" path="res://Assets/UI Elements/UI Elements/Papers/build-grid-tile.png" id="1_chr3s"]
 
 [node name="BuildingGrid" type="NinePatchRect" unique_id=1308019038]
+modulate = Color(1, 1, 1, 0.5019608)
 offset_right = 1152.0
 offset_bottom = 638.0
 texture = ExtResource("1_chr3s")

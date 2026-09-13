@@ -3,9 +3,6 @@ using System.Linq;
 
 public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
 {
-    private UiBuildingPopup _popup;
-    private PackedScene _uiBuildingPopup;
-
     public int MaxHp { get; set; }
     public int HP { get; set; }
 
@@ -13,25 +10,19 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
     public CollisionPolygon2D CollisionPolygon2D { get; private set; }
     public NavigationObstacle2D[] Obstacles { get; private set; }
 
+    private UiBuildingPopup UiBuildingPopup;
+
     [Export] public BuildResource Resource { get; private set; }
 
     public override void _Ready()
     {
+        UiBuildingPopup = GetNode<UiBuildingPopup>(nameof(UiBuildingPopup));
         CollisionPolygon2D = GetNode<CollisionPolygon2D>(nameof(CollisionPolygon2D));
         Obstacles = GetChildren().Where(x => x is NavigationObstacle2D).Select(x => x as NavigationObstacle2D).ToArray();
-
-        _uiBuildingPopup = ResourceLoader.Load<PackedScene>("uid://c784niqlcupmb");
 
         MaxHp = Resource.MaxHp;
 
         UnitsController.Instance.SelectionChanged += OnSelectionChanged;
-    }
-
-    public void ShowBuildingPopup()
-    {
-        if (IsInstanceValid(_popup)) return;
-        _popup = _uiBuildingPopup.Instantiate<UiBuildingPopup>();
-        AddChild(_popup);
     }
 
     public bool TryBuildProgressOne()
@@ -63,15 +54,15 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
 
     private void OnSelectionChanged()
     {
-        bool show = UnitsController.Instance.Selections.Count == 1 && UnitsController.Instance.Selections.Any(x => x.EffectedOn == this);
+        UiBuildingPopup.Selected = UnitsController.Instance.Selections.Count == 1 && UnitsController.Instance.Selections.Any(x => x.EffectedOn == this);
 
-        if (show)
+        if (UiBuildingPopup.Selected)
         {
-            ShowBuildingPopup();
+            UiBuildingPopup.Expand();
         }
-        else if (IsInstanceValid(_popup))
+        else
         {
-            _popup.QueueFree();
+            UiBuildingPopup.Colapse();
         }
     }
 }

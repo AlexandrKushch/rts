@@ -15,5 +15,4 @@ mouse_filter = 2
 script = ExtResource("1_x6h6x")
 UiBuildingPopupItem = ExtResource("2_msede")
 Radius = 150.0
-Count = 2
 CloseTexture = ExtResource("3_8beeu")
