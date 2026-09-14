@@ -4,7 +4,7 @@ using Godot.Collections;
 
 public partial class UiCursorTooltip : Control
 {
-    private readonly Vector2 OffsetToRight = new Vector2(25, 0);
+    private readonly float Offset = 150;
     
     private TooltipContent _content;
 
@@ -31,7 +31,10 @@ public partial class UiCursorTooltip : Control
 
     public override void _Process(double delta)
     {
-        GlobalPosition = GetGlobalMousePosition() + OffsetToRight;
+        var mousePos = GetGlobalMousePosition();
+        var viewportSize = GetViewport().GetVisibleRect().Size;
+        var direction = mousePos.X < viewportSize.X - (viewportSize.X / 5) ? Vector2.Right : Vector2.Left;
+        GlobalPosition = GetGlobalMousePosition() + direction * Offset;
     }
 
     public void UpdateVisibilityAndContent(bool value, TooltipContent content = null)

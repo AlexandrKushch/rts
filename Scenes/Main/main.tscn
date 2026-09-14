@@ -26,10 +26,15 @@
 [ext_resource type="Resource" uid="uid://b81s8vll42xy2" path="res://Scenes/Units/Types/r_warrior.tres" id="16_m6uf5"]
 [ext_resource type="Resource" uid="uid://dy2ree62pofk1" path="res://Scenes/Buildings/Types/r_archery.tres" id="17_37bn8"]
 [ext_resource type="PackedScene" uid="uid://defkh2wiunq4g" path="res://Scenes/Resources/Meat/sheep.tscn" id="17_es6iu"]
+[ext_resource type="PackedScene" uid="uid://o6ovn6r5mcae" path="res://Scenes/Buildings/Archery/archery.tscn" id="17_gw8t2"]
 [ext_resource type="Script" uid="uid://caks0w8rk10ox" path="res://Scenes/Resources/ResourceInfo.cs" id="17_ifk88"]
 [ext_resource type="Resource" uid="uid://b8ycuiugnmrri" path="res://Scenes/Buildings/Types/r_barracks.tres" id="18_gw8t2"]
+[ext_resource type="PackedScene" uid="uid://bhwicgs7tna51" path="res://Scenes/Buildings/Barracks/barracks.tscn" id="18_nsdex"]
+[ext_resource type="PackedScene" uid="uid://dxfs7l3k65nvi" path="res://Scenes/Buildings/Castle/castle.tscn" id="19_eo50k"]
 [ext_resource type="Resource" uid="uid://u24n2a8v85ov" path="res://Scenes/Buildings/Types/r_castle.tres" id="19_nsdex"]
 [ext_resource type="Resource" uid="uid://c3qhmxdssqwd0" path="res://Scenes/Buildings/Types/r_monastery.tres" id="20_eo50k"]
+[ext_resource type="PackedScene" uid="uid://gbgcj1ms1bp7" path="res://Scenes/Buildings/Monastery/monastery.tscn" id="20_vae3x"]
+[ext_resource type="PackedScene" uid="uid://ciqpg25wy10i2" path="res://Scenes/Buildings/Tower/tower.tscn" id="21_h4gp5"]
 [ext_resource type="PackedScene" uid="uid://d01xy6skh73sa" path="res://Scenes/UI/Units/UiSelectedUnits/ui_selected_units.tscn" id="21_tdwxr"]
 [ext_resource type="Resource" uid="uid://3fqpdgsfv17m" path="res://Scenes/Buildings/Types/r_tower.tres" id="21_vae3x"]
 [ext_resource type="PackedScene" uid="uid://ri0xagskbbyu" path="res://Scenes/UI/Buildings/UiBuildingControl/ui_building_control.tscn" id="22_4a3kt"]
@@ -92,6 +97,20 @@ Buildings = Dictionary[int, Object]({
 3: ExtResource("19_nsdex"),
 4: ExtResource("20_eo50k"),
 5: ExtResource("21_vae3x")
+})
+UnitScenes = Dictionary[int, PackedScene]({
+1: ExtResource("9_hryqi"),
+2: ExtResource("9_hryqi"),
+3: ExtResource("9_hryqi"),
+4: ExtResource("9_hryqi"),
+5: ExtResource("9_hryqi")
+})
+BuildingScenes = Dictionary[int, PackedScene]({
+1: ExtResource("17_gw8t2"),
+2: ExtResource("18_nsdex"),
+3: ExtResource("19_eo50k"),
+4: ExtResource("20_vae3x"),
+5: ExtResource("21_h4gp5")
 })
 
 [node name="CameraController" parent="Controllers" unique_id=2145932106 node_paths=PackedStringArray("Camera") instance=ExtResource("2_lixft")]

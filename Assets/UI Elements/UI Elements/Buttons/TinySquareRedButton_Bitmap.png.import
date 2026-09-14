@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://c0mlm2h63wiv1"
+path="res://.godot/imported/TinySquareRedButton_Bitmap.png-4780062619b13b1c0f528376f92f2e57.res"
+
+[deps]
+
+source_file="res://Assets/UI Elements/UI Elements/Buttons/TinySquareRedButton_Bitmap.png"
+dest_files=["res://.godot/imported/TinySquareRedButton_Bitmap.png-4780062619b13b1c0f528376f92f2e57.res"]
+
+[params]
+
+create_from=0
+threshold=0.5

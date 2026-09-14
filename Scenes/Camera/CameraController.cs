@@ -13,7 +13,7 @@ public partial class CameraController : Node2D
 	private Vector2 _dragEnd;
 
 	[Export]
-	private float FollowSpeed = 10;
+	private float FollowSpeed = 20;
 	
 	[Export]
 	private float ZoomSpeed = 7.5f;
@@ -54,7 +54,7 @@ public partial class CameraController : Node2D
 		else if (Input.IsActionPressed(InputMapGlobal.Mmb))
 		{
 			_dragEnd = GetGlobalMousePosition();
-			Camera.Position = Camera.Position.Lerp(Camera.Position + (_dragStart - _dragEnd), delta * FollowSpeed);
+			Camera.Position =  Camera.Position.Lerp(Camera.Position + (_dragStart - _dragEnd), delta * FollowSpeed);
 		}
 		else if (Input.IsActionJustReleased(InputMapGlobal.Mmb))
 		{

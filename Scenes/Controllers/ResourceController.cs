@@ -44,11 +44,37 @@ public partial class ResourceController : Node2D
         EmitSignal(SignalName.Changed);
     }
 
+    public bool TrySpentCost(Dictionary<ResourceTypeIds, int> costs)
+    {
+        foreach (var cost in costs)
+        {
+            if (!CheckSpent(cost.Key, cost.Value))
+            {
+                return false;
+            }
+        }
+
+        foreach (var cost in costs)
+        {
+            Spent(cost.Key, cost.Value);
+        }
+
+        return true;
+    }
+
+    public void CollectCost(Dictionary<ResourceTypeIds, int> costs)
+    {
+        foreach (var cost in costs)
+        {
+            Collect(cost.Key, cost.Value);
+        }
+    }
+
     private void CheckResource(ResourceTypeIds resourceType)
     {
         if (!CollectedResources.ContainsKey(resourceType))
         {
             throw new NullReferenceException($"Resource with id {resourceType} not found");
-        }        
+        }
     }
 }

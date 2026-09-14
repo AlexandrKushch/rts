@@ -8,4 +8,7 @@ script = ExtResource("2_svf0v")
 Id = 5
 Name = "warrior"
 Icon = ExtResource("1_pd55f")
+Cost = Dictionary[int, int]({
+3: 100
+})
 metadata/_custom_type_script = "uid://b3jham1omyu5f"

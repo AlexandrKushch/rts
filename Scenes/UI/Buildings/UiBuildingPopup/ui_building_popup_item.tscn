@@ -2,10 +2,13 @@
 
 [ext_resource type="Script" uid="uid://wefxur340men" path="res://Scenes/UI/Buildings/UiBuildingPopup/UiBuildingPopupItem.cs" id="1_a6p73"]
 [ext_resource type="Texture2D" uid="uid://c8oits44a1wdm" path="res://Assets/UI Elements/UI Elements/Buttons/SmallBlueRoundButton_Regular.png" id="2_a6p73"]
+[ext_resource type="PackedScene" uid="uid://c5l1cgfanyjkf" path="res://Scenes/UI/UiButton/ui_button.tscn" id="2_ldf1o"]
 [ext_resource type="Texture2D" uid="uid://vlbifplkcaj7" path="res://Assets/UI Elements/UI Elements/Human Avatars/Avatars_01.png" id="3_a6p73"]
 [ext_resource type="Texture2D" uid="uid://cwl5868ku73r2" path="res://Assets/UI Elements/UI Elements/Buttons/SmallBlueRoundButton_Hover.png" id="3_cay47"]
 [ext_resource type="Texture2D" uid="uid://hyhcukocmldk" path="res://Assets/UI Elements/UI Elements/Buttons/TinySquareRedButton.png" id="3_wtad6"]
 [ext_resource type="Texture2D" uid="uid://bfp8j5epgh40d" path="res://Assets/UI Elements/UI Elements/Buttons/TinySquareRedButton_Hover.png" id="5_bjwj2"]
+[ext_resource type="BitMap" uid="uid://ys3odowxtrp2" path="res://Assets/UI Elements/UI Elements/Buttons/SmallBlueRoundButton_Bitmap.png" id="5_lswju"]
+[ext_resource type="BitMap" uid="uid://c0mlm2h63wiv1" path="res://Assets/UI Elements/UI Elements/Buttons/TinySquareRedButton_Bitmap.png" id="7_bj754"]
 
 [node name="UiBuildingPopupItem" type="Control" unique_id=41689300]
 layout_mode = 3
@@ -24,21 +27,15 @@ scale = Vector2(0.6, 0.6)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 script = ExtResource("1_a6p73")
 
-[node name="AddQueue" type="TextureButton" parent="." unique_id=595244017]
+[node name="AddQueue" parent="." unique_id=710057526 instance=ExtResource("2_ldf1o")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -32.0
-offset_top = -32.0
-offset_right = 32.0
-offset_bottom = 32.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
 texture_normal = ExtResource("2_a6p73")
 texture_hover = ExtResource("3_cay47")
-stretch_mode = 5
+texture_click_mask = ExtResource("5_lswju")
 
 [node name="ProgressBar" type="TextureProgressBar" parent="." unique_id=424226668]
 layout_mode = 1
@@ -57,21 +54,23 @@ radial_center_offset = Vector2(0.5, 0.5)
 texture_progress = ExtResource("2_a6p73")
 tint_progress = Color(0.16748855, 0.9999998, 0.40862802, 1)
 
-[node name="RemoveQueue" type="TextureButton" parent="." unique_id=578075708]
+[node name="RemoveQueue" parent="." unique_id=1686197266 instance=ExtResource("2_ldf1o")]
 custom_maximum_size = Vector2(32, 32)
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
+anchor_top = 0.0
 anchor_right = 1.0
-offset_left = -22.0
-offset_top = -21.333
-offset_right = 10.0
-offset_bottom = 10.667
+anchor_bottom = 0.0
+offset_left = -12.0
+offset_top = -30.0
+offset_right = 20.0
+offset_bottom = 2.0
 grow_horizontal = 0
-pivot_offset_ratio = Vector2(0.5, 0.5)
+grow_vertical = 1
 texture_normal = ExtResource("5_bjwj2")
 texture_hover = ExtResource("3_wtad6")
-stretch_mode = 5
+texture_click_mask = ExtResource("7_bj754")
 
 [node name="Label" type="Label" parent="RemoveQueue" unique_id=858782932]
 custom_minimum_size = Vector2(63, 63)
@@ -79,6 +78,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -15.5
+offset_top = -15.4999695
+offset_right = 15.5
+offset_bottom = 15.5000305
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 48
@@ -115,7 +118,5 @@ theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 32
 text = "1"
 
-[connection signal="button_down" from="AddQueue" to="." method="AddButtonDown"]
 [connection signal="button_up" from="AddQueue" to="." method="OnAddButton"]
-[connection signal="button_down" from="RemoveQueue" to="." method="RemoveButtonDown"]
 [connection signal="button_up" from="RemoveQueue" to="." method="OnRemoveButton"]

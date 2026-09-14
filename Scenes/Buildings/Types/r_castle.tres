@@ -8,6 +8,7 @@
 
 [resource]
 script = ExtResource("1_2dvea")
+Id = 3
 Name = "castle"
 Icon = ExtResource("1_1px0e")
 MaxHp = 50

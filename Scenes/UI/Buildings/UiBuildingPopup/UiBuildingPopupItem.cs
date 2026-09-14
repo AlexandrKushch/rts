@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class UiBuildingPopupItem : Control
+public partial class UiBuildingPopupItem : Control, IHasTooltip
 {
     private TextureButton AddQueue;
 
@@ -28,6 +28,9 @@ public partial class UiBuildingPopupItem : Control
 
         InQueue.Visible = false;
         RemoveQueue.Visible = false;
+
+        AddQueue.MouseEntered += OnMouseEntered;
+        AddQueue.MouseExited += OnMouseExited;
     }
 
     public void SetExpanded(bool value)
@@ -38,37 +41,29 @@ public partial class UiBuildingPopupItem : Control
         RemoveQueue.Visible = value;
     }
 
-    public void AddButtonDown()
-    {
-        TweenButtonDown(AddQueue);
-    }
-
-    public void RemoveButtonDown()
-    {
-        TweenButtonDown(RemoveQueue);
-    }
-
     public void OnAddButton()
     {
-        TweenButtonUp(AddQueue);
         EmitSignal(SignalName.AddToQueue, (int)Id);
     }
 
     public void OnRemoveButton()
     {
-        TweenButtonUp(RemoveQueue);
         EmitSignal(SignalName.RemoveFromQueue, (int)Id);
     }
 
-    private void TweenButtonDown(TextureButton button)
+    public void OnMouseEntered()
     {
-        var tween = CreateTween();
-        tween.TweenProperty(button, "scale", new Vector2(0.9f, 0.9f), 0.1f);
+        UiCursorTooltip.Instance.UpdateVisibilityAndContent(
+            true,
+            new TooltipContent
+            {
+                Title = GlobalResources.Instance.Units[Id].Name.Capitalize(),
+                ResourcesCost = GlobalResources.Instance.Units[Id].Cost
+            });
     }
 
-    private void TweenButtonUp(TextureButton button)
+    public void OnMouseExited()
     {
-        var tween = CreateTween();
-        tween.TweenProperty(button, "scale", new Vector2(1.0f, 1.0f), 0.1f);
+        UiCursorTooltip.Instance.UpdateVisibilityAndContent(false);
     }
 }

@@ -5,30 +5,31 @@ using Godot;
 
 public partial class UiBuildingPopup : Control
 {
-    private const float MaxProgress = 100;
-    private float _currentProgress = 0;
-    private UiBuildingPopupItem _currentProgressItem;
-
     private Vector2 _itemOrigin;
     private Vector2 _itemScaleOrigin;
 
-    private List<UiBuildingPopupItem> _popupItems = new List<UiBuildingPopupItem>();
-    private Dictionary<UnitTypeIds, int> QueueCapacity = new Dictionary<UnitTypeIds, int>();
+    private Dictionary<UnitTypeIds, UiBuildingPopupItem> _popupItems = new Dictionary<UnitTypeIds, UiBuildingPopupItem>();
 
     [Export] private PackedScene UiBuildingPopupItem;
     [Export] private float Radius;
     [Export] private Vector2 OffsetCenter;
     [Export] private float DefaultOffset = 30;
 
+    [Export] private ProducingQueueManager ProducingQueueManager;
+
     public bool Selected { get; set; } = false;
     public BuildingBase Building { get; set; }
-    private UnitType[] Produces { get; set; }
+    public UnitType[] Produces { get; set; }
 
     public override void _Ready()
     {
         Building = GetParent<BuildingBase>();
 
         Produces = Building.Resource.Produces;
+
+        SetProcess(Produces.Length != 0);
+
+        if (Produces.Length == 0) return;
 
         foreach (var produce in Building.Resource.Produces)
         {
@@ -38,23 +39,33 @@ public partial class UiBuildingPopup : Control
             item.Icon.Texture = produce.Icon;
             item.Id = produce.Id;
             item.AddToQueue += AddToQueue;
-            item.RemoveFromQueue += RemoveFromQueue;
+            item.RemoveFromQueue += (id) => { RemoveFromQueue(id, true); };
 
-            _popupItems.Add(item);
+            _popupItems.Add(produce.Id, item);
         }
 
-        _itemOrigin = _popupItems[0].Position;
-        _itemScaleOrigin = _popupItems[0].Scale;
+        _itemOrigin = _popupItems.First().Value.Position;
+        _itemScaleOrigin = _popupItems.First().Value.Scale;
 
+        ProducingQueueManager.ProgressComplete += ProgressComplete;
         Colapse();
     }
 
-    public void Expand()
+    public void Expand(bool useTween)
     {
-        int count = _popupItems.Count;
+        var popupItemsList = _popupItems.Select(x => x.Value).ToArray();
+        int count = popupItemsList.Length;
+
+        if (count == 0) return;
 
         float offset = Mathf.Min(360, DefaultOffset * count) / count;
         int halfCount = count / 2;
+
+        Tween tween = null;
+        if (useTween)
+        {
+            tween = CreateTween().SetParallel();
+        }
 
         for (int i = -halfCount, index = 0; i <= halfCount; i++)
         {
@@ -65,39 +76,62 @@ public partial class UiBuildingPopup : Control
 
             float offsetIndex = count % 2 == 0 ? i - 0.5f * Math.Sign(i) : i;
             float angle = Mathf.DegToRad((offset * offsetIndex) - 90);
-            var item = _popupItems[index];
+            var item = popupItemsList[index];
 
             item.Visible = true;
-            item.Scale = _itemScaleOrigin;
-            item.Position = _itemOrigin + OffsetCenter + new Vector2(Radius * Mathf.Cos(angle), Radius * Mathf.Sin(angle));
             item.SetExpanded(true);
-            if (QueueCapacity.ContainsKey(item.Id))
+            if (ProducingQueueManager.QueueCapacity.ContainsKey(item.Id))
             {
-                UpdateLabel(item.Id, QueueCapacity[item.Id]);
+                UpdateLabel(item.Id, ProducingQueueManager.QueueCapacity[item.Id]);
             }
             else
             {
                 item.RemoveQueue.Visible = false;
             }
+
+            if (useTween && tween != null)
+            {
+                item.Scale = _itemScaleOrigin * 0.5f;
+                item.Position = _itemOrigin;
+                var itemTween = CreateTween()
+                    .SetTrans(Tween.TransitionType.Sine)
+                    .SetParallel();
+                float itemTweenDuration = 0.2f;
+                var tweenToPos = _itemOrigin + OffsetCenter + new Vector2(Radius * Mathf.Cos(angle), Radius * Mathf.Sin(angle));
+
+                tween.TweenSubtween(itemTween).SetDelay(index * itemTweenDuration / 10);
+                itemTween.TweenProperty(item, "scale", _itemScaleOrigin, itemTweenDuration);
+                itemTween.TweenProperty(item, "position", tweenToPos, itemTweenDuration);
+            }
+
             index++;
         }
     }
 
     public void Colapse()
     {
-        var remainVisible = _popupItems.Where(x => QueueCapacity.ContainsKey(x.Id)).ToArray();
-        var toHide = _popupItems.Where(x => !QueueCapacity.ContainsKey(x.Id)).ToArray();
+        if (_popupItems.Count == 0) return;
+
+        var remainVisible = _popupItems.Where(x => ProducingQueueManager.QueueCapacity.ContainsKey(x.Key)).ToArray();
+        var toHide = _popupItems.Where(x => !ProducingQueueManager.QueueCapacity.ContainsKey(x.Key)).ToArray();
 
         foreach (var item in toHide)
         {
-            item.Position = _itemOrigin;
-            item.SetExpanded(false);
-            item.Visible = false;
+            item.Value.SetExpanded(false);
+            item.Value.Position = _itemOrigin;
+            item.Value.Visible = false;
         }
 
         int count = remainVisible.Length;
         int halfCount = count / 2;
         float offset = 30;
+
+        Tween tween = null;
+
+        if (count > 0)
+        {
+            tween = CreateTween().SetParallel();
+        }
 
         for (int i = -halfCount, index = 0; i <= halfCount; i++)
         {
@@ -108,10 +142,16 @@ public partial class UiBuildingPopup : Control
 
             float offsetIndex = count % 2 == 0 ? i - 0.5f * Math.Sign(i) : i;
             var item = remainVisible[index];
+            item.Value.SetExpanded(false);
 
-            item.Scale = _itemScaleOrigin * 0.5f;
-            item.Position = _itemOrigin + new Vector2(offset * offsetIndex, 0);
-            item.SetExpanded(false);
+            var itemTween = CreateTween()
+                .SetTrans(Tween.TransitionType.Sine)
+                .SetParallel();
+            float itemTweenDuration = 0.2f;
+            tween.TweenSubtween(itemTween).SetDelay(index * itemTweenDuration / 10);
+            itemTween.TweenProperty(item.Value, "scale", _itemScaleOrigin * 0.5f, itemTweenDuration);
+            itemTween.TweenProperty(item.Value, "position", _itemOrigin + new Vector2(offset * offsetIndex, 0), itemTweenDuration);
+
             index++;
         }
     }
@@ -119,77 +159,55 @@ public partial class UiBuildingPopup : Control
     public override void _Process(double delta)
     {
         Scale = Vector2.One * (2.5f - (float)Mathf.Remap(GetViewport().GetCamera2D().Zoom.X, 0.25, 2, 0, 1.5));
-        Visible = Selected || QueueCapacity.Count > 0;
-        if (QueueCapacity.Count == 0) return;
+        Visible = Selected || ProducingQueueManager.QueueCapacity.Count > 0;
 
-        if (_currentProgressItem == null)
+        if (_popupItems.ContainsKey(ProducingQueueManager.CurrentProgressItem))
         {
-            var queueItem = QueueCapacity.FirstOrDefault();
-            _currentProgressItem = _popupItems.FirstOrDefault(x => x.Id == queueItem.Key);
-            _currentProgress = 0;
+            _popupItems[ProducingQueueManager.CurrentProgressItem].ProgressBar.Value = ProducingQueueManager.CurrentProgress;
+        }
+    }
+
+    public void ProgressComplete(UnitTypeIds id)
+    {
+        if (!Selected)
+        {
+            Colapse();
         }
 
-        _currentProgress += 100 * (float)delta;
-
-        _currentProgressItem.ProgressBar.Value = _currentProgress;
-
-        if (_currentProgress >= MaxProgress)
+        if (_popupItems.TryGetValue(id, out var popupItem))
         {
-            _currentProgress = 0;
+            popupItem.ProgressBar.Value = 0;
+        }
 
-            _currentProgressItem.ProgressBar.Value = _currentProgress;
-
-            RemoveFromQueue(_currentProgressItem.Id);
-            _currentProgressItem = null;
-
-            if (!Selected)
-            {
-                Colapse();
-            }
+        if (ProducingQueueManager.QueueCapacity.ContainsKey(id))
+        {
+            UpdateLabel(id, ProducingQueueManager.QueueCapacity[id]);
+        }
+        else
+        {
+            UpdateLabel(id, 0);
         }
     }
 
     public void AddToQueue(UnitTypeIds id)
     {
-        GD.Print($"Add: {id}");
-
-        if (!QueueCapacity.ContainsKey(id))
-        {
-            QueueCapacity = QueueCapacity.Append(new KeyValuePair<UnitTypeIds, int>(id, 1)).ToDictionary();
-        }
-        else
-        {
-            QueueCapacity[id] += 1;
-        }
-
-        UpdateLabel(id, QueueCapacity[id]);
+        ProducingQueueManager.AddToQueue(id);
+        UpdateLabel(id, ProducingQueueManager.QueueCapacity[id]);
     }
 
-    public void RemoveFromQueue(UnitTypeIds id)
+    public void RemoveFromQueue(UnitTypeIds id, bool cashback = false)
     {
-        GD.Print($"Remove: {id}");
-
-        if (QueueCapacity.ContainsKey(id))
+        if (!ProducingQueueManager.QueueCapacity.ContainsKey(id))
         {
-            QueueCapacity[id] -= 1;
-
-            UpdateLabel(id, QueueCapacity[id]);
-
-            if (QueueCapacity[id] <= 0)
-            {
-                _currentProgress = 0;
-                _currentProgressItem.ProgressBar.Value = _currentProgress;
-                _currentProgressItem = null;
-                QueueCapacity.Remove(id);
-            }
+            return;
         }
+        UpdateLabel(id, ProducingQueueManager.QueueCapacity[id] - 1);
+        ProducingQueueManager.RemoveFromQueue(id, cashback);
     }
 
     private void UpdateLabel(UnitTypeIds id, int value)
     {
-        var popupItem = _popupItems.FirstOrDefault(x => x.Id == id);
-
-        if (popupItem != null)
+        if (_popupItems.TryGetValue(id, out var popupItem))
         {
             popupItem.InQueue.Visible = value != 0;
             popupItem.RemoveQueue.Visible = popupItem.Expanded && value != 0;

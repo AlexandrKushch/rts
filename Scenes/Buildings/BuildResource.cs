@@ -5,6 +5,9 @@ using Godot.Collections;
 public partial class BuildResource : Resource
 {
     [Export]
+    public BuildingTypeIds Id { get; set; }
+    
+    [Export]
     public string Name { get; set; }
 
     [Export]

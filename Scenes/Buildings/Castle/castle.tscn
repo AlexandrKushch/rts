@@ -10,7 +10,7 @@ size = Vector2(284, 180)
 [node name="Castle" unique_id=548953940 instance=ExtResource("1_xfw4a")]
 Resource = ExtResource("2_4g0xq")
 
-[node name="BuildingSelectableComponent" parent="." index="0" unique_id=550510253]
+[node name="BuildingSelectableComponent" parent="." index="1" unique_id=550510253]
 position = Vector2(0, -4)
 
 [node name="NinePatchRect" parent="BuildingSelectableComponent/Visual" parent_id_path=PackedInt32Array(550510253, 946751036) index="0" unique_id=584840865]
@@ -23,10 +23,6 @@ offset_bottom = 70.0
 position = Vector2(0, -53)
 shape = SubResource("RectangleShape2D_d1o4y")
 
-[node name="Visual" parent="." index="1" unique_id=1679201315]
-position = Vector2(0, -71)
-texture = ExtResource("2_n84d7")
-
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="2" unique_id=82442801]
 position = Vector2(-111, -12)
 radius = 30.0
@@ -35,11 +31,18 @@ radius = 30.0
 position = Vector2(111, -12)
 radius = 30.0
 
-[node name="CollisionPolygon2D" parent="." index="4" unique_id=168278068]
+[node name="Visual" parent="." index="4" unique_id=1679201315]
+position = Vector2(0, -71)
+texture = ExtResource("2_n84d7")
+
+[node name="CollisionPolygon2D" parent="." index="5" unique_id=168278068]
 position = Vector2(0, -24)
 polygon = PackedVector2Array(-120, 40, -130, -10, 0, -10, 130, -10, 120, 40, 0, 40)
 
-[node name="UiBuildingPopup" parent="." index="5" unique_id=540837747]
+[node name="SpawnMarker" parent="." index="6" unique_id=462682957]
+position = Vector2(0, 91)
+
+[node name="UiBuildingPopup" parent="." index="7" unique_id=540837747]
 offset_top = -156.0
 offset_bottom = -156.0
 Radius = 125.0

@@ -1,5 +1,5 @@
+using System.Linq;
 using Godot;
-using Godot.Collections;
 
 public partial class BuildingBlueprint : Node2D
 {
@@ -10,12 +10,9 @@ public partial class BuildingBlueprint : Node2D
 
     public BuildResource Resource { get; set; }
 
-    [Export]
-    public Dictionary<string, PackedScene> BuildingsDictionary { get; set; }
-
     public override void _Ready()
     {
-        var itemScene = BuildingsDictionary[Resource.Name];
+        var itemScene = GlobalResources.Instance.BuildingScenes[Resource.Id];
 
         if (itemScene != null)
         {
@@ -27,7 +24,7 @@ public partial class BuildingBlueprint : Node2D
 
     public bool TryDeployTo(Node2D to)
     {
-        if (!TryPayForBuilding())
+        if (!ResourceController.Instance.TrySpentCost(Resource.Cost.ToDictionary()))
         {
             return false;
         }
@@ -56,23 +53,5 @@ public partial class BuildingBlueprint : Node2D
         {
             obstacle.AvoidanceEnabled = false;
         }
-    }
-
-    private bool TryPayForBuilding()
-    {
-        foreach (var resourceType in Resource.Cost)
-        {
-            if (!ResourceController.Instance.CheckSpent(resourceType.Key, resourceType.Value))
-            {
-                return false;
-            }
-        }
-
-        foreach (var resourceType in Resource.Cost)
-        {
-            ResourceController.Instance.Spent(resourceType.Key, resourceType.Value);
-        }
-
-        return true;
     }
 }

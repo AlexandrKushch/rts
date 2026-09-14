@@ -11,18 +11,28 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
     public NavigationObstacle2D[] Obstacles { get; private set; }
 
     private UiBuildingPopup UiBuildingPopup;
+    private ProducingQueueManager ProducingQueueManager;
 
     [Export] public BuildResource Resource { get; private set; }
 
     public override void _Ready()
     {
         UiBuildingPopup = GetNode<UiBuildingPopup>(nameof(UiBuildingPopup));
+        ProducingQueueManager = GetNode<ProducingQueueManager>(nameof(ProducingQueueManager));
         CollisionPolygon2D = GetNode<CollisionPolygon2D>(nameof(CollisionPolygon2D));
         Obstacles = GetChildren().Where(x => x is NavigationObstacle2D).Select(x => x as NavigationObstacle2D).ToArray();
 
         MaxHp = Resource.MaxHp;
 
+        ProducingQueueManager.ProgressComplete += SpawnUnit;
         UnitsController.Instance.SelectionChanged += OnSelectionChanged;
+    }
+
+    public void SpawnUnit(UnitTypeIds id)
+    {
+        var unit = GlobalResources.Instance.UnitScenes[id].Instantiate<UnitBase>();
+        unit.GlobalPosition = GlobalPosition;
+        BuildingController.Instance.World.AddChild(unit);
     }
 
     public bool TryBuildProgressOne()
@@ -54,11 +64,12 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
 
     private void OnSelectionChanged()
     {
+        bool wasSelected = UiBuildingPopup.Selected;
         UiBuildingPopup.Selected = UnitsController.Instance.Selections.Count == 1 && UnitsController.Instance.Selections.Any(x => x.EffectedOn == this);
 
         if (UiBuildingPopup.Selected)
         {
-            UiBuildingPopup.Expand();
+            UiBuildingPopup.Expand(wasSelected != UiBuildingPopup.Selected);
         }
         else
         {

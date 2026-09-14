@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://ys3odowxtrp2"
+path="res://.godot/imported/SmallBlueRoundButton_Bitmap.png-50ea813d7f7b827fd45aadecc68c1728.res"
+
+[deps]
+
+source_file="res://Assets/UI Elements/UI Elements/Buttons/SmallBlueRoundButton_Bitmap.png"
+dest_files=["res://.godot/imported/SmallBlueRoundButton_Bitmap.png-50ea813d7f7b827fd45aadecc68c1728.res"]
+
+[params]
+
+create_from=0
+threshold=0.5

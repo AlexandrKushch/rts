@@ -10,7 +10,11 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 240.0
 offset_bottom = 61.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
 size_flags_horizontal = 3
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(-0.5, 0)
+mouse_filter = 2
 script = ExtResource("1_bxqsw")
 Title = NodePath("VBoxContainer/MarginContainer/Title")
 ResourceCost = NodePath("VBoxContainer/MarginContainer/ResourceCost")
@@ -22,6 +26,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1329512857]
 layout_mode = 1
@@ -30,9 +35,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=1470001967]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
@@ -46,15 +53,18 @@ text = "Castle"
 [node name="ResourceCost" type="HBoxContainer" parent="VBoxContainer/MarginContainer" unique_id=1641284480]
 layout_mode = 2
 size_flags_horizontal = 8
+mouse_filter = 2
 alignment = 2
 
 [node name="Item" type="HBoxContainer" parent="VBoxContainer/MarginContainer/ResourceCost" unique_id=1487768626]
 layout_mode = 2
+mouse_filter = 2
 alignment = 2
 script = ExtResource("2_kvvly")
 
 [node name="Icon" type="TextureRect" parent="VBoxContainer/MarginContainer/ResourceCost/Item" unique_id=1511890156]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("2_k271w")
 expand_mode = 3
 stretch_mode = 5
@@ -66,11 +76,13 @@ text = "250"
 
 [node name="Item2" type="HBoxContainer" parent="VBoxContainer/MarginContainer/ResourceCost" unique_id=1769413207]
 layout_mode = 2
+mouse_filter = 2
 alignment = 2
 script = ExtResource("2_kvvly")
 
 [node name="Icon" type="TextureRect" parent="VBoxContainer/MarginContainer/ResourceCost/Item2" unique_id=934653690]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("2_k271w")
 expand_mode = 3
 stretch_mode = 5
@@ -82,11 +94,13 @@ text = "250"
 
 [node name="Item3" type="HBoxContainer" parent="VBoxContainer/MarginContainer/ResourceCost" unique_id=1961463786]
 layout_mode = 2
+mouse_filter = 2
 alignment = 2
 script = ExtResource("2_kvvly")
 
 [node name="Icon" type="TextureRect" parent="VBoxContainer/MarginContainer/ResourceCost/Item3" unique_id=345355878]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("2_k271w")
 expand_mode = 3
 stretch_mode = 5
@@ -98,12 +112,14 @@ text = "250"
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer" unique_id=2096848603]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_right = 5
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer2" unique_id=1096256470]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
+mouse_filter = 2
 theme_override_colors/default_color = Color(0.6955032, 0.6955031, 0.6955031, 1)
 theme_override_font_sizes/normal_font_size = 12
 theme_override_font_sizes/bold_font_size = 12
