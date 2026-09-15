@@ -20,12 +20,9 @@ offset_bottom = 110.0
 position = Vector2(-2, -15.5)
 shape = SubResource("RectangleShape2D_t274w")
 
-[node name="Visual" parent="." index="1" unique_id=1679201315]
+[node name="Visual" parent="." index="2" unique_id=1679201315]
 position = Vector2(0, -44)
 texture = ExtResource("2_yami0")
-
-[node name="CollisionPolygon2D" parent="." index="2" unique_id=168278068]
-polygon = PackedVector2Array(-70, -40, 69, -40, 70, 50, -75, 50)
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="3" unique_id=56571997]
 position = Vector2(-66, 42)
@@ -42,5 +39,11 @@ radius = 15.0
 [node name="NavigationObstacle2D4" type="NavigationObstacle2D" parent="." index="6" unique_id=1351582374]
 position = Vector2(-60, -33)
 radius = 15.0
+
+[node name="CollisionPolygon2D" parent="." index="7" unique_id=168278068]
+polygon = PackedVector2Array(0, 50, 70, 50, 69, -40, -70, -40, -75, 50)
+
+[node name="UiBuildingPopup" parent="." index="8" unique_id=540837747]
+Radius = 100.0
 
 [editable path="BuildingSelectableComponent"]

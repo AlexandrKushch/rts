@@ -1,8 +1,11 @@
 using Godot;
+using System.Collections.Generic;
 using System.Linq;
 
 public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
 {
+    private Vector2[] _spaceAroundPoints;
+
     public int MaxHp { get; set; }
     public int HP { get; set; }
 
@@ -15,6 +18,8 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
 
     [Export] public BuildResource Resource { get; private set; }
 
+    [Export] private PackedScene MarkerScene;
+
     public override void _Ready()
     {
         UiBuildingPopup = GetNode<UiBuildingPopup>(nameof(UiBuildingPopup));
@@ -23,6 +28,7 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
         Obstacles = GetChildren().Where(x => x is NavigationObstacle2D).Select(x => x as NavigationObstacle2D).ToArray();
 
         MaxHp = Resource.MaxHp;
+        _spaceAroundPoints = GetSpaceAround();
 
         ProducingQueueManager.ProgressComplete += SpawnUnit;
         UnitsController.Instance.SelectionChanged += OnSelectionChanged;
@@ -30,8 +36,11 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
 
     public void SpawnUnit(UnitTypeIds id)
     {
+        TryGetOpenSpaceAround(out var occupiedPoints, out var openSpacePoints);
+
         var unit = GlobalResources.Instance.UnitScenes[id].Instantiate<UnitBase>();
-        unit.GlobalPosition = GlobalPosition;
+        GD.Print(openSpacePoints[0]);
+        unit.GlobalPosition = openSpacePoints[0];
         BuildingController.Instance.World.AddChild(unit);
     }
 
@@ -56,7 +65,7 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
             Destroy();
         }
     }
-    
+
     public void Destroy()
     {
         QueueFree();
@@ -75,5 +84,67 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
         {
             UiBuildingPopup.Colapse();
         }
+    }
+
+    private void TryGetOpenSpaceAround(out List<Vector2> occupiedPoints, out List<Vector2> openSpacePoints)
+    {
+        occupiedPoints = [];
+        openSpacePoints = [];
+
+        var spaceState = GetWorld2D().DirectSpaceState;
+        var query = new PhysicsPointQueryParameters2D
+        {
+            CollideWithAreas = false,
+            CollideWithBodies = true
+        };
+
+        foreach (var point in _spaceAroundPoints)
+        {
+            query.Position = ToGlobal(point);
+            var results = spaceState.IntersectPoint(query);
+
+            if (results.Count == 0)
+            {
+                openSpacePoints.Add(query.Position);
+            }
+            else
+            {
+                occupiedPoints.Add(query.Position);                    
+            }
+        }
+    }
+
+    private Vector2[] GetSpaceAround()
+    {
+        List<Vector2> aroundPoints = new List<Vector2>();
+        var points = CollisionPolygon2D.Polygon.Select(x => x + Vector2.Zero.DirectionTo(x) * 45).ToArray();
+
+        for (int i = 0; i < points.Length; i++)
+        {
+            var point = points[i];
+            var nextPoint = points[(i + 1) % points.Length];
+            var direction = point.DirectionTo(nextPoint);
+            float step = 25;
+
+            for (Vector2 start = point + direction * step; point.DistanceTo(start) < point.DistanceTo(nextPoint); start += direction * step)
+            {
+                aroundPoints.Add(start);
+                var marker = MarkerScene.Instantiate<Node2D>();
+                AddChild(marker);
+                marker.GlobalPosition = ToGlobal(start);
+            }
+        }
+
+        return aroundPoints.ToArray();
+    }
+
+    private bool IsEqualApprox(Vector2 a, Vector2 b, float tolerance = 0.1f)
+    {
+        if (Mathf.IsEqualApprox(a.X, b.X, tolerance))
+        {
+            return Mathf.IsEqualApprox(a.Y, b.Y, tolerance);
+        }
+
+        return false;
     }
 }

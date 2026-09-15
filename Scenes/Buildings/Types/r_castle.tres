@@ -3,8 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://b2obdvjv7o4ef" path="res://Assets/Buildings/Blue Buildings/Castle.png" id="1_1px0e"]
 [ext_resource type="Script" uid="uid://ck4k0rwiv3nec" path="res://Scenes/Buildings/BuildResource.cs" id="1_2dvea"]
 [ext_resource type="Resource" uid="uid://cmmqwgiyv1amy" path="res://Scenes/Units/Types/r_pawn.tres" id="2_4h5ph"]
-[ext_resource type="Resource" uid="uid://b81s8vll42xy2" path="res://Scenes/Units/Types/r_warrior.tres" id="3_4ln1s"]
-[ext_resource type="Resource" uid="uid://cm5nt1ekod7b8" path="res://Scenes/Units/Types/r_lancer.tres" id="4_7nnjy"]
 
 [resource]
 script = ExtResource("1_2dvea")
@@ -18,5 +16,5 @@ Cost = Dictionary[int, int]({
 3: 100
 })
 TileRequiresToBuild = PackedVector2Array(0, 0, 1, 0, 2, 0, 2, -1, 1, -1, 0, -1, -1, -1, -2, -1, -2, 0, -1, 0)
-Produces = Array[Object]([ExtResource("2_4h5ph"), ExtResource("3_4ln1s"), ExtResource("4_7nnjy")])
+Produces = Array[Object]([ExtResource("2_4h5ph")])
 metadata/_custom_type_script = "uid://ck4k0rwiv3nec"

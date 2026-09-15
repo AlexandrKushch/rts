@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="BuildResource" format=3 uid="uid://c3qhmxdssqwd0"]
 
 [ext_resource type="Texture2D" uid="uid://c2ol0sgjkbgie" path="res://Assets/Buildings/Blue Buildings/Monastery.png" id="1_ed6t8"]
+[ext_resource type="Resource" uid="uid://hq8cctjvc4r1" path="res://Scenes/Units/Types/r_monk.tres" id="2_0i2or"]
 [ext_resource type="Script" uid="uid://ck4k0rwiv3nec" path="res://Scenes/Buildings/BuildResource.cs" id="2_bn8qg"]
 
 [resource]
@@ -14,5 +15,5 @@ Cost = Dictionary[int, int]({
 3: 300
 })
 TileRequiresToBuild = PackedVector2Array(0, 0, 1, 0, 1, -1, 0, -1, -1, -1, -1, 0)
-Produces = Array[Object]([])
+Produces = Array[Object]([ExtResource("2_0i2or")])
 metadata/_custom_type_script = "uid://ck4k0rwiv3nec"

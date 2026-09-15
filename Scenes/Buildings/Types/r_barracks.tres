@@ -1,7 +1,9 @@
 [gd_resource type="Resource" script_class="BuildResource" format=3 uid="uid://b8ycuiugnmrri"]
 
 [ext_resource type="Texture2D" uid="uid://dumaqi6xtmqtx" path="res://Assets/Buildings/Blue Buildings/Barracks.png" id="1_wpym7"]
+[ext_resource type="Resource" uid="uid://cm5nt1ekod7b8" path="res://Scenes/Units/Types/r_lancer.tres" id="2_0e67r"]
 [ext_resource type="Script" uid="uid://ck4k0rwiv3nec" path="res://Scenes/Buildings/BuildResource.cs" id="2_mjw4g"]
+[ext_resource type="Resource" uid="uid://b81s8vll42xy2" path="res://Scenes/Units/Types/r_warrior.tres" id="3_b2o47"]
 
 [resource]
 script = ExtResource("2_mjw4g")
@@ -13,5 +15,5 @@ Cost = Dictionary[int, int]({
 1: 150
 })
 TileRequiresToBuild = PackedVector2Array(0, 0, 1, 0, 1, -1, 0, -1, -1, -1, -1, 0)
-Produces = Array[Object]([])
+Produces = Array[Object]([ExtResource("2_0e67r"), ExtResource("3_b2o47")])
 metadata/_custom_type_script = "uid://ck4k0rwiv3nec"
