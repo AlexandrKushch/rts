@@ -19,4 +19,13 @@ public static class RandomExtension
 
         return new Vector2(x, y);
     }
+
+    public static Vector2 GetRandomPointOnCircle(float radius)
+    {
+        float angle = (float)_random.NextDouble() * Mathf.Pi * 2;
+        float x = radius * Mathf.Cos(angle);
+        float y = radius * Mathf.Sin(angle);
+
+        return new Vector2(x, y);        
+    }
 }

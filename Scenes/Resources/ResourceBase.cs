@@ -2,6 +2,8 @@ using Godot;
 
 public partial class ResourceBase : Node2D
 {
+    public int CurrentCollectingCount { get; set; }
+
     [Export]
     public ResourceInfo ResourceType { get; set; }
 

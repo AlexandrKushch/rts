@@ -6,6 +6,7 @@ public partial class PawnGatheringResourceState : PawnStateBase
     {
         base.Activate();
 
+        PawnStateMachine.Pawn.TargetResource.CurrentCollectingCount++;
         PawnStateMachine.Pawn.Target = null;
         PawnStateMachine.Pawn.Visual.Connect(PawnVisual.SignalName.OnInteractAnimationFinished, Callable.From(Gather));
 
@@ -15,6 +16,7 @@ public partial class PawnGatheringResourceState : PawnStateBase
     public override void Deactivate()
     {
         base.Deactivate();
+        PawnStateMachine.Pawn.TargetResource.CurrentCollectingCount--;
         PawnStateMachine.Pawn.Visual.Stop();
         PawnStateMachine.Pawn.Visual.Disconnect(PawnVisual.SignalName.OnInteractAnimationFinished, Callable.From(Gather));
     }

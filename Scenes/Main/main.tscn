@@ -64,8 +64,8 @@ _bundled = {
 }
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_xrivr"]
-vertices = PackedVector2Array(23.648438, 106.59375, 28.898438, 108, 20, 108, 20, 102.9375, 620, -276, 532, -276, 532, -364, 620, -364, 892, 324, 1068, 276, 1132, 276, 1132, 684, 1044, 556, 148, 108, 49.101563, 108, 54.351563, 106.59375, 65.59375, 95.35156, 892, 238, 1068, -236, 99.71094, 31, 96.75781, 20, 212, 20, 852, -236, 852, 20, 800, 238, 684, 20, 66.72656, 91.10156, 69, 91.71094, 84.35156, 87.59375, 95.59375, 76.35156, 532, 20, 532, -108, 684, -108, 800, 243, 773, 243, 773, 258, 738, 258, 738, 282, 718, 282, 532, 428, 718, 350, 730, 350, 730, 370, 596, 492, 532, 492, 596, 596, 773, 370, 773, 385, 684, 684, 845, 385, 845, 376, 872, 376, 876, 556, 872, 355, 888, 355, 888, 324, 1068, 940, 916, 940, 916, 852, 1044, 852, 1068, 684, 876, 620, 812, 620, 812, 684, 684, 812, 532, 812, 532, 684, 364, 684, 364, 940, 148, 940, 148, 684, 172, 596, 20, 684, 20, 556, 108, 468, 172, 468, -172, 556, -172, 532, -108, 532, -108, 340, -20, 340, -20, 404, 108, 404, 468, 428, 468, 364, 276, 364, 276, 236, 364, 20, 212, 236, 212, 172, 148, 172, 212, -236, 364, -236, 99.71094, 61, 95.67969, 46)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 0, 2), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11, 12), PackedInt32Array(13, 14, 15), PackedInt32Array(13, 15, 16), PackedInt32Array(9, 8, 17, 18), PackedInt32Array(19, 20, 21), PackedInt32Array(22, 18, 17, 23), PackedInt32Array(23, 17, 24, 25), PackedInt32Array(16, 26, 27), PackedInt32Array(13, 16, 27, 28), PackedInt32Array(13, 28, 29), PackedInt32Array(30, 31, 32, 25), PackedInt32Array(24, 33, 34, 25), PackedInt32Array(25, 34, 35, 36, 30), PackedInt32Array(36, 37, 38, 30), PackedInt32Array(39, 40, 41, 42, 43, 44), PackedInt32Array(45, 43, 42, 46, 47, 48), PackedInt32Array(49, 50, 51, 52), PackedInt32Array(52, 51, 53, 54, 12), PackedInt32Array(54, 55, 8, 12), PackedInt32Array(56, 57, 58, 59), PackedInt32Array(60, 56, 59, 12), PackedInt32Array(52, 61, 62, 47, 49), PackedInt32Array(62, 63, 48, 47), PackedInt32Array(48, 64, 65, 66, 45), PackedInt32Array(67, 68, 69, 70, 71), PackedInt32Array(70, 72, 73, 74, 75, 71), PackedInt32Array(73, 76, 77, 78), PackedInt32Array(78, 79, 80, 81), PackedInt32Array(73, 78, 81, 82, 74), PackedInt32Array(67, 71, 45, 66), PackedInt32Array(39, 83, 84, 30, 38, 40), PackedInt32Array(84, 85, 86, 87, 30), PackedInt32Array(86, 88, 89, 87), PackedInt32Array(89, 90, 13, 21, 87), PackedInt32Array(21, 91, 92, 87), PackedInt32Array(11, 60, 12), PackedInt32Array(13, 29, 93, 21), PackedInt32Array(94, 19, 21, 93)])
+vertices = PackedVector2Array(23.648438, 106.59375, 28.898438, 108, 20, 108, 20, 102.9375, 620, -276, 532, -276, 532, -364, 620, -364, 892, 324, 1068, 276, 1132, 276, 1132, 684, 1044, 556, 148, 108, 49.101563, 108, 54.351563, 106.59375, 655.71094, 751, 684, 684, 684, 812, 651.59375, 766.35156, 651.6797, 736, 655.71094, 721, 212, 20, 212, -72.0625, 214.64844, -69.40625, 65.59375, 95.35156, 651.59375, 705.64844, 335.59375, -80.64844, 335.96875, -82.078125, 341.64844, -76.40625, 892, 238, 1068, -236, 99.71094, 31, 96.75781, 20, 357, -72.28906, 364, -74.15625, 364, 20, 230, -65.28906, 852, -236, 852, 20, 800, 238, 684, 20, 640.35156, 777.59375, 245.35156, -69.40625, 249, -73.0625, 252.64844, -69.40625, 283.35156, -69.40625, 288.5, -74.5625, 293.64844, -69.40625, 276, 236, 621.59375, 785.35156, 622.72656, 781.10156, 625, 781.71094, 66.72656, 91.10156, 69, 91.71094, 84.35156, 87.59375, 95.59375, 76.35156, 800, 243, 773, 243, 773, 258, 738, 258, 532, 20, 738, 282, 718, 282, 606.35156, 685.40625, 591, 681.28906, 718, 350, 730, 350, 730, 370, 625, 690.28906, 640.35156, 694.40625, 773, 370, 773, 385, 845, 385, 845, 376, 872, 376, 876, 556, 872, 355, 888, 355, 888, 324, 1068, 940, 916, 940, 916, 852, 1044, 852, 1068, 684, 876, 620, 812, 620, 812, 684, 364, 684, 364, 940, 148, 940, 148, 684, 172, 596, 20, 684, 20, 556, 108, 468, 172, 468, -172, 556, -172, 532, -108, 532, -108, 340, -20, 340, -20, 404, 108, 404, 596, 596, 532, 684, 596, 492, 532, 492, 532, 428, 468, 428, 468, 364, 276, 364, 212, 236, 212, 172, 148, 172, 532, -108, 684, -108, 324.35156, -69.40625, 99.71094, 61, 309, -65.28906, 95.67969, 46, 268, -65.28906, 614.1406, 693.2031, 560.28906, 712, 562.9922, 722.0625, 557.40625, 727.64844, 557.40625, 758.35156, 565.28906, 766.22656, 564.28906, 770, 532, 812, 575.64844, 685.40625, 610.35156, 796.59375, 564.40625, 696.64844, 553.28906, 743, 568.40625, 785.35156, 579.64844, 796.59375, 595, 800.71094, 214.64844, -122.59375, 212, -119.9375, 212, -236, 305.71094, -184, 301.59375, -199.35156, 364, -236, 364, -131.82813, 357, -133.71094, 341.64844, -129.59375, 301.59375, -168.64844, 330.40625, -118.35156, 330.02344, -116.90625, 324.35156, -122.59375, 248.40625, -168.64844, 230, -126.71094, 244.28906, -184, 309, -126.71094, 290.35156, -157.40625, 275, -153.28906, 293.64844, -122.59375, 283.35156, -122.59375, 268, -126.71094, 252.64844, -122.59375, 249, -118.9375, 245.35156, -122.59375, 259.64844, -157.40625, 288.5, -117.4375, 248.40625, -199.35156, 259.64844, -210.59375, 290.35156, -210.59375, 275, -214.71094)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 0, 2), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11, 12), PackedInt32Array(13, 14, 15), PackedInt32Array(16, 17, 18, 19), PackedInt32Array(17, 16, 20, 21), PackedInt32Array(22, 23, 24), PackedInt32Array(13, 15, 25), PackedInt32Array(17, 21, 26), PackedInt32Array(27, 28, 29), PackedInt32Array(9, 8, 30, 31), PackedInt32Array(32, 33, 22), PackedInt32Array(34, 35, 36), PackedInt32Array(22, 24, 37), PackedInt32Array(38, 31, 30, 39), PackedInt32Array(39, 30, 40, 41), PackedInt32Array(42, 19, 18), PackedInt32Array(43, 44, 45, 22), PackedInt32Array(46, 47, 48, 49), PackedInt32Array(50, 51, 52, 18), PackedInt32Array(25, 53, 54), PackedInt32Array(13, 25, 54, 55), PackedInt32Array(13, 55, 56), PackedInt32Array(40, 57, 58, 41), PackedInt32Array(41, 58, 59, 60, 61), PackedInt32Array(61, 60, 62, 63, 36), PackedInt32Array(64, 65, 66, 67, 68, 69), PackedInt32Array(70, 68, 71, 72, 17, 26), PackedInt32Array(73, 74, 75, 76), PackedInt32Array(76, 75, 77, 78, 12), PackedInt32Array(78, 79, 8, 12), PackedInt32Array(80, 81, 82, 83), PackedInt32Array(84, 80, 83, 12), PackedInt32Array(76, 85, 86, 72, 73), PackedInt32Array(86, 87, 17, 72), PackedInt32Array(88, 89, 90, 91, 92), PackedInt32Array(91, 93, 94, 95, 96, 92), PackedInt32Array(94, 97, 98, 99), PackedInt32Array(99, 100, 101, 102), PackedInt32Array(94, 99, 102, 103, 95), PackedInt32Array(88, 92, 104, 105), PackedInt32Array(106, 107, 108, 66), PackedInt32Array(108, 109, 110, 66), PackedInt32Array(66, 110, 111, 49, 36, 63), PackedInt32Array(49, 112, 113), PackedInt32Array(113, 114, 13, 22), PackedInt32Array(61, 115, 116, 41), PackedInt32Array(117, 27, 29, 36), PackedInt32Array(11, 84, 12), PackedInt32Array(13, 56, 118, 22), PackedInt32Array(29, 34, 36), PackedInt32Array(119, 117, 36, 49), PackedInt32Array(120, 32, 22, 118), PackedInt32Array(68, 70, 69), PackedInt32Array(22, 37, 43), PackedInt32Array(22, 45, 121, 49, 113), PackedInt32Array(69, 122, 64), PackedInt32Array(123, 124, 125), PackedInt32Array(126, 127, 128, 129), PackedInt32Array(66, 65, 130, 104), PackedInt32Array(52, 42, 18), PackedInt32Array(131, 50, 18), PackedInt32Array(49, 121, 46), PackedInt32Array(49, 48, 119), PackedInt32Array(104, 106, 66), PackedInt32Array(105, 104, 130, 132), PackedInt32Array(129, 105, 132, 123), PackedInt32Array(129, 123, 125, 133), PackedInt32Array(129, 133, 126), PackedInt32Array(129, 128, 134), PackedInt32Array(129, 134, 135), PackedInt32Array(129, 135, 136), PackedInt32Array(18, 129, 136), PackedInt32Array(18, 136, 131), PackedInt32Array(137, 138, 139), PackedInt32Array(140, 141, 142, 143, 144), PackedInt32Array(140, 144, 145, 146), PackedInt32Array(147, 148, 149, 146), PackedInt32Array(150, 151, 137, 139, 152), PackedInt32Array(146, 145, 147), PackedInt32Array(146, 149, 153, 154), PackedInt32Array(155, 154, 153, 156, 157, 158), PackedInt32Array(159, 160, 161, 162), PackedInt32Array(156, 163, 157), PackedInt32Array(162, 155, 158, 159), PackedInt32Array(162, 161, 151, 150), PackedInt32Array(164, 152, 139), PackedInt32Array(165, 164, 139), PackedInt32Array(142, 141, 166), PackedInt32Array(139, 142, 166, 167), PackedInt32Array(165, 139, 167)])
 agent_radius = 20.0
 
 [sub_resource type="Resource" id="Resource_8sujb"]
@@ -186,30 +186,108 @@ collision_mask = 1
 position = Vector2(391, 229)
 collision_mask = 1
 
+[node name="Pawn6" parent="Map/NavigationRegion2D/World" unique_id=1684911376 instance=ExtResource("9_hryqi")]
+position = Vector2(391, 273)
+collision_mask = 1
+
+[node name="Pawn7" parent="Map/NavigationRegion2D/World" unique_id=1446575363 instance=ExtResource("9_hryqi")]
+position = Vector2(428, 292)
+collision_mask = 1
+
+[node name="Pawn8" parent="Map/NavigationRegion2D/World" unique_id=1475746276 instance=ExtResource("9_hryqi")]
+position = Vector2(487, 297)
+collision_mask = 1
+
+[node name="Pawn9" parent="Map/NavigationRegion2D/World" unique_id=1888855846 instance=ExtResource("9_hryqi")]
+position = Vector2(537, 286)
+collision_mask = 1
+
+[node name="Pawn10" parent="Map/NavigationRegion2D/World" unique_id=1566719133 instance=ExtResource("9_hryqi")]
+position = Vector2(581, 229)
+collision_mask = 1
+
+[node name="Pawn11" parent="Map/NavigationRegion2D/World" unique_id=1626849300 instance=ExtResource("9_hryqi")]
+position = Vector2(581, 160)
+collision_mask = 1
+
+[node name="Pawn12" parent="Map/NavigationRegion2D/World" unique_id=492978993 instance=ExtResource("9_hryqi")]
+position = Vector2(537, 215)
+collision_mask = 1
+
 [node name="Tree1" parent="Map/NavigationRegion2D/World" unique_id=1936357647 instance=ExtResource("10_6t3k2")]
 position = Vector2(35, 22)
 ResourceType = SubResource("Resource_8sujb")
-Quantity = 100
+Quantity = 1000
 
 [node name="Tree2" parent="Map/NavigationRegion2D/World" unique_id=1862420138 instance=ExtResource("10_6t3k2")]
 position = Vector2(69, 31)
 ResourceType = SubResource("Resource_8sujb")
-Quantity = 100
+Quantity = 1000
 
 [node name="Tree3" parent="Map/NavigationRegion2D/World" unique_id=1659567576 instance=ExtResource("10_6t3k2")]
 position = Vector2(28, 53)
 ResourceType = SubResource("Resource_8sujb")
-Quantity = 100
+Quantity = 1000
 
 [node name="Tree4" parent="Map/NavigationRegion2D/World" unique_id=1137143637 instance=ExtResource("10_6t3k2")]
 position = Vector2(69, 61)
 ResourceType = SubResource("Resource_8sujb")
-Quantity = 100
+Quantity = 1000
 
 [node name="Tree5" parent="Map/NavigationRegion2D/World" unique_id=1779211396 instance=ExtResource("10_6t3k2")]
 position = Vector2(39, 80)
 ResourceType = SubResource("Resource_8sujb")
-Quantity = 100
+Quantity = 1000
+
+[node name="Tree6" parent="Map/NavigationRegion2D/World" unique_id=724001846 instance=ExtResource("10_6t3k2")]
+position = Vector2(591, 712)
+ResourceType = SubResource("Resource_8sujb")
+Quantity = 1000
+
+[node name="Tree7" parent="Map/NavigationRegion2D/World" unique_id=843169484 instance=ExtResource("10_6t3k2")]
+position = Vector2(625, 721)
+ResourceType = SubResource("Resource_8sujb")
+Quantity = 1000
+
+[node name="Tree8" parent="Map/NavigationRegion2D/World" unique_id=1277218688 instance=ExtResource("10_6t3k2")]
+position = Vector2(584, 743)
+ResourceType = SubResource("Resource_8sujb")
+Quantity = 1000
+
+[node name="Tree9" parent="Map/NavigationRegion2D/World" unique_id=1832244540 instance=ExtResource("10_6t3k2")]
+position = Vector2(625, 751)
+ResourceType = SubResource("Resource_8sujb")
+Quantity = 1000
+
+[node name="Tree10" parent="Map/NavigationRegion2D/World" unique_id=1819974078 instance=ExtResource("10_6t3k2")]
+position = Vector2(595, 770)
+ResourceType = SubResource("Resource_8sujb")
+Quantity = 1000
+
+[node name="Tree12" parent="Map/NavigationRegion2D/World" unique_id=169821820 instance=ExtResource("10_6t3k2")]
+position = Vector2(275, -184)
+ResourceType = SubResource("Resource_8sujb")
+Quantity = 1000
+
+[node name="Tree13" parent="Map/NavigationRegion2D/World" unique_id=592144781 instance=ExtResource("10_6t3k2")]
+position = Vector2(230, -96)
+ResourceType = SubResource("Resource_8sujb")
+Quantity = 1000
+
+[node name="Tree14" parent="Map/NavigationRegion2D/World" unique_id=375700389 instance=ExtResource("10_6t3k2")]
+position = Vector2(268, -96)
+ResourceType = SubResource("Resource_8sujb")
+Quantity = 1000
+
+[node name="Tree15" parent="Map/NavigationRegion2D/World" unique_id=917896522 instance=ExtResource("10_6t3k2")]
+position = Vector2(309, -96)
+ResourceType = SubResource("Resource_8sujb")
+Quantity = 1000
+
+[node name="Tree16" parent="Map/NavigationRegion2D/World" unique_id=233391691 instance=ExtResource("10_6t3k2")]
+position = Vector2(357, -103)
+ResourceType = SubResource("Resource_8sujb")
+Quantity = 1000
 
 [node name="GoldPreset" parent="Map/NavigationRegion2D/World" unique_id=304495028 instance=ExtResource("16_koken")]
 position = Vector2(809, 318)

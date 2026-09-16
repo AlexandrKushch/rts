@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Godot;
 
@@ -62,13 +63,14 @@ public partial class Pawn : UnitBase
 
     public ResourceBase GetNextResource()
     {
-        if (ResourceToCollectData == null) return null;
+        return QueryResource()
+            ?.MinBy(x => ResourceToCollectData.Position.DistanceTo(x.GlobalPosition));
+    }
 
-        return GetParent()
-            .FindChildren("*")
-            .Where(x => x is ResourceBase && x != null)
-            .Select(x => x as ResourceBase)
-            .Where(x => x.ResourceType.Name.Equals(ResourceToCollectData.ResourceType.Name, StringComparison.OrdinalIgnoreCase))
+    public ResourceBase GetNextResourceWithSpace()
+    {
+        return QueryResource()
+            ?.Where(x => x.GetInstanceId() != TargetResource.GetInstanceId() && x.CurrentCollectingCount < 2)
             .MinBy(x => ResourceToCollectData.Position.DistanceTo(x.GlobalPosition));
     }
 
@@ -112,6 +114,10 @@ public partial class Pawn : UnitBase
                         ResourceType = resource.ResourceType,
                         CollectedCount = 0
                     };
+                }
+                else
+                {
+                    ResourceToCollectData.Position = resource.GlobalPosition;
                 }
 
                 _updateMovementAnimation = (v, c) => { Visual.UpdateMovement(v, c, resource.ResourceType); };
@@ -181,7 +187,7 @@ public partial class Pawn : UnitBase
         var query = new PhysicsRayQueryParameters2D
         {
             From = GlobalPosition,
-            To = to,
+            To = to.LimitLength(100),
             CollideWithAreas = false,
             CollideWithBodies = true,
             CollisionMask = 1
@@ -193,7 +199,7 @@ public partial class Pawn : UnitBase
         {
             collider = result.ContainsKey("collider") ? result["collider"].As<Node2D>() : null;
             collisionPoint = result.ContainsKey("position") ? result["position"].As<Vector2>() : null;
-            
+
             if (collider != null && collisionPoint != null)
             {
                 return true;
@@ -201,5 +207,19 @@ public partial class Pawn : UnitBase
         }
 
         return false;
+    }
+
+    private IEnumerable<ResourceBase> QueryResource()
+    {
+        if (ResourceToCollectData == null) return null;
+        float distanceLimit = 300;
+
+        return GetParent()
+            .FindChildren("*")
+            .Where(x => x is ResourceBase && x != null)
+            .Select(x => x as ResourceBase)
+            .Where(x => x.ResourceType.Name.Equals(ResourceToCollectData.ResourceType.Name, StringComparison.OrdinalIgnoreCase)
+                && ResourceToCollectData.Position.DistanceTo(x.GlobalPosition) <= distanceLimit);
+
     }
 }
