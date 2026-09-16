@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://c1skwp03bakoh" path="res://Scenes/SelectionArea/UnitSelectableComponent/unit_selectable_component.tscn" id="2_igbku"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xrivr"]
-radius = 18.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_igbku"]
 
@@ -14,7 +13,7 @@ collision_mask = 3
 script = ExtResource("1_qwnlj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1443833613]
-position = Vector2(0, -13)
+position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_xrivr")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1325708388]

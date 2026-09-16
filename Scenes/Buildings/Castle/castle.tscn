@@ -24,11 +24,11 @@ position = Vector2(0, -53)
 shape = SubResource("RectangleShape2D_d1o4y")
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="2" unique_id=82442801]
-position = Vector2(-111, -12)
+position = Vector2(-111, -3)
 radius = 30.0
 
 [node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="3" unique_id=692338129]
-position = Vector2(111, -12)
+position = Vector2(111, -3)
 radius = 30.0
 
 [node name="Visual" parent="." index="4" unique_id=1679201315]

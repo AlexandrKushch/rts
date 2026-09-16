@@ -29,12 +29,10 @@
 [ext_resource type="Texture2D" uid="uid://bsw0alb2na82x" path="res://Assets/Units/Blue Units/Pawn/Pawn_Interact Knife.png" id="18_65j2d"]
 [ext_resource type="Texture2D" uid="uid://cdy84ksjalnea" path="res://Assets/Units/Blue Units/Pawn/Pawn_Run Meat.png" id="19_1iohd"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_1iohd"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6t8ju"]
 size = Vector2(58, 69)
 
-[sub_resource type="Animation" id="Animation_scesx"]
+[sub_resource type="Animation" id="Animation_1iohd"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -73,7 +71,7 @@ tracks/2/keys = {
 "values": [8]
 }
 
-[sub_resource type="Animation" id="Animation_byvkr"]
+[sub_resource type="Animation" id="Animation_v8keg"]
 resource_name = "idle"
 length = 0.8
 loop_mode = 1
@@ -115,7 +113,7 @@ tracks/2/keys = {
 "values": [ExtResource("3_8igw0")]
 }
 
-[sub_resource type="Animation" id="Animation_o75xy"]
+[sub_resource type="Animation" id="Animation_vfo5x"]
 resource_name = "run"
 length = 0.6
 loop_mode = 1
@@ -157,11 +155,11 @@ tracks/2/keys = {
 "values": [6]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_fwvsl"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_akoip"]
 _data = {
-&"RESET": SubResource("Animation_scesx"),
-&"idle": SubResource("Animation_byvkr"),
-&"run": SubResource("Animation_o75xy")
+&"RESET": SubResource("Animation_1iohd"),
+&"idle": SubResource("Animation_v8keg"),
+&"run": SubResource("Animation_vfo5x")
 }
 
 [sub_resource type="Animation" id="Animation_flo51"]
@@ -1010,10 +1008,6 @@ _data = {
 script = ExtResource("2_8igw0")
 Meta = ExtResource("3_8fvhf")
 
-[node name="CollisionShape2D" parent="." index="0" unique_id=1443833613]
-position = Vector2(0, -6)
-shape = SubResource("CircleShape2D_1iohd")
-
 [node name="UnitSelectableComponent" parent="." index="3" unique_id=550510253 node_paths=PackedStringArray("EffectedOn")]
 EffectedOn = NodePath("..")
 
@@ -1034,7 +1028,7 @@ hframes = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" index="1" unique_id=793198965]
 root_node = NodePath("../..")
-libraries/ = SubResource("AnimationLibrary_fwvsl")
+libraries/ = SubResource("AnimationLibrary_akoip")
 libraries/build = SubResource("AnimationLibrary_5n0ob")
 libraries/gold = SubResource("AnimationLibrary_r6g2o")
 libraries/meat = SubResource("AnimationLibrary_6u2jw")

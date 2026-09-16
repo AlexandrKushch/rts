@@ -1,20 +1,21 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
 {
-    private Vector2[] _spaceAroundPoints;
+    private UiBuildingPopup UiBuildingPopup;
+    private ProducingQueueManager ProducingQueueManager;
 
     public int MaxHp { get; set; }
     public int HP { get; set; }
 
+    public Vector2[] SpaceAroundPoints { get; private set; }
+
     public bool Built { get; private set; } = false;
     public CollisionPolygon2D CollisionPolygon2D { get; private set; }
     public NavigationObstacle2D[] Obstacles { get; private set; }
-
-    private UiBuildingPopup UiBuildingPopup;
-    private ProducingQueueManager ProducingQueueManager;
 
     [Export] public BuildResource Resource { get; private set; }
 
@@ -28,10 +29,23 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
         Obstacles = GetChildren().Where(x => x is NavigationObstacle2D).Select(x => x as NavigationObstacle2D).ToArray();
 
         MaxHp = Resource.MaxHp;
-        _spaceAroundPoints = GetSpaceAround();
 
         ProducingQueueManager.ProgressComplete += SpawnUnit;
         UnitsController.Instance.SelectionChanged += OnSelectionChanged;
+    }
+
+    public void Deploy()
+    {
+        Modulate = Colors.White;
+        SetProcess(true);
+        CollisionPolygon2D.Disabled = false;
+
+        foreach (var obstacle in Obstacles)
+        {
+            obstacle.AvoidanceEnabled = true;
+        }
+
+        SpaceAroundPoints = GetSpaceAround();
     }
 
     public void SpawnUnit(UnitTypeIds id)
@@ -98,7 +112,7 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
             CollideWithBodies = true
         };
 
-        foreach (var point in _spaceAroundPoints)
+        foreach (var point in SpaceAroundPoints)
         {
             query.Position = ToGlobal(point);
             var results = spaceState.IntersectPoint(query);
@@ -109,7 +123,7 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
             }
             else
             {
-                occupiedPoints.Add(query.Position);                    
+                occupiedPoints.Add(query.Position);
             }
         }
     }
@@ -128,10 +142,14 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
 
             for (Vector2 start = point + direction * step; point.DistanceTo(start) < point.DistanceTo(nextPoint); start += direction * step)
             {
-                aroundPoints.Add(start);
-                var marker = MarkerScene.Instantiate<Node2D>();
-                AddChild(marker);
-                marker.GlobalPosition = ToGlobal(start);
+                var globalStart = ToGlobal(start);
+                if (NavigationRegionController.Instance.IsPointInside(globalStart))
+                {
+                    aroundPoints.Add(start);
+                    var marker = MarkerScene.Instantiate<Node2D>();
+                    AddChild(marker);
+                    marker.GlobalPosition = globalStart;
+                }
             }
         }
 

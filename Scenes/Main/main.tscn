@@ -24,14 +24,18 @@
 [ext_resource type="Texture2D" uid="uid://ckj0epo2gp5cd" path="res://Assets/UI Elements/UI Elements/Icons/Icon_02.png" id="16_4a3kt"]
 [ext_resource type="PackedScene" uid="uid://bdj83x5vkxdjx" path="res://Scenes/Resources/Gold/gold_preset.tscn" id="16_koken"]
 [ext_resource type="Resource" uid="uid://b81s8vll42xy2" path="res://Scenes/Units/Types/r_warrior.tres" id="16_m6uf5"]
+[ext_resource type="PackedScene" uid="uid://cptso5a20thfd" path="res://Scenes/Units/Archer/archer.tscn" id="16_vae3x"]
 [ext_resource type="Resource" uid="uid://dy2ree62pofk1" path="res://Scenes/Buildings/Types/r_archery.tres" id="17_37bn8"]
 [ext_resource type="PackedScene" uid="uid://defkh2wiunq4g" path="res://Scenes/Resources/Meat/sheep.tscn" id="17_es6iu"]
 [ext_resource type="PackedScene" uid="uid://o6ovn6r5mcae" path="res://Scenes/Buildings/Archery/archery.tscn" id="17_gw8t2"]
+[ext_resource type="PackedScene" uid="uid://bkwjb1xjrmt43" path="res://Scenes/Units/Lancer/lancer.tscn" id="17_h4gp5"]
 [ext_resource type="Script" uid="uid://caks0w8rk10ox" path="res://Scenes/Resources/ResourceInfo.cs" id="17_ifk88"]
+[ext_resource type="PackedScene" uid="uid://n8g1qd6cignt" path="res://Scenes/Units/Monk/monk.tscn" id="18_gw1lt"]
 [ext_resource type="Resource" uid="uid://b8ycuiugnmrri" path="res://Scenes/Buildings/Types/r_barracks.tres" id="18_gw8t2"]
 [ext_resource type="PackedScene" uid="uid://bhwicgs7tna51" path="res://Scenes/Buildings/Barracks/barracks.tscn" id="18_nsdex"]
 [ext_resource type="PackedScene" uid="uid://dxfs7l3k65nvi" path="res://Scenes/Buildings/Castle/castle.tscn" id="19_eo50k"]
 [ext_resource type="Resource" uid="uid://u24n2a8v85ov" path="res://Scenes/Buildings/Types/r_castle.tres" id="19_nsdex"]
+[ext_resource type="PackedScene" uid="uid://cqxccea4iisej" path="res://Scenes/Units/Warrior/warrior.tscn" id="20_c8mgu"]
 [ext_resource type="Resource" uid="uid://c3qhmxdssqwd0" path="res://Scenes/Buildings/Types/r_monastery.tres" id="20_eo50k"]
 [ext_resource type="PackedScene" uid="uid://gbgcj1ms1bp7" path="res://Scenes/Buildings/Monastery/monastery.tscn" id="20_vae3x"]
 [ext_resource type="PackedScene" uid="uid://ciqpg25wy10i2" path="res://Scenes/Buildings/Tower/tower.tscn" id="21_h4gp5"]
@@ -99,11 +103,11 @@ Buildings = Dictionary[int, Object]({
 5: ExtResource("21_vae3x")
 })
 UnitScenes = Dictionary[int, PackedScene]({
-1: ExtResource("9_hryqi"),
-2: ExtResource("9_hryqi"),
-3: ExtResource("9_hryqi"),
+1: ExtResource("16_vae3x"),
+2: ExtResource("17_h4gp5"),
+3: ExtResource("18_gw1lt"),
 4: ExtResource("9_hryqi"),
-5: ExtResource("9_hryqi")
+5: ExtResource("20_c8mgu")
 })
 BuildingScenes = Dictionary[int, PackedScene]({
 1: ExtResource("17_gw8t2"),

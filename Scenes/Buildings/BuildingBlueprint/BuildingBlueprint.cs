@@ -30,15 +30,7 @@ public partial class BuildingBlueprint : Node2D
         }
 
         Deployed = true;
-
-        Building.Modulate = Colors.White;
-        Building.SetProcess(true);
-        Building.CollisionPolygon2D.Disabled = false;
-
-        foreach (var obstacle in Building.Obstacles)
-        {
-            obstacle.AvoidanceEnabled = true;
-        }
+        Building.Deploy();
         Building.Reparent(to);
         NavigationRegionController.Instance.BakeNavigationPolygon(true);
         return true;

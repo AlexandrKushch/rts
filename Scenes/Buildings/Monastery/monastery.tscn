@@ -33,14 +33,14 @@ position = Vector2(36, -8)
 radius = 30.0
 
 [node name="NavigationObstacle2D3" type="NavigationObstacle2D" parent="." index="5" unique_id=377817090]
-position = Vector2(-41, -57)
+position = Vector2(-41, -37)
 radius = 30.0
 
 [node name="NavigationObstacle2D4" type="NavigationObstacle2D" parent="." index="6" unique_id=2054179555]
-position = Vector2(42, -55)
+position = Vector2(42, -37)
 radius = 30.0
 
 [node name="CollisionPolygon2D" parent="." index="7" unique_id=168278068]
-polygon = PackedVector2Array(0, 15, 55, 15, 65, -70, -65, -70, -55, 15)
+polygon = PackedVector2Array(0, 15, 55, 15, 65, -50, -65, -50, -55, 15)
 
 [editable path="BuildingSelectableComponent"]

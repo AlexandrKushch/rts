@@ -33,15 +33,15 @@ position = Vector2(50, 2)
 radius = 15.0
 
 [node name="NavigationObstacle2D3" type="NavigationObstacle2D" parent="." index="5" unique_id=730362715]
-position = Vector2(60, -35)
+position = Vector2(65, -54)
 radius = 15.0
 
 [node name="NavigationObstacle2D4" type="NavigationObstacle2D" parent="." index="6" unique_id=1942465228]
-position = Vector2(-62, -35)
+position = Vector2(-65, -54)
 radius = 15.0
 
 [node name="CollisionPolygon2D" parent="." index="7" unique_id=168278068]
-polygon = PackedVector2Array(0, 10, 55, 10, 70, -40, -70, -40, -55, 10)
+polygon = PackedVector2Array(0, 10, 55, 10, 70, -60, -70, -60, -55, 10)
 
 [node name="UiBuildingPopup" parent="." index="8" unique_id=540837747]
 Radius = 125.0
