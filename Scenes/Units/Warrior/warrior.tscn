@@ -1,18 +1,22 @@
 [gd_scene format=3 uid="uid://cqxccea4iisej"]
 
 [ext_resource type="PackedScene" uid="uid://c5ni0fi5ycvwj" path="res://Scenes/Units/unit_base.tscn" id="1_jxcyl"]
-[ext_resource type="Script" uid="uid://721wi7gt8mik" path="res://Scenes/Units/Archer/Archer.cs" id="2_kvhdx"]
+[ext_resource type="Script" uid="uid://c3skjbocoyk12" path="res://Scenes/Units/Warrior/Warrior.cs" id="2_bbpbx"]
+[ext_resource type="Script" uid="uid://blpk7b5utk33r" path="res://Scenes/Units/Warrior/WarriorVisual.cs" id="3_546yd"]
 [ext_resource type="Resource" uid="uid://b81s8vll42xy2" path="res://Scenes/Units/Types/r_warrior.tres" id="3_intd2"]
-[ext_resource type="Script" uid="uid://td0hl5a7lqvt" path="res://Scenes/Units/UnitVisualBase.cs" id="3_kvhdx"]
 [ext_resource type="Texture2D" uid="uid://0v1r6vmklik1" path="res://Assets/Units/Blue Units/Warrior/Warrior_Idle.png" id="3_ypcdl"]
 [ext_resource type="Texture2D" uid="uid://nx6qj76be3eg" path="res://Assets/Units/Blue Units/Warrior/Warrior_Attack1.png" id="4_kvhdx"]
 [ext_resource type="Texture2D" uid="uid://cpfl3rpyy5btc" path="res://Assets/Units/Blue Units/Warrior/Warrior_Run.png" id="5_intd2"]
+[ext_resource type="Texture2D" uid="uid://bvp3vvvdtdg3m" path="res://Assets/Units/Blue Units/Warrior/Warrior_Guard.png" id="7_546yd"]
+[ext_resource type="Texture2D" uid="uid://daulrfkfskpeh" path="res://Assets/Units/Blue Units/Warrior/Warrior_Attack2.png" id="7_bbpbx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nhsra"]
 size = Vector2(72, 97)
 
-[sub_resource type="Animation" id="Animation_546yd"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_wscwa"]
+resource_name = "run"
+length = 0.4
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -20,34 +24,115 @@ tracks/0/path = NodePath("Visual/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [0]
+"values": [0, 1, 2, 3]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Visual/Sprite2D:texture")
+tracks/1/path = NodePath("Visual/Sprite2D:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_ypcdl")]
+"values": [4]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Visual/Sprite2D:hframes")
+tracks/2/path = NodePath("Visual/Sprite2D:texture")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [8]
+"values": [ExtResource("4_kvhdx")]
+}
+
+[sub_resource type="Animation" id="Animation_5husr"]
+length = 0.39999999999999997
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visual/Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visual/Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_bbpbx")]
+}
+
+[sub_resource type="Animation" id="Animation_dhetd"]
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visual/Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visual/Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_546yd")]
 }
 
 [sub_resource type="Animation" id="Animation_3yhs5"]
@@ -92,10 +177,8 @@ tracks/2/keys = {
 "values": [ExtResource("3_ypcdl")]
 }
 
-[sub_resource type="Animation" id="Animation_wscwa"]
-resource_name = "run"
-length = 0.4
-step = 0.1
+[sub_resource type="Animation" id="Animation_546yd"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -103,10 +186,10 @@ tracks/0/path = NodePath("Visual/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -118,7 +201,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_kvhdx")]
+"values": [ExtResource("3_ypcdl")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -130,7 +213,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [4]
+"values": [8]
 }
 
 [sub_resource type="Animation" id="Animation_kk860"]
@@ -153,38 +236,40 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Visual/Sprite2D:texture")
+tracks/1/path = NodePath("Visual/Sprite2D:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("5_intd2")]
+"values": [6]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Visual/Sprite2D:hframes")
+tracks/2/path = NodePath("Visual/Sprite2D:texture")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [6]
+"values": [ExtResource("5_intd2")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5husr"]
 _data = {
+&"Attack1": SubResource("Animation_wscwa"),
+&"Attack2": SubResource("Animation_5husr"),
+&"Guard": SubResource("Animation_dhetd"),
+&"Idle": SubResource("Animation_3yhs5"),
 &"RESET": SubResource("Animation_546yd"),
-&"idle": SubResource("Animation_3yhs5"),
-&"interact": SubResource("Animation_wscwa"),
-&"run": SubResource("Animation_kk860")
+&"Run": SubResource("Animation_kk860")
 }
 
 [node name="Warrior" unique_id=1673489485 instance=ExtResource("1_jxcyl")]
-script = ExtResource("2_kvhdx")
+script = ExtResource("2_bbpbx")
 Meta = ExtResource("3_intd2")
 
 [node name="UnitSelectableComponent" parent="." index="3" unique_id=550510253 node_paths=PackedStringArray("EffectedOn")]
@@ -195,7 +280,7 @@ position = Vector2(0, -34.5)
 shape = SubResource("RectangleShape2D_nhsra")
 
 [node name="Visual" type="Node2D" parent="." index="4" unique_id=1311978416]
-script = ExtResource("3_kvhdx")
+script = ExtResource("3_546yd")
 
 [node name="Sprite2D" type="Sprite2D" parent="Visual" index="0" unique_id=22426039]
 position = Vector2(0, -29)

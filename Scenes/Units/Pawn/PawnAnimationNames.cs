@@ -2,10 +2,10 @@ public class PawnAnimationNames
 {
     public const string Reset = "RESET";
 
-    public const string Idle = "idle";
-    public const string Run = "run";
+    public const string Idle = "Idle";
+    public const string Run = "Run";
 
-    public const string Interact = "interact";
+    public const string Interact = "Interact";
 
-    public const string Instrument = "instrument";
+    public const string Instrument = "Instrument";
 }

@@ -29,18 +29,22 @@ public partial class UiSelectedUnitsContainer : HBoxContainer
 
     public void UpdateUI()
     {
-        var newSelectedUnitsCount = UnitsController.Instance.Selections
+        var newSelectedUnitsQuery = UnitsController.Instance.Selections
             .Select(x => x.EffectedOn as UnitBase)
-            .Where(x => x != null)
+            .Where(x => x != null);
+
+        var newSelectedUnits = newSelectedUnitsQuery
+            .ToDictionary(x => x.Meta.Id, x => x.Meta);
+        var newSelectedUnitsCount = newSelectedUnitsQuery
             .GroupBy(x => x.Meta.Id)
             .ToDictionary(x => x.Key, x => x.Count());
         
-        var itemsToAdd = newSelectedUnitsCount.Where(x => !_selectedUnitsCount.ContainsKey(x.Key));
-        var itemsToRemove = _selectedUnitsCount.Where(x => !newSelectedUnitsCount.ContainsKey(x.Key));
+        var itemsToAdd = newSelectedUnits.Where(x => !_selectedUnitsCount.ContainsKey(x.Key));
+        var itemsToRemove = _selectedUnitsCount.Where(x => !newSelectedUnits.ContainsKey(x.Key));
 
         foreach (var item in itemsToAdd)
         {
-            AddItem(item.Key);
+            AddItem(item.Value);
         }
 
         foreach (var item in itemsToRemove)
@@ -107,15 +111,15 @@ public partial class UiSelectedUnitsContainer : HBoxContainer
         }
     }
 
-    private void AddItem(UnitTypeIds unitId)
+    private void AddItem(UnitType unitType)
     {
         var item = UiSelectedUnitItemScene.Instantiate<UiSelectedUnitItem>();
         AddChild(item);
 
-        item.Id = unitId;
-        item.Icon.Texture = GlobalResources.Instance.Units[unitId].Icon;
+        item.Id = unitType.Id;
+        item.Icon.Texture = unitType.Icon;
 
-        _items.Add(unitId, item);
+        _items.Add(unitType.Id, item);
         
         var tweenObject = item.Icon;
 

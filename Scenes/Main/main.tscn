@@ -22,6 +22,7 @@
 [ext_resource type="Resource" uid="uid://cmmqwgiyv1amy" path="res://Scenes/Units/Types/r_pawn.tres" id="15_go6uc"]
 [ext_resource type="Script" uid="uid://bmym3all5d5mm" path="res://Scenes/Main/Hud.cs" id="15_wliom"]
 [ext_resource type="Texture2D" uid="uid://ckj0epo2gp5cd" path="res://Assets/UI Elements/UI Elements/Icons/Icon_02.png" id="16_4a3kt"]
+[ext_resource type="Resource" uid="uid://8o6rwtbamayv" path="res://Scenes/Teams/Types/r_team_black.tres" id="16_gw1lt"]
 [ext_resource type="PackedScene" uid="uid://bdj83x5vkxdjx" path="res://Scenes/Resources/Gold/gold_preset.tscn" id="16_koken"]
 [ext_resource type="Resource" uid="uid://b81s8vll42xy2" path="res://Scenes/Units/Types/r_warrior.tres" id="16_m6uf5"]
 [ext_resource type="PackedScene" uid="uid://cptso5a20thfd" path="res://Scenes/Units/Archer/archer.tscn" id="16_vae3x"]
@@ -44,7 +45,9 @@
 [ext_resource type="PackedScene" uid="uid://ri0xagskbbyu" path="res://Scenes/UI/Buildings/UiBuildingControl/ui_building_control.tscn" id="22_4a3kt"]
 [ext_resource type="PackedScene" uid="uid://b231gr2h4tst0" path="res://Scenes/UI/Resources/UIResources/ui_resources.tscn" id="22_4o5wv"]
 [ext_resource type="PackedScene" uid="uid://qiy2m5y8a5no" path="res://Scenes/UI/UiCursorTooltip/ui_cursor_tooltip.tscn" id="24_ifk88"]
+[ext_resource type="Script" uid="uid://lawrrgfo58ew" path="res://Scenes/Controllers/TeamController.cs" id="32_h4gp5"]
 [ext_resource type="PackedScene" uid="uid://88o7aad1m0ln" path="res://Scenes/UI/Buildings/building_grid.tscn" id="37_fy12w"]
+[ext_resource type="Script" uid="uid://f7ntvr3jr462" path="res://Scenes/Main/DELME.cs" id="48_c8mgu"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_xrivr"]
 
@@ -102,6 +105,9 @@ Buildings = Dictionary[int, Object]({
 4: ExtResource("20_eo50k"),
 5: ExtResource("21_vae3x")
 })
+Teams = Dictionary[int, Object]({
+4: ExtResource("16_gw1lt")
+})
 UnitScenes = Dictionary[int, PackedScene]({
 1: ExtResource("16_vae3x"),
 2: ExtResource("17_h4gp5"),
@@ -134,6 +140,9 @@ BuildingGrid = NodePath("../../Map/NavigationRegion2D/BuildingGrid")
 
 [node name="ResourceController" type="Node2D" parent="Controllers" unique_id=1531060020]
 script = ExtResource("8_tdwxr")
+
+[node name="TeamController" type="Node2D" parent="Controllers" unique_id=44126685]
+script = ExtResource("32_h4gp5")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=891201985]
 zoom = Vector2(0.25, 0.25)
@@ -180,38 +189,6 @@ collision_mask = 1
 
 [node name="Pawn4" parent="Map/NavigationRegion2D/World" unique_id=400829926 instance=ExtResource("9_hryqi")]
 position = Vector2(441, 247)
-collision_mask = 1
-
-[node name="Pawn5" parent="Map/NavigationRegion2D/World" unique_id=1508332381 instance=ExtResource("9_hryqi")]
-position = Vector2(391, 229)
-collision_mask = 1
-
-[node name="Pawn6" parent="Map/NavigationRegion2D/World" unique_id=1684911376 instance=ExtResource("9_hryqi")]
-position = Vector2(391, 273)
-collision_mask = 1
-
-[node name="Pawn7" parent="Map/NavigationRegion2D/World" unique_id=1446575363 instance=ExtResource("9_hryqi")]
-position = Vector2(428, 292)
-collision_mask = 1
-
-[node name="Pawn8" parent="Map/NavigationRegion2D/World" unique_id=1475746276 instance=ExtResource("9_hryqi")]
-position = Vector2(487, 297)
-collision_mask = 1
-
-[node name="Pawn9" parent="Map/NavigationRegion2D/World" unique_id=1888855846 instance=ExtResource("9_hryqi")]
-position = Vector2(537, 286)
-collision_mask = 1
-
-[node name="Pawn10" parent="Map/NavigationRegion2D/World" unique_id=1566719133 instance=ExtResource("9_hryqi")]
-position = Vector2(581, 229)
-collision_mask = 1
-
-[node name="Pawn11" parent="Map/NavigationRegion2D/World" unique_id=1626849300 instance=ExtResource("9_hryqi")]
-position = Vector2(581, 160)
-collision_mask = 1
-
-[node name="Pawn12" parent="Map/NavigationRegion2D/World" unique_id=492978993 instance=ExtResource("9_hryqi")]
-position = Vector2(537, 215)
 collision_mask = 1
 
 [node name="Tree1" parent="Map/NavigationRegion2D/World" unique_id=1936357647 instance=ExtResource("10_6t3k2")]
@@ -307,6 +284,18 @@ position = Vector2(690, 192)
 [node name="Sheep5" parent="Map/NavigationRegion2D/World" unique_id=387458147 instance=ExtResource("17_es6iu")]
 position = Vector2(690, 192)
 
+[node name="Warrior" parent="Map/NavigationRegion2D/World" unique_id=1457291613 instance=ExtResource("20_c8mgu")]
+position = Vector2(575, 149)
+
+[node name="Lancer" parent="Map/NavigationRegion2D/World" unique_id=1882567422 instance=ExtResource("17_h4gp5")]
+position = Vector2(608, 254)
+
+[node name="Archer" parent="Map/NavigationRegion2D/World" unique_id=1148559058 instance=ExtResource("16_vae3x")]
+position = Vector2(564, 317)
+
+[node name="Monk" parent="Map/NavigationRegion2D/World" unique_id=609647047 instance=ExtResource("18_gw1lt")]
+position = Vector2(418, 312)
+
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1867642460]
 script = ExtResource("15_wliom")
 
@@ -318,3 +307,6 @@ script = ExtResource("15_wliom")
 
 [node name="UICursorTooltip" parent="HUD" unique_id=1935595318 instance=ExtResource("24_ifk88")]
 visible = false
+
+[node name="Node" type="Node" parent="." unique_id=1821256000]
+script = ExtResource("48_c8mgu")

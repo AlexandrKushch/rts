@@ -20,6 +20,8 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
 
     [Export] private PackedScene MarkerScene;
 
+    public TeamType Team { get; set; }
+
     public override void _Ready()
     {
         UiBuildingPopup = GetNode<UiBuildingPopup>(nameof(UiBuildingPopup));

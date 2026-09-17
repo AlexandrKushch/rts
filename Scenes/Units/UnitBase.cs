@@ -11,7 +11,9 @@ public partial class UnitBase : CharacterBody2D
 	public Node2D TargetObject { get; set; }
 
 	[Export]
-	public UnitType Meta { get; private set; }
+	public UnitType Meta { get; protected set; }
+
+    public TeamType Team { get; set; } = TeamType.Black;
 
 	public override void _Ready()
 	{

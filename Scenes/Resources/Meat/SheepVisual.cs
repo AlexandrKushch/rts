@@ -17,35 +17,35 @@ public partial class SheepVisual : Node2D
 
     public void UpdateMovement(Vector2 velocity)
     {
-        if (AnimationPlayer.CurrentAnimation.ToString().Contains(PawnAnimationNames.Interact, StringComparison.OrdinalIgnoreCase))
-        {
-            return;
-        }
+        // if (AnimationPlayer.CurrentAnimation.ToString().Contains(PawnAnimationNames.Interact, StringComparison.OrdinalIgnoreCase))
+        // {
+        //     return;
+        // }
 
-        Sprite2D.FlipH = velocity.Length() > 0 ? velocity.X < 0 : Sprite2D.FlipH;
+        // Sprite2D.FlipH = velocity.Length() > 0 ? velocity.X < 0 : Sprite2D.FlipH;
         
-        string animation = velocity.Length() > 0
-            ? PawnAnimationNames.Run
-            : PawnAnimationNames.Idle;
+        // string animation = velocity.Length() > 0
+        //     ? PawnAnimationNames.Run
+        //     : PawnAnimationNames.Idle;
 
-        if (AnimationPlayer.CurrentAnimation.Equals(animation))
-        {
-            return;
-        }
+        // if (AnimationPlayer.CurrentAnimation.Equals(animation))
+        // {
+        //     return;
+        // }
 
-        AnimationPlayer.Play(animation);
+        // AnimationPlayer.Play(animation);
     }
 
     public void Interact()
     {
-        string animation = PawnAnimationNames.Interact;
+        // string animation = PawnAnimationNames.Interact;
         
-        if (AnimationPlayer.CurrentAnimation.Equals(animation))
-        {
-            return;
-        }
+        // if (AnimationPlayer.CurrentAnimation.Equals(animation))
+        // {
+        //     return;
+        // }
 
-        AnimationPlayer.Play(animation);
+        // AnimationPlayer.Play(animation);
     }
 
     private void OnAnimationFinished(StringName animation)
