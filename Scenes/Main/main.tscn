@@ -47,7 +47,6 @@
 [ext_resource type="PackedScene" uid="uid://qiy2m5y8a5no" path="res://Scenes/UI/UiCursorTooltip/ui_cursor_tooltip.tscn" id="24_ifk88"]
 [ext_resource type="Script" uid="uid://lawrrgfo58ew" path="res://Scenes/Controllers/TeamController.cs" id="32_h4gp5"]
 [ext_resource type="PackedScene" uid="uid://88o7aad1m0ln" path="res://Scenes/UI/Buildings/building_grid.tscn" id="37_fy12w"]
-[ext_resource type="Script" uid="uid://f7ntvr3jr462" path="res://Scenes/Main/DELME.cs" id="48_c8mgu"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_xrivr"]
 
@@ -307,6 +306,3 @@ script = ExtResource("15_wliom")
 
 [node name="UICursorTooltip" parent="HUD" unique_id=1935595318 instance=ExtResource("24_ifk88")]
 visible = false
-
-[node name="Node" type="Node" parent="." unique_id=1821256000]
-script = ExtResource("48_c8mgu")

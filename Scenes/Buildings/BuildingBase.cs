@@ -54,7 +54,6 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
         TryGetOpenSpaceAround(out var occupiedPoints, out var openSpacePoints);
 
         var unit = GlobalResources.Instance.UnitScenes[id].Instantiate<UnitBase>();
-        GD.Print(openSpacePoints[0]);
         unit.GlobalPosition = openSpacePoints[0];
         BuildingController.Instance.World.AddChild(unit);
     }

@@ -18,7 +18,7 @@ public partial class UiSelectedUnitsContainer : HBoxContainer
     {
         foreach (var item in GetChildren())
         {
-            item.QueueFree();       
+            item.QueueFree();
         }
 
         BgBanner.Visible = false;
@@ -31,14 +31,15 @@ public partial class UiSelectedUnitsContainer : HBoxContainer
     {
         var newSelectedUnitsQuery = UnitsController.Instance.Selections
             .Select(x => x.EffectedOn as UnitBase)
-            .Where(x => x != null);
+            .Where(x => x != null)
+            .GroupBy(x => x.Meta.Id);
 
         var newSelectedUnits = newSelectedUnitsQuery
-            .ToDictionary(x => x.Meta.Id, x => x.Meta);
+            .Where(x => x.Count() > 0)
+            .ToDictionary(x => x.Key, x => x.First().Meta);
         var newSelectedUnitsCount = newSelectedUnitsQuery
-            .GroupBy(x => x.Meta.Id)
             .ToDictionary(x => x.Key, x => x.Count());
-        
+
         var itemsToAdd = newSelectedUnits.Where(x => !_selectedUnitsCount.ContainsKey(x.Key));
         var itemsToRemove = _selectedUnitsCount.Where(x => !newSelectedUnits.ContainsKey(x.Key));
 
@@ -120,7 +121,7 @@ public partial class UiSelectedUnitsContainer : HBoxContainer
         item.Icon.Texture = unitType.Icon;
 
         _items.Add(unitType.Id, item);
-        
+
         var tweenObject = item.Icon;
 
         var tweenPosition = CreateTween().SetTrans(Tween.TransitionType.Bounce);
@@ -132,7 +133,7 @@ public partial class UiSelectedUnitsContainer : HBoxContainer
         float tweenSizeDuration = 0.2f;
         tweenSize.TweenProperty(tweenObject, "scale", new Vector2(0.9f, 1.1f), tweenSizeDuration / 2);
         tweenSize.TweenProperty(tweenObject, "scale", Vector2.One, tweenSizeDuration / 2);
-        
+
         var tween = CreateTween().SetParallel();
         tween.TweenSubtween(tweenSize);
         tween.TweenSubtween(tweenSize);

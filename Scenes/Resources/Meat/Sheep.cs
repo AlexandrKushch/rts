@@ -17,6 +17,6 @@ public partial class Sheep : UnitBase
 	public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);
-		Visual.UpdateMovement(Velocity);
+		Visual.UpdateMovement(Velocity, string.Empty);
 	}
 }

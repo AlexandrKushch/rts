@@ -15,7 +15,7 @@ public partial class Archer : UnitBase
         if (match.Success
             && int.TryParse(match.Groups[1].Value, out int index))
         {
-            index += 5 * (int)Team;
+            index = (index % 5) + (5 * (int)Team);
             string indexString = index.ToString("00");
             string resourcePath = Regex.Replace(Meta.Icon.ResourcePath, pattern, $"_{indexString}.png");
 
