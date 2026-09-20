@@ -1,38 +1,17 @@
 using Godot;
 
-public partial class UiResources : HBoxContainer
+public partial class UiResources : Control
 {
-    private UIResourceItem[] _resouorces;
+    private NinePatchRect Banner;
 
     public override void _Ready()
     {
-        var item = GetChild<UIResourceItem>(0).Duplicate() as UIResourceItem;
+        Banner = GetNode<NinePatchRect>(nameof(Banner));
 
-        foreach (var child in GetChildren())
-        {
-            child.QueueFree();
-        }
-
-        _resouorces = new UIResourceItem[GlobalResources.Instance.GatheringResources.Count];
-        int i = 0;
-
-        foreach (var resource in GlobalResources.Instance.GatheringResources)
-        {
-            var newItem = item.Duplicate() as UIResourceItem;
-            AddChild(newItem);
-            newItem.Type = resource.Value.Type;
-            newItem.Icon.Texture = resource.Value.Icon;
-            newItem.Value.Text = resource.Value.DefaultValue.ToString();
-            _resouorces[i] = newItem;
-            i++;
-        }
-    }
-
-    public override void _Process(double delta)
-    {
-        foreach (var resource in _resouorces)
-        {
-            resource.Value.Text = ResourceController.Instance.CollectedResources[resource.Type].ToString();
-        }        
+        var player = GetParent().GetParent<PlayerBase>();
+        var bannerRegionRect = Banner.RegionRect;
+        int offset = 128;
+        bannerRegionRect.Position = new Vector2(bannerRegionRect.Position.X, bannerRegionRect.Position.Y + offset * (int)player.Team);
+        Banner.RegionRect = bannerRegionRect;
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Godot;
 
 public partial class Pawn : UnitBase
@@ -24,8 +25,6 @@ public partial class Pawn : UnitBase
         Visual = GetNode<PawnVisual>(nameof(Visual));
         StateMachine = GetNode<PawnStateManagerBase>(nameof(StateMachine));
         _updateMovementAnimation = (v, _) => { Visual.UpdateMovement(v, string.Empty); };
-
-        Visual.SetupColor(Team, Meta);
     }
 
     public override void _PhysicsProcess(double delta)

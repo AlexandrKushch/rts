@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TeamResource" format=3 uid="uid://cbq18ad7vp5rd"]
+
+[ext_resource type="Script" uid="uid://bcc3o5ktans6o" path="res://Scenes/Teams/TeamResource.cs" id="1_rwec2"]
+
+[resource]
+script = ExtResource("1_rwec2")
+Id = 1
+UnitsPath = "res://Assets/Units/Red Units/"
+BuildingsPath = "res://Assets/Buildings/Red Buildings/"
+metadata/_custom_type_script = "uid://bcc3o5ktans6o"

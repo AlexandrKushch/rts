@@ -17,7 +17,9 @@ public partial class BuildingBlueprint : Node2D
         if (itemScene != null)
         {
             Building = itemScene.Instantiate<BuildingBase>();
+            Building.Resource = Resource;
             AddChild(Building);
+            Building.Visual.Texture = Resource.Icon;
             SetAsBlueprint();
         }
     }

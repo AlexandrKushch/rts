@@ -92,7 +92,7 @@ public partial class BuildingController : Node2D
         }
     }
 
-    public void InitBuildingBlueprint(BuildResource resource)
+    public void InitBuildingBlueprint(BuildResource resource, TeamType team)
     {
         if (IsInstanceValid(_blueprint))
         {
@@ -102,6 +102,8 @@ public partial class BuildingController : Node2D
         _blueprint = BuildingBlueprintScene.Instantiate<BuildingBlueprint>();
         _blueprint.Resource = resource;
         World.AddChild(_blueprint);
+
+        _blueprint.Building.Team = team;
 
         BlueprintActive = true;
         BuildingGrid.Visible = BlueprintActive;

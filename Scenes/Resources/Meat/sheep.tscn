@@ -194,8 +194,8 @@ shape = SubResource("RectangleShape2D_fbmh2")
 script = ExtResource("3_c3se6")
 
 [node name="Sprite2D" type="Sprite2D" parent="Visual" unique_id=1000010458]
-texture = ExtResource("1_d1k6x")
-hframes = 6
+texture = ExtResource("1_1ffw7")
+hframes = 12
 frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" unique_id=1262780307]

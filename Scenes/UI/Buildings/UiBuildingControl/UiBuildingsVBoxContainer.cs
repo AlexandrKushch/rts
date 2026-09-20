@@ -7,6 +7,7 @@ public partial class UiBuildingsVBoxContainer : Control
 
     public override void _Ready()
     {
+        var humanPlayer = GetParent().GetParent<UiBuildingControl>().HumanPlayer;
         var buildingItem = GetChild<UiBuildingItem>(0);
 
         foreach (var child in GetChildren())
@@ -14,10 +15,11 @@ public partial class UiBuildingsVBoxContainer : Control
             child.QueueFree();
         }
 
-        foreach (var building in GlobalResources.Instance.Buildings)
+        foreach (var building in humanPlayer.GlobalResources.Buildings)
         {
             var newBuildingItem = buildingItem.Duplicate() as UiBuildingItem;
             newBuildingItem.Resource = building.Value;
+            newBuildingItem.Team = humanPlayer.Team;
             AddChild(newBuildingItem);
         }
     }

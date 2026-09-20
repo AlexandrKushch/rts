@@ -1,17 +1,11 @@
 [gd_scene format=3 uid="uid://ri0xagskbbyu"]
 
-[ext_resource type="Texture2D" uid="uid://7hr82ohprdp4" path="res://Assets/UI Elements/UI Banners from the store page/ribbon.png" id="1_f64go"]
 [ext_resource type="Texture2D" uid="uid://chq4cjxnnhc4k" path="res://Assets/UI Elements/UI Banners from the store page/banner.png" id="2_eox38"]
-[ext_resource type="Texture2D" uid="uid://bbwms4xd0g6ij" path="res://Assets/UI Elements/UI Banners from the store page/ribbon-close.png" id="3_eox38"]
+[ext_resource type="Texture2D" uid="uid://c4v2yyeuiy5pd" path="res://Assets/UI Elements/UI Banners from the store page/Ribbons/Ribbons.png" id="3_mgia4"]
 [ext_resource type="Texture2D" uid="uid://byv6mcctl0oqa" path="res://Assets/UI Elements/UI Elements/Banners/Banner_Slots.png" id="4_21vhc"]
 [ext_resource type="Script" uid="uid://cbmw8d7urhw7l" path="res://Scenes/UI/Buildings/UiBuildingControl/UiBuildingControl.cs" id="4_exx37"]
-[ext_resource type="Resource" uid="uid://u24n2a8v85ov" path="res://Scenes/Buildings/Types/r_castle.tres" id="5_gy2ql"]
 [ext_resource type="Texture2D" uid="uid://b1a0047iar2io" path="res://Assets/Buildings/Blue Buildings/Archery.png" id="5_kp43j"]
 [ext_resource type="Script" uid="uid://k0icjuia2osj" path="res://Scenes/UI/Buildings/UiBuildingControl/UiBuildingsVBoxContainer.cs" id="5_nluwe"]
-[ext_resource type="Resource" uid="uid://b8ycuiugnmrri" path="res://Scenes/Buildings/Types/r_barracks.tres" id="6_nluwe"]
-[ext_resource type="Resource" uid="uid://dy2ree62pofk1" path="res://Scenes/Buildings/Types/r_archery.tres" id="7_r75i8"]
-[ext_resource type="Resource" uid="uid://c3qhmxdssqwd0" path="res://Scenes/Buildings/Types/r_monastery.tres" id="8_k15p3"]
-[ext_resource type="Resource" uid="uid://3fqpdgsfv17m" path="res://Scenes/Buildings/Types/r_tower.tres" id="9_aqrqo"]
 [ext_resource type="PackedScene" uid="uid://c57j2yxf5jasx" path="res://Scenes/Buildings/BuildingBlueprint/building_blueprint.tscn" id="10_o08uo"]
 [ext_resource type="Script" uid="uid://ft75va7n5dqd" path="res://Scenes/UI/Buildings/UiBuildingControl/UiBuildingItem.cs" id="11_ur3mk"]
 [ext_resource type="Texture2D" uid="uid://b2pch1h077dfi" path="res://Assets/Terrain/Tileset/Shadow.png" id="14_nluwe"]
@@ -41,38 +35,41 @@ patch_margin_left = 64
 patch_margin_top = 64
 patch_margin_right = 64
 patch_margin_bottom = 64
-axis_stretch_horizontal = 2
+axis_stretch_horizontal = 1
 axis_stretch_vertical = 2
 
-[node name="Ribbon" type="TextureRect" parent="Banner" unique_id=1413503464]
+[node name="Ribbon" type="NinePatchRect" parent="Banner" unique_id=811216992]
 z_index = -1
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -70.5
-offset_right = 70.5
-offset_bottom = 106.0
+offset_left = -72.666664
+offset_right = 68.333336
+offset_bottom = 128.0
 grow_horizontal = 2
 offset_transform_enabled = true
 offset_transform_position_ratio = Vector2(-0.15, -0.9)
-texture = ExtResource("1_f64go")
+texture = ExtResource("3_mgia4")
+region_rect = Rect2(256, 0, 143, 128)
 
-[node name="RibbonClose" type="TextureRect" parent="Banner" unique_id=854358581]
+[node name="RibbonClose" type="NinePatchRect" parent="Banner" unique_id=1717974843]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -45.0
-offset_top = -107.0
-offset_right = 45.0
+offset_left = -63.999992
+offset_top = -128.0
+offset_right = 63.999992
 grow_horizontal = 2
 grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 0.5)
 offset_transform_enabled = true
-offset_transform_position_ratio = Vector2(0, 0.83)
-texture = ExtResource("3_eox38")
+offset_transform_position_ratio = Vector2(0, 0.732)
+texture = ExtResource("3_mgia4")
+region_rect = Rect2(0, 0, 128, 128)
 
 [node name="BuildingsScrollable" type="ScrollContainer" parent="." unique_id=1748479862]
 layout_mode = 1

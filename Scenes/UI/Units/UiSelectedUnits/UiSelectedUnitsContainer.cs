@@ -7,6 +7,8 @@ public partial class UiSelectedUnitsContainer : HBoxContainer
 {
     private float _bgBannerOneItemWidth;
 
+    private UiSelectedUnits _uiSelectedUnits;
+
     private Dictionary<UnitTypeIds, int> _selectedUnitsCount = new Dictionary<UnitTypeIds, int>();
     private Dictionary<UnitTypeIds, UiSelectedUnitItem> _items = new Dictionary<UnitTypeIds, UiSelectedUnitItem>();
 
@@ -24,28 +26,27 @@ public partial class UiSelectedUnitsContainer : HBoxContainer
         BgBanner.Visible = false;
         _bgBannerOneItemWidth = BgBanner.Size.X;
 
-        UnitsController.Instance.Connect(UnitsController.SignalName.SelectionChanged, Callable.From(UpdateUI));
+        _uiSelectedUnits = GetParent<UiSelectedUnits>();
+
+        _uiSelectedUnits.HumanPlayer.UnitsController.Connect(UnitsController.SignalName.SelectionChanged, Callable.From(UpdateUI));
     }
 
     public void UpdateUI()
     {
-        var newSelectedUnitsQuery = UnitsController.Instance.Selections
+        var newSelectedUnitsQuery = _uiSelectedUnits.HumanPlayer.UnitsController.Selections
             .Select(x => x.EffectedOn as UnitBase)
             .Where(x => x != null)
             .GroupBy(x => x.Meta.Id);
 
-        var newSelectedUnits = newSelectedUnitsQuery
-            .Where(x => x.Count() > 0)
-            .ToDictionary(x => x.Key, x => x.First().Meta);
         var newSelectedUnitsCount = newSelectedUnitsQuery
             .ToDictionary(x => x.Key, x => x.Count());
 
-        var itemsToAdd = newSelectedUnits.Where(x => !_selectedUnitsCount.ContainsKey(x.Key));
-        var itemsToRemove = _selectedUnitsCount.Where(x => !newSelectedUnits.ContainsKey(x.Key));
+        var itemsToAdd = newSelectedUnitsCount.Where(x => !_selectedUnitsCount.ContainsKey(x.Key));
+        var itemsToRemove = _selectedUnitsCount.Where(x => !newSelectedUnitsCount.ContainsKey(x.Key));
 
         foreach (var item in itemsToAdd)
         {
-            AddItem(item.Value);
+            AddItem(item.Key);
         }
 
         foreach (var item in itemsToRemove)
@@ -112,15 +113,15 @@ public partial class UiSelectedUnitsContainer : HBoxContainer
         }
     }
 
-    private void AddItem(UnitType unitType)
+    private void AddItem(UnitTypeIds unitId)
     {
         var item = UiSelectedUnitItemScene.Instantiate<UiSelectedUnitItem>();
         AddChild(item);
 
-        item.Id = unitType.Id;
-        item.Icon.Texture = unitType.Icon;
+        item.Id = unitId;
+        item.Icon.Texture = _uiSelectedUnits.HumanPlayer.GlobalResources.Units[unitId].Icon;
 
-        _items.Add(unitType.Id, item);
+        _items.Add(unitId, item);
 
         var tweenObject = item.Icon;
 

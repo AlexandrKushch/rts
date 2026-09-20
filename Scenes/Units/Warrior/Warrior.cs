@@ -1,5 +1,4 @@
-using Godot;
-using System;
+
 
 public partial class Warrior : UnitBase
 {
@@ -9,8 +8,6 @@ public partial class Warrior : UnitBase
     {
         base._Ready();
         Visual = GetNode<WarriorVisual>(nameof(Visual));
-
-        Visual.SetupColor(Team, Meta);
     }
 
     public override void _PhysicsProcess(double delta)

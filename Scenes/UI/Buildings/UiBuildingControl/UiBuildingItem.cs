@@ -9,6 +9,7 @@ public partial class UiBuildingItem : Control, IHasTooltip
     private TextureRect Icon { get; set; }
     private Button Button { get; set; }
 
+    public TeamType Team;
     public BuildResource Resource { get; set; }
 
     public override void _Ready()
@@ -40,7 +41,9 @@ public partial class UiBuildingItem : Control, IHasTooltip
             }
         }
         
-        BuildingController.Instance.InitBuildingBlueprint(Resource);
+        GD.Print(Team);
+
+        BuildingController.Instance.InitBuildingBlueprint(Resource, Team);
         UpdateHighlight(false);
     }
 

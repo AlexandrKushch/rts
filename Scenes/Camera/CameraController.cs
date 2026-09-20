@@ -28,7 +28,7 @@ public partial class CameraController : Node2D
 		ProcessZoom((float)delta);
 	}
 
-    public override void _UnhandledInput(InputEvent input)
+	public override void _UnhandledInput(InputEvent input)
 	{
 		if (input is InputEventMouseButton inputButton)
 		{

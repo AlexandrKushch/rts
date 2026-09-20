@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://75y4i6gxnve3"]
 
 [ext_resource type="Script" uid="uid://wefxur340men" path="res://Scenes/UI/Buildings/UiBuildingPopup/UiBuildingPopupItem.cs" id="1_a6p73"]
-[ext_resource type="Texture2D" uid="uid://c8oits44a1wdm" path="res://Assets/UI Elements/UI Elements/Buttons/SmallBlueRoundButton_Regular.png" id="2_a6p73"]
 [ext_resource type="PackedScene" uid="uid://c5l1cgfanyjkf" path="res://Scenes/UI/UiButton/ui_button.tscn" id="2_ldf1o"]
 [ext_resource type="Texture2D" uid="uid://vlbifplkcaj7" path="res://Assets/UI Elements/UI Elements/Human Avatars/Avatars_01.png" id="3_a6p73"]
-[ext_resource type="Texture2D" uid="uid://cwl5868ku73r2" path="res://Assets/UI Elements/UI Elements/Buttons/SmallBlueRoundButton_Hover.png" id="3_cay47"]
+[ext_resource type="Texture2D" uid="uid://d16r56ns05ce3" path="res://Assets/UI Elements/UI Elements/Buttons/SmallWoodRoundButton_Regular.png" id="3_uc7cs"]
 [ext_resource type="Texture2D" uid="uid://hyhcukocmldk" path="res://Assets/UI Elements/UI Elements/Buttons/TinySquareRedButton.png" id="3_wtad6"]
+[ext_resource type="Texture2D" uid="uid://de5a1gx0t3pdk" path="res://Assets/UI Elements/UI Elements/Buttons/SmallWoodRoundButton_Hover.png" id="4_uc7cs"]
 [ext_resource type="Texture2D" uid="uid://bfp8j5epgh40d" path="res://Assets/UI Elements/UI Elements/Buttons/TinySquareRedButton_Hover.png" id="5_bjwj2"]
 [ext_resource type="BitMap" uid="uid://ys3odowxtrp2" path="res://Assets/UI Elements/UI Elements/Buttons/SmallBlueRoundButton_Bitmap.png" id="5_lswju"]
 [ext_resource type="BitMap" uid="uid://c0mlm2h63wiv1" path="res://Assets/UI Elements/UI Elements/Buttons/TinySquareRedButton_Bitmap.png" id="7_bj754"]
@@ -27,15 +27,16 @@ scale = Vector2(0.6, 0.6)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 script = ExtResource("1_a6p73")
 
-[node name="AddQueue" parent="." unique_id=710057526 instance=ExtResource("2_ldf1o")]
+[node name="AddQueue" parent="." unique_id=710057526 node_paths=PackedStringArray("TweenWith") instance=ExtResource("2_ldf1o")]
 layout_mode = 1
 offset_left = -64.0
 offset_top = -64.0
 offset_right = 64.0
 offset_bottom = 64.0
-texture_normal = ExtResource("2_a6p73")
-texture_hover = ExtResource("3_cay47")
+texture_normal = ExtResource("3_uc7cs")
+texture_hover = ExtResource("4_uc7cs")
 texture_click_mask = ExtResource("5_lswju")
+TweenWith = NodePath("../ProgressBar")
 
 [node name="ProgressBar" type="TextureProgressBar" parent="." unique_id=424226668]
 layout_mode = 1
@@ -48,10 +49,11 @@ offset_right = 32.0
 offset_bottom = 31.99997
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 mouse_filter = 2
 fill_mode = 4
 radial_center_offset = Vector2(0.5, 0.5)
-texture_progress = ExtResource("2_a6p73")
+texture_progress = ExtResource("3_uc7cs")
 tint_progress = Color(0.16748855, 0.9999998, 0.40862802, 1)
 
 [node name="RemoveQueue" parent="." unique_id=1686197266 instance=ExtResource("2_ldf1o")]

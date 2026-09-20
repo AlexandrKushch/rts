@@ -13,10 +13,11 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
     public Vector2[] SpaceAroundPoints { get; private set; }
 
     public bool Built { get; private set; } = false;
+    public Sprite2D Visual { get; private set; }
     public CollisionPolygon2D CollisionPolygon2D { get; private set; }
     public NavigationObstacle2D[] Obstacles { get; private set; }
 
-    [Export] public BuildResource Resource { get; private set; }
+    [Export] public BuildResource Resource { get; set; }
 
     [Export] private PackedScene MarkerScene;
 
@@ -26,6 +27,7 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
     {
         UiBuildingPopup = GetNode<UiBuildingPopup>(nameof(UiBuildingPopup));
         ProducingQueueManager = GetNode<ProducingQueueManager>(nameof(ProducingQueueManager));
+        Visual = GetNode<Sprite2D>(nameof(Visual));
         CollisionPolygon2D = GetNode<CollisionPolygon2D>(nameof(CollisionPolygon2D));
         Obstacles = GetChildren().Where(x => x is NavigationObstacle2D).Select(x => x as NavigationObstacle2D).ToArray();
 
@@ -53,7 +55,8 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
     {
         TryGetOpenSpaceAround(out var occupiedPoints, out var openSpacePoints);
 
-        var unit = GlobalResources.Instance.UnitScenes[id].Instantiate<UnitBase>();
+        var player = GlobalPlayers.Instance.Players[Team];
+        var unit = player.GlobalResources.UnitScenes[id].Instantiate<UnitBase>();
         unit.GlobalPosition = openSpacePoints[0];
         BuildingController.Instance.World.AddChild(unit);
     }
@@ -80,6 +83,25 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
         }
     }
 
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+
+        if (IsNodeReady())
+        {
+            ProducingQueueManager.ProgressComplete += SpawnUnit;
+            UnitsController.Instance.SelectionChanged += OnSelectionChanged;
+        }
+    }
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+
+        ProducingQueueManager.ProgressComplete -= SpawnUnit;
+        UnitsController.Instance.SelectionChanged -= OnSelectionChanged;
+    }
+
     public void Destroy()
     {
         QueueFree();
@@ -88,7 +110,7 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
     private void OnSelectionChanged()
     {
         bool wasSelected = UiBuildingPopup.Selected;
-        UiBuildingPopup.Selected = UnitsController.Instance.Selections.Count == 1 && UnitsController.Instance.Selections.Any(x => x.EffectedOn == this);
+        UiBuildingPopup.Selected = UnitsController.Instance.Selections.Count == 1 && UnitsController.Instance.Selections.Any(x => x.EffectedOn.GetInstanceId() == GetInstanceId());
 
         if (UiBuildingPopup.Selected)
         {

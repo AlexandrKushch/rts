@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://donhwiyp4wmh2"]
+
+[ext_resource type="Script" uid="uid://cakyyachosjcf" path="res://Scenes/Players/ComputerPlayer/ComputerPlayer.cs" id="1_ukydo"]
+[ext_resource type="Script" uid="uid://yjxq8sjmy64b" path="res://Scenes/Players/PlayerGlobalResources.cs" id="2_y1pki"]
+
+[node name="ComputerPlayer" type="Node" unique_id=900074517]
+script = ExtResource("1_ukydo")
+
+[node name="GlobalResources" type="Node" parent="." unique_id=313224358]
+script = ExtResource("2_y1pki")

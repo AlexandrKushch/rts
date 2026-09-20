@@ -7,6 +7,7 @@ public partial class UnitsController : Node2D
     private const double ClickedTimer = 0.2f;
 
     private double _clickTimer = 0.0f;
+    private PlayerBase PlayerBase;
     private SelectArea _selectArea;
     private MeshInstance2D _marker;
     [Export] private PackedScene SelectAreaScene;
@@ -24,6 +25,8 @@ public partial class UnitsController : Node2D
         {
             Instance = this;
         }
+
+        PlayerBase = GetParent<PlayerBase>();
     }
 
     public override void _UnhandledInput(InputEvent input)
@@ -65,13 +68,20 @@ public partial class UnitsController : Node2D
         {
             if (_clickTimer <= ClickedTimer
                 && _selectArea.Start.IsEqualApprox(_selectArea.End)
-                && TryPointCastSelectable(out SelectableComponent selection))
+                && TryPointCastSelectable(out var selection))
             {
-                Selections = new HashSet<SelectableComponent> { selection };
+                if (selection.EffectedOn is not UnitBase || (selection.EffectedOn is UnitBase unit && unit.Team == PlayerBase.Team))
+                {
+                    Selections = new HashSet<SelectableComponent> { selection };
+                }
+                else
+                {
+                    Selections = new HashSet<SelectableComponent>();
+                }
             }
             else
             {
-                Selections = _selectArea.GetSelection();
+                Selections = _selectArea.GetSelection(PlayerBase.Team);
             }
 
             SelectUnits();

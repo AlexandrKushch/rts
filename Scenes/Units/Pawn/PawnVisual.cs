@@ -10,30 +10,6 @@ public partial class PawnVisual : UnitVisualBase
         AnimationPlayer.AnimationFinished += OnAnimationFinished;
     }
 
-    public override void SetupColor(TeamType team, UnitType unit)
-    {
-        
-        string unitName = unit.Name.Capitalize();
-
-        foreach (var animationName in AnimationPlayer.GetAnimationList())
-        {
-            if (animationName.Equals(UnitAnimationNames.RESET, StringComparison.OrdinalIgnoreCase))
-            {
-                continue;
-            }
-
-            bool isInteract = animationName.Contains(UnitAnimationNames.Pawn.Interact, StringComparison.OrdinalIgnoreCase);
-
-            var animation = AnimationPlayer.GetAnimation(animationName);
-
-            // {UnitsPath}/Pawn/Pawn_Idle.png
-            animation.TrackSetKeyValue(
-                isInteract ? TextureKeyId + 1 : TextureKeyId,
-                0,
-                ResourceLoader.Load<Texture2D>($"{GlobalResources.Instance.Teams[team].UnitsPath}{unitName}/{unitName}_{animationName.Replace("/", "_")}.png"));
-        }
-    }
-
     public void UpdateMovement(Vector2 velocity, int collected, ResourceInfo resource)
     {
         if (AnimationPlayer.CurrentAnimation.ToString().Contains(UnitAnimationNames.Pawn.Interact, StringComparison.OrdinalIgnoreCase))
