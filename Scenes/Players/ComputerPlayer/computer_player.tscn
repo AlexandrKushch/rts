@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://yjxq8sjmy64b" path="res://Scenes/Players/PlayerGlobalResources.cs" id="2_y1pki"]
 [ext_resource type="Script" uid="uid://dhau4800s5smp" path="res://Scenes/Controllers/ResourceController.cs" id="3_mkwfl"]
 [ext_resource type="Script" uid="uid://baul70getpa3l" path="res://Scenes/Controllers/UnitsController.cs" id="4_hvb3t"]
+[ext_resource type="Script" uid="uid://c8u764v7f4mju" path="res://Scenes/Controllers/BuildingController.cs" id="5_1xvtd"]
+[ext_resource type="PackedScene" uid="uid://c57j2yxf5jasx" path="res://Scenes/Buildings/BuildingBlueprint/building_blueprint.tscn" id="6_w1jbw"]
 
 [node name="ComputerPlayer" type="Node" unique_id=900074517]
 script = ExtResource("1_ukydo")
@@ -16,3 +18,7 @@ script = ExtResource("3_mkwfl")
 
 [node name="UnitsController" type="Node2D" parent="." unique_id=1032090258]
 script = ExtResource("4_hvb3t")
+
+[node name="BuildingController" type="Node2D" parent="." unique_id=128339092]
+script = ExtResource("5_1xvtd")
+BuildingBlueprintScene = ExtResource("6_w1jbw")

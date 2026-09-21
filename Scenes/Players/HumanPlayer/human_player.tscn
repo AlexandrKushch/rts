@@ -9,8 +9,10 @@
 [ext_resource type="Script" uid="uid://bmym3all5d5mm" path="res://Scenes/Main/Hud.cs" id="5_3tbmi"]
 [ext_resource type="PackedScene" uid="uid://b231gr2h4tst0" path="res://Scenes/UI/Resources/UIResources/ui_resources.tscn" id="6_4tgaf"]
 [ext_resource type="Script" uid="uid://dhau4800s5smp" path="res://Scenes/Controllers/ResourceController.cs" id="6_f0dpf"]
+[ext_resource type="Script" uid="uid://c8u764v7f4mju" path="res://Scenes/Controllers/BuildingController.cs" id="7_e8f3t"]
 [ext_resource type="PackedScene" uid="uid://d01xy6skh73sa" path="res://Scenes/UI/Units/UiSelectedUnits/ui_selected_units.tscn" id="7_f0dpf"]
 [ext_resource type="PackedScene" uid="uid://ri0xagskbbyu" path="res://Scenes/UI/Buildings/UiBuildingControl/ui_building_control.tscn" id="8_epnf1"]
+[ext_resource type="PackedScene" uid="uid://c57j2yxf5jasx" path="res://Scenes/Buildings/BuildingBlueprint/building_blueprint.tscn" id="8_ij06d"]
 [ext_resource type="PackedScene" uid="uid://qiy2m5y8a5no" path="res://Scenes/UI/UiCursorTooltip/ui_cursor_tooltip.tscn" id="9_yh0gu"]
 
 [node name="HumanPlayer" type="Node" unique_id=180625435]
@@ -28,6 +30,10 @@ script = ExtResource("6_f0dpf")
 
 [node name="UnitsController" type="Node2D" parent="." unique_id=726544043]
 script = ExtResource("3_2bcmd")
+
+[node name="BuildingController" type="Node2D" parent="." unique_id=1609669762]
+script = ExtResource("7_e8f3t")
+BuildingBlueprintScene = ExtResource("8_ij06d")
 
 [node name="CameraController" type="Node2D" parent="." unique_id=1663371452 node_paths=PackedStringArray("Camera")]
 script = ExtResource("2_jk1ea")

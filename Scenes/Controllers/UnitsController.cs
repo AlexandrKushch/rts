@@ -3,16 +3,26 @@ using System.Linq;
 
 public partial class UnitsController : Node2D
 {
-    private PlayerBase PlayerBase;
+    private HumanPlayer HumanPlayer;
 
     public override void _Ready()
     {
-        PlayerBase = GetParent<PlayerBase>();
+        var player = GetParent<PlayerBase>();
+
+        if (player is HumanPlayer humanPlayer)
+        {
+            HumanPlayer = humanPlayer;
+        }
+
+        if (HumanPlayer == null)
+        {
+            SetProcessUnhandledInput(false);
+        }
     }
 
     public override void _UnhandledInput(InputEvent input)
     {
-        if (BuildingController.Instance.BlueprintActive) return;
+        if (HumanPlayer.BuildingController.BlueprintActive) return;
 
         if (input is InputEventMouseButton buttonInput)
         {
@@ -35,7 +45,7 @@ public partial class UnitsController : Node2D
         if (input.IsReleased())
         {
             TryPointCastSelectable(out SelectableComponent targetObject);
-            var units = (PlayerBase as HumanPlayer).SelectionController.Selections.Select(x => x.EffectedOn as UnitBase).Where(x => x != null).ToHashSet();
+            var units = HumanPlayer.SelectionController.Selections.Select(x => x.EffectedOn as UnitBase).Where(x => x != null).ToHashSet();
 
             int i = 0;
             foreach (var unit in units)

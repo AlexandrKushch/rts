@@ -3,6 +3,7 @@ using Godot.Collections;
 
 public partial class GlobalResources : Node
 {
+    [ExportGroup("Resources")]
     [Export] public Dictionary<UnitTypeIds, UnitType> Units { get; set; }
     [Export] public Dictionary<ResourceTypeIds, ResourceInfo> GatheringResources { get; set; }
     [Export] public Dictionary<BuildingTypeIds, BuildResource> Buildings { get; set; }
@@ -10,6 +11,11 @@ public partial class GlobalResources : Node
 
     [Export] public Dictionary<UnitTypeIds, PackedScene> UnitScenes { get; set; }
     [Export] public Dictionary<BuildingTypeIds, PackedScene> BuildingScenes { get; set; }
+
+    [ExportGroup("Nodes")]
+    [Export] public Node2D World;
+    [Export] public TileMapLayer Ground;
+    [Export] public Control BuildingGrid;
 
     public static GlobalResources Instance { get; private set; }
 

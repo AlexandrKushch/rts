@@ -62,7 +62,7 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
         var player = GlobalPlayers.Instance.Players[Team];
         var unit = player.GlobalResources.UnitScenes[id].Instantiate<UnitBase>();
         unit.GlobalPosition = openSpacePoints[0];
-        BuildingController.Instance.World.AddChild(unit);
+        GlobalResources.Instance.World.AddChild(unit);
     }
 
     public bool TryBuildProgressOne()

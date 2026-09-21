@@ -45,4 +45,18 @@ public partial class PlayerBase : Node
             return _unitsController;
         }
     }
+    
+    private BuildingController _buildingController;
+    public BuildingController BuildingController
+    {
+        get
+        {
+            if (_buildingController == null)
+            {
+                _buildingController = GetNode<BuildingController>(nameof(BuildingController));
+            }
+
+            return _buildingController;
+        }
+    }
 }

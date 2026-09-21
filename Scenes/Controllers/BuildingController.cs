@@ -12,21 +12,12 @@ public partial class BuildingController : Node2D
     private BuildingBlueprint _blueprint;
 
     [Export] private PackedScene BuildingBlueprintScene;
-    [Export] public Node2D World;
-    [Export] public TileMapLayer Ground;
-    [Export] private Control BuildingGrid;
 
     public HashSet<Vector2> OccupiedTiles { get; private set; } = new HashSet<Vector2>();
     public bool BlueprintActive { get; private set; }
 
-    public static BuildingController Instance { get; private set; }
-
     public override void _Ready()
     {
-        if (!IsInstanceValid(Instance))
-        {
-            Instance = this;
-        }
     }
 
     public override void _UnhandledInput(InputEvent input)
@@ -39,7 +30,7 @@ public partial class BuildingController : Node2D
                 && !inputButton.Pressed
                 && _blueprint.ValidToDeploy)
             {
-                if (_blueprint.TryDeployTo(World))
+                if (_blueprint.TryDeployTo(GlobalResources.Instance.World))
                 {
                     var team = _blueprint.Building.Team;
                     var player = GlobalPlayers.Instance.Players[team] as HumanPlayer;
@@ -52,13 +43,13 @@ public partial class BuildingController : Node2D
 
                     foreach (var point in _blueprint.Building.Resource.TileRequiresToBuild)
                     {
-                        var posOnLayer = Ground.LocalToMap(Ground.ToLocal(_blueprint.Building.GlobalPosition + point * TileSize));
+                        var posOnLayer = GlobalResources.Instance.Ground.LocalToMap(GlobalResources.Instance.Ground.ToLocal(_blueprint.Building.GlobalPosition + point * TileSize));
                         OccupiedTiles.Add(posOnLayer);
                     }
 
                     _blueprint.QueueFree();
                     BlueprintActive = false;
-                    BuildingGrid.Visible = BlueprintActive;
+                    GlobalResources.Instance.BuildingGrid.Visible = BlueprintActive;
                 }
             }
             else if (inputButton.ButtonIndex == MouseButton.Right
@@ -66,7 +57,7 @@ public partial class BuildingController : Node2D
             {
                 _blueprint.QueueFree();
                 BlueprintActive = false;
-                BuildingGrid.Visible = BlueprintActive;
+                GlobalResources.Instance.BuildingGrid.Visible = BlueprintActive;
                 GetViewport().SetInputAsHandled();
             }
         }
@@ -76,8 +67,8 @@ public partial class BuildingController : Node2D
     {
         if (IsInstanceValid(_blueprint) && !_blueprint.Deployed)
         {
-            var mousePosOnTileMap = Ground.LocalToMap(GetLocalMousePosition());
-            var mousePos = ToGlobal(Ground.MapToLocal(mousePosOnTileMap));
+            var mousePosOnTileMap = GlobalResources.Instance.Ground.LocalToMap(GetLocalMousePosition());
+            var mousePos = ToGlobal(GlobalResources.Instance.Ground.MapToLocal(mousePosOnTileMap));
             float weight = 1f - Mathf.Exp(-25 * (float)delta);
             _blueprint.GlobalPosition = _blueprint.GlobalPosition.Lerp(mousePos, weight);
 
@@ -103,12 +94,12 @@ public partial class BuildingController : Node2D
 
         _blueprint = BuildingBlueprintScene.Instantiate<BuildingBlueprint>();
         _blueprint.Resource = resource;
-        World.AddChild(_blueprint);
+        GlobalResources.Instance.World.AddChild(_blueprint);
 
         _blueprint.Building.Team = team;
 
         BlueprintActive = true;
-        BuildingGrid.Visible = BlueprintActive;
+        GlobalResources.Instance.BuildingGrid.Visible = BlueprintActive;
     }
 
     private bool CheckAbleToBuild()
@@ -136,14 +127,14 @@ public partial class BuildingController : Node2D
 
         foreach (var point in _blueprint.Building.Resource.TileRequiresToBuild)
         {
-            var posOnLayer = Ground.LocalToMap(Ground.ToLocal(_blueprint.Building.GlobalPosition + point * TileSize));
+            var posOnLayer = GlobalResources.Instance.Ground.LocalToMap(GlobalResources.Instance.Ground.ToLocal(_blueprint.Building.GlobalPosition + point * TileSize));
 
             if (OccupiedTiles.Contains(posOnLayer))
             {
                 return false;
             }
 
-            var cell = Ground.GetCellTileData(posOnLayer);
+            var cell = GlobalResources.Instance.Ground.GetCellTileData(posOnLayer);
 
             if (cell == null)
             {

@@ -24,7 +24,7 @@ public partial class SelectionController : Node2D
 
 	public override void _UnhandledInput(InputEvent input)
 	{
-		if (BuildingController.Instance.BlueprintActive) return;
+		if (PlayerBase.BuildingController.BlueprintActive) return;
 
 		if (input is InputEventMouseButton buttonInput)
 		{
