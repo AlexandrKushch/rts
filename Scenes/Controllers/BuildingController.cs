@@ -41,11 +41,13 @@ public partial class BuildingController : Node2D
             {
                 if (_blueprint.TryDeployTo(World))
                 {
-                    var units = UnitsController.Instance.Selections.Select(x => x.EffectedOn as UnitBase).ToHashSet();
+                    var team = _blueprint.Building.Team;
+                    var player = GlobalPlayers.Instance.Players[team] as HumanPlayer;
+                    var units = player.SelectionController.Selections.Select(x => x.EffectedOn as UnitBase).ToHashSet();
 
                     foreach (var unit in units)
                     {
-                        UnitsController.Instance.MoveToNodeCommand(unit, _blueprint.Building);
+                        player.UnitsController.MoveToNodeCommand(unit, _blueprint.Building);
                     }
 
                     foreach (var point in _blueprint.Building.Resource.TileRequiresToBuild)

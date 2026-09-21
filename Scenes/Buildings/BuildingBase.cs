@@ -7,6 +7,8 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
     private UiBuildingPopup UiBuildingPopup;
     private ProducingQueueManager ProducingQueueManager;
 
+    private HumanPlayer _player;
+
     public int MaxHp { get; set; }
     public int HP { get; set; }
 
@@ -34,7 +36,6 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
         MaxHp = Resource.MaxHp;
 
         ProducingQueueManager.ProgressComplete += SpawnUnit;
-        UnitsController.Instance.SelectionChanged += OnSelectionChanged;
     }
 
     public void Deploy()
@@ -49,6 +50,9 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
         }
 
         SpaceAroundPoints = GetSpaceAround();
+        
+        _player = GlobalPlayers.Instance.Players[Team] as HumanPlayer;
+        _player.SelectionController.SelectionChanged += OnSelectionChanged;
     }
 
     public void SpawnUnit(UnitTypeIds id)
@@ -90,7 +94,7 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
         if (IsNodeReady())
         {
             ProducingQueueManager.ProgressComplete += SpawnUnit;
-            UnitsController.Instance.SelectionChanged += OnSelectionChanged;
+            _player.SelectionController.SelectionChanged += OnSelectionChanged;
         }
     }
 
@@ -99,7 +103,7 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
         base._ExitTree();
 
         ProducingQueueManager.ProgressComplete -= SpawnUnit;
-        UnitsController.Instance.SelectionChanged -= OnSelectionChanged;
+        _player.SelectionController.SelectionChanged -= OnSelectionChanged;
     }
 
     public void Destroy()
@@ -110,7 +114,7 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
     private void OnSelectionChanged()
     {
         bool wasSelected = UiBuildingPopup.Selected;
-        UiBuildingPopup.Selected = UnitsController.Instance.Selections.Count == 1 && UnitsController.Instance.Selections.Any(x => x.EffectedOn.GetInstanceId() == GetInstanceId());
+        UiBuildingPopup.Selected = _player.SelectionController.Selections.Count == 1 && _player.SelectionController.Selections.Any(x => x.EffectedOn.GetInstanceId() == GetInstanceId());
 
         if (UiBuildingPopup.Selected)
         {

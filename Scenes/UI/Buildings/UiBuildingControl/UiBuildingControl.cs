@@ -41,14 +41,14 @@ public partial class UiBuildingControl : Control
         RibbonClose.RegionRect = ribbonCloseRegionRect;
 
         Visible = false;
-        HumanPlayer.UnitsController.Connect(UnitsController.SignalName.SelectionChanged, Callable.From(UpdateUI));
+        HumanPlayer.SelectionController.SelectionChanged += UpdateUI;
     }
 
     private void UpdateUI()
     {
         bool oldVisible = Visible;
-        var visible = HumanPlayer.UnitsController.Selections.Count > 0
-            && HumanPlayer.UnitsController.Selections
+        var visible = HumanPlayer.SelectionController.Selections.Count > 0
+            && HumanPlayer.SelectionController.Selections
                 .All(x => x.EffectedOn is UnitBase unit && unit.Meta.Id == UnitTypeIds.Pawn);
         BuildingsScrollable.Visible = visible;
 

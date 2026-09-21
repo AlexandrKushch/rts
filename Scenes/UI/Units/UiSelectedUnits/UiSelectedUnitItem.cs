@@ -9,6 +9,8 @@ public partial class UiSelectedUnitItem : Control
     public TextureRect Icon { get; set; }
     public Label Count { get; set; }
 
+    private UiSelectedUnitsContainer _uiSelectedUnitsContainer;
+
     public override void _Ready()
     {
         Highlight = GetNode<TextureRect>(nameof(Highlight));
@@ -16,6 +18,7 @@ public partial class UiSelectedUnitItem : Control
         Count = GetNode<Label>(nameof(Count));
 
         _highlightScale = Highlight.Scale;
+        _uiSelectedUnitsContainer = GetParent<UiSelectedUnitsContainer>();
     }
 
     public void UpdateHighlight(bool value)
@@ -51,7 +54,7 @@ public partial class UiSelectedUnitItem : Control
     {
         if (Highlight.Visible)
         {
-            UnitsController.Instance.ClearUnitsExcept(Id);
+            _uiSelectedUnitsContainer.UiSelectedUnits.HumanPlayer.SelectionController.ClearUnitsExcept(Id);
             UpdateHighlight(false);
         }
     }

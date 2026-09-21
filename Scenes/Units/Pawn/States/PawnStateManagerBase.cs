@@ -3,6 +3,14 @@ using Godot;
 public partial class PawnStateManagerBase : StateMachineBase<PawnStateIds>
 {
     [Export] public Pawn Pawn { get; private set; }
+    public UnitsController UnitsController { get; private set; }
+
+    public override void _Ready()
+    {
+        base._Ready();
+
+        UnitsController = GlobalPlayers.Instance.Players[Pawn.Team].UnitsController;
+    }
 
     public override void ChangeState(PawnStateIds state)
     {
@@ -29,7 +37,7 @@ public partial class PawnStateManagerBase : StateMachineBase<PawnStateIds>
     public void MoveToClosestBuilding()
     {
         var building = Pawn.GetClosestResourceStorageBuilding();
-        UnitsController.Instance.MoveToNodeCommand(Pawn, building);
+        UnitsController.MoveToNodeCommand(Pawn, building);
     }
 
     public void MoveToClosestResourceIfNotToBuilding()
@@ -38,12 +46,12 @@ public partial class PawnStateManagerBase : StateMachineBase<PawnStateIds>
 
         if (resource != null)
         {
-            UnitsController.Instance.MoveToNodeCommand(Pawn, resource);
+            UnitsController.MoveToNodeCommand(Pawn, resource);
         }
         else
         {
             var building = Pawn.GetClosestResourceStorageBuilding();
-            UnitsController.Instance.MoveToNodeCommand(Pawn, building);
+            UnitsController.MoveToNodeCommand(Pawn, building);
         }
     }
 }

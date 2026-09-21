@@ -31,4 +31,18 @@ public partial class PlayerBase : Node
             return _resourceController;
         }
     }
+    
+    private UnitsController _unitsController;
+    public UnitsController UnitsController
+    {
+        get
+        {
+            if (_unitsController == null)
+            {
+                _unitsController = GetNode<UnitsController>(nameof(UnitsController));
+            }
+
+            return _unitsController;
+        }
+    }
 }

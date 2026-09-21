@@ -2,32 +2,18 @@ using Godot;
 using System;
 
 public partial class HumanPlayer : PlayerBase
-{
-    private UnitsController _unitsController;
-    public UnitsController UnitsController
+{    
+    private SelectionController _selectionController;
+    public SelectionController SelectionController
     {
         get
         {
-            if (_unitsController == null)
+            if (_selectionController == null)
             {
-                _unitsController = GetNode<UnitsController>(nameof(UnitsController));
+                _selectionController = GetNode<SelectionController>(nameof(SelectionController));
             }
 
-            return _unitsController;
-        }
-    }
-    
-    private ResourceController _resourceController;
-    public ResourceController ResourceController
-    {
-        get
-        {
-            if (_resourceController == null)
-            {
-                _resourceController = GetNode<ResourceController>(nameof(ResourceController));
-            }
-
-            return _resourceController;
+            return _selectionController;
         }
     }
 

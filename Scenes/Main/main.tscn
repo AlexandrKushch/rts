@@ -106,7 +106,7 @@ BuildingScenes = Dictionary[int, PackedScene]({
 5: ExtResource("21_h4gp5")
 })
 
-[node name="BuildingController" type="Node2D" parent="Controllers" unique_id=404899581 node_paths=PackedStringArray("World", "Ground", "BuildingGrid")]
+[node name="BuildingController" type="Node2D" parent="Controllers" unique_id=420102737 node_paths=PackedStringArray("World", "Ground", "BuildingGrid")]
 script = ExtResource("6_2ok46")
 BuildingBlueprintScene = ExtResource("7_koken")
 World = NodePath("../../Map/NavigationRegion2D/World")

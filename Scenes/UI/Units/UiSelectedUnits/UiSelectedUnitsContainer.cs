@@ -7,7 +7,7 @@ public partial class UiSelectedUnitsContainer : HBoxContainer
 {
     private float _bgBannerOneItemWidth;
 
-    private UiSelectedUnits _uiSelectedUnits;
+    public UiSelectedUnits UiSelectedUnits { get; private set; }
 
     private Dictionary<UnitTypeIds, int> _selectedUnitsCount = new Dictionary<UnitTypeIds, int>();
     private Dictionary<UnitTypeIds, UiSelectedUnitItem> _items = new Dictionary<UnitTypeIds, UiSelectedUnitItem>();
@@ -26,14 +26,14 @@ public partial class UiSelectedUnitsContainer : HBoxContainer
         BgBanner.Visible = false;
         _bgBannerOneItemWidth = BgBanner.Size.X;
 
-        _uiSelectedUnits = GetParent<UiSelectedUnits>();
+        UiSelectedUnits = GetParent<UiSelectedUnits>();
 
-        _uiSelectedUnits.HumanPlayer.UnitsController.Connect(UnitsController.SignalName.SelectionChanged, Callable.From(UpdateUI));
+        UiSelectedUnits.HumanPlayer.SelectionController.SelectionChanged += UpdateUI;
     }
 
     public void UpdateUI()
     {
-        var newSelectedUnitsQuery = _uiSelectedUnits.HumanPlayer.UnitsController.Selections
+        var newSelectedUnitsQuery = UiSelectedUnits.HumanPlayer.SelectionController.Selections
             .Select(x => x.EffectedOn as UnitBase)
             .Where(x => x != null)
             .GroupBy(x => x.Meta.Id);
@@ -119,7 +119,7 @@ public partial class UiSelectedUnitsContainer : HBoxContainer
         AddChild(item);
 
         item.Id = unitId;
-        item.Icon.Texture = _uiSelectedUnits.HumanPlayer.GlobalResources.Units[unitId].Icon;
+        item.Icon.Texture = UiSelectedUnits.HumanPlayer.GlobalResources.Units[unitId].Icon;
 
         _items.Add(unitId, item);
 
