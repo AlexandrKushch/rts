@@ -7,7 +7,7 @@ public partial class ResourceController : Node2D
 {
     public Dictionary<ResourceTypeIds, int> CollectedResources { get; private set; }
 
-    public static ResourceController Instance { get; private set; }
+    // public static ResourceController Instance { get; private set; }
 
     [Signal]
     public delegate void ChangedEventHandler();
@@ -16,10 +16,10 @@ public partial class ResourceController : Node2D
     {
         base._Ready();
 
-        if (!IsInstanceValid(Instance))
-        {
-            Instance = this;
-        }
+        // if (!IsInstanceValid(Instance))
+        // {
+        //     Instance = this;
+        // }
 
         CollectedResources = GlobalResources.Instance.GatheringResources.ToDictionary(x => x.Key, x => x.Value.DefaultValue);
     }

@@ -5,7 +5,6 @@
 [ext_resource type="TileSet" uid="uid://ba68yn6mvywfx" path="res://Tilesets/tile_set.tres" id="6_2a143"]
 [ext_resource type="Script" uid="uid://c8u764v7f4mju" path="res://Scenes/Controllers/BuildingController.cs" id="6_2ok46"]
 [ext_resource type="PackedScene" uid="uid://c57j2yxf5jasx" path="res://Scenes/Buildings/BuildingBlueprint/building_blueprint.tscn" id="7_koken"]
-[ext_resource type="Script" uid="uid://dhau4800s5smp" path="res://Scenes/Controllers/ResourceController.cs" id="8_tdwxr"]
 [ext_resource type="Resource" uid="uid://wjt3mfk3hveg" path="res://Scenes/Resources/Types/r_gold.tres" id="9_4o5wv"]
 [ext_resource type="PackedScene" uid="uid://k7krsgxhrgo2" path="res://Scenes/Units/Pawn/pawn.tscn" id="9_hryqi"]
 [ext_resource type="Resource" uid="uid://ct36o5f4apb73" path="res://Scenes/Resources/Types/r_meat.tres" id="10_4a3kt"]
@@ -113,9 +112,6 @@ BuildingBlueprintScene = ExtResource("7_koken")
 World = NodePath("../../Map/NavigationRegion2D/World")
 Ground = NodePath("../../Map/NavigationRegion2D/FlatGround")
 BuildingGrid = NodePath("../../Map/NavigationRegion2D/BuildingGrid")
-
-[node name="ResourceController" type="Node2D" parent="Controllers" unique_id=1531060020]
-script = ExtResource("8_tdwxr")
 
 [node name="Players" type="Node" parent="." unique_id=1708522379]
 script = ExtResource("35_h4gp5")

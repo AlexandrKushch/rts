@@ -6,6 +6,8 @@ public partial class UiCursorTooltip : Control
 {
     private readonly float Offset = 150;
     
+    private PlayerBase _player;
+
     private TooltipContent _content;
 
     [Export] private Label Title;
@@ -22,7 +24,9 @@ public partial class UiCursorTooltip : Control
 
         UpdateVisibilityAndContent(false, new TooltipContent());
         
-        ResourceController.Instance.Changed += () =>
+        _player = GetParent().GetParent<PlayerBase>();
+
+        _player.ResourceController.Changed += () =>
         {
             if (!Visible || _content == null) return;
             UpdateResourceCost(_content.ResourcesCost);
@@ -69,7 +73,7 @@ public partial class UiCursorTooltip : Control
             newItem.Value.Text = cost.Value.ToString();
 
             newItem.Value.AddThemeColorOverride("font_color",
-                ResourceController.Instance.CheckSpent(cost.Key, cost.Value) ? ColorsGlobal.Default : ColorsGlobal.Error);
+                _player.ResourceController.CheckSpent(cost.Key, cost.Value) ? ColorsGlobal.Default : ColorsGlobal.Error);
         }
     }
 
@@ -81,7 +85,7 @@ public partial class UiCursorTooltip : Control
         {
             var cost = _content.ResourcesCost[item.Id];
             item.Value.AddThemeColorOverride("font_color",
-                ResourceController.Instance.CheckSpent(item.Id, cost) ? ColorsGlobal.Default : ColorsGlobal.Error);
+                _player.ResourceController.CheckSpent(item.Id, cost) ? ColorsGlobal.Default : ColorsGlobal.Error);
         }
     }
 }

@@ -2,10 +2,13 @@ using Godot;
 
 public partial class UiResourcesGrid : HBoxContainer
 {
+    private PlayerBase _player;
     private UIResourceItem[] _resouorces;
 
     public override void _Ready()
     {
+        _player = GetParent().GetParent().GetParent<PlayerBase>();
+
         var item = GetChild<UIResourceItem>(0).Duplicate() as UIResourceItem;
 
         foreach (var child in GetChildren())
@@ -32,7 +35,7 @@ public partial class UiResourcesGrid : HBoxContainer
     {
         foreach (var resource in _resouorces)
         {
-            resource.Value.Text = ResourceController.Instance.CollectedResources[resource.Type].ToString();
+            resource.Value.Text = _player.ResourceController.CollectedResources[resource.Type].ToString();
         }        
     }
 }

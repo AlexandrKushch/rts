@@ -6,6 +6,21 @@ public partial class ProducingQueueManager : Node
 {
     private const float MaxProgress = 100;
 
+    private PlayerBase _player;
+    private PlayerBase Player
+    {
+        get
+        {
+            if (_player == null)
+            {
+                var team = GetParent<BuildingBase>().Team;
+                _player = GlobalPlayers.Instance.Players[team];
+            }
+
+            return _player;
+        }
+    }
+
     public bool Progressing { get; set; } = false;
     public float CurrentProgress { get; set; } = 0;
     public UnitTypeIds CurrentProgressItem { get; set; }
@@ -42,7 +57,7 @@ public partial class ProducingQueueManager : Node
     {
         var costs = GlobalResources.Instance.Units[id].Cost.ToDictionary();
 
-        if (!ResourceController.Instance.TrySpentCost(costs))
+        if (!Player.ResourceController.TrySpentCost(costs))
         {
             return;
         }
@@ -67,7 +82,7 @@ public partial class ProducingQueueManager : Node
             if (cashback)
             {
                 var costs = GlobalResources.Instance.Units[id].Cost.ToDictionary();
-                ResourceController.Instance.CollectCost(costs);
+                Player.ResourceController.CollectCost(costs);
             }
 
             if (QueueCapacity[id] <= 0)

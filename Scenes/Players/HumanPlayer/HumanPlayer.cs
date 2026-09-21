@@ -16,6 +16,20 @@ public partial class HumanPlayer : PlayerBase
             return _unitsController;
         }
     }
+    
+    private ResourceController _resourceController;
+    public ResourceController ResourceController
+    {
+        get
+        {
+            if (_resourceController == null)
+            {
+                _resourceController = GetNode<ResourceController>(nameof(ResourceController));
+            }
+
+            return _resourceController;
+        }
+    }
 
     public override void _Ready()
     {

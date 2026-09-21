@@ -26,7 +26,7 @@ public partial class BuildingBlueprint : Node2D
 
     public bool TryDeployTo(Node2D to)
     {
-        if (!ResourceController.Instance.TrySpentCost(Resource.Cost.ToDictionary()))
+        if (!GlobalPlayers.Instance.Players[Building.Team].ResourceController.TrySpentCost(Resource.Cost.ToDictionary()))
         {
             return false;
         }

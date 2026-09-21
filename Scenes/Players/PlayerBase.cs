@@ -17,4 +17,18 @@ public partial class PlayerBase : Node
             return _globalResources;
         }
     }
+    
+    private ResourceController _resourceController;
+    public ResourceController ResourceController
+    {
+        get
+        {
+            if (_resourceController == null)
+            {
+                _resourceController = GetNode<ResourceController>(nameof(ResourceController));
+            }
+
+            return _resourceController;
+        }
+    }
 }

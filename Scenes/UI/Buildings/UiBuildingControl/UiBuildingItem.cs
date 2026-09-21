@@ -2,6 +2,7 @@ using Godot;
 
 public partial class UiBuildingItem : Control, IHasTooltip
 {
+    private PlayerBase _player;
     private Vector2 _highlightScale;
 
     private TextureRect Background { get; set; }
@@ -14,6 +15,8 @@ public partial class UiBuildingItem : Control, IHasTooltip
 
     public override void _Ready()
     {
+        _player = GetParent().GetParent().GetParent<UiBuildingControl>().HumanPlayer;
+
         Background = GetNode<TextureRect>(nameof(Background));
         Highlight = GetNode<TextureRect>(nameof(Highlight));
         Icon = GetNode<TextureRect>(nameof(Icon));
@@ -35,7 +38,7 @@ public partial class UiBuildingItem : Control, IHasTooltip
     {
         foreach (var cost in Resource.Cost)
         {
-            if (!ResourceController.Instance.CheckSpent(cost.Key, cost.Value))
+            if (!_player.ResourceController.CheckSpent(cost.Key, cost.Value))
             {
                 return;
             }

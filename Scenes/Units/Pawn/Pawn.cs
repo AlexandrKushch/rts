@@ -175,7 +175,7 @@ public partial class Pawn : UnitBase
         tween.TweenProperty(label, "rotation", RandomExtension.RandomDouble() - 0.5f, tweenDuration / 2);
         tween.Finished += label.QueueFree;
 
-        ResourceController.Instance.Collect(ResourceToCollectData.ResourceType.Type, ResourceToCollectData.CollectedCount);
+        GlobalPlayers.Instance.Players[Team].ResourceController.Collect(ResourceToCollectData.ResourceType.Type, ResourceToCollectData.CollectedCount);
         ResourceToCollectData.CollectedCount = 0;
     }
 
