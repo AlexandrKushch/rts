@@ -103,7 +103,11 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
         base._ExitTree();
 
         ProducingQueueManager.ProgressComplete -= SpawnUnit;
-        _player.SelectionController.SelectionChanged -= OnSelectionChanged;
+
+        if (_player != null)
+        {
+            _player.SelectionController.SelectionChanged -= OnSelectionChanged;
+        }
     }
 
     public void Destroy()

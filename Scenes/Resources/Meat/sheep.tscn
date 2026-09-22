@@ -6,8 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://csuinv1qxftxb" path="res://Assets/Terrain/Resources/Meat/Sheep/Sheep_Move.png" id="1_rya4n"]
 [ext_resource type="PackedScene" uid="uid://c1skwp03bakoh" path="res://Scenes/SelectionArea/UnitSelectableComponent/unit_selectable_component.tscn" id="2_5savk"]
 [ext_resource type="Script" uid="uid://8fm6fauxtot" path="res://Scenes/Resources/Meat/SheepVisual.cs" id="3_c3se6"]
+[ext_resource type="Shader" uid="uid://cr5ubxgqx01e6" path="res://Shaders/outline.gdshader" id="5_mcfp1"]
 [ext_resource type="Resource" uid="uid://ct36o5f4apb73" path="res://Scenes/Resources/Types/r_meat.tres" id="6_5savk"]
+[ext_resource type="Texture2D" uid="uid://b65d2n0ixixel" path="res://Assets/Units/Blue Units/Pawn/Pawn_Idle.png" id="6_44iym"]
 [ext_resource type="Script" uid="uid://uuk7t4f3ag7r" path="res://Scenes/Resources/Meat/MeatResourceBase.cs" id="7_c3se6"]
+[ext_resource type="Script" uid="uid://bp0pnxnktf4kt" path="res://Scenes/Units/Pawn/OutlineVisual.cs" id="7_ckux8"]
 [ext_resource type="Script" uid="uid://c27dwm3x8mii4" path="res://Scenes/Resources/Meat/SheepStateMachine/SheepStateMachine.cs" id="8_fbmh2"]
 [ext_resource type="Script" uid="uid://cs48ychew8beq" path="res://Scenes/Resources/Meat/SheepStateMachine/SheepIdleState.cs" id="9_00pu4"]
 [ext_resource type="Script" uid="uid://7mt0wwcx4e1i" path="res://Scenes/Resources/Meat/SheepStateMachine/SheepMoveState.cs" id="10_104yu"]
@@ -18,6 +21,16 @@ radius = 8.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fbmh2"]
 size = Vector2(46, 43)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xrivr"]
+size = Vector2(96, 96)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jdeet"]
+shader = ExtResource("5_mcfp1")
+shader_parameter/clr = Color(0.28235295, 0.34509805, 0.5176471, 1)
+shader_parameter/type = 1
+shader_parameter/thickness = 2.0
+shader_parameter/polygon = PackedVector2Array(0, 0, 0, 0.5, 0.5, 0.5, 0.5, 0)
 
 [sub_resource type="Animation" id="Animation_1ffw7"]
 resource_name = "idle"
@@ -190,6 +203,13 @@ position = Vector2(-2, -20)
 position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_fbmh2")
 
+[node name="UnitOverlapedDetector" type="Area2D" parent="." unique_id=718295326]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UnitOverlapedDetector" unique_id=625527422]
+position = Vector2(0, 48)
+shape = SubResource("RectangleShape2D_xrivr")
+
 [node name="Visual" type="Node2D" parent="." unique_id=296800109]
 script = ExtResource("3_c3se6")
 
@@ -197,6 +217,15 @@ script = ExtResource("3_c3se6")
 texture = ExtResource("1_1ffw7")
 hframes = 12
 frame = 1
+
+[node name="Outline" type="Sprite2D" parent="Visual" unique_id=2085497299 node_paths=PackedStringArray("DuplicateThe")]
+visible = false
+z_index = 5
+material = SubResource("ShaderMaterial_jdeet")
+texture = ExtResource("6_44iym")
+hframes = 8
+script = ExtResource("7_ckux8")
+DuplicateThe = NodePath("../Sprite2D")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" unique_id=1262780307]
 libraries/ = SubResource("AnimationLibrary_8louv")

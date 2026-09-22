@@ -152,6 +152,16 @@ position = Vector2(428, 177)
 collision_mask = 1
 Team = 4
 
+[node name="Pawn5" parent="Map/NavigationRegion2D/World" unique_id=1734289473 instance=ExtResource("9_hryqi")]
+position = Vector2(366, 190)
+collision_mask = 1
+Team = 4
+
+[node name="Pawn6" parent="Map/NavigationRegion2D/World" unique_id=1752945761 instance=ExtResource("9_hryqi")]
+position = Vector2(357, 236)
+collision_mask = 1
+Team = 4
+
 [node name="Pawn3" parent="Map/NavigationRegion2D/World" unique_id=620398878 instance=ExtResource("9_hryqi")]
 position = Vector2(488, 248)
 collision_mask = 1
@@ -260,18 +270,6 @@ Team = 1
 position = Vector2(690, 192)
 Team = 1
 
-[node name="Warrior" parent="Map/NavigationRegion2D/World" unique_id=1457291613 instance=ExtResource("20_c8mgu")]
-position = Vector2(575, 149)
-Team = 3
-
-[node name="Lancer" parent="Map/NavigationRegion2D/World" unique_id=1882567422 instance=ExtResource("17_h4gp5")]
-position = Vector2(608, 254)
-Team = 3
-
-[node name="Archer" parent="Map/NavigationRegion2D/World" unique_id=1148559058 instance=ExtResource("16_vae3x")]
-position = Vector2(564, 317)
-Team = 3
-
-[node name="Monk" parent="Map/NavigationRegion2D/World" unique_id=609647047 instance=ExtResource("18_gw1lt")]
-position = Vector2(418, 312)
+[node name="Warrior" parent="Map/NavigationRegion2D/World" unique_id=1380548045 instance=ExtResource("20_c8mgu")]
+position = Vector2(615, 321)
 Team = 3

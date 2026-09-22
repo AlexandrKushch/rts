@@ -7,11 +7,20 @@
 [ext_resource type="Texture2D" uid="uid://0v1r6vmklik1" path="res://Assets/Units/Blue Units/Warrior/Warrior_Idle.png" id="3_ypcdl"]
 [ext_resource type="Texture2D" uid="uid://nx6qj76be3eg" path="res://Assets/Units/Blue Units/Warrior/Warrior_Attack1.png" id="4_kvhdx"]
 [ext_resource type="Texture2D" uid="uid://cpfl3rpyy5btc" path="res://Assets/Units/Blue Units/Warrior/Warrior_Run.png" id="5_intd2"]
+[ext_resource type="Shader" uid="uid://cr5ubxgqx01e6" path="res://Shaders/outline.gdshader" id="6_kk860"]
+[ext_resource type="Texture2D" uid="uid://b65d2n0ixixel" path="res://Assets/Units/Blue Units/Pawn/Pawn_Idle.png" id="7_5husr"]
 [ext_resource type="Texture2D" uid="uid://bvp3vvvdtdg3m" path="res://Assets/Units/Blue Units/Warrior/Warrior_Guard.png" id="7_546yd"]
 [ext_resource type="Texture2D" uid="uid://daulrfkfskpeh" path="res://Assets/Units/Blue Units/Warrior/Warrior_Attack2.png" id="7_bbpbx"]
+[ext_resource type="Script" uid="uid://bp0pnxnktf4kt" path="res://Scenes/Units/Pawn/OutlineVisual.cs" id="8_dhetd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nhsra"]
 size = Vector2(72, 97)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o1m4s"]
+shader = ExtResource("6_kk860")
+shader_parameter/clr = Color(0.28235295, 0.34509805, 0.5176471, 1)
+shader_parameter/type = 1
+shader_parameter/thickness = 4.0
 
 [sub_resource type="Animation" id="Animation_wscwa"]
 resource_name = "run"
@@ -55,7 +64,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_5husr"]
-length = 0.39999999999999997
+length = 0.4
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -287,7 +296,17 @@ position = Vector2(0, -29)
 texture = ExtResource("3_ypcdl")
 hframes = 8
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" index="1" unique_id=1839081757]
+[node name="Outline" type="Sprite2D" parent="Visual" index="1" unique_id=989331758 node_paths=PackedStringArray("DuplicateThe")]
+visible = false
+z_index = 5
+material = SubResource("ShaderMaterial_o1m4s")
+position = Vector2(0, -29)
+texture = ExtResource("7_5husr")
+hframes = 8
+script = ExtResource("8_dhetd")
+DuplicateThe = NodePath("../Sprite2D")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" index="2" unique_id=1839081757]
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_5husr")
 

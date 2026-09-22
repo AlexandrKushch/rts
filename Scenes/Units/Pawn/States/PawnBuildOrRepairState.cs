@@ -7,7 +7,7 @@ public partial class PawnBuildOrRepairState : PawnStateBase
         base.Activate();
 
         PawnStateMachine.Pawn.Target = null;
-        PawnStateMachine.Pawn.Visual.Connect(PawnVisual.SignalName.OnInteractAnimationFinished, Callable.From(Build));
+        PawnStateMachine.Pawn.PawnVisual.Connect(PawnVisual.SignalName.OnInteractAnimationFinished, Callable.From(Build));
 
         Build();
     }
@@ -15,8 +15,8 @@ public partial class PawnBuildOrRepairState : PawnStateBase
     public override void Deactivate()
     {
         base.Deactivate();
-        PawnStateMachine.Pawn.Visual.Stop();
-        PawnStateMachine.Pawn.Visual.Disconnect(PawnVisual.SignalName.OnInteractAnimationFinished, Callable.From(Build));
+        PawnStateMachine.Pawn.PawnVisual.Stop();
+        PawnStateMachine.Pawn.PawnVisual.Disconnect(PawnVisual.SignalName.OnInteractAnimationFinished, Callable.From(Build));
     }
 
     private void Build()
@@ -46,7 +46,7 @@ public partial class PawnBuildOrRepairState : PawnStateBase
             return;
         }
 
-        PawnStateMachine.Pawn.Visual.Interact("build", PawnStateMachine.Pawn.TargetObject?.GlobalPosition);
+        PawnStateMachine.Pawn.PawnVisual.Interact("build", PawnStateMachine.Pawn.TargetObject?.GlobalPosition);
     }
 
     private void OnInteractAnimatioKeyReached()

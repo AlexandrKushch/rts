@@ -7,9 +7,19 @@
 [ext_resource type="Resource" uid="uid://cm5nt1ekod7b8" path="res://Scenes/Units/Types/r_lancer.tres" id="3_ixymf"]
 [ext_resource type="Texture2D" uid="uid://dqlraj8web2cw" path="res://Assets/Units/Blue Units/Lancer/Lancer_Right_Attack.png" id="4_ixymf"]
 [ext_resource type="Texture2D" uid="uid://jb0k48q5pvdq" path="res://Assets/Units/Blue Units/Lancer/Lancer_Run.png" id="5_680ec"]
+[ext_resource type="Shader" uid="uid://cr5ubxgqx01e6" path="res://Shaders/outline.gdshader" id="6_13wat"]
+[ext_resource type="Texture2D" uid="uid://b65d2n0ixixel" path="res://Assets/Units/Blue Units/Pawn/Pawn_Idle.png" id="7_h0ltc"]
+[ext_resource type="Script" uid="uid://bp0pnxnktf4kt" path="res://Scenes/Units/Pawn/OutlineVisual.cs" id="8_t8ae6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ypcdl"]
 size = Vector2(58, 87)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dsmhd"]
+shader = ExtResource("6_13wat")
+shader_parameter/clr = Color(0.28235295, 0.34509805, 0.5176471, 1)
+shader_parameter/type = 1
+shader_parameter/thickness = 4.0
+shader_parameter/polygon = PackedVector2Array(0, 0, 0, 0.5, 0.5, 0.5, 0.5, 0)
 
 [sub_resource type="Animation" id="Animation_13wat"]
 resource_name = "idle"
@@ -202,7 +212,17 @@ position = Vector2(0, -29)
 texture = ExtResource("3_cbjpg")
 hframes = 12
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" index="1" unique_id=1960499430]
+[node name="Outline" type="Sprite2D" parent="Visual" index="1" unique_id=1960704067 node_paths=PackedStringArray("DuplicateThe")]
+visible = false
+z_index = 5
+material = SubResource("ShaderMaterial_dsmhd")
+position = Vector2(0, -29)
+texture = ExtResource("7_h0ltc")
+hframes = 8
+script = ExtResource("8_t8ae6")
+DuplicateThe = NodePath("../Sprite2D")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" index="2" unique_id=1960499430]
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_dsmhd")
 

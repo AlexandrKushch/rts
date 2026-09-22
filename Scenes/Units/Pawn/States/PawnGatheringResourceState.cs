@@ -8,7 +8,7 @@ public partial class PawnGatheringResourceState : PawnStateBase
 
         // PawnStateMachine.Pawn.TargetResource.CurrentCollectingCount++;
         PawnStateMachine.Pawn.Target = null;
-        PawnStateMachine.Pawn.Visual.Connect(PawnVisual.SignalName.OnInteractAnimationFinished, Callable.From(Gather));
+        PawnStateMachine.Pawn.PawnVisual.Connect(PawnVisual.SignalName.OnInteractAnimationFinished, Callable.From(Gather));
 
         Gather();
     }
@@ -17,8 +17,8 @@ public partial class PawnGatheringResourceState : PawnStateBase
     {
         base.Deactivate();
         // PawnStateMachine.Pawn.TargetResource.CurrentCollectingCount--;
-        PawnStateMachine.Pawn.Visual.Stop();
-        PawnStateMachine.Pawn.Visual.Disconnect(PawnVisual.SignalName.OnInteractAnimationFinished, Callable.From(Gather));
+        PawnStateMachine.Pawn.PawnVisual.Stop();
+        PawnStateMachine.Pawn.PawnVisual.Disconnect(PawnVisual.SignalName.OnInteractAnimationFinished, Callable.From(Gather));
     }
 
     private void Gather()
@@ -35,7 +35,7 @@ public partial class PawnGatheringResourceState : PawnStateBase
             return;
         }
 
-        PawnStateMachine.Pawn.Visual.Interact(PawnStateMachine.Pawn.TargetResource.ResourceType.Name, PawnStateMachine.Pawn.TargetObject?.GlobalPosition);
+        PawnStateMachine.Pawn.PawnVisual.Interact(PawnStateMachine.Pawn.TargetResource.ResourceType.Name, PawnStateMachine.Pawn.TargetObject?.GlobalPosition);
     }
 
     private void OnInteractAnimatioKeyReached()

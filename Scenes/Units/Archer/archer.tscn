@@ -5,11 +5,20 @@
 [ext_resource type="Texture2D" uid="uid://o0bbv0dupqxv" path="res://Assets/Units/Blue Units/Archer/Archer_Idle.png" id="2_ldfi1"]
 [ext_resource type="Script" uid="uid://td0hl5a7lqvt" path="res://Scenes/Units/UnitVisualBase.cs" id="2_qys3b"]
 [ext_resource type="Resource" uid="uid://us5gsh240dda" path="res://Scenes/Units/Types/r_archer.tres" id="3_x40ju"]
+[ext_resource type="Shader" uid="uid://cr5ubxgqx01e6" path="res://Shaders/outline.gdshader" id="6_81b8j"]
 [ext_resource type="Texture2D" uid="uid://dt8ty838i5wcs" path="res://Assets/Units/Blue Units/Archer/Archer_Shoot.png" id="6_iuvmd"]
+[ext_resource type="Texture2D" uid="uid://b65d2n0ixixel" path="res://Assets/Units/Blue Units/Pawn/Pawn_Idle.png" id="7_cjf6y"]
 [ext_resource type="Texture2D" uid="uid://bmyipbb8iuj44" path="res://Assets/Units/Blue Units/Archer/Archer_Run.png" id="7_x40ju"]
+[ext_resource type="Script" uid="uid://bp0pnxnktf4kt" path="res://Scenes/Units/Pawn/OutlineVisual.cs" id="8_bem2y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lirip"]
 size = Vector2(70, 88)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_02drl"]
+shader = ExtResource("6_81b8j")
+shader_parameter/clr = Color(0.28235295, 0.34509805, 0.5176471, 1)
+shader_parameter/type = 1
+shader_parameter/thickness = 4.0
 
 [sub_resource type="Animation" id="Animation_byvkr"]
 resource_name = "idle"
@@ -202,7 +211,17 @@ position = Vector2(0, -29)
 texture = ExtResource("2_ldfi1")
 hframes = 6
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" index="1" unique_id=1700615018]
+[node name="Outline" type="Sprite2D" parent="Visual" index="1" unique_id=1667719366 node_paths=PackedStringArray("DuplicateThe")]
+visible = false
+z_index = 5
+material = SubResource("ShaderMaterial_02drl")
+position = Vector2(0, -29)
+texture = ExtResource("7_cjf6y")
+hframes = 8
+script = ExtResource("8_bem2y")
+DuplicateThe = NodePath("../Sprite2D")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" index="2" unique_id=1700615018]
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_iuv1g")
 

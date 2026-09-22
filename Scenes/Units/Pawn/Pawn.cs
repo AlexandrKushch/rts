@@ -1,17 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Godot;
 
-public partial class Pawn : UnitBase
+public partial class Pawn : UnitHasVisualBase
 {
     public const int MaxCollectableCapacity = 15;
 
     private UpdateMovementAnimation _updateMovementAnimation;
     private PawnStateManagerBase StateMachine;
 
-    public PawnVisual Visual { get; private set; }
+    public PawnVisual PawnVisual { get; private set; }
     public ResourceBase TargetResource { get; private set; }
     public BuildingBase TargetBuilding { get; private set; }
 
@@ -22,35 +21,41 @@ public partial class Pawn : UnitBase
     public override void _Ready()
     {
         base._Ready();
-        Visual = GetNode<PawnVisual>(nameof(Visual));
         StateMachine = GetNode<PawnStateManagerBase>(nameof(StateMachine));
-        _updateMovementAnimation = (v, _) => { Visual.UpdateMovement(v, string.Empty); };
+
+        PawnVisual = Visual as PawnVisual;
+        _updateMovementAnimation = (v, _) => { PawnVisual.UpdateMovement(v, string.Empty); };
+    }
+
+    public override void _Process(double delta)
+    {
+        _updateMovementAnimation(Velocity, ResourceToCollectData?.CollectedCount ?? 0);
+
+        Visual.UpdateOutlineVisible(UnitOverlapedDetector.GetOverlappingBodies().Count > 0);
     }
 
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
 
-        _updateMovementAnimation(Velocity, ResourceToCollectData?.CollectedCount ?? 0);
+        // if (StateMachine.GetCurrentStateType() == PawnStateIds.MoveTo)
+        // {
+        //     Node2D target;
+        //     Vector2? point;
 
-        if (StateMachine.GetCurrentStateType() == PawnStateIds.MoveTo)
-        {
-            Node2D target;
-            Vector2? point;
-
-            if (IsInstanceValid(TargetResource)
-                && TryGetClosestTarget(TargetResource.GlobalPosition, out target, out point)
-                && target is ResourceBase resource)
-            {
-                SetTarget(point, resource);
-            }
-            else if (IsInstanceValid(TargetBuilding)
-                && TryGetClosestTarget(TargetBuilding.GlobalPosition, out target, out point)
-                && target is BuildingBase building)
-            {
-                SetTarget(point, building);
-            }
-        }
+        //     if (IsInstanceValid(TargetResource)
+        //         && TryGetClosestTarget(TargetResource.GlobalPosition, out target, out point)
+        //         && target is ResourceBase resource)
+        //     {
+        //         SetTarget(point, resource);
+        //     }
+        //     else if (IsInstanceValid(TargetBuilding)
+        //         && TryGetClosestTarget(TargetBuilding.GlobalPosition, out target, out point)
+        //         && target is BuildingBase building)
+        //     {
+        //         SetTarget(point, building);
+        //     }
+        // }
     }
 
     public BuildingBase GetClosestResourceStorageBuilding()
@@ -121,7 +126,7 @@ public partial class Pawn : UnitBase
                     ResourceToCollectData.Position = resource.GlobalPosition;
                 }
 
-                _updateMovementAnimation = (v, c) => { Visual.UpdateMovement(v, c, resource.ResourceType); };
+                _updateMovementAnimation = (v, c) => { PawnVisual.UpdateMovement(v, c, resource.ResourceType); };
             }
             else if (TargetObject is BuildingBase building)
             {
@@ -130,7 +135,7 @@ public partial class Pawn : UnitBase
 
                 if (!building.Built)
                 {
-                    _updateMovementAnimation = (v, _) => { Visual.UpdateMovement(v, "build"); };
+                    _updateMovementAnimation = (v, _) => { PawnVisual.UpdateMovement(v, "build"); };
                 }
             }
 
@@ -147,11 +152,11 @@ public partial class Pawn : UnitBase
             {
                 TargetResource = null;
                 ResourceToCollectData = null;
-                _updateMovementAnimation = (v, _) => { Visual.UpdateMovement(v, string.Empty); };
+                _updateMovementAnimation = (v, _) => { PawnVisual.UpdateMovement(v, string.Empty); };
             }
             else
             {
-                _updateMovementAnimation = (v, c) => { Visual.UpdateMovement(v, c, ResourceToCollectData.ResourceType); };
+                _updateMovementAnimation = (v, c) => { PawnVisual.UpdateMovement(v, c, ResourceToCollectData.ResourceType); };
             }
         }
     }
@@ -179,6 +184,25 @@ public partial class Pawn : UnitBase
         ResourceToCollectData.CollectedCount = 0;
     }
 
+    // private void SetTargetToNode()
+    // {
+    //     Node2D target;
+    //     Vector2? point;
+
+    //     if (IsInstanceValid(TargetResource)
+    //         && TryGetClosestTarget(TargetResource.GlobalPosition, out target, out point)
+    //         && target is ResourceBase resource)
+    //     {
+    //         base.SetTarget(point, resource);
+    //     }
+    //     else if (IsInstanceValid(TargetBuilding)
+    //         && TryGetClosestTarget(TargetBuilding.GlobalPosition, out target, out point)
+    //         && target is BuildingBase building)
+    //     {
+    //         base.SetTarget(point, building);
+    //     }
+    // }
+
     private bool TryGetClosestTarget(Vector2 to, out Node2D collider, out Vector2? collisionPoint)
     {
         collider = null;
@@ -188,7 +212,7 @@ public partial class Pawn : UnitBase
         var query = new PhysicsRayQueryParameters2D
         {
             From = GlobalPosition,
-            To = to.LimitLength(100),
+            To = to,
             CollideWithAreas = false,
             CollideWithBodies = true,
             CollisionMask = 1
