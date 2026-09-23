@@ -18,7 +18,7 @@ const vec2[8] DIRECTIONS = {
 float gtz(float input) { return max(0, sign(input)); }
 // returns 1 if input > 0, else 0
 
-float check(sampler2D tex, vec2 from, vec2 size) {
+float check(sampler2D tex, vec2 from, vec2 size, vec4 color) {
 	float result = 0.0;
 	for (int i = 0; i < 4 * type; i++) {
 		result += texture(tex, from + DIRECTIONS[i] * size * thickness).a;
@@ -27,5 +27,5 @@ float check(sampler2D tex, vec2 from, vec2 size) {
 }
 
 void fragment() {
-	COLOR = mix( vec4(0), clr, check(TEXTURE, UV, TEXTURE_PIXEL_SIZE) * (1.0 - gtz(COLOR.a)) );
+	COLOR = mix( vec4(0), clr, check(TEXTURE, UV, TEXTURE_PIXEL_SIZE, COLOR) * (1.0 - gtz(COLOR.a)) );
 }

@@ -1,9 +1,9 @@
 using Godot;
-using System;
 
 public partial class UnitHasVisualBase : UnitBase
 {
     protected Area2D UnitOverlapedDetector;
+    protected SelectableComponent UnitSelectableComponent;    
 
     public UnitVisualBase Visual { get; private set; }
 
@@ -11,6 +11,7 @@ public partial class UnitHasVisualBase : UnitBase
     {
         base._Ready();
         UnitOverlapedDetector = GetNode<Area2D>(nameof(UnitOverlapedDetector));
+        UnitSelectableComponent = GetNode<SelectableComponent>(nameof(UnitSelectableComponent));
         Visual = GetNode<UnitVisualBase>(nameof(Visual));
     }
 
@@ -20,7 +21,7 @@ public partial class UnitHasVisualBase : UnitBase
 
         Visual.UpdateMovement(Velocity, string.Empty);
 
-        Visual.UpdateOutlineVisible(UnitOverlapedDetector.GetOverlappingBodies().Count > 0);
+        Visual.UpdateOutlineVisible(UnitOverlapedDetector.GetOverlappingAreas().Count > 0);
     }
 
     public override void _PhysicsProcess(double delta)

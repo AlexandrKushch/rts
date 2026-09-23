@@ -23,14 +23,13 @@ radius = 8.0
 size = Vector2(46, 43)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xrivr"]
-size = Vector2(96, 96)
+size = Vector2(96, 20)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jdeet"]
 shader = ExtResource("5_mcfp1")
 shader_parameter/clr = Color(0.28235295, 0.34509805, 0.5176471, 1)
 shader_parameter/type = 1
-shader_parameter/thickness = 2.0
-shader_parameter/polygon = PackedVector2Array(0, 0, 0, 0.5, 0.5, 0.5, 0.5, 0)
+shader_parameter/thickness = 4.0
 
 [sub_resource type="Animation" id="Animation_1ffw7"]
 resource_name = "idle"
@@ -194,6 +193,8 @@ avoidance_layers = 0
 shape = SubResource("CircleShape2D_q3rmq")
 
 [node name="UnitSelectableComponent" parent="." unique_id=550510253 node_paths=PackedStringArray("EffectedOn") instance=ExtResource("2_5savk")]
+collision_layer = 2
+collision_mask = 0
 EffectedOn = NodePath("../Resource")
 
 [node name="Visual" parent="UnitSelectableComponent" index="0" unique_id=946751036]
@@ -207,7 +208,7 @@ shape = SubResource("RectangleShape2D_fbmh2")
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UnitOverlapedDetector" unique_id=625527422]
-position = Vector2(0, 48)
+position = Vector2(0, 10)
 shape = SubResource("RectangleShape2D_xrivr")
 
 [node name="Visual" type="Node2D" parent="." unique_id=296800109]

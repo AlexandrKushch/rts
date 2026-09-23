@@ -31,7 +31,7 @@ public partial class Pawn : UnitHasVisualBase
     {
         _updateMovementAnimation(Velocity, ResourceToCollectData?.CollectedCount ?? 0);
 
-        Visual.UpdateOutlineVisible(UnitOverlapedDetector.GetOverlappingBodies().Count > 0);
+        Visual.UpdateOutlineVisible(UnitOverlapedDetector.GetOverlappingAreas().Count(x => x.GetInstanceId() != UnitSelectableComponent.GetInstanceId()) > 0);
     }
 
     public override void _PhysicsProcess(double delta)

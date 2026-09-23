@@ -8,7 +8,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_igbku"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xrivr"]
-size = Vector2(96, 96)
+size = Vector2(44, 20)
 
 [node name="UnitBase" type="CharacterBody2D" unique_id=1673489485]
 collision_layer = 2
@@ -35,6 +35,8 @@ wait_time = 0.5
 autostart = true
 
 [node name="UnitSelectableComponent" parent="." unique_id=550510253 instance=ExtResource("2_igbku")]
+collision_layer = 2
+collision_mask = 0
 
 [node name="CollisionShape2D" parent="UnitSelectableComponent" index="1" unique_id=1060696685]
 shape = SubResource("CircleShape2D_igbku")
@@ -43,7 +45,7 @@ shape = SubResource("CircleShape2D_igbku")
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UnitOverlapedDetector" unique_id=1591378200]
-position = Vector2(0, 48)
+position = Vector2(0, 10)
 shape = SubResource("RectangleShape2D_xrivr")
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="OnVelocityComputed"]

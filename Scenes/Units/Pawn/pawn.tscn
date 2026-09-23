@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b5go5f5g5ufb4" path="res://Assets/Units/Blue Units/Pawn/Pawn_Wood_IdleInstrument.png" id="5_fek7p"]
 [ext_resource type="Texture2D" uid="uid://bbpp35kpv1o3t" path="res://Assets/Units/Blue Units/Pawn/Pawn_Wood_Run.png" id="6_1eew4"]
 [ext_resource type="Texture2D" uid="uid://cf1kcsxgx3gjl" path="res://Assets/Units/Blue Units/Pawn/Pawn_Wood_RunInstrument.png" id="6_v7e5t"]
-[ext_resource type="Shader" uid="uid://cr5ubxgqx01e6" path="res://Shaders/outline.gdshader" id="6_v8keg"]
+[ext_resource type="Material" uid="uid://b5ivatfoc4qge" path="res://Shaders/m_outline.tres" id="6_vfo5x"]
 [ext_resource type="Texture2D" uid="uid://6v0ttw3galtg" path="res://Assets/Units/Blue Units/Pawn/Pawn_Build_Idle.png" id="7_b2238"]
 [ext_resource type="Texture2D" uid="uid://duklfw51bbt5b" path="res://Assets/Units/Blue Units/Pawn/Pawn_Wood_Idle.png" id="7_v7e5t"]
 [ext_resource type="Script" uid="uid://bp0pnxnktf4kt" path="res://Scenes/Units/Pawn/OutlineVisual.cs" id="7_vfo5x"]
@@ -33,13 +33,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6t8ju"]
 size = Vector2(58, 69)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1iohd"]
-shader = ExtResource("6_v8keg")
-shader_parameter/clr = Color(0.28235295, 0.34509805, 0.5176471, 1)
-shader_parameter/type = 1
-shader_parameter/thickness = 4.0
-shader_parameter/polygon = PackedVector2Array(0, 0, 0, 0.5, 0.5, 0.5, 0.5, 0)
 
 [sub_resource type="Animation" id="Animation_v8keg"]
 resource_name = "idle"
@@ -1036,9 +1029,8 @@ texture = ExtResource("3_8igw0")
 hframes = 8
 
 [node name="Outline" type="Sprite2D" parent="Visual" index="1" unique_id=195150417 node_paths=PackedStringArray("DuplicateThe")]
-visible = false
 z_index = 5
-material = SubResource("ShaderMaterial_1iohd")
+material = ExtResource("6_vfo5x")
 position = Vector2(0, -29)
 texture = ExtResource("3_8igw0")
 hframes = 8
