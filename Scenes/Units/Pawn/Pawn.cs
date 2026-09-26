@@ -87,7 +87,14 @@ public partial class Pawn : UnitHasVisualBase
 
     public override void SetTarget(Vector2? targetPosition, Node2D targetObject)
     {
-        base.SetTarget(targetPosition, targetObject);
+        if (IsInstanceValid(targetObject))
+        {
+            base.SetTarget(targetObject.GlobalPosition, targetObject);
+        }
+        else
+        {
+            base.SetTarget(targetPosition, targetObject);
+        }
 
         UpdateTargetObject();
 

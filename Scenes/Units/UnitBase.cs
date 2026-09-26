@@ -1,9 +1,9 @@
 using Godot;
 
-public partial class UnitBase : CharacterBody2D
+public partial class UnitBase : CharacterBody2D, IDestroyableWithHp
 {
 	protected virtual float MovementSpeed => 100f;
-	
+
 	public NavigationAgent2D NavigationAgent2D { get; private set; }
 
 	public Vector2? Target { get; set; }
@@ -14,9 +14,10 @@ public partial class UnitBase : CharacterBody2D
 	public UnitType Meta { get; set; }
 
 	[Export]
-    public TeamType Team { get; set; } 
+	public TeamType Team { get; set; }
 
 	public bool Setup { get; set; } = false;
+	public int HP { get; set; } = 5;
 
 	public override void _Ready()
 	{
@@ -59,5 +60,25 @@ public partial class UnitBase : CharacterBody2D
 		Target = targetPosition;
 		TargetObject = targetObject;
 		UpdatePath();
+	}
+
+	public void TakeDamage(int value)
+	{
+		if (!IsInstanceValid(this))
+		{
+			return;
+		}
+
+		HP -= value;
+
+		if (HP <= 0)
+		{
+			Destroy();
+		}
+	}
+
+	public void Destroy()
+	{
+		QueueFree();
 	}
 }

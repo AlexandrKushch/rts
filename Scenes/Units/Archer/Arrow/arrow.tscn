@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://b30e35p1ctttl"]
+
+[ext_resource type="Script" uid="uid://b1llsplh5yrxy" path="res://Scenes/Units/Archer/Arrow/ArrowPath.cs" id="1_soo22"]
+[ext_resource type="Texture2D" uid="uid://bakpnbnnub30u" path="res://Assets/Units/Arrows/Arrow.png" id="2_soo22"]
+[ext_resource type="Texture2D" uid="uid://bjss5rj1cbrna" path="res://Assets/Units/Arrows/ArrowBroken.png" id="3_lab1v"]
+
+[sub_resource type="Curve2D" id="Curve2D_25oqh"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, -100, 0, 100, 0, 200, -50, 0, 0, 0, 0, 400, 0)
+}
+point_count = 3
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xrivr"]
+size = Vector2(42.93251, 20)
+
+[node name="ArrowPath" type="Path2D" unique_id=548669941]
+curve = SubResource("Curve2D_25oqh")
+script = ExtResource("1_soo22")
+
+[node name="ArrowPathFollow" type="PathFollow2D" parent="." unique_id=247291346]
+rotation = -0.4636476
+
+[node name="ArrowHitBox" type="Area2D" parent="ArrowPathFollow" unique_id=670771766]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArrowPathFollow/ArrowHitBox" unique_id=727506396]
+position = Vector2(-15.652485, 0)
+scale = Vector2(1.0000002, 1.0000002)
+shape = SubResource("RectangleShape2D_xrivr")
+
+[node name="ArrowVisual" type="Sprite2D" parent="ArrowPathFollow" unique_id=1742264870]
+position = Vector2(-15, 0)
+texture = ExtResource("2_soo22")
+
+[node name="ArrowBrokenVisual" type="Sprite2D" parent="ArrowPathFollow" unique_id=858378689]
+visible = false
+position = Vector2(-15, 0)
+texture = ExtResource("3_lab1v")
+
+[node name="Timer" type="Timer" parent="." unique_id=177225715]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="Destroy"]

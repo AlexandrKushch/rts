@@ -43,8 +43,6 @@ public partial class UiBuildingItem : Control, IHasTooltip
                 return;
             }
         }
-        
-        GD.Print(Team);
 
         _player.BuildingController.InitBuildingBlueprint(Resource, Team);
         UpdateHighlight(false);

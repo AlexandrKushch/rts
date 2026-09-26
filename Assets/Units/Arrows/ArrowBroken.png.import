@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1ijaplcgmi5w"
-path="res://.godot/imported/Arrow.png-b8032128dd804667f4a8f25ee9cca211.ctex"
+uid="uid://bjss5rj1cbrna"
+path="res://.godot/imported/ArrowBroken.png-b855e7fc0fa51a8072b59a7bc323b006.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Units/Black Units/Archer/Arrow.png"
-dest_files=["res://.godot/imported/Arrow.png-b8032128dd804667f4a8f25ee9cca211.ctex"]
+source_file="res://Assets/Units/Arrows/ArrowBroken.png"
+dest_files=["res://.godot/imported/ArrowBroken.png-b855e7fc0fa51a8072b59a7bc323b006.ctex"]
 
 [params]
 

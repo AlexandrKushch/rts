@@ -3,13 +3,19 @@
 [ext_resource type="PackedScene" uid="uid://c5ni0fi5ycvwj" path="res://Scenes/Units/unit_base.tscn" id="1_kdrlx"]
 [ext_resource type="Script" uid="uid://721wi7gt8mik" path="res://Scenes/Units/Archer/Archer.cs" id="2_iuvmd"]
 [ext_resource type="Texture2D" uid="uid://o0bbv0dupqxv" path="res://Assets/Units/Blue Units/Archer/Archer_Idle.png" id="2_ldfi1"]
-[ext_resource type="Script" uid="uid://td0hl5a7lqvt" path="res://Scenes/Units/UnitVisualBase.cs" id="2_qys3b"]
+[ext_resource type="PackedScene" uid="uid://b30e35p1ctttl" path="res://Scenes/Units/Archer/Arrow/arrow.tscn" id="3_h6b1n"]
 [ext_resource type="Resource" uid="uid://us5gsh240dda" path="res://Scenes/Units/Types/r_archer.tres" id="3_x40ju"]
+[ext_resource type="Script" uid="uid://badwdam6585pp" path="res://Scenes/Units/Archer/ArcherVisual.cs" id="4_81b8j"]
 [ext_resource type="Shader" uid="uid://cr5ubxgqx01e6" path="res://Shaders/outline.gdshader" id="6_81b8j"]
 [ext_resource type="Texture2D" uid="uid://dt8ty838i5wcs" path="res://Assets/Units/Blue Units/Archer/Archer_Shoot.png" id="6_iuvmd"]
 [ext_resource type="Texture2D" uid="uid://b65d2n0ixixel" path="res://Assets/Units/Blue Units/Pawn/Pawn_Idle.png" id="7_cjf6y"]
 [ext_resource type="Texture2D" uid="uid://bmyipbb8iuj44" path="res://Assets/Units/Blue Units/Archer/Archer_Run.png" id="7_x40ju"]
 [ext_resource type="Script" uid="uid://bp0pnxnktf4kt" path="res://Scenes/Units/Pawn/OutlineVisual.cs" id="8_bem2y"]
+[ext_resource type="Script" uid="uid://c4si3w1en870t" path="res://Scenes/Units/Archer/ArcherStateMachine/ArcherStateMachine.cs" id="11_cjf6y"]
+[ext_resource type="Script" uid="uid://dqwcrb7h6o8l0" path="res://Scenes/Units/Archer/ArcherStateMachine/ArcherIdleState.cs" id="12_bem2y"]
+[ext_resource type="Script" uid="uid://4xot23nfpvfg" path="res://Scenes/Units/Archer/ArcherStateMachine/ArcherMoveToState.cs" id="13_02drl"]
+[ext_resource type="Script" uid="uid://d4c2camm5pxk3" path="res://Scenes/Units/Archer/ArcherStateMachine/ArcherAttackState.cs" id="14_ki8vg"]
+[ext_resource type="Script" uid="uid://b6adybwltho1f" path="res://Scenes/Units/Archer/ArcherStateMachine/ArcherMoveToEnemyState.cs" id="16_vcr0m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lirip"]
 size = Vector2(70, 88)
@@ -183,6 +189,20 @@ tracks/2/keys = {
 "update": 1,
 "values": [ExtResource("6_iuvmd")]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StateMachine/Attack")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"OnAttackAnimationKeyReached"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_iuv1g"]
 _data = {
@@ -192,9 +212,16 @@ _data = {
 &"Shoot": SubResource("Animation_x40ju")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_xrivr"]
+radius = 300.0
+
 [node name="Archer" unique_id=1673489485 instance=ExtResource("1_kdrlx")]
 script = ExtResource("2_iuvmd")
+ArrowScene = ExtResource("3_h6b1n")
 Meta = ExtResource("3_x40ju")
+
+[node name="NavigationAgent2D" parent="." index="1" unique_id=1325708388]
+max_speed = 1000.0
 
 [node name="UnitSelectableComponent" parent="." index="3" unique_id=550510253 node_paths=PackedStringArray("EffectedOn")]
 EffectedOn = NodePath("..")
@@ -203,8 +230,8 @@ EffectedOn = NodePath("..")
 position = Vector2(0, -34)
 shape = SubResource("RectangleShape2D_lirip")
 
-[node name="Visual" type="Node2D" parent="." index="4" unique_id=646223824]
-script = ExtResource("2_qys3b")
+[node name="Visual" type="Node2D" parent="." index="5" unique_id=646223824]
+script = ExtResource("4_81b8j")
 
 [node name="Sprite2D" type="Sprite2D" parent="Visual" index="0" unique_id=1385795100]
 position = Vector2(0, -29)
@@ -224,6 +251,32 @@ DuplicateThe = NodePath("../Sprite2D")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" index="2" unique_id=1700615018]
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_iuv1g")
+
+[node name="EnemyDetector" type="Area2D" parent="." index="6" unique_id=1403183266]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetector" index="0" unique_id=1364830385]
+shape = SubResource("CircleShape2D_xrivr")
+
+[node name="ShootPoint" type="Marker2D" parent="." index="7" unique_id=553381415]
+position = Vector2(33, -49)
+
+[node name="StateMachine" type="Node" parent="." index="8" unique_id=364302710 node_paths=PackedStringArray("Archer")]
+script = ExtResource("11_cjf6y")
+Archer = NodePath("..")
+
+[node name="Idle" type="Node" parent="StateMachine" index="0" unique_id=1088189973]
+script = ExtResource("12_bem2y")
+
+[node name="MoveTo" type="Node" parent="StateMachine" index="1" unique_id=216810615]
+script = ExtResource("13_02drl")
+
+[node name="Attack" type="Node" parent="StateMachine" index="2" unique_id=1419916541]
+script = ExtResource("14_ki8vg")
+
+[node name="MoveToEnemy" type="Node" parent="StateMachine" index="3" unique_id=234535291]
+script = ExtResource("16_vcr0m")
 
 [connection signal="animation_finished" from="Visual/AnimationPlayer" to="Visual" method="OnAnimationFinished"]
 

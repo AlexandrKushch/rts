@@ -25,7 +25,6 @@ public partial class SheepVisual : UnitVisualBase
         base.UpdateMovement(velocity, animationLibraryName);
     }
 
-
     private void OnAnimationFinished(StringName animation)
     {
         if (animation.ToString().Contains(UnitAnimationNames.Sheep.Interact, StringComparison.OrdinalIgnoreCase))

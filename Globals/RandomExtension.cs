@@ -5,6 +5,11 @@ public static class RandomExtension
 {
     private static Random _random = new Random();
 
+    public static long RandomLong(int maxValue)
+    {
+        return _random.NextInt64(maxValue);
+    }
+
     public static double RandomDouble()
     {
         return _random.NextDouble();

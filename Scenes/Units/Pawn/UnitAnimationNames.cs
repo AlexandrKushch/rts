@@ -6,6 +6,11 @@ public class UnitAnimationNames
 
     public const string RESET = "RESET";
 
+    public class Archer
+    {
+        public const string Shoot = "Shoot";        
+    }
+
     public class Pawn
     {
         public const string Interact = "Interact";

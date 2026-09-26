@@ -1020,7 +1020,7 @@ position = Vector2(0, -28)
 position = Vector2(0, -28.5)
 shape = SubResource("RectangleShape2D_6t8ju")
 
-[node name="Visual" type="Node2D" parent="." index="4" unique_id=105057415]
+[node name="Visual" type="Node2D" parent="." index="5" unique_id=105057415]
 script = ExtResource("3_fwvsl")
 
 [node name="Sprite2D" type="Sprite2D" parent="Visual" index="0" unique_id=1326027893]
@@ -1045,7 +1045,7 @@ libraries/Gold = SubResource("AnimationLibrary_r6g2o")
 libraries/Meat = SubResource("AnimationLibrary_6u2jw")
 libraries/Wood = SubResource("AnimationLibrary_e66ud")
 
-[node name="StateMachine" type="Node" parent="." index="5" unique_id=848676482 node_paths=PackedStringArray("Pawn")]
+[node name="StateMachine" type="Node" parent="." index="6" unique_id=848676482 node_paths=PackedStringArray("Pawn")]
 script = ExtResource("15_5n0ob")
 Pawn = NodePath("..")
 

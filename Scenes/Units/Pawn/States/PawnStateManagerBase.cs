@@ -37,7 +37,13 @@ public partial class PawnStateManagerBase : StateMachineBase<PawnStateIds>
     public void MoveToClosestBuilding()
     {
         var building = Pawn.GetClosestResourceStorageBuilding();
-        UnitsController.MoveToNodeCommand(Pawn, building);
+        
+        if (IsInstanceValid(building))
+        {
+            Pawn.SetTarget(
+                building.GlobalPosition,
+                building);
+        }
     }
 
     public void MoveToClosestResourceIfNotToBuilding()
@@ -46,12 +52,13 @@ public partial class PawnStateManagerBase : StateMachineBase<PawnStateIds>
 
         if (resource != null)
         {
-            UnitsController.MoveToNodeCommand(Pawn, resource);
+            Pawn.SetTarget(
+                resource.GlobalPosition,
+                resource);
         }
         else
         {
-            var building = Pawn.GetClosestResourceStorageBuilding();
-            UnitsController.MoveToNodeCommand(Pawn, building);
+            MoveToClosestBuilding();
         }
     }
 }

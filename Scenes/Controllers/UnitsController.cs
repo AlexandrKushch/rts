@@ -33,13 +33,6 @@ public partial class UnitsController : Node2D
         }
     }
 
-    public void MoveToNodeCommand(UnitBase unit, Node2D targetObject)
-    {
-        unit.SetTarget(
-            targetObject?.GlobalPosition ?? null,
-            targetObject ?? null);
-    }
-
     private void InputMoveCommand(InputEventMouseButton input)
     {
         if (input.IsReleased())
@@ -52,7 +45,9 @@ public partial class UnitsController : Node2D
             {
                 if (targetObject != null)
                 {
-                    MoveToNodeCommand(unit, targetObject.EffectedOn);
+                    unit.SetTarget(
+                        GetGlobalMousePosition(),
+                        targetObject.EffectedOn);
                 }
                 else
                 {

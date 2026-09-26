@@ -35,7 +35,9 @@ public partial class PawnBuildOrRepairState : PawnStateBase
 
                 if (IsInstanceValid(PawnStateMachine.Pawn.TargetResource))
                 {
-                    PawnStateMachine.UnitsController.MoveToNodeCommand(PawnStateMachine.Pawn, PawnStateMachine.Pawn.TargetResource);
+                    PawnStateMachine.Pawn.SetTarget(
+                        PawnStateMachine.Pawn.TargetResource.GlobalPosition,
+                        PawnStateMachine.Pawn.TargetResource);
                 }
                 else
                 {

@@ -38,7 +38,9 @@ public partial class BuildingController : Node2D
 
                     foreach (var unit in units)
                     {
-                        player.UnitsController.MoveToNodeCommand(unit, _blueprint.Building);
+                        unit.SetTarget(
+                            _blueprint.Building.GlobalPosition,
+                            _blueprint.Building);
                     }
 
                     foreach (var point in _blueprint.Building.Resource.TileRequiresToBuild)

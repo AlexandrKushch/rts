@@ -82,7 +82,7 @@ public partial class PawnVisual : UnitVisualBase
 
     private void OnAnimationFinished(StringName animation)
     {
-        if (animation.ToString().Contains(PawnAnimationNames.Interact, StringComparison.OrdinalIgnoreCase))
+        if (animation.ToString().Contains(UnitAnimationNames.Pawn.Interact, StringComparison.OrdinalIgnoreCase))
         {
             EmitSignal(SignalName.OnInteractAnimationFinished);
         }
