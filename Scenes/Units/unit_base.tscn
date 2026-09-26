@@ -26,7 +26,6 @@ time_horizon_agents = 0.2
 time_horizon_obstacles = 0.25
 avoidance_layers = 2
 avoidance_mask = 3
-debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(0, 1, 1, 1)
 

@@ -57,6 +57,7 @@ public partial class Archer : UnitHasVisualBase
     {
         var arrowPath = ArrowScene.Instantiate<ArrowPath>();
         arrowPath.GlobalPosition = GlobalPosition;
+        arrowPath.Team = Team;
         GlobalResources.Instance.World.AddChild(arrowPath);
 
         float radius = GetRadius();

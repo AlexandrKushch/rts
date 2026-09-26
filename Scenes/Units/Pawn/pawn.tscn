@@ -1016,6 +1016,9 @@ EffectedOn = NodePath("..")
 [node name="Visual" parent="UnitSelectableComponent" index="0" unique_id=946751036]
 position = Vector2(0, -28)
 
+[node name="SelectionTriangleSprite" parent="UnitSelectableComponent/Visual" index="0" unique_id=205670872]
+position = Vector2(0, -49)
+
 [node name="CollisionShape2D" parent="UnitSelectableComponent" index="1" unique_id=1060696685]
 position = Vector2(0, -28.5)
 shape = SubResource("RectangleShape2D_6t8ju")
