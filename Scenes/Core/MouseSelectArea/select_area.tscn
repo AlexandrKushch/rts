@@ -1,19 +1,19 @@
 [gd_scene format=3 uid="uid://r4ncnt86o6sr"]
 
-[ext_resource type="Texture2D" uid="uid://muuoltgu4vdl" path="res://Assets/Terrain/Tileset/Water Background color.png" id="1_bxwuc"]
-[ext_resource type="Script" uid="uid://bignplnmt7l3p" path="res://Scenes/Controllers/SelectionScenes/SelectArea.cs" id="1_xtga0"]
+[ext_resource type="Script" uid="uid://bignplnmt7l3p" path="res://Scenes/Core/MouseSelectArea/SelectArea.cs" id="1_renmy"]
+[ext_resource type="Texture2D" uid="uid://muuoltgu4vdl" path="res://Assets/Terrain/Tileset/Water Background color.png" id="2_dh107"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xrivr"]
 
 [node name="SelectArea" type="Area2D" unique_id=658971404]
 collision_layer = 0
 collision_mask = 3
-script = ExtResource("1_xtga0")
+script = ExtResource("1_renmy")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=322716202]
 modulate = Color(0, 0.18039216, 0.6431373, 0.17254902)
 scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("1_bxwuc")
+texture = ExtResource("2_dh107")
 offset = Vector2(32, 32)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1461916859]

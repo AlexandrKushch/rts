@@ -29,7 +29,10 @@ public partial class Pawn : UnitHasVisualBase
 
     public override void _Process(double delta)
     {
-        _updateMovementAnimation(Velocity, ResourceToCollectData?.CollectedCount ?? 0);
+        if (!Dashed)
+        {
+            _updateMovementAnimation(Velocity, ResourceToCollectData?.CollectedCount ?? 0);
+        }
 
         Visual.UpdateOutlineVisible(UnitOverlapedDetector.GetOverlappingAreas().Count(x => x.GetInstanceId() != UnitSelectableComponent.GetInstanceId()) > 0);
     }

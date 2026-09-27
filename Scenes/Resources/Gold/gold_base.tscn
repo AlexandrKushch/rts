@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cke7evi2wytya" path="res://Scenes/Resources/Gold/GoldBase.cs" id="1_oy27y"]
 [ext_resource type="Resource" uid="uid://wjt3mfk3hveg" path="res://Scenes/Resources/Types/r_gold.tres" id="2_s42g8"]
-[ext_resource type="PackedScene" uid="uid://dmh6f0dnp4ebk" path="res://Scenes/SelectionArea/BuildingSelectableComponent/building_selectable_component.tscn" id="3_akyrr"]
+[ext_resource type="PackedScene" uid="uid://dmh6f0dnp4ebk" path="res://Scenes/Core/SelectableComponent/BuildingSelectableComponent/building_selectable_component.tscn" id="3_akyrr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xrivr"]
 

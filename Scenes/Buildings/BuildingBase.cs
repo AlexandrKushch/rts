@@ -186,13 +186,8 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
         return aroundPoints.ToArray();
     }
 
-    private bool IsEqualApprox(Vector2 a, Vector2 b, float tolerance = 0.1f)
+    public void TakeDamageWithDash(Vector2 from, int value, float power)
     {
-        if (Mathf.IsEqualApprox(a.X, b.X, tolerance))
-        {
-            return Mathf.IsEqualApprox(a.Y, b.Y, tolerance);
-        }
-
-        return false;
+        throw new System.NotImplementedException();
     }
 }

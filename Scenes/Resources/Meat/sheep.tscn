@@ -4,8 +4,9 @@
 [ext_resource type="Script" uid="uid://qxapu7neyxx5" path="res://Scenes/Resources/Meat/Sheep.cs" id="1_8louv"]
 [ext_resource type="Texture2D" uid="uid://bmivy0oyg5wqb" path="res://Assets/Terrain/Resources/Meat/Sheep/Sheep_Idle.png" id="1_d1k6x"]
 [ext_resource type="Texture2D" uid="uid://csuinv1qxftxb" path="res://Assets/Terrain/Resources/Meat/Sheep/Sheep_Move.png" id="1_rya4n"]
-[ext_resource type="PackedScene" uid="uid://c1skwp03bakoh" path="res://Scenes/SelectionArea/UnitSelectableComponent/unit_selectable_component.tscn" id="2_5savk"]
+[ext_resource type="PackedScene" uid="uid://c1skwp03bakoh" path="res://Scenes/Core/SelectableComponent/UnitSelectableComponent/unit_selectable_component.tscn" id="2_5savk"]
 [ext_resource type="Script" uid="uid://8fm6fauxtot" path="res://Scenes/Resources/Meat/SheepVisual.cs" id="3_c3se6"]
+[ext_resource type="Material" uid="uid://dvulgksriyeti" path="res://Shaders/m_unit_visual.tres" id="4_44iym"]
 [ext_resource type="Shader" uid="uid://cr5ubxgqx01e6" path="res://Shaders/outline.gdshader" id="5_mcfp1"]
 [ext_resource type="Resource" uid="uid://ct36o5f4apb73" path="res://Scenes/Resources/Types/r_meat.tres" id="6_5savk"]
 [ext_resource type="Texture2D" uid="uid://b65d2n0ixixel" path="res://Assets/Units/Blue Units/Pawn/Pawn_Idle.png" id="6_44iym"]
@@ -215,6 +216,7 @@ shape = SubResource("RectangleShape2D_xrivr")
 script = ExtResource("3_c3se6")
 
 [node name="Sprite2D" type="Sprite2D" parent="Visual" unique_id=1000010458]
+material = ExtResource("4_44iym")
 texture = ExtResource("1_1ffw7")
 hframes = 12
 frame = 1

@@ -1,12 +1,13 @@
 [gd_scene format=3 uid="uid://bkwjb1xjrmt43"]
 
 [ext_resource type="PackedScene" uid="uid://c5ni0fi5ycvwj" path="res://Scenes/Units/unit_base.tscn" id="1_6kxvf"]
-[ext_resource type="Script" uid="uid://721wi7gt8mik" path="res://Scenes/Units/Archer/Archer.cs" id="2_cbjpg"]
+[ext_resource type="Script" uid="uid://cg6c23isc04rr" path="res://Scenes/Units/Lancer/Lancer.cs" id="2_koi2g"]
 [ext_resource type="Script" uid="uid://td0hl5a7lqvt" path="res://Scenes/Units/UnitVisualBase.cs" id="2_lirip"]
 [ext_resource type="Texture2D" uid="uid://vfw7i38rju8y" path="res://Assets/Units/Blue Units/Lancer/Lancer_Idle.png" id="3_cbjpg"]
 [ext_resource type="Resource" uid="uid://cm5nt1ekod7b8" path="res://Scenes/Units/Types/r_lancer.tres" id="3_ixymf"]
 [ext_resource type="Texture2D" uid="uid://dqlraj8web2cw" path="res://Assets/Units/Blue Units/Lancer/Lancer_Right_Attack.png" id="4_ixymf"]
 [ext_resource type="Texture2D" uid="uid://jb0k48q5pvdq" path="res://Assets/Units/Blue Units/Lancer/Lancer_Run.png" id="5_680ec"]
+[ext_resource type="Material" uid="uid://dvulgksriyeti" path="res://Shaders/m_unit_visual.tres" id="5_h0ltc"]
 [ext_resource type="Shader" uid="uid://cr5ubxgqx01e6" path="res://Shaders/outline.gdshader" id="6_13wat"]
 [ext_resource type="Texture2D" uid="uid://b65d2n0ixixel" path="res://Assets/Units/Blue Units/Pawn/Pawn_Idle.png" id="7_h0ltc"]
 [ext_resource type="Script" uid="uid://bp0pnxnktf4kt" path="res://Scenes/Units/Pawn/OutlineVisual.cs" id="8_t8ae6"]
@@ -19,7 +20,6 @@ shader = ExtResource("6_13wat")
 shader_parameter/clr = Color(0.28235295, 0.34509805, 0.5176471, 1)
 shader_parameter/type = 1
 shader_parameter/thickness = 4.0
-shader_parameter/polygon = PackedVector2Array(0, 0, 0, 0.5, 0.5, 0.5, 0.5, 0)
 
 [sub_resource type="Animation" id="Animation_13wat"]
 resource_name = "idle"
@@ -193,8 +193,11 @@ _data = {
 &"Run": SubResource("Animation_t8ae6")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_13wat"]
+size = Vector2(44, 64)
+
 [node name="Lancer" unique_id=1673489485 instance=ExtResource("1_6kxvf")]
-script = ExtResource("2_cbjpg")
+script = ExtResource("2_koi2g")
 Meta = ExtResource("3_ixymf")
 
 [node name="UnitSelectableComponent" parent="." index="3" unique_id=550510253 node_paths=PackedStringArray("EffectedOn")]
@@ -208,6 +211,7 @@ shape = SubResource("RectangleShape2D_ypcdl")
 script = ExtResource("2_lirip")
 
 [node name="Sprite2D" type="Sprite2D" parent="Visual" index="0" unique_id=1176692145]
+material = ExtResource("5_h0ltc")
 position = Vector2(0, -29)
 texture = ExtResource("3_cbjpg")
 hframes = 12
@@ -226,6 +230,11 @@ DuplicateThe = NodePath("../Sprite2D")
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_dsmhd")
 
+[node name="CollisionShape2D" parent="HurtBox" parent_id_path=PackedInt32Array(799690141) index="0" unique_id=930546286]
+position = Vector2(0, -32)
+shape = SubResource("RectangleShape2D_13wat")
+
 [connection signal="animation_finished" from="Visual/AnimationPlayer" to="Visual" method="OnAnimationFinished"]
 
 [editable path="UnitSelectableComponent"]
+[editable path="HurtBox"]

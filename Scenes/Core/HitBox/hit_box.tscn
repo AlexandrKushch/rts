@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cpo5lje6qtg0o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xrivr"]
+
+[node name="HitBox" type="Area2D" unique_id=1242638785]
+collision_layer = 0
+collision_mask = 256
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=394402596]
+shape = SubResource("RectangleShape2D_xrivr")
+debug_color = Color(0.40728343, 0.4664691, 1, 0.41960785)

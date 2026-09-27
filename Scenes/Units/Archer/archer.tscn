@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://badwdam6585pp" path="res://Scenes/Units/Archer/ArcherVisual.cs" id="4_81b8j"]
 [ext_resource type="Shader" uid="uid://cr5ubxgqx01e6" path="res://Shaders/outline.gdshader" id="6_81b8j"]
 [ext_resource type="Texture2D" uid="uid://dt8ty838i5wcs" path="res://Assets/Units/Blue Units/Archer/Archer_Shoot.png" id="6_iuvmd"]
+[ext_resource type="Material" uid="uid://dvulgksriyeti" path="res://Shaders/m_unit_visual.tres" id="6_mmmmp"]
 [ext_resource type="Texture2D" uid="uid://b65d2n0ixixel" path="res://Assets/Units/Blue Units/Pawn/Pawn_Idle.png" id="7_cjf6y"]
 [ext_resource type="Texture2D" uid="uid://bmyipbb8iuj44" path="res://Assets/Units/Blue Units/Archer/Archer_Run.png" id="7_x40ju"]
 [ext_resource type="Script" uid="uid://bp0pnxnktf4kt" path="res://Scenes/Units/Pawn/OutlineVisual.cs" id="8_bem2y"]
@@ -215,6 +216,9 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_xrivr"]
 radius = 300.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vcr0m"]
+size = Vector2(44, 64)
+
 [node name="Archer" unique_id=1673489485 instance=ExtResource("1_kdrlx")]
 script = ExtResource("2_iuvmd")
 ArrowScene = ExtResource("3_h6b1n")
@@ -234,6 +238,7 @@ shape = SubResource("RectangleShape2D_lirip")
 script = ExtResource("4_81b8j")
 
 [node name="Sprite2D" type="Sprite2D" parent="Visual" index="0" unique_id=1385795100]
+material = ExtResource("6_mmmmp")
 position = Vector2(0, -29)
 texture = ExtResource("2_ldfi1")
 hframes = 6
@@ -278,6 +283,11 @@ script = ExtResource("14_ki8vg")
 [node name="MoveToEnemy" type="Node" parent="StateMachine" index="3" unique_id=234535291]
 script = ExtResource("16_vcr0m")
 
+[node name="CollisionShape2D" parent="HurtBox" parent_id_path=PackedInt32Array(799690141) index="0" unique_id=930546286]
+position = Vector2(0, -32)
+shape = SubResource("RectangleShape2D_vcr0m")
+
 [connection signal="animation_finished" from="Visual/AnimationPlayer" to="Visual" method="OnAnimationFinished"]
 
 [editable path="UnitSelectableComponent"]
+[editable path="HurtBox"]

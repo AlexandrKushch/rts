@@ -2,12 +2,11 @@
 
 [ext_resource type="Script" uid="uid://d2ur4jmshldh1" path="res://Scenes/Resources/Wood/TreeBase.cs" id="1_nbom4"]
 [ext_resource type="Resource" uid="uid://cj7uk3l8yh8rq" path="res://Scenes/Resources/Types/r_wood.tres" id="2_oexb5"]
-[ext_resource type="PackedScene" uid="uid://c1skwp03bakoh" path="res://Scenes/SelectionArea/UnitSelectableComponent/unit_selectable_component.tscn" id="3_oexb5"]
+[ext_resource type="PackedScene" uid="uid://dmh6f0dnp4ebk" path="res://Scenes/Core/SelectableComponent/BuildingSelectableComponent/building_selectable_component.tscn" id="3_oexb5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xrivr"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5n0ob"]
-size = Vector2(46, 170)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4e3nm"]
 
 [sub_resource type="Animation" id="Animation_4e3nm"]
 resource_name = "idle"
@@ -43,12 +42,11 @@ shape = SubResource("CircleShape2D_xrivr")
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=2047243752]
 radius = 10.0
 
-[node name="UnitSelectableComponent" parent="." unique_id=550510253 node_paths=PackedStringArray("EffectedOn") instance=ExtResource("3_oexb5")]
+[node name="BuildingSelectableComponent" parent="." unique_id=550510253 node_paths=PackedStringArray("EffectedOn") instance=ExtResource("3_oexb5")]
 EffectedOn = NodePath("..")
 
-[node name="CollisionShape2D" parent="UnitSelectableComponent" index="1" unique_id=1060696685]
-position = Vector2(0, -68)
-shape = SubResource("RectangleShape2D_5n0ob")
+[node name="CollisionShape2D" parent="BuildingSelectableComponent" index="1" unique_id=1060696685]
+shape = SubResource("RectangleShape2D_4e3nm")
 
 [node name="Visual" type="Node2D" parent="." unique_id=1800092084]
 
@@ -61,4 +59,4 @@ libraries/ = SubResource("AnimationLibrary_bg567")
 
 [connection signal="tree_exited" from="." to="." method="OnTreeExited"]
 
-[editable path="UnitSelectableComponent"]
+[editable path="BuildingSelectableComponent"]

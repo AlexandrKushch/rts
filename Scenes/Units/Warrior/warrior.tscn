@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://b81s8vll42xy2" path="res://Scenes/Units/Types/r_warrior.tres" id="3_intd2"]
 [ext_resource type="Texture2D" uid="uid://0v1r6vmklik1" path="res://Assets/Units/Blue Units/Warrior/Warrior_Idle.png" id="3_ypcdl"]
 [ext_resource type="Texture2D" uid="uid://nx6qj76be3eg" path="res://Assets/Units/Blue Units/Warrior/Warrior_Attack1.png" id="4_kvhdx"]
+[ext_resource type="Material" uid="uid://dvulgksriyeti" path="res://Shaders/m_unit_visual.tres" id="5_5husr"]
 [ext_resource type="Texture2D" uid="uid://cpfl3rpyy5btc" path="res://Assets/Units/Blue Units/Warrior/Warrior_Run.png" id="5_intd2"]
 [ext_resource type="Shader" uid="uid://cr5ubxgqx01e6" path="res://Shaders/outline.gdshader" id="6_kk860"]
 [ext_resource type="Texture2D" uid="uid://b65d2n0ixixel" path="res://Assets/Units/Blue Units/Pawn/Pawn_Idle.png" id="7_5husr"]
@@ -277,6 +278,9 @@ _data = {
 &"Run": SubResource("Animation_kk860")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kk860"]
+size = Vector2(70, 89)
+
 [node name="Warrior" unique_id=1673489485 instance=ExtResource("1_jxcyl")]
 script = ExtResource("2_bbpbx")
 Meta = ExtResource("3_intd2")
@@ -292,6 +296,7 @@ shape = SubResource("RectangleShape2D_nhsra")
 script = ExtResource("3_546yd")
 
 [node name="Sprite2D" type="Sprite2D" parent="Visual" index="0" unique_id=22426039]
+material = ExtResource("5_5husr")
 position = Vector2(0, -29)
 texture = ExtResource("3_ypcdl")
 hframes = 8
@@ -310,6 +315,10 @@ DuplicateThe = NodePath("../Sprite2D")
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_5husr")
 
+[node name="CollisionShape2D" parent="HurtBox" parent_id_path=PackedInt32Array(799690141) index="0" unique_id=930546286]
+shape = SubResource("RectangleShape2D_kk860")
+
 [connection signal="animation_finished" from="Visual/AnimationPlayer" to="Visual" method="OnAnimationFinished"]
 
 [editable path="UnitSelectableComponent"]
+[editable path="HurtBox"]

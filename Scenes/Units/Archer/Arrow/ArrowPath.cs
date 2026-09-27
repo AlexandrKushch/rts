@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class ArrowPath : Path2D, IDestroyable
@@ -26,7 +27,7 @@ public partial class ArrowPath : Path2D, IDestroyable
 
         SetPhysicsProcess(false);
 
-        ArrowHitBox.BodyEntered += OnHitBoxEntered;
+        ArrowHitBox.AreaEntered += OnHitBoxEntered;
         Timer.Timeout += OnDestroyTimerTimeout;
     }
 
@@ -91,7 +92,7 @@ public partial class ArrowPath : Path2D, IDestroyable
 
     public void OnDestroyTimerTimeout()
     {
-        ArrowHitBox.BodyEntered -= OnHitBoxEntered;
+        ArrowHitBox.AreaEntered -= OnHitBoxEntered;
         if (IsInstanceValid(ArrowBrokenVisual))
         {
             ArrowBrokenVisual.QueueFree();
@@ -99,15 +100,16 @@ public partial class ArrowPath : Path2D, IDestroyable
         QueueFree();
     }
 
-    private void OnHitBoxEntered(Node2D body)
+    private void OnHitBoxEntered(Area2D area)
     {
-        if (body is UnitBase unit
+        if (area is HurtBox hurtBox
+            && hurtBox.EffectedOn is UnitBase unit
             && unit.Team != Team)
         {
             Destroy();
-            ArrowBrokenVisual.Reparent(body);
+            ArrowBrokenVisual.Visible = false;
 
-            unit.TakeDamage(1);
+            unit.TakeDamageWithDash(GlobalPosition, 1, 1.0f);
         }
     }
 }

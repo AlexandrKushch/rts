@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cb8citwk61klx"]
+
+[ext_resource type="Script" uid="uid://drh45bpnawe32" path="res://Scenes/Core/HurtBox/HurtBox.cs" id="1_w5n7e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xrivr"]
+
+[node name="HurtBox" type="Area2D" unique_id=799690141]
+collision_layer = 256
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_w5n7e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=930546286]
+shape = SubResource("RectangleShape2D_xrivr")
+debug_color = Color(1, 0, 0.16862746, 0.41960785)

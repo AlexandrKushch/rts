@@ -19,7 +19,10 @@ public partial class UnitHasVisualBase : UnitBase
     {
         base._Process(delta);
 
-        Visual.UpdateMovement(Velocity, string.Empty);
+        if (!Dashed)
+        {
+            Visual.UpdateMovement(Velocity, string.Empty);
+        }
 
         Visual.UpdateOutlineVisible(UnitOverlapedDetector.GetOverlappingAreas().Count > 0);
     }
@@ -27,5 +30,12 @@ public partial class UnitHasVisualBase : UnitBase
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
+    }
+
+    public override void TakeDamage(int value)
+    {
+        base.TakeDamage(value);
+
+        Visual.TakeDamage();
     }
 }

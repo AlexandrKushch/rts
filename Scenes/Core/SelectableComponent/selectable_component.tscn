@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://000g2r01lhuu"]
 
-[ext_resource type="Script" uid="uid://b7sapnsb074ir" path="res://Scenes/SelectionArea/SelectableComponent.cs" id="1_n2dd7"]
+[ext_resource type="Script" uid="uid://b7sapnsb074ir" path="res://Scenes/Core/SelectableComponent/SelectableComponent.cs" id="1_u80up"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xrivr"]
 
 [node name="SelectableComponent" type="Area2D" unique_id=550510253]
-script = ExtResource("1_n2dd7")
+script = ExtResource("1_u80up")
 
 [node name="Visual" type="Node2D" parent="." unique_id=946751036]
 position = Vector2(0, -31)

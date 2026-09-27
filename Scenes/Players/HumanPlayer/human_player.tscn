@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://c2evq1nn72ffv" path="res://Scenes/Camera/CameraController.cs" id="2_jk1ea"]
 [ext_resource type="Script" uid="uid://baul70getpa3l" path="res://Scenes/Controllers/UnitsController.cs" id="3_2bcmd"]
 [ext_resource type="Script" uid="uid://blyr6pgqshysi" path="res://Scenes/Controllers/SelectionController.cs" id="3_4tgaf"]
-[ext_resource type="PackedScene" uid="uid://r4ncnt86o6sr" path="res://Scenes/Controllers/SelectionScenes/select_area.tscn" id="4_lw6ek"]
+[ext_resource type="PackedScene" uid="uid://r4ncnt86o6sr" path="res://Scenes/Core/MouseSelectArea/select_area.tscn" id="4_lw6ek"]
 [ext_resource type="Script" uid="uid://bmym3all5d5mm" path="res://Scenes/Main/Hud.cs" id="5_3tbmi"]
 [ext_resource type="PackedScene" uid="uid://b231gr2h4tst0" path="res://Scenes/UI/Resources/UIResources/ui_resources.tscn" id="6_4tgaf"]
 [ext_resource type="Script" uid="uid://dhau4800s5smp" path="res://Scenes/Controllers/ResourceController.cs" id="6_f0dpf"]

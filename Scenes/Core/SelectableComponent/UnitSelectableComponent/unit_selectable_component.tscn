@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c1skwp03bakoh"]
 
-[ext_resource type="PackedScene" uid="uid://000g2r01lhuu" path="res://Scenes/SelectionArea/selectable_component.tscn" id="1_6uo5u"]
-[ext_resource type="Script" uid="uid://dyx625yy7fyfk" path="res://Scenes/SelectionArea/UnitSelectableComponent/SelectionTriangleSprite.cs" id="3_23xt1"]
+[ext_resource type="PackedScene" uid="uid://000g2r01lhuu" path="res://Scenes/Core/SelectableComponent/selectable_component.tscn" id="1_6uo5u"]
+[ext_resource type="Script" uid="uid://dyx625yy7fyfk" path="res://Scenes/Core/SelectableComponent/UnitSelectableComponent/SelectionTriangleSprite.cs" id="3_23xt1"]
 [ext_resource type="Texture2D" uid="uid://ck108dq6ny8th" path="res://Assets/UI Elements/unit_selection.png" id="3_luj8k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_23xt1"]

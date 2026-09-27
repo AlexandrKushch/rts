@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://c5ni0fi5ycvwj"]
 
 [ext_resource type="Script" uid="uid://f8iwmwq1ftht" path="res://Scenes/Units/UnitBase.cs" id="1_qwnlj"]
-[ext_resource type="PackedScene" uid="uid://c1skwp03bakoh" path="res://Scenes/SelectionArea/UnitSelectableComponent/unit_selectable_component.tscn" id="2_igbku"]
+[ext_resource type="PackedScene" uid="uid://c1skwp03bakoh" path="res://Scenes/Core/SelectableComponent/UnitSelectableComponent/unit_selectable_component.tscn" id="2_igbku"]
+[ext_resource type="PackedScene" uid="uid://cb8citwk61klx" path="res://Scenes/Core/HurtBox/hurt_box.tscn" id="3_hw2f8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xrivr"]
 
@@ -9,6 +10,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xrivr"]
 size = Vector2(44, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ccatd"]
+size = Vector2(44, 77)
 
 [node name="UnitBase" type="CharacterBody2D" unique_id=1673489485]
 collision_layer = 2
@@ -47,7 +51,15 @@ collision_layer = 0
 position = Vector2(0, 10)
 shape = SubResource("RectangleShape2D_xrivr")
 
+[node name="HurtBox" parent="." unique_id=799690141 instance=ExtResource("3_hw2f8")]
+visible = false
+
+[node name="CollisionShape2D" parent="HurtBox" index="0" unique_id=930546286]
+position = Vector2(0, -38.5)
+shape = SubResource("RectangleShape2D_ccatd")
+
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="OnVelocityComputed"]
 [connection signal="timeout" from="UpdatePathTimer" to="." method="UpdatePath"]
 
 [editable path="UnitSelectableComponent"]
+[editable path="HurtBox"]

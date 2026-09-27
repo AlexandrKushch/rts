@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dmh6f0dnp4ebk"]
 
-[ext_resource type="PackedScene" uid="uid://000g2r01lhuu" path="res://Scenes/SelectionArea/selectable_component.tscn" id="1_20dgu"]
-[ext_resource type="Script" uid="uid://dv4hjo0ok03dg" path="res://Scenes/SelectionArea/BuildingSelectableComponent/BuildingSelectableComponent.cs" id="2_4kki1"]
+[ext_resource type="PackedScene" uid="uid://000g2r01lhuu" path="res://Scenes/Core/SelectableComponent/selectable_component.tscn" id="1_20dgu"]
+[ext_resource type="Script" uid="uid://dv4hjo0ok03dg" path="res://Scenes/Core/SelectableComponent/BuildingSelectableComponent/BuildingSelectableComponent.cs" id="2_4kki1"]
 [ext_resource type="Texture2D" uid="uid://majrpwmcg8h2" path="res://Assets/UI Elements/UI Elements/Cursors/Cursor_04.png" id="2_7m3we"]
 
 [node name="BuildingSelectableComponent" unique_id=550510253 node_paths=PackedStringArray("Visual") instance=ExtResource("1_20dgu")]

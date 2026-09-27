@@ -1,9 +1,10 @@
 using Godot;
-using System;
 
 public partial class UnitVisualBase : Node2D
 {
     protected const int TextureKeyId = 2;
+
+    private ShaderMaterial SpriteShaderMaterial;
 
     protected Sprite2D Sprite2D;
     protected OutlineVisual Outline;
@@ -15,6 +16,8 @@ public partial class UnitVisualBase : Node2D
     public override void _Ready()
     {
         Sprite2D = GetNode<Sprite2D>(nameof(Sprite2D));
+        SpriteShaderMaterial = (Sprite2D.Material as ShaderMaterial).Duplicate(true) as ShaderMaterial;
+        Sprite2D.Material = SpriteShaderMaterial;
         Outline = GetNode<OutlineVisual>(nameof(Outline));
         AnimationPlayer = GetNode<AnimationPlayer>(nameof(AnimationPlayer));
     }
@@ -38,6 +41,19 @@ public partial class UnitVisualBase : Node2D
         }
 
         AnimationPlayer.Play(animation);
+    }
+
+    public virtual void TakeDamage()
+    {
+        SpriteShaderMaterial.SetShaderParameter("on", true);
+        var tween = CreateTween();
+        float tweenDuration = 0.15f;
+
+        tween.TweenProperty(SpriteShaderMaterial, "shader_parameter/color", ColorsGlobal.Yellow, tweenDuration * 0.33f);
+        tween.TweenProperty(SpriteShaderMaterial, "shader_parameter/color", ColorsGlobal.Error, tweenDuration * 0.33f);
+        tween.TweenProperty(SpriteShaderMaterial, "shader_parameter/color", ColorsGlobal.Yellow, tweenDuration * 0.33f);
+
+        tween.Finished += () => { SpriteShaderMaterial.SetShaderParameter("on", false); };
     }
 
     public virtual void Stop()

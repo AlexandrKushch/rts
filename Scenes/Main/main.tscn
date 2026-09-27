@@ -274,7 +274,23 @@ Team = 1
 position = Vector2(615, 321)
 Team = 3
 
+[node name="Pawn7" parent="Map/NavigationRegion2D/World" unique_id=442795000 instance=ExtResource("9_hryqi")]
+position = Vector2(521, 350)
+Team = 3
+
+[node name="Lancer" parent="Map/NavigationRegion2D/World" unique_id=573939914 instance=ExtResource("17_h4gp5")]
+position = Vector2(617, 433)
+Team = 3
+
 [node name="Archer" parent="Map/NavigationRegion2D/World" unique_id=751685340 instance=ExtResource("16_vae3x")]
 position = Vector2(1008, 316)
 ArrowScene = null
 Team = 4
+
+[node name="Monk" parent="Map/NavigationRegion2D/World" unique_id=1339172819 instance=ExtResource("18_gw1lt")]
+position = Vector2(680, 457)
+Team = 3
+
+[node name="Monk2" parent="Map/NavigationRegion2D/World" unique_id=1632611817 instance=ExtResource("18_gw1lt")]
+position = Vector2(738, 516)
+Team = 3

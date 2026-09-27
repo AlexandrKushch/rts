@@ -75,6 +75,7 @@ mmb={
 
 2d_physics/layer_1="world"
 2d_physics/layer_2="units"
+2d_physics/layer_9="hitbox"
 avoidance/layer_1="world"
 avoidance/layer_2="units"
 
