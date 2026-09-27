@@ -46,14 +46,23 @@ public partial class UnitVisualBase : Node2D
     public virtual void TakeDamage()
     {
         SpriteShaderMaterial.SetShaderParameter("on", true);
-        var tween = CreateTween();
+
+        var tween = CreateTween().SetParallel();
         float tweenDuration = 0.15f;
 
-        tween.TweenProperty(SpriteShaderMaterial, "shader_parameter/color", ColorsGlobal.Yellow, tweenDuration * 0.33f);
-        tween.TweenProperty(SpriteShaderMaterial, "shader_parameter/color", ColorsGlobal.Error, tweenDuration * 0.33f);
-        tween.TweenProperty(SpriteShaderMaterial, "shader_parameter/color", ColorsGlobal.Yellow, tweenDuration * 0.33f);
 
-        tween.Finished += () => { SpriteShaderMaterial.SetShaderParameter("on", false); };
+        var tweenColor = CreateTween();
+        tweenColor.TweenProperty(SpriteShaderMaterial, "shader_parameter/color", ColorsGlobal.Yellow, tweenDuration * 0.33f);
+        tweenColor.TweenProperty(SpriteShaderMaterial, "shader_parameter/color", ColorsGlobal.Error, tweenDuration * 0.33f);
+        tweenColor.TweenProperty(SpriteShaderMaterial, "shader_parameter/color", ColorsGlobal.Yellow, tweenDuration * 0.33f);
+        tweenColor.Finished += () => { SpriteShaderMaterial.SetShaderParameter("on", false); };
+
+        var tweenScale = CreateTween().SetTrans(Tween.TransitionType.Bounce);
+        tweenScale.TweenProperty(this, "scale", new Vector2(0.8f, 1.2f), tweenDuration * 0.5f);
+        tweenScale.TweenProperty(this, "scale", Vector2.One, tweenDuration * 0.5f);
+
+        tween.TweenSubtween(tweenColor);
+        tween.TweenSubtween(tweenScale);
     }
 
     public virtual void Stop()

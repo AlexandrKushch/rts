@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -143,7 +142,8 @@ public partial class SelectionController : Node2D
 		{
 			Position = GetGlobalMousePosition(),
 			CollideWithAreas = true,
-			CollideWithBodies = false
+			CollideWithBodies = false,
+			CollisionMask = 2
 		};
 
 		var results = spaceState.IntersectPoint(query);

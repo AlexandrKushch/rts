@@ -12,6 +12,12 @@ public partial class StateMachineBase<T> : Node where T : struct, Enum
     public override void _Ready()
     {
         States = GetChildren().ToDictionary(x => Enum.Parse<T>(x.Name), x => x as StateBase<T>);
+
+        foreach (var state in States)
+        {
+            state.Value.SetProcess(false);
+        }
+
         SetProcess(false);
     }
 

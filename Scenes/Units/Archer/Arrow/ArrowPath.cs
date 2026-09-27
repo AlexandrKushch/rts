@@ -10,7 +10,7 @@ public partial class ArrowPath : Path2D, IDestroyable
     private bool _rightDirection;
 
     private PathFollow2D ArrowPathFollow;
-    private Area2D ArrowHitBox;
+    private HitBox ArrowHitBox;
     private Sprite2D ArrowVisual;
     private Sprite2D ArrowBrokenVisual;
     private Timer Timer;
@@ -20,7 +20,7 @@ public partial class ArrowPath : Path2D, IDestroyable
     public override void _Ready()
     {
         ArrowPathFollow = GetNode<PathFollow2D>(nameof(ArrowPathFollow));
-        ArrowHitBox = ArrowPathFollow.GetNode<Area2D>(nameof(ArrowHitBox));
+        ArrowHitBox = ArrowPathFollow.GetNode<HitBox>(nameof(ArrowHitBox));
         ArrowVisual = ArrowPathFollow.GetNode<Sprite2D>(nameof(ArrowVisual));
         ArrowBrokenVisual = ArrowPathFollow.GetNode<Sprite2D>(nameof(ArrowBrokenVisual));
         Timer = GetNode<Timer>(nameof(Timer));
@@ -81,6 +81,7 @@ public partial class ArrowPath : Path2D, IDestroyable
     public void Destroy()
     {
         SetPhysicsProcess(false);
+        ArrowHitBox.CallDeferred(nameof(ArrowHitBox.Disable));
         ArrowVisual.Visible = false;
         if (IsInstanceValid(ArrowBrokenVisual))
         {

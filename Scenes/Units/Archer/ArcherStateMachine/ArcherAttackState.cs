@@ -24,6 +24,14 @@ public partial class ArcherAttackState : ArcherStateBase
             return;
         }
 
+        if (ArcherStateMachine.Archer.GlobalPosition
+            .DistanceTo(ArcherStateMachine.Archer.AttackTarget.GlobalPosition)
+            > ArcherStateMachine.Archer.Radius + ArcherStateMachine.Archer.Radius / 1)
+        {
+            ArcherStateMachine.ChangeState(ArcherStateIds.Idle);
+            return;
+        }
+
         ArcherStateMachine.Archer.ArcherVisual.Attack(ArcherStateMachine.Archer.AttackTarget.GlobalPosition);
     }
 

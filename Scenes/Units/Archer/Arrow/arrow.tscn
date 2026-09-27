@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b1llsplh5yrxy" path="res://Scenes/Units/Archer/Arrow/ArrowPath.cs" id="1_soo22"]
 [ext_resource type="PackedScene" uid="uid://cpo5lje6qtg0o" path="res://Scenes/Core/HitBox/hit_box.tscn" id="2_3o4d5"]
 [ext_resource type="Texture2D" uid="uid://bakpnbnnub30u" path="res://Assets/Units/Arrows/Arrow.png" id="2_soo22"]
+[ext_resource type="Script" uid="uid://b074t1seqw6q1" path="res://Scenes/Core/HitBox/HitBox.cs" id="3_g0yus"]
 [ext_resource type="Texture2D" uid="uid://bjss5rj1cbrna" path="res://Assets/Units/Arrows/ArrowBroken.png" id="3_lab1v"]
 
 [sub_resource type="Curve2D" id="Curve2D_25oqh"]
@@ -22,6 +23,7 @@ script = ExtResource("1_soo22")
 rotation = -0.4636476
 
 [node name="ArrowHitBox" parent="ArrowPathFollow" unique_id=1242638785 instance=ExtResource("2_3o4d5")]
+script = ExtResource("3_g0yus")
 
 [node name="CollisionShape2D" parent="ArrowPathFollow/ArrowHitBox" index="0" unique_id=394402596]
 position = Vector2(-15.428878, 0)

@@ -68,7 +68,8 @@ public partial class UnitsController : Node2D
         {
             Position = GetGlobalMousePosition(),
             CollideWithAreas = true,
-            CollideWithBodies = false
+            CollideWithBodies = false,
+            CollisionMask = 2
         };
 
         var results = spaceState.IntersectPoint(query);

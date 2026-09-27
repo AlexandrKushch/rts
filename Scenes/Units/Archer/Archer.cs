@@ -10,6 +10,8 @@ public partial class Archer : UnitHasVisualBase
     public Area2D EnemyDetector { get; private set; }
     public Marker2D ShootPoint { get; set; }
 
+    public float Radius { get; private set; }
+
     [Export] public PackedScene ArrowScene { get; private set; }
 
     public override void _Ready()
@@ -22,6 +24,8 @@ public partial class Archer : UnitHasVisualBase
         ShootPoint = GetNode<Marker2D>(nameof(ShootPoint));
 
         StateMachine.ChangeState(ArcherStateIds.Idle);
+
+        Radius = (EnemyDetector.GetNode<CollisionShape2D>(nameof(CollisionShape2D)).Shape as CircleShape2D).Radius;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -48,19 +52,12 @@ public partial class Archer : UnitHasVisualBase
         StateMachine.ChangeState(ArcherStateIds.Attack);
     }
 
-    public float GetRadius()
-    {
-        return (EnemyDetector.GetNode<CollisionShape2D>(nameof(CollisionShape2D)).Shape as CircleShape2D).Radius;
-    }
-
     public void ShootArrow()
     {
         var arrowPath = ArrowScene.Instantiate<ArrowPath>();
         arrowPath.GlobalPosition = GlobalPosition;
         arrowPath.Team = Team;
         GlobalResources.Instance.World.AddChild(arrowPath);
-
-        float radius = GetRadius();
 
         var changeShootPointPosition = ShootPoint.Position;
         changeShootPointPosition.X = Mathf.Abs(changeShootPointPosition.X);
@@ -72,10 +69,10 @@ public partial class Archer : UnitHasVisualBase
         var randomness = Mathf.Remap(
             GlobalPosition.DistanceTo(AttackTarget.GlobalPosition),
             0,
-            radius,
+            Radius,
             25,
             100);
         var randomTargetPosition = AttackTarget.GlobalPosition + RandomExtension.GetRandomPointInCircle(randomness);
-        arrowPath.SetTarget(ShootPoint.Position, randomTargetPosition, radius);
+        arrowPath.SetTarget(ShootPoint.Position, randomTargetPosition, Radius);
     }
 }

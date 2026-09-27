@@ -149,4 +149,5 @@ libraries/ = SubResource("AnimationLibrary_furs5")
 autoplay = &"Dead"
 
 [node name="Timer" type="Timer" parent="." unique_id=543235935]
+wait_time = 2.0
 one_shot = true

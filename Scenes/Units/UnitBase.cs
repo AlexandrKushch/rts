@@ -2,10 +2,9 @@ using Godot;
 
 public partial class UnitBase : CharacterBody2D, IDestroyableWithHp
 {
-	protected virtual float MovementSpeed => 100f;
-
 	private PackedScene _deadScene;
 
+	protected virtual float MovementSpeed => 100f;
 	protected bool Dashed = false;
 
 	public NavigationAgent2D NavigationAgent2D { get; private set; }
@@ -37,6 +36,8 @@ public partial class UnitBase : CharacterBody2D, IDestroyableWithHp
 		}
 
 		NavigationAgent2D = GetNode<NavigationAgent2D>(nameof(NavigationAgent2D));
+		Target = GlobalPosition;
+		UpdatePath();
 
 		_deadScene = ResourceLoader.Load<PackedScene>("uid://d0k60hnpsewgk");
 	}
@@ -99,11 +100,11 @@ public partial class UnitBase : CharacterBody2D, IDestroyableWithHp
 
     public void TakeDamageWithDash(Vector2 from, int value, float power)
     {
+		TakeDamage(value);
+
 		var direction = from.DirectionTo(GlobalPosition);
 		Velocity += direction * 500 * power;
 		Dashed = true;
-
-		TakeDamage(value);
     }
 
 	public void Destroy()
