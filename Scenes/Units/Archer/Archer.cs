@@ -2,7 +2,12 @@ using Godot;
 
 public partial class Archer : UnitHasVisualBase
 {
-	protected override float MovementSpeed => 150f;
+    public const float ReloadSpeed = 1f;
+
+    public bool CanShoot { get; private set; } = true;
+    private double _attackReloadTimer = 0.0f;
+
+    protected override float MovementSpeed => 150f;
     public UnitBase AttackTarget { get; private set; }
 
     public ArcherVisual ArcherVisual { get; private set; }
@@ -31,6 +36,17 @@ public partial class Archer : UnitHasVisualBase
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
+
+        if (!CanShoot)
+        {
+            _attackReloadTimer += ReloadSpeed * delta;
+
+            if (_attackReloadTimer > 1.0f)
+            {
+                CanShoot = true;
+                _attackReloadTimer = 0.0f;
+            }
+        }
     }
 
     public override void SetTarget(Vector2? targetPosition, Node2D targetObject)
@@ -54,6 +70,7 @@ public partial class Archer : UnitHasVisualBase
 
     public void ShootArrow()
     {
+        CanShoot = false;
         var arrowPath = ArrowScene.Instantiate<ArrowPath>();
         arrowPath.GlobalPosition = GlobalPosition;
         arrowPath.Team = Team;

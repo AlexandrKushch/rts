@@ -4,16 +4,24 @@ public partial class ArcherAttackState : ArcherStateBase
     {
         base.Activate();
 
-        ArcherStateMachine.Archer.ArcherVisual.OnAttackAnimationFinished += Attack;
-
-        Attack();
+        if (ArcherStateMachine.Archer.CanShoot)
+        {
+            Attack();
+        }
     }
 
     public override void Deactivate()
     {
         base.Deactivate();
         ArcherStateMachine.Archer.ArcherVisual.Stop();
-        ArcherStateMachine.Archer.ArcherVisual.OnAttackAnimationFinished -= Attack;
+    }
+
+    public override void _Process(double delta)
+    {
+        if (ArcherStateMachine.Archer.CanShoot)
+        {
+            Attack();
+        }
     }
 
     private void Attack()
