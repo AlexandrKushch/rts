@@ -17,6 +17,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nhsra"]
 size = Vector2(72, 97)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kk860"]
+size = Vector2(70, 89)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o1m4s"]
 shader = ExtResource("6_kk860")
 shader_parameter/clr = Color(0.28235295, 0.34509805, 0.5176471, 1)
@@ -278,9 +281,6 @@ _data = {
 &"Run": SubResource("Animation_kk860")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kk860"]
-size = Vector2(70, 89)
-
 [node name="Warrior" unique_id=1673489485 instance=ExtResource("1_jxcyl")]
 script = ExtResource("2_bbpbx")
 Meta = ExtResource("3_intd2")
@@ -292,7 +292,13 @@ EffectedOn = NodePath("..")
 position = Vector2(0, -34.5)
 shape = SubResource("RectangleShape2D_nhsra")
 
-[node name="Visual" type="Node2D" parent="." index="4" unique_id=1311978416]
+[node name="UnitOverlapedDetector" parent="." index="4" unique_id=1906555247]
+visible = false
+
+[node name="CollisionShape2D" parent="HurtBox" parent_id_path=PackedInt32Array(799690141) index="0" unique_id=930546286]
+shape = SubResource("RectangleShape2D_kk860")
+
+[node name="Visual" type="Node2D" parent="." index="6" unique_id=1311978416]
 script = ExtResource("3_546yd")
 
 [node name="Sprite2D" type="Sprite2D" parent="Visual" index="0" unique_id=22426039]
@@ -314,9 +320,6 @@ DuplicateThe = NodePath("../Sprite2D")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" index="2" unique_id=1839081757]
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_5husr")
-
-[node name="CollisionShape2D" parent="HurtBox" parent_id_path=PackedInt32Array(799690141) index="0" unique_id=930546286]
-shape = SubResource("RectangleShape2D_kk860")
 
 [connection signal="animation_finished" from="Visual/AnimationPlayer" to="Visual" method="OnAnimationFinished"]
 

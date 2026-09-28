@@ -4,11 +4,7 @@ public partial class ArcherIdleState : ArcherStateBase
 {
     public override void _Process(double delta)
     {
-        var enemies = ArcherStateMachine.Archer.EnemyDetector
-            .GetOverlappingBodies()
-            .Select(x => x as UnitBase)
-            .Where(x => x.Team != ArcherStateMachine.Archer.Team)
-            .ToArray();
+        var enemies = ArcherStateMachine.Archer.EnemyDetector.Enemies.ToArray();
 
         if (enemies.Length > 0)
         {

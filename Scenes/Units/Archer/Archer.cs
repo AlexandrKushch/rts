@@ -12,7 +12,7 @@ public partial class Archer : UnitHasVisualBase
 
     public ArcherVisual ArcherVisual { get; private set; }
     public ArcherStateMachine StateMachine { get; private set; }
-    public Area2D EnemyDetector { get; private set; }
+    public EnemyDetector EnemyDetector { get; private set; }
     public Marker2D ShootPoint { get; set; }
 
     public float Radius { get; private set; }
@@ -25,7 +25,7 @@ public partial class Archer : UnitHasVisualBase
 
         ArcherVisual = Visual as ArcherVisual;
         StateMachine = GetNode<ArcherStateMachine>(nameof(StateMachine));
-        EnemyDetector = GetNode<Area2D>(nameof(EnemyDetector));
+        EnemyDetector = GetNode<EnemyDetector>(nameof(EnemyDetector));
         ShootPoint = GetNode<Marker2D>(nameof(ShootPoint));
 
         StateMachine.ChangeState(ArcherStateIds.Idle);

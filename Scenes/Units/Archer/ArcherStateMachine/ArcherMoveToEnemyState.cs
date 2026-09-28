@@ -4,10 +4,7 @@ public partial class ArcherMoveToEnemyState : ArcherStateBase
 {
     public override void _Process(double delta)
     {
-        var enemy = ArcherStateMachine.Archer.EnemyDetector
-            .GetOverlappingBodies()
-            .Select(x => x as UnitBase)
-            .Where(x => x.Team != ArcherStateMachine.Archer.Team)
+        var enemy = ArcherStateMachine.Archer.EnemyDetector.Enemies
             .FirstOrDefault(x => x.GetInstanceId() == ArcherStateMachine.Archer.TargetObject?.GetInstanceId());
 
         if (enemy != null)

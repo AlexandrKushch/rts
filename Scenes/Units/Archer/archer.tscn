@@ -15,11 +15,15 @@
 [ext_resource type="Script" uid="uid://c4si3w1en870t" path="res://Scenes/Units/Archer/ArcherStateMachine/ArcherStateMachine.cs" id="11_cjf6y"]
 [ext_resource type="Script" uid="uid://dqwcrb7h6o8l0" path="res://Scenes/Units/Archer/ArcherStateMachine/ArcherIdleState.cs" id="12_bem2y"]
 [ext_resource type="Script" uid="uid://4xot23nfpvfg" path="res://Scenes/Units/Archer/ArcherStateMachine/ArcherMoveToState.cs" id="13_02drl"]
+[ext_resource type="PackedScene" uid="uid://7neisewoma26" path="res://Scenes/Core/EnemyDetector/enemy_detector.tscn" id="13_syvfn"]
 [ext_resource type="Script" uid="uid://d4c2camm5pxk3" path="res://Scenes/Units/Archer/ArcherStateMachine/ArcherAttackState.cs" id="14_ki8vg"]
 [ext_resource type="Script" uid="uid://b6adybwltho1f" path="res://Scenes/Units/Archer/ArcherStateMachine/ArcherMoveToEnemyState.cs" id="16_vcr0m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lirip"]
 size = Vector2(70, 88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vcr0m"]
+size = Vector2(44, 64)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_02drl"]
 shader = ExtResource("6_81b8j")
@@ -213,12 +217,6 @@ _data = {
 &"Shoot": SubResource("Animation_x40ju")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_xrivr"]
-radius = 450.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vcr0m"]
-size = Vector2(44, 64)
-
 [node name="Archer" unique_id=1673489485 instance=ExtResource("1_kdrlx")]
 script = ExtResource("2_iuvmd")
 ArrowScene = ExtResource("3_h6b1n")
@@ -234,7 +232,11 @@ EffectedOn = NodePath("..")
 position = Vector2(0, -34)
 shape = SubResource("RectangleShape2D_lirip")
 
-[node name="Visual" type="Node2D" parent="." index="5" unique_id=646223824]
+[node name="CollisionShape2D" parent="HurtBox" parent_id_path=PackedInt32Array(799690141) index="0" unique_id=930546286]
+position = Vector2(0, -32)
+shape = SubResource("RectangleShape2D_vcr0m")
+
+[node name="Visual" type="Node2D" parent="." index="6" unique_id=646223824]
 script = ExtResource("4_81b8j")
 
 [node name="Sprite2D" type="Sprite2D" parent="Visual" index="0" unique_id=1385795100]
@@ -257,17 +259,12 @@ DuplicateThe = NodePath("../Sprite2D")
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_iuv1g")
 
-[node name="EnemyDetector" type="Area2D" parent="." index="6" unique_id=1403183266]
-collision_layer = 0
-collision_mask = 2
+[node name="EnemyDetector" parent="." index="7" unique_id=1958789508 instance=ExtResource("13_syvfn")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetector" index="0" unique_id=1364830385]
-shape = SubResource("CircleShape2D_xrivr")
-
-[node name="ShootPoint" type="Marker2D" parent="." index="7" unique_id=553381415]
+[node name="ShootPoint" type="Marker2D" parent="." index="8" unique_id=553381415]
 position = Vector2(33, -49)
 
-[node name="StateMachine" type="Node" parent="." index="8" unique_id=364302710 node_paths=PackedStringArray("Archer")]
+[node name="StateMachine" type="Node" parent="." index="9" unique_id=364302710 node_paths=PackedStringArray("Archer")]
 script = ExtResource("11_cjf6y")
 Archer = NodePath("..")
 
@@ -282,10 +279,6 @@ script = ExtResource("14_ki8vg")
 
 [node name="MoveToEnemy" type="Node" parent="StateMachine" index="3" unique_id=234535291]
 script = ExtResource("16_vcr0m")
-
-[node name="CollisionShape2D" parent="HurtBox" parent_id_path=PackedInt32Array(799690141) index="0" unique_id=930546286]
-position = Vector2(0, -32)
-shape = SubResource("RectangleShape2D_vcr0m")
 
 [connection signal="animation_finished" from="Visual/AnimationPlayer" to="Visual" method="OnAnimationFinished"]
 
