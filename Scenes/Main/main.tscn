@@ -271,26 +271,49 @@ position = Vector2(690, 192)
 Team = 1
 
 [node name="Warrior" parent="Map/NavigationRegion2D/World" unique_id=1380548045 instance=ExtResource("20_c8mgu")]
-position = Vector2(615, 321)
+position = Vector2(1051, 370)
+Team = 4
+
+[node name="Warrior6" parent="Map/NavigationRegion2D/World" unique_id=656746565 instance=ExtResource("20_c8mgu")]
+position = Vector2(1008, 414)
+Team = 4
+
+[node name="Warrior7" parent="Map/NavigationRegion2D/World" unique_id=1954069870 instance=ExtResource("20_c8mgu")]
+position = Vector2(1073, 460)
+Team = 4
+
+[node name="Warrior8" parent="Map/NavigationRegion2D/World" unique_id=1819018646 instance=ExtResource("20_c8mgu")]
+position = Vector2(1008, 475)
+Team = 4
+
+[node name="Warrior2" parent="Map/NavigationRegion2D/World" unique_id=303966900 instance=ExtResource("20_c8mgu")]
+position = Vector2(453, 208)
+Team = 3
+
+[node name="Warrior3" parent="Map/NavigationRegion2D/World" unique_id=1418552216 instance=ExtResource("20_c8mgu")]
+position = Vector2(453, 291)
+Team = 3
+
+[node name="Warrior4" parent="Map/NavigationRegion2D/World" unique_id=3404335 instance=ExtResource("20_c8mgu")]
+position = Vector2(389, 240)
+Team = 3
+
+[node name="Warrior5" parent="Map/NavigationRegion2D/World" unique_id=614493885 instance=ExtResource("20_c8mgu")]
+position = Vector2(529, 245)
 Team = 3
 
 [node name="Pawn7" parent="Map/NavigationRegion2D/World" unique_id=442795000 instance=ExtResource("9_hryqi")]
-position = Vector2(521, 350)
+position = Vector2(101, 642)
 Team = 3
 
 [node name="Lancer" parent="Map/NavigationRegion2D/World" unique_id=573939914 instance=ExtResource("17_h4gp5")]
-position = Vector2(617, 433)
+position = Vector2(197, 725)
 Team = 3
 
-[node name="Archer" parent="Map/NavigationRegion2D/World" unique_id=751685340 instance=ExtResource("16_vae3x")]
-position = Vector2(1008, 316)
-ArrowScene = null
-Team = 4
-
 [node name="Monk" parent="Map/NavigationRegion2D/World" unique_id=1339172819 instance=ExtResource("18_gw1lt")]
-position = Vector2(680, 457)
+position = Vector2(260, 749)
 Team = 3
 
 [node name="Monk2" parent="Map/NavigationRegion2D/World" unique_id=1632611817 instance=ExtResource("18_gw1lt")]
-position = Vector2(738, 516)
+position = Vector2(318, 808)
 Team = 3

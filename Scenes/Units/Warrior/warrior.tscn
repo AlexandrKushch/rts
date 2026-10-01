@@ -13,6 +13,14 @@
 [ext_resource type="Texture2D" uid="uid://bvp3vvvdtdg3m" path="res://Assets/Units/Blue Units/Warrior/Warrior_Guard.png" id="7_546yd"]
 [ext_resource type="Texture2D" uid="uid://daulrfkfskpeh" path="res://Assets/Units/Blue Units/Warrior/Warrior_Attack2.png" id="7_bbpbx"]
 [ext_resource type="Script" uid="uid://bp0pnxnktf4kt" path="res://Scenes/Units/Pawn/OutlineVisual.cs" id="8_dhetd"]
+[ext_resource type="PackedScene" uid="uid://7neisewoma26" path="res://Scenes/Core/EnemyDetector/enemy_detector.tscn" id="14_dhetd"]
+[ext_resource type="Script" uid="uid://dvn078hltenve" path="res://Scenes/Units/Warrior/States/WarriorStateMachine.cs" id="15_sp1vb"]
+[ext_resource type="Script" uid="uid://25rdpnr81ut4" path="res://Scenes/Units/Warrior/States/WarriorIdleState.cs" id="16_yuf4r"]
+[ext_resource type="Script" uid="uid://jt0r8ygeauq3" path="res://Scenes/Units/Warrior/States/WarriorMoveToState.cs" id="17_7dhpc"]
+[ext_resource type="Script" uid="uid://ccri7exhibpqf" path="res://Scenes/Units/Warrior/States/WarriorAttackState.cs" id="18_ih0oj"]
+[ext_resource type="Script" uid="uid://cks0i0rkbq85r" path="res://Scenes/Units/Warrior/States/WarriorMoveToEnemyState.cs" id="19_x230b"]
+[ext_resource type="Script" uid="uid://cfebs5kyjbvjg" path="res://Scenes/Units/Warrior/States/WarriorChargeState.cs" id="20_yuf4r"]
+[ext_resource type="Script" uid="uid://27qe17v8ew2r" path="res://Scenes/Units/Warrior/States/WarriorGuardState.cs" id="21_7dhpc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nhsra"]
 size = Vector2(72, 97)
@@ -66,6 +74,20 @@ tracks/2/keys = {
 "update": 1,
 "values": [ExtResource("4_kvhdx")]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StateMachine/Attack")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"OnAttackAnimationKeyReached"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_5husr"]
 length = 0.4
@@ -105,6 +127,17 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("7_bbpbx")]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StateMachine/Charge")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
 }
 
 [sub_resource type="Animation" id="Animation_dhetd"]
@@ -281,6 +314,9 @@ _data = {
 &"Run": SubResource("Animation_kk860")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_sp1vb"]
+radius = 200.0
+
 [node name="Warrior" unique_id=1673489485 instance=ExtResource("1_jxcyl")]
 script = ExtResource("2_bbpbx")
 Meta = ExtResource("3_intd2")
@@ -321,7 +357,42 @@ DuplicateThe = NodePath("../Sprite2D")
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_5husr")
 
+[node name="EnemyDetector" parent="." index="7" unique_id=1958789508 instance=ExtResource("14_dhetd")]
+
+[node name="CollisionShape2D" parent="EnemyDetector" index="0" unique_id=368633700]
+shape = SubResource("CircleShape2D_sp1vb")
+
+[node name="StateMachine" type="Node" parent="." index="8" unique_id=1697989344 node_paths=PackedStringArray("Warrior")]
+script = ExtResource("15_sp1vb")
+Warrior = NodePath("..")
+
+[node name="Idle" type="Node" parent="StateMachine" index="0" unique_id=1998868622]
+script = ExtResource("16_yuf4r")
+
+[node name="MoveTo" type="Node" parent="StateMachine" index="1" unique_id=1539429893]
+script = ExtResource("17_7dhpc")
+
+[node name="Attack" type="Node" parent="StateMachine" index="2" unique_id=1382841266]
+script = ExtResource("18_ih0oj")
+
+[node name="MoveToEnemy" type="Node" parent="StateMachine" index="3" unique_id=1716885844]
+script = ExtResource("19_x230b")
+
+[node name="Charge" type="Node" parent="StateMachine" index="4" unique_id=337579274]
+script = ExtResource("20_yuf4r")
+
+[node name="Guard" type="Node" parent="StateMachine" index="5" unique_id=807963043]
+script = ExtResource("21_7dhpc")
+
+[node name="AttackReloadTimer" type="Timer" parent="." index="9" unique_id=383657286]
+one_shot = true
+
+[node name="ChargeReloadTimer" type="Timer" parent="." index="10" unique_id=944852751]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="animation_finished" from="Visual/AnimationPlayer" to="Visual" method="OnAnimationFinished"]
 
 [editable path="UnitSelectableComponent"]
 [editable path="HurtBox"]
+[editable path="EnemyDetector"]

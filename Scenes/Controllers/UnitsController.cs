@@ -54,6 +54,11 @@ public partial class UnitsController : Node2D
                     unit.SetTarget(GetGlobalMousePosition() + RandomExtension.GetRandomPointInCircle(i * 20), null);
                 }
 
+                if (unit is Warrior warrior)
+                {
+                    warrior.AttachedToPoint = warrior.Target.Value;
+                }
+
                 i++;
             }
         }
@@ -69,7 +74,7 @@ public partial class UnitsController : Node2D
             Position = GetGlobalMousePosition(),
             CollideWithAreas = true,
             CollideWithBodies = false,
-            CollisionMask = 2
+            CollisionMask = int.MaxValue ^ 256
         };
 
         var results = spaceState.IntersectPoint(query);

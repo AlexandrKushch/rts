@@ -22,6 +22,11 @@ public partial class UnitVisualBase : Node2D
         AnimationPlayer = GetNode<AnimationPlayer>(nameof(AnimationPlayer));
     }
 
+    public virtual void SetDirection(bool flipH)
+    {
+        Sprite2D.FlipH = flipH;
+    }
+
     public virtual void UpdateMovement(Vector2 velocity, string animationLibraryName)
     {
         Sprite2D.FlipH = velocity.Length() > 0 ? velocity.X < 0 : Sprite2D.FlipH;

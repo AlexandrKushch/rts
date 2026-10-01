@@ -38,4 +38,11 @@ public partial class UnitHasVisualBase : UnitBase
 
         Visual.TakeDamage();
     }
+
+    public override void TakeDamageWithDash(Vector2 from, int value, float power)
+    {
+        base.TakeDamageWithDash(from, value, power);
+
+        Visual.SetDirection(GlobalPosition.X > from.X);
+    }
 }

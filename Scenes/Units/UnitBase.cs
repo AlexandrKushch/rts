@@ -5,7 +5,7 @@ public partial class UnitBase : CharacterBody2D, IDestroyableWithHp
 	private PackedScene _deadScene;
 
 	protected virtual float MovementSpeed => 100f;
-	protected bool Dashed = false;
+	public bool Dashed { get; set; } = false;
 
 	public NavigationAgent2D NavigationAgent2D { get; private set; }
 
@@ -47,7 +47,7 @@ public partial class UnitBase : CharacterBody2D, IDestroyableWithHp
 		if (Dashed)
 		{
 			float weight = 1f - Mathf.Exp(-15 * (float)delta);
-    		Velocity = Velocity.Lerp(Vector2.Zero, weight);
+			Velocity = Velocity.Lerp(Vector2.Zero, weight);
 			if (Velocity.IsEqualApprox(Vector2.Zero, 0.15f))
 			{
 				Dashed = false;
@@ -98,14 +98,14 @@ public partial class UnitBase : CharacterBody2D, IDestroyableWithHp
 		}
 	}
 
-    public void TakeDamageWithDash(Vector2 from, int value, float power)
-    {
+	public virtual void TakeDamageWithDash(Vector2 from, int value, float power)
+	{
 		TakeDamage(value);
 
 		var direction = from.DirectionTo(GlobalPosition);
 		Velocity += direction * 500 * power;
 		Dashed = true;
-    }
+	}
 
 	public void Destroy()
 	{
