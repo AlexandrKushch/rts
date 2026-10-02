@@ -18,6 +18,7 @@ config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_width"
+mouse_cursor/custom_image_hotspot=Vector2(20, 16)
 
 [dotnet]
 

@@ -1,6 +1,3 @@
-using Godot;
-using System;
-
 public partial class HumanPlayer : PlayerBase
 {    
     private SelectionController _selectionController;
@@ -16,9 +13,18 @@ public partial class HumanPlayer : PlayerBase
             return _selectionController;
         }
     }
-
-    public override void _Ready()
+    
+    private CustomMouseCursors _customMouseCursors;
+    public CustomMouseCursors CustomMouseCursors
     {
-        base._Ready();
+        get
+        {
+            if (_customMouseCursors == null)
+            {
+                _customMouseCursors = GetNode<CustomMouseCursors>(nameof(CustomMouseCursors));
+            }
+
+            return _customMouseCursors;
+        }
     }
 }

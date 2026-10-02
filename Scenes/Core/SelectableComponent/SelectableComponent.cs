@@ -12,6 +12,9 @@ public partial class SelectableComponent : Area2D
         Visual = GetNode<Node2D>(nameof(Visual));
 
         UpdateSelection(false);
+
+        MouseEntered += () => { CustomMouseCursors.Instance.UpdateCursorPointerCount(+1); };
+        MouseExited += () => { CustomMouseCursors.Instance.UpdateCursorPointerCount(-1); };
     }
 
     public virtual void UpdateSelection(bool value)
