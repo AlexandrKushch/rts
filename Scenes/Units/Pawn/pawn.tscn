@@ -1037,6 +1037,7 @@ texture = ExtResource("3_8igw0")
 hframes = 8
 
 [node name="Outline" type="Sprite2D" parent="Visual" index="1" unique_id=195150417 node_paths=PackedStringArray("DuplicateThe")]
+visible = false
 z_index = 5
 material = ExtResource("6_vfo5x")
 position = Vector2(0, -29)

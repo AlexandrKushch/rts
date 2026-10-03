@@ -19,6 +19,10 @@ public partial class SelectableComponent : Area2D
 
     public virtual void UpdateSelection(bool value)
     {
+        if (!IsInstanceValid(Visual))
+        {
+            return;
+        }
         Visual.Visible = value;
     }
 }

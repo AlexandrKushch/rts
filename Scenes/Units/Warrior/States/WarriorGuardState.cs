@@ -18,10 +18,14 @@ public partial class WarriorGuardState : WarriorStateBase
 
     public override void _Process(double delta)
     {
-        bool shouldGuard = WarriorStateMachine.Warrior.EnemyDetector.Enemies
-            .Any(x => x is Warrior warrior && warrior.CanCharge);
+        bool shouldGuardCuaseOfEnemy = WarriorStateMachine.Warrior.EnemyDetector.Enemies
+                .Any(x => x is Warrior warrior && warrior.CanCharge);
+        bool shouldGuardCuaseOfArrow = WarriorStateMachine.Warrior.ArrowDetector.Enemies
+                .Any(x => x.GetParent().GetParent<ArrowPath>().Team != WarriorStateMachine.Warrior.Team);
 
-        if (!shouldGuard)
+        bool shouldGuard = shouldGuardCuaseOfEnemy || shouldGuardCuaseOfArrow;
+
+        if (!shouldGuard || !WarriorStateMachine.Warrior.CanGuard())
         {
             WarriorStateMachine.ChangeState(WarriorStateIds.Idle);
         }

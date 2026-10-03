@@ -48,17 +48,23 @@ public partial class UnitVisualBase : Node2D
         AnimationPlayer.Play(animation);
     }
 
-    public virtual void TakeDamage()
+    public virtual void TakeDamage(int value)
     {
         SpriteShaderMaterial.SetShaderParameter("on", true);
 
         var tween = CreateTween().SetParallel();
         float tweenDuration = 0.15f;
 
-
         var tweenColor = CreateTween();
         tweenColor.TweenProperty(SpriteShaderMaterial, "shader_parameter/color", ColorsGlobal.Yellow, tweenDuration * 0.33f);
-        tweenColor.TweenProperty(SpriteShaderMaterial, "shader_parameter/color", ColorsGlobal.Error, tweenDuration * 0.33f);
+        if (value > 0)
+        {
+            tweenColor.TweenProperty(SpriteShaderMaterial, "shader_parameter/color", ColorsGlobal.Error, tweenDuration * 0.33f);
+        }
+        else
+        {
+            tweenColor.TweenProperty(SpriteShaderMaterial, "shader_parameter/color", ColorsGlobal.Default, tweenDuration * 0.33f);
+        }
         tweenColor.TweenProperty(SpriteShaderMaterial, "shader_parameter/color", ColorsGlobal.Yellow, tweenDuration * 0.33f);
         tweenColor.Finished += () => { SpriteShaderMaterial.SetShaderParameter("on", false); };
 

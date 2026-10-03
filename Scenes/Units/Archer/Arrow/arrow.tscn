@@ -23,6 +23,8 @@ script = ExtResource("1_soo22")
 rotation = -0.4636476
 
 [node name="ArrowHitBox" parent="ArrowPathFollow" unique_id=1242638785 instance=ExtResource("2_3o4d5")]
+collision_layer = 256
+monitorable = true
 script = ExtResource("3_g0yus")
 
 [node name="CollisionShape2D" parent="ArrowPathFollow/ArrowHitBox" index="0" unique_id=394402596]

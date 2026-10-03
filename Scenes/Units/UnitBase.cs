@@ -4,7 +4,7 @@ public partial class UnitBase : CharacterBody2D, IDestroyableWithHp
 {
 	private PackedScene _deadScene;
 
-	protected virtual float MovementSpeed => 100f;
+	public virtual float MovementSpeed { get; protected set; } = 100f;
 	public bool Dashed { get; set; } = false;
 
 	public NavigationAgent2D NavigationAgent2D { get; private set; }

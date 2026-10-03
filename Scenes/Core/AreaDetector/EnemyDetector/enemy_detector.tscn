@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://7neisewoma26"]
 
-[ext_resource type="Script" uid="uid://cwj08df1riopq" path="res://Scenes/Core/EnemyDetector/EnemyDetector.cs" id="1_cedf7"]
+[ext_resource type="Script" uid="uid://csntddod4224j" path="res://Scenes/Core/AreaDetector/EnemyDetector/EnemyDetector.cs" id="1_2yibm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xrivr"]
 radius = 450.0
@@ -8,7 +8,7 @@ radius = 450.0
 [node name="EnemyDetector" type="Area2D" unique_id=1958789508]
 collision_layer = 0
 collision_mask = 2
-script = ExtResource("1_cedf7")
+script = ExtResource("1_2yibm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=368633700]
 shape = SubResource("CircleShape2D_xrivr")

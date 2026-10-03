@@ -7,7 +7,7 @@ public partial class Archer : UnitHasVisualBase
     public bool CanShoot { get; private set; } = true;
     private double _attackReloadTimer = 0.0f;
 
-    protected override float MovementSpeed => 150f;
+    public override float MovementSpeed { get; protected set; } = 150f;
     public UnitBase AttackTarget { get; private set; }
 
     public ArcherVisual ArcherVisual { get; private set; }

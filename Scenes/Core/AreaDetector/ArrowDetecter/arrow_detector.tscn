@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bqjyu20ma3xo5"]
+
+[ext_resource type="Script" uid="uid://cw3uibkwks6om" path="res://Scenes/Core/AreaDetector/ArrowDetecter/ArrowDetector.cs" id="1_a8p5e"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xrivr"]
+radius = 300.0
+
+[node name="ArrowDetector" type="Area2D" unique_id=1175189121]
+collision_layer = 0
+collision_mask = 256
+script = ExtResource("1_a8p5e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=767066828]
+shape = SubResource("CircleShape2D_xrivr")

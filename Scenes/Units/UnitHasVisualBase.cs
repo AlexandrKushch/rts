@@ -36,7 +36,7 @@ public partial class UnitHasVisualBase : UnitBase
     {
         base.TakeDamage(value);
 
-        Visual.TakeDamage();
+        Visual.TakeDamage(value);
     }
 
     public override void TakeDamageWithDash(Vector2 from, int value, float power)

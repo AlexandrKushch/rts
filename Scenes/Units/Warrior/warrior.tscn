@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bvp3vvvdtdg3m" path="res://Assets/Units/Blue Units/Warrior/Warrior_Guard.png" id="7_546yd"]
 [ext_resource type="Texture2D" uid="uid://daulrfkfskpeh" path="res://Assets/Units/Blue Units/Warrior/Warrior_Attack2.png" id="7_bbpbx"]
 [ext_resource type="Script" uid="uid://bp0pnxnktf4kt" path="res://Scenes/Units/Pawn/OutlineVisual.cs" id="8_dhetd"]
-[ext_resource type="PackedScene" uid="uid://7neisewoma26" path="res://Scenes/Core/EnemyDetector/enemy_detector.tscn" id="14_dhetd"]
+[ext_resource type="PackedScene" uid="uid://bqjyu20ma3xo5" path="res://Scenes/Core/AreaDetector/ArrowDetecter/arrow_detector.tscn" id="15_ih0oj"]
 [ext_resource type="Script" uid="uid://dvn078hltenve" path="res://Scenes/Units/Warrior/States/WarriorStateMachine.cs" id="15_sp1vb"]
 [ext_resource type="Script" uid="uid://25rdpnr81ut4" path="res://Scenes/Units/Warrior/States/WarriorIdleState.cs" id="16_yuf4r"]
 [ext_resource type="Script" uid="uid://jt0r8ygeauq3" path="res://Scenes/Units/Warrior/States/WarriorMoveToState.cs" id="17_7dhpc"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://cks0i0rkbq85r" path="res://Scenes/Units/Warrior/States/WarriorMoveToEnemyState.cs" id="19_x230b"]
 [ext_resource type="Script" uid="uid://cfebs5kyjbvjg" path="res://Scenes/Units/Warrior/States/WarriorChargeState.cs" id="20_yuf4r"]
 [ext_resource type="Script" uid="uid://27qe17v8ew2r" path="res://Scenes/Units/Warrior/States/WarriorGuardState.cs" id="21_7dhpc"]
+[ext_resource type="PackedScene" uid="uid://7neisewoma26" path="res://Scenes/Core/AreaDetector/EnemyDetector/enemy_detector.tscn" id="21_ih0oj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nhsra"]
 size = Vector2(72, 97)
@@ -314,8 +315,8 @@ _data = {
 &"Run": SubResource("Animation_kk860")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_sp1vb"]
-radius = 200.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_mpskv"]
+radius = 250.0
 
 [node name="Warrior" unique_id=1673489485 instance=ExtResource("1_jxcyl")]
 script = ExtResource("2_bbpbx")
@@ -357,12 +358,16 @@ DuplicateThe = NodePath("../Sprite2D")
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_5husr")
 
-[node name="EnemyDetector" parent="." index="7" unique_id=1958789508 instance=ExtResource("14_dhetd")]
+[node name="ArrowDetector" parent="." index="7" unique_id=1175189121 instance=ExtResource("15_ih0oj")]
+visible = false
+
+[node name="EnemyDetector" parent="." index="8" unique_id=1958789508 instance=ExtResource("21_ih0oj")]
+visible = false
 
 [node name="CollisionShape2D" parent="EnemyDetector" index="0" unique_id=368633700]
-shape = SubResource("CircleShape2D_sp1vb")
+shape = SubResource("CircleShape2D_mpskv")
 
-[node name="StateMachine" type="Node" parent="." index="8" unique_id=1697989344 node_paths=PackedStringArray("Warrior")]
+[node name="StateMachine" type="Node" parent="." index="9" unique_id=1697989344 node_paths=PackedStringArray("Warrior")]
 script = ExtResource("15_sp1vb")
 Warrior = NodePath("..")
 
@@ -384,15 +389,16 @@ script = ExtResource("20_yuf4r")
 [node name="Guard" type="Node" parent="StateMachine" index="5" unique_id=807963043]
 script = ExtResource("21_7dhpc")
 
-[node name="AttackReloadTimer" type="Timer" parent="." index="9" unique_id=383657286]
+[node name="AttackReloadTimer" type="Timer" parent="." index="10" unique_id=383657286]
 one_shot = true
 
-[node name="ChargeReloadTimer" type="Timer" parent="." index="10" unique_id=944852751]
-wait_time = 0.5
+[node name="GuardReloadTimer" type="Timer" parent="." index="11" unique_id=13804463]
+wait_time = 10.0
 one_shot = true
 
 [connection signal="animation_finished" from="Visual/AnimationPlayer" to="Visual" method="OnAnimationFinished"]
 
 [editable path="UnitSelectableComponent"]
 [editable path="HurtBox"]
+[editable path="ArrowDetector"]
 [editable path="EnemyDetector"]

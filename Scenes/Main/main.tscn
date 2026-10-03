@@ -286,22 +286,6 @@ Team = 4
 position = Vector2(1008, 475)
 Team = 4
 
-[node name="Warrior2" parent="Map/NavigationRegion2D/World" unique_id=303966900 instance=ExtResource("20_c8mgu")]
-position = Vector2(453, 208)
-Team = 3
-
-[node name="Warrior3" parent="Map/NavigationRegion2D/World" unique_id=1418552216 instance=ExtResource("20_c8mgu")]
-position = Vector2(453, 291)
-Team = 3
-
-[node name="Warrior4" parent="Map/NavigationRegion2D/World" unique_id=3404335 instance=ExtResource("20_c8mgu")]
-position = Vector2(389, 240)
-Team = 3
-
-[node name="Warrior5" parent="Map/NavigationRegion2D/World" unique_id=614493885 instance=ExtResource("20_c8mgu")]
-position = Vector2(529, 245)
-Team = 3
-
 [node name="Pawn7" parent="Map/NavigationRegion2D/World" unique_id=442795000 instance=ExtResource("9_hryqi")]
 position = Vector2(101, 642)
 Team = 3
@@ -316,4 +300,20 @@ Team = 3
 
 [node name="Monk2" parent="Map/NavigationRegion2D/World" unique_id=1632611817 instance=ExtResource("18_gw1lt")]
 position = Vector2(318, 808)
+Team = 3
+
+[node name="Archer" parent="Map/NavigationRegion2D/World" unique_id=508446138 instance=ExtResource("16_vae3x")]
+position = Vector2(917, 546)
+Team = 4
+
+[node name="Archer2" parent="Map/NavigationRegion2D/World" unique_id=1588633454 instance=ExtResource("16_vae3x")]
+position = Vector2(821, 579)
+Team = 4
+
+[node name="Archer3" parent="Map/NavigationRegion2D/World" unique_id=1699762527 instance=ExtResource("16_vae3x")]
+position = Vector2(859, 460)
+Team = 4
+
+[node name="Warrior2" parent="Map/NavigationRegion2D/World" unique_id=443152803 instance=ExtResource("20_c8mgu")]
+position = Vector2(499, 277)
 Team = 3
