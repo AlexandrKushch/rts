@@ -31,6 +31,16 @@ public partial class SelectionController : Node2D
 			{
 				SelectionInput(buttonInput);
 			}
+			else if (buttonInput.Pressed
+				&& buttonInput.ButtonIndex == MouseButton.Middle)
+			{
+				if (TryPointCastSelectable(out var selection)
+					&& selection.EffectedOn is UnitBase unit)
+				{
+					unit.TakeDamage(1);
+					GD.Print(unit.Meta.Name, unit.HP);
+				}
+			}
 		}
 	}
 	

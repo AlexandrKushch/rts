@@ -4,7 +4,7 @@ public partial class ArcherMoveToEnemyState : ArcherStateBase
 {
     public override void _Process(double delta)
     {
-        var enemy = ArcherStateMachine.Archer.EnemyDetector.Enemies
+        var enemy = ArcherStateMachine.Archer.EnemyDetector.Items
             .FirstOrDefault(x => x.GetInstanceId() == ArcherStateMachine.Archer.TargetObject?.GetInstanceId());
 
         if (enemy != null)

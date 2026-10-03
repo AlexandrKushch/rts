@@ -45,4 +45,11 @@ public partial class UnitHasVisualBase : UnitBase
 
         Visual.SetDirection(GlobalPosition.X > from.X);
     }
+
+    public override void Heal(int value)
+    {
+        base.Heal(value);
+        Visual.Heal();
+    }
+
 }

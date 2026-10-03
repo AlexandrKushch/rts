@@ -11,6 +11,12 @@
 [ext_resource type="Shader" uid="uid://cr5ubxgqx01e6" path="res://Shaders/outline.gdshader" id="6_xn6s7"]
 [ext_resource type="Texture2D" uid="uid://b65d2n0ixixel" path="res://Assets/Units/Blue Units/Pawn/Pawn_Idle.png" id="7_ad7h7"]
 [ext_resource type="Script" uid="uid://bp0pnxnktf4kt" path="res://Scenes/Units/Pawn/OutlineVisual.cs" id="8_k61rc"]
+[ext_resource type="PackedScene" uid="uid://qmbdx123twrb" path="res://Scenes/Core/AreaDetector/AllyDetector/ally_detector.tscn" id="12_k61rc"]
+[ext_resource type="Script" uid="uid://cgqljv25rxvk6" path="res://Scenes/Units/Monk/MonkStateMachine/MonkStateMachine.cs" id="13_etu4i"]
+[ext_resource type="Script" uid="uid://6xcglh3d3fri" path="res://Scenes/Units/Monk/MonkStateMachine/MonkIdleState.cs" id="13_gxaub"]
+[ext_resource type="Script" uid="uid://c62phqe4mheh2" path="res://Scenes/Units/Monk/MonkStateMachine/MonkMoveToState.cs" id="14_etu4i"]
+[ext_resource type="Script" uid="uid://c4a2rgaarcnlo" path="res://Scenes/Units/Monk/MonkStateMachine/MonkMoveToUnitState.cs" id="15_87ean"]
+[ext_resource type="Script" uid="uid://kxiygt0jif1v" path="res://Scenes/Units/Monk/MonkStateMachine/MonkHealState.cs" id="16_e5fx3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qys3b"]
 size = Vector2(60, 73)
@@ -21,9 +27,9 @@ shader_parameter/clr = Color(0.28235295, 0.34509805, 0.5176471, 1)
 shader_parameter/type = 1
 shader_parameter/thickness = 4.0
 
-[sub_resource type="Animation" id="Animation_ad7h7"]
+[sub_resource type="Animation" id="Animation_2g8ea"]
 resource_name = "run"
-length = 1.1
+length = 0.3
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -32,10 +38,10 @@ tracks/0/path = NodePath("Visual/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.100000024, 0.19999999),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+"values": [8, 9, 10]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -60,6 +66,131 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("4_7nax4")]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StateMachine/Heal")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"OnHealEndAnimationKeyReached"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visual")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"ResetCancelCondition"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_stxtg"]
+resource_name = "run"
+length = 0.5
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.20000002, 0.29999998, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7, 8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visual/Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [11]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visual/Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_7nax4")]
+}
+
+[sub_resource type="Animation" id="Animation_03xi6"]
+resource_name = "run"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visual/Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [11]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visual/Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_7nax4")]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StateMachine/Heal")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"OnHealStartAnimationKeyReached"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_xn6s7"]
@@ -187,11 +318,73 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2g8ea"]
 _data = {
-&"Heal": SubResource("Animation_ad7h7"),
+&"HealEnd": SubResource("Animation_2g8ea"),
+&"HealProcess": SubResource("Animation_stxtg"),
+&"HealStart": SubResource("Animation_03xi6"),
 &"Idle": SubResource("Animation_xn6s7"),
 &"RESET": SubResource("Animation_07oq6"),
 &"Run": SubResource("Animation_k61rc")
 }
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_e5fx3"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gxaub"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_etu4i"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_87ean"]
+blend_mode = 2
+blend_point_0/node = SubResource("AnimationNodeAnimation_gxaub")
+blend_point_0/pos = 0.0
+blend_point_0/name = &"Idle"
+blend_point_1/node = SubResource("AnimationNodeAnimation_etu4i")
+blend_point_1/pos = 1.0
+blend_point_1/name = &"Run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m7ck8"]
+animation = &"HealEnd"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l2il7"]
+animation = &"HealProcess"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h47a3"]
+animation = &"HealStart"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kqrm5"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gucyq"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bl2c5"]
+advance_mode = 2
+advance_condition = &"cancel"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kilc8"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_t7uhn"]
+states/HealEnd/node = SubResource("AnimationNodeAnimation_m7ck8")
+states/HealEnd/position = Vector2(716, 100)
+states/HealProcess/node = SubResource("AnimationNodeAnimation_l2il7")
+states/HealProcess/position = Vector2(530, 100)
+states/HealStart/node = SubResource("AnimationNodeAnimation_h47a3")
+states/HealStart/position = Vector2(342, 100)
+transitions = ["Start", "HealStart", SubResource("AnimationNodeStateMachineTransition_kqrm5"), "HealStart", "HealProcess", SubResource("AnimationNodeStateMachineTransition_gucyq"), "HealProcess", "HealEnd", SubResource("AnimationNodeStateMachineTransition_bl2c5"), "HealEnd", "End", SubResource("AnimationNodeStateMachineTransition_kilc8")]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_xrivr"]
+graph_offset = Vector2(-498.46204, -23.507889)
+nodes/SM_Healing/node = SubResource("AnimationNodeStateMachine_t7uhn")
+nodes/SM_Healing/position = Vector2(-320, 280)
+nodes/Heal/node = SubResource("AnimationNodeOneShot_e5fx3")
+nodes/Heal/position = Vector2(20, 120)
+nodes/Movement/node = SubResource("AnimationNodeBlendSpace1D_87ean")
+nodes/Movement/position = Vector2(-320, 80)
+node_connections = [&"output", 0, &"Heal", &"Heal", 0, &"Movement", &"Heal", 1, &"SM_Healing"]
 
 [node name="Monk" unique_id=1673489485 instance=ExtResource("1_51sj2")]
 script = ExtResource("2_07oq6")
@@ -204,7 +397,7 @@ EffectedOn = NodePath("..")
 position = Vector2(0, -26.5)
 shape = SubResource("RectangleShape2D_qys3b")
 
-[node name="Visual" type="Node2D" parent="." index="4" unique_id=1035432735]
+[node name="Visual" type="Node2D" parent="." index="6" unique_id=1035432735]
 script = ExtResource("4_864hi")
 
 [node name="Sprite2D" type="Sprite2D" parent="Visual" index="0" unique_id=1598300309]
@@ -227,7 +420,37 @@ DuplicateThe = NodePath("../Sprite2D")
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_2g8ea")
 
+[node name="AnimationTree" type="AnimationTree" parent="Visual" index="3" unique_id=974860406]
+root_node = NodePath("../..")
+tree_root = SubResource("AnimationNodeBlendTree_xrivr")
+anim_player = NodePath("../AnimationPlayer")
+parameters/SM_Healing/conditions/cancel = false
+parameters/Heal/active = false
+parameters/Heal/internal_active = false
+parameters/Heal/request = 0
+parameters/Movement/blend_position = 0.0
+
+[node name="AllyDetector" parent="." index="7" unique_id=362746832 instance=ExtResource("12_k61rc")]
+visible = false
+
+[node name="StateMachine" type="Node" parent="." index="8" unique_id=1317112738 node_paths=PackedStringArray("Monk")]
+script = ExtResource("13_etu4i")
+Monk = NodePath("..")
+
+[node name="Idle" type="Node" parent="StateMachine" index="0" unique_id=276713446]
+script = ExtResource("13_gxaub")
+
+[node name="MoveTo" type="Node" parent="StateMachine" index="1" unique_id=1510361184]
+script = ExtResource("14_etu4i")
+
+[node name="MoveToUnit" type="Node" parent="StateMachine" index="2" unique_id=1253400253]
+script = ExtResource("15_87ean")
+
+[node name="Heal" type="Node" parent="StateMachine" index="3" unique_id=1540054116]
+script = ExtResource("16_e5fx3")
+
 [connection signal="animation_finished" from="Visual/AnimationPlayer" to="Visual" method="OnAnimationFinished"]
 
 [editable path="UnitSelectableComponent"]
 [editable path="HurtBox"]
+[editable path="AllyDetector"]

@@ -36,8 +36,6 @@ public partial class WarriorMoveToEnemyState : WarriorStateBase
         }
         else if (WarriorStateMachine.Warrior.AttackTargetInRange())
         {
-            GD.Print("REACHED ATTACK TARGET");
-
             WarriorStateMachine.Warrior.SetTarget(WarriorStateMachine.Warrior.GlobalPosition, null);
             WarriorStateMachine.ChangeState(WarriorStateIds.Attack);
         }

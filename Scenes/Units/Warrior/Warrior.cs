@@ -58,7 +58,7 @@ public partial class Warrior : UnitHasVisualBase
         if (!InGuard()
             && CanGuard())
         {
-            bool shouldGuard = ArrowDetector.Enemies
+            bool shouldGuard = ArrowDetector.Items
                 .Any(x => x.GetParent().GetParent<ArrowPath>().Team != Team);
 
             if (shouldGuard)

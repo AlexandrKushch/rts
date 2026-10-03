@@ -23,7 +23,7 @@ public partial class WarriorIdleState : WarriorStateBase
 
     public override void _Process(double delta)
     {
-        bool shouldGuard = WarriorStateMachine.Warrior.EnemyDetector.Enemies
+        bool shouldGuard = WarriorStateMachine.Warrior.EnemyDetector.Items
             .Any(x => x is Warrior warrior && warrior.CanCharge);
 
         if (shouldGuard)
@@ -53,7 +53,7 @@ public partial class WarriorIdleState : WarriorStateBase
 
     private UnitBase GetEnemyOrGoToBasePoint()
     {
-        var enemy = WarriorStateMachine.Warrior.EnemyDetector.Enemies.MinBy(x => WarriorStateMachine.Warrior.GlobalPosition.DistanceTo(x.GlobalPosition));
+        var enemy = WarriorStateMachine.Warrior.EnemyDetector.Items.MinBy(x => WarriorStateMachine.Warrior.GlobalPosition.DistanceTo(x.GlobalPosition));
      
         if ((enemy == null && !WarriorStateMachine.Warrior.ReachedAttachedPoint())
             || WarriorStateMachine.Warrior.FarFromAttachedPoint())

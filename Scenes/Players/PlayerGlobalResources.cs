@@ -116,12 +116,18 @@ public partial class PlayerGlobalResources : Node
             }
             else if (visual is MonkVisual)
             {
-                var animation = animationPlayer.GetAnimation(animationName);
+                string monkAnimationName = animationName;
+                var animation = animationPlayer.GetAnimation(monkAnimationName);
+
+                if (monkAnimationName.Contains("heal", StringComparison.OrdinalIgnoreCase))
+                {
+                    monkAnimationName = "Heal";
+                }
 
                 // {UnitsPath}/Monk/Idle.png
                 animation.TrackSetKeyValue(UnitAnimationTextureKeyId,
                     0,
-                    ResourceLoader.Load<Texture2D>($"{GlobalResources.Instance.Teams[_player.Team].UnitsPath}{unitName}/{animationName}.png"));
+                    ResourceLoader.Load<Texture2D>($"{GlobalResources.Instance.Teams[_player.Team].UnitsPath}{unitName}/{monkAnimationName}.png"));
             }
             else
             {

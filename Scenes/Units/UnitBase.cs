@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class UnitBase : CharacterBody2D, IDestroyableWithHp
@@ -20,7 +21,7 @@ public partial class UnitBase : CharacterBody2D, IDestroyableWithHp
 	public TeamType Team { get; set; }
 
 	public bool Setup { get; set; } = false;
-	public int HP { get; set; } = 5;
+	public int HP { get; set; }
 
 	public override void _Ready()
 	{
@@ -35,6 +36,11 @@ public partial class UnitBase : CharacterBody2D, IDestroyableWithHp
 			return;
 		}
 
+		if (Meta != null)
+		{
+			HP = Meta.MaxHP;
+		}
+		
 		NavigationAgent2D = GetNode<NavigationAgent2D>(nameof(NavigationAgent2D));
 		Target = GlobalPosition;
 		UpdatePath();
@@ -105,6 +111,11 @@ public partial class UnitBase : CharacterBody2D, IDestroyableWithHp
 		var direction = from.DirectionTo(GlobalPosition);
 		Velocity += direction * 500 * power;
 		Dashed = true;
+	}
+
+    public virtual void Heal(int value)
+	{
+		HP = Math.Min(HP + value, Meta.MaxHP);
 	}
 
 	public void Destroy()

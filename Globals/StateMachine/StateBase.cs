@@ -21,4 +21,9 @@ public partial class StateBase<T> : Node
     {
         SetProcess(false);
     }
+
+    protected void ChangeState(T t)
+    {
+        StateMachine.ChangeState(t);
+    }
 }

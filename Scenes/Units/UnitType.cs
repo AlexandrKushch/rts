@@ -11,4 +11,6 @@ public partial class UnitType : Resource
     [Export] public Texture2D Icon { get; set; }
     
     [Export] public Dictionary<ResourceTypeIds, int> Cost { get; set; }
+
+    [Export] public int MaxHP { get; set; } = 5;
 }

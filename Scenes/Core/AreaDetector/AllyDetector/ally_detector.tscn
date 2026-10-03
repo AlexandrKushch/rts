@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://qmbdx123twrb"]
+
+[ext_resource type="Script" uid="uid://cusx7684ejvnx" path="res://Scenes/Core/AreaDetector/AllyDetector/AllyDetector.cs" id="1_tgk32"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xrivr"]
+radius = 250.0
+
+[node name="AllyDetector" type="Area2D" unique_id=362746832]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_tgk32")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=307189913]
+shape = SubResource("CircleShape2D_xrivr")

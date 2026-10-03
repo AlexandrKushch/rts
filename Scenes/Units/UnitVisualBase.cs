@@ -5,6 +5,7 @@ public partial class UnitVisualBase : Node2D
     protected const int TextureKeyId = 2;
 
     private ShaderMaterial SpriteShaderMaterial;
+    private PackedScene HealEffect;
 
     protected Sprite2D Sprite2D;
     protected OutlineVisual Outline;
@@ -20,6 +21,7 @@ public partial class UnitVisualBase : Node2D
         Sprite2D.Material = SpriteShaderMaterial;
         Outline = GetNode<OutlineVisual>(nameof(Outline));
         AnimationPlayer = GetNode<AnimationPlayer>(nameof(AnimationPlayer));
+        HealEffect = ResourceLoader.Load<PackedScene>("uid://dq1onv83hufil");
     }
 
     public virtual void SetDirection(bool flipH)
@@ -84,5 +86,10 @@ public partial class UnitVisualBase : Node2D
     public void UpdateOutlineVisible(bool value)
     {
         Outline.UpdateVisible(value);
+    }
+
+    public void Heal()
+    {
+        AddChild(HealEffect.Instantiate());
     }
 }

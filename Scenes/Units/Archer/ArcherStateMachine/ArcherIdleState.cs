@@ -4,7 +4,7 @@ public partial class ArcherIdleState : ArcherStateBase
 {
     public override void _Process(double delta)
     {
-        var enemies = ArcherStateMachine.Archer.EnemyDetector.Enemies.ToArray();
+        var enemies = ArcherStateMachine.Archer.EnemyDetector.Items.ToArray();
 
         if (enemies.Length > 0)
         {

@@ -5,7 +5,7 @@ public partial class ArrowDetector : AreaDetector<HitBox>
 {
     public override void _Ready()
     {
-        Enemies = new HashSet<HitBox>();
+        Items = new HashSet<HitBox>();
 
         AreaEntered += OnBodyEntered;
         AreaExited += OnBodyExited;

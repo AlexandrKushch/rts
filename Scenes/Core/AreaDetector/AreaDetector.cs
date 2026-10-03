@@ -3,11 +3,11 @@ using Godot;
 
 public partial class AreaDetector<T> : Area2D
 {
-    public HashSet<T> Enemies { get; protected set; }
+    public HashSet<T> Items { get; protected set; }
 
     public override void _Ready()
     {
-        Enemies = new HashSet<T>();
+        Items = new HashSet<T>();
 
         BodyEntered += OnBodyEntered;
         BodyExited += OnBodyExited;
@@ -17,7 +17,7 @@ public partial class AreaDetector<T> : Area2D
     {
         if (body is T unit)
         {
-            Enemies.Add(unit);
+            Items.Add(unit);
         }
     }
     
@@ -25,7 +25,7 @@ public partial class AreaDetector<T> : Area2D
     {
         if (body is T unit)
         {
-            Enemies.Remove(unit);
+            Items.Remove(unit);
         }
     }
 }

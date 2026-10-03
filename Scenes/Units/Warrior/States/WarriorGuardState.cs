@@ -18,9 +18,9 @@ public partial class WarriorGuardState : WarriorStateBase
 
     public override void _Process(double delta)
     {
-        bool shouldGuardCuaseOfEnemy = WarriorStateMachine.Warrior.EnemyDetector.Enemies
+        bool shouldGuardCuaseOfEnemy = WarriorStateMachine.Warrior.EnemyDetector.Items
                 .Any(x => x is Warrior warrior && warrior.CanCharge);
-        bool shouldGuardCuaseOfArrow = WarriorStateMachine.Warrior.ArrowDetector.Enemies
+        bool shouldGuardCuaseOfArrow = WarriorStateMachine.Warrior.ArrowDetector.Items
                 .Any(x => x.GetParent().GetParent<ArrowPath>().Team != WarriorStateMachine.Warrior.Team);
 
         bool shouldGuard = shouldGuardCuaseOfEnemy || shouldGuardCuaseOfArrow;
