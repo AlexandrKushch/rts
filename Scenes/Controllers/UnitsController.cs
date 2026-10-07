@@ -59,6 +59,11 @@ public partial class UnitsController : Node2D
                     warrior.AttachedToPoint = warrior.Target.Value;
                 }
 
+                if (unit is Lancer lancer)
+                {
+                    lancer.AttachedToPoint = lancer.Target.Value;
+                }
+
                 i++;
             }
         }

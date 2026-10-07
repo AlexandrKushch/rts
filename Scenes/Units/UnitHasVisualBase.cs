@@ -17,8 +17,6 @@ public partial class UnitHasVisualBase : UnitBase
 
     public override void _Process(double delta)
     {
-        base._Process(delta);
-
         if (!Dashed)
         {
             Visual.UpdateMovement(Velocity, string.Empty);

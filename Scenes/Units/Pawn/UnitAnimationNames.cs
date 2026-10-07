@@ -11,6 +11,20 @@ public class UnitAnimationNames
         public const string Shoot = "Shoot";
     }
 
+    public class Lancer
+    {
+        public const string UpAttack = "Up_Attack";
+        public const string UpDefence = "Up_Defence";
+        public const string UpRightAttack = "UpRight_Attack";
+        public const string UpRightDefence = "UpRight_Defence";
+        public const string DownAttack = "Down_Attack";
+        public const string DownDefence = "Down_Defence";
+        public const string DownRightAttack = "DownRight_Attack";
+        public const string DownRightDefence = "DownRight_Defence";
+        public const string RightAttack = "Right_Attack";
+        public const string RightDefence = "Right_Defence";
+    }
+
     public class Pawn
     {
         public const string Interact = "Interact";
