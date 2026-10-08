@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 public partial class CustomMouseCursors : Node
@@ -32,7 +33,7 @@ public partial class CustomMouseCursors : Node
 
     public void UpdateCursorPointerCount(int value)
     {
-        PointerCount += value;
+        PointerCount = Math.Max(0, PointerCount + value);
 
         if (PointerCount > 0)
         {

@@ -47,21 +47,30 @@ public partial class LancerVisual : UnitVisualBase
     }
 
 
-    public void UpdateDefence(Vector2 attackTarget)
+    public void UpdateDefence(Vector2? attackTarget)
     {
         if (AnimationPlayer.CurrentAnimation.ToString().Contains("attack", StringComparison.OrdinalIgnoreCase))
         {
             return;
         }
 
-        _direction = GlobalPosition.DirectionTo(attackTarget) * new Vector2(1, -1);
+        string animation;
 
-        Sprite2D.FlipH = _direction.X < 0;
-        _direction.X = Mathf.Abs(_direction.X);
-        _direction.X = (float)Math.Round(_direction.X, MidpointRounding.AwayFromZero);
-        _direction.Y = (float)Math.Round(_direction.Y, MidpointRounding.AwayFromZero);
-        
-        string animation = _defenceDirections[_direction];
+        if (attackTarget == null)
+        {
+            animation = _defenceDirections[Vector2.Zero];
+        }
+        else
+        {
+            _direction = GlobalPosition.DirectionTo(attackTarget.Value) * new Vector2(1, -1);
+
+            Sprite2D.FlipH = _direction.X < 0;
+            _direction.X = Mathf.Abs(_direction.X);
+            _direction.X = (float)Math.Round(_direction.X, MidpointRounding.AwayFromZero);
+            _direction.Y = (float)Math.Round(_direction.Y, MidpointRounding.AwayFromZero);
+
+            animation = _defenceDirections[_direction];
+        }
 
         if (AnimationPlayer.CurrentAnimation.Equals(animation))
         {
@@ -74,7 +83,7 @@ public partial class LancerVisual : UnitVisualBase
     public void Attack()
     {
         string animation = _attackDirections[_direction];
-        
+
         if (AnimationPlayer.CurrentAnimation.Equals(animation))
         {
             return;

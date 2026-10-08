@@ -3,20 +3,12 @@ using Godot;
 
 public partial class WarriorVisual : UnitVisualBase
 {
-    private Tween _jumpingTween;
-
     [Signal]
     public delegate void OnAttackAnimationFinishedEventHandler();
 
     public override void _Ready()
     {
         base._Ready();
-
-        _jumpingTween = CreateTween().SetLoops(); //.SetTrans(Tween.TransitionType.Sine);
-        double jumpingTweenDuration = 0.2f;
-        _jumpingTween.TweenProperty(this, "position", Vector2.Up * 15, jumpingTweenDuration * 0.5f);
-        _jumpingTween.TweenProperty(this, "position", Vector2.Zero, jumpingTweenDuration * 0.5f);
-        _jumpingTween.Stop();
 
         AnimationPlayer.AnimationFinished += OnAnimationFinished;
     }
@@ -29,13 +21,11 @@ public partial class WarriorVisual : UnitVisualBase
             return;
         }
 
-        _jumpingTween.Stop();
         base.UpdateMovement(velocity, animationLibraryName);
     }
 
     public void Attack(Vector2? target)
     {
-        _jumpingTween.Stop();
         string animation = UnitAnimationNames.Warrior.Attack1;
 
         Sprite2D.FlipH = target.HasValue ? target.Value.X < GlobalPosition.X : Sprite2D.FlipH;
@@ -50,7 +40,6 @@ public partial class WarriorVisual : UnitVisualBase
     
     public void Charge(Vector2? target)
     {
-        _jumpingTween.Stop();
         string animation = UnitAnimationNames.Warrior.Attack2;
 
         Sprite2D.FlipH = target.HasValue ? target.Value.X < GlobalPosition.X : Sprite2D.FlipH;
@@ -68,11 +57,6 @@ public partial class WarriorVisual : UnitVisualBase
         string animation = UnitAnimationNames.Warrior.Guard;
 
         Sprite2D.FlipH = velocity.Normalized().X < 0;
-
-        if (velocity.Length() > 0)
-        {        
-            _jumpingTween.Play();
-        }
         
         if (AnimationPlayer.CurrentAnimation.Equals(animation))
         {

@@ -7,7 +7,7 @@ public partial class LancerIdleState : LancerStateBase
     {
         base.Activate();
 
-        Lancer.LancerVisual.UpdateDefence(Vector2.Zero);
+        Lancer.LancerVisual.UpdateDefence(null);
 
         Lancer.UpdateAttackTargetTimer.Start();
         Lancer.UpdateAttackTargetTimer.Timeout += UpdateAttackTarget;
@@ -44,7 +44,7 @@ public partial class LancerIdleState : LancerStateBase
         else
         {
             Lancer.AttackTarget = null;
-            Lancer.LancerVisual.UpdateDefence(Vector2.Zero);
+            Lancer.LancerVisual.UpdateDefence(null);
         }
     }
 

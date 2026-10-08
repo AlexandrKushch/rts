@@ -58,10 +58,12 @@ public partial class Warrior : UnitHasVisualBase
         if (!InGuard()
             && CanGuard())
         {
-            bool shouldGuard = ArrowDetector.Items
+            bool shouldGuardCuaseOfEnemy = EnemyDetector.Items
+                    .Any(x => x is Lancer && x.GlobalPosition.DistanceTo(GlobalPosition) < Lancer.AttackRangeDistance + 20);
+            bool shouldGuardCauseOfArrow = ArrowDetector.Items
                 .Any(x => x.GetParent().GetParent<ArrowPath>().Team != Team);
 
-            if (shouldGuard)
+            if (shouldGuardCuaseOfEnemy || shouldGuardCauseOfArrow)
             {
                 StateMachine.ChangeState(WarriorStateIds.Guard);
             }

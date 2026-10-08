@@ -17,6 +17,13 @@ public partial class SelectableComponent : Area2D
         MouseExited += () => { CustomMouseCursors.Instance.UpdateCursorPointerCount(-1); };
     }
 
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+
+        CustomMouseCursors.Instance.UpdateCursorPointerCount(-1);
+    }
+
     public virtual void UpdateSelection(bool value)
     {
         if (!IsInstanceValid(Visual))

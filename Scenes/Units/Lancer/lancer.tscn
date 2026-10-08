@@ -573,8 +573,8 @@ script = ExtResource("4_0nlk7")
 [node name="Sprite2D" type="Sprite2D" parent="Visual" index="0" unique_id=1176692145]
 material = ExtResource("5_h0ltc")
 position = Vector2(0, -29)
-texture = ExtResource("10_yqjad")
-hframes = 3
+texture = ExtResource("3_cbjpg")
+hframes = 12
 
 [node name="Outline" type="Sprite2D" parent="Visual" index="1" unique_id=1960704067 node_paths=PackedStringArray("DuplicateThe")]
 visible = false
