@@ -2,13 +2,17 @@
 
 [ext_resource type="PackedScene" uid="uid://cpss5e0hxbiu8" path="res://Scenes/Resources/Wood/tree_base.tscn" id="1_vd3df"]
 [ext_resource type="Texture2D" uid="uid://bewg31ljl273m" path="res://Assets/Terrain/Resources/Wood/Trees/Tree2.png" id="2_7y8tl"]
+[ext_resource type="Texture2D" uid="uid://b4sqnyaicc4hq" path="res://Assets/Terrain/Resources/Wood/Trees/Stump 2.png" id="3_7y8tl"]
 
 [node name="Tree2" unique_id=1936357647 instance=ExtResource("1_vd3df")]
 
-[node name="SelectableComponent" parent="." index="2" unique_id=550510253]
+[node name="BuildingSelectableComponent" parent="." index="2" unique_id=550510253]
 position = Vector2(-1, 4)
 
 [node name="Sprite2D" parent="Visual" parent_id_path=PackedInt32Array(1800092084) index="0" unique_id=413574009]
 texture = ExtResource("2_7y8tl")
 
-[editable path="SelectableComponent"]
+[node name="Stump" parent="Visual" parent_id_path=PackedInt32Array(1800092084) index="1" unique_id=1042248787]
+texture = ExtResource("3_7y8tl")
+
+[editable path="BuildingSelectableComponent"]

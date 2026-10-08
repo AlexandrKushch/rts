@@ -253,7 +253,8 @@ public partial class Pawn : UnitHasVisualBase
             .FindChildren("*")
             .Where(x => x is ResourceBase && x != null)
             .Select(x => x as ResourceBase)
-            .Where(x => x.ResourceType.Name.Equals(ResourceToCollectData.ResourceType.Name, StringComparison.OrdinalIgnoreCase)
+            .Where(x => !x.Destroyed
+                && x.ResourceType.Name.Equals(ResourceToCollectData.ResourceType.Name, StringComparison.OrdinalIgnoreCase)
                 && ResourceToCollectData.Position.DistanceTo(x.GlobalPosition) <= distanceLimit);
 
     }

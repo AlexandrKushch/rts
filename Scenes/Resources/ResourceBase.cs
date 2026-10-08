@@ -2,6 +2,7 @@ using Godot;
 
 public partial class ResourceBase : Node2D
 {
+    public bool Destroyed { get; set; } = false;
     public int CurrentCollectingCount { get; set; }
 
     [Export]
@@ -22,13 +23,18 @@ public partial class ResourceBase : Node2D
 
         if (Quantity <= 0)
         {
-            QueueFree();
+            Destroy();
         }
     }
 
-    public void OnExitTree()
+    public virtual void Destroy()
     {
-        base._ExitTree();
-        NavigationRegionController.Instance.BakeNavigationPolygon(true);
+        Destroyed = true;
+        QueueFree();
+    }
+
+    public virtual void OnExitTree()
+    {
+        NavigationRegionController.Instance.Bake();
     }
 }

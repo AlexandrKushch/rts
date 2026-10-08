@@ -35,6 +35,12 @@ public partial class PawnGatheringResourceState : PawnStateBase
             return;
         }
 
+        if (PawnStateMachine.Pawn.TargetResource.Destroyed)
+        {
+            PawnStateMachine.MoveToClosestResourceIfNotToBuilding();
+            return;            
+        }
+
         PawnStateMachine.Pawn.PawnVisual.Interact(PawnStateMachine.Pawn.TargetResource.ResourceType.Name, PawnStateMachine.Pawn.TargetObject?.GlobalPosition);
     }
 

@@ -34,7 +34,7 @@ public partial class BuildingBlueprint : Node2D
         Deployed = true;
         Building.Deploy();
         Building.Reparent(to);
-        NavigationRegionController.Instance.BakeNavigationPolygon(true);
+        NavigationRegionController.Instance.Bake();
         return true;
     }
 

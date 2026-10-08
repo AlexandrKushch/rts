@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class NavigationRegionController : NavigationRegion2D
 {
@@ -11,6 +10,16 @@ public partial class NavigationRegionController : NavigationRegion2D
         {
             Instance = this;
         }
+    }
+
+    public void Bake()
+    {
+        if (IsBaking())
+        {
+            return;
+        }
+
+        BakeNavigationPolygon(true);
     }
 
     public bool IsPointInside(Vector2 point)
