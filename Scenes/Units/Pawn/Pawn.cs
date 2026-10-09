@@ -6,6 +6,7 @@ using Godot;
 public partial class Pawn : UnitHasVisualBase
 {
     public const int MaxCollectableCapacity = 15;
+    public const int GatherDistanceRange = 75;
 
     private UpdateMovementAnimation _updateMovementAnimation;
     private PawnStateManagerBase StateMachine;

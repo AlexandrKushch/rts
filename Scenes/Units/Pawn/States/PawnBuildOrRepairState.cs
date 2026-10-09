@@ -6,8 +6,8 @@ public partial class PawnBuildOrRepairState : PawnStateBase
     {
         base.Activate();
 
-        PawnStateMachine.Pawn.Target = null;
-        PawnStateMachine.Pawn.PawnVisual.Connect(PawnVisual.SignalName.OnInteractAnimationFinished, Callable.From(Build));
+        Pawn.Target = null;
+        Pawn.PawnVisual.Connect(PawnVisual.SignalName.OnInteractAnimationFinished, Callable.From(Build));
 
         Build();
     }

@@ -238,11 +238,12 @@ DuplicateThe = NodePath("../Sprite2D")
 libraries/ = SubResource("AnimationLibrary_8louv")
 autoplay = &"Idle"
 
-[node name="Resource" type="Node2D" parent="." unique_id=1411045899 node_paths=PackedStringArray("Visual")]
+[node name="Resource" type="Node2D" parent="." unique_id=1411045899 node_paths=PackedStringArray("AttachedTo", "Visual")]
 script = ExtResource("7_c3se6")
+AttachedTo = NodePath("..")
 Visual = NodePath("../Visual")
 ResourceType = ExtResource("6_5savk")
-Quantity = 100
+Quantity = 10
 
 [node name="StateMachine" type="Node" parent="." unique_id=1994220742 node_paths=PackedStringArray("Sheep")]
 script = ExtResource("8_fbmh2")
