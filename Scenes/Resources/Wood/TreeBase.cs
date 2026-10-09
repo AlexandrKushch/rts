@@ -41,9 +41,9 @@ public partial class TreeBase : ResourceBase
         }
     }
 
-    public override void CollectOne()
+    public override void CollectOne(Pawn by)
     {
-        base.CollectOne();
+        base.CollectOne(by);
 
         var tween = CreateTween()
             .SetTrans(Tween.TransitionType.Bounce);

@@ -2,7 +2,7 @@ using Godot;
 
 public partial class PawnMoveToState : PawnStateBase
 {
-    private const float ResourceDesiredDistance = 40;
+    private const float ResourceDesiredDistance = 60;
     private const float BuildingDesiredDistance = 80;
     private float _defaultTargetDesiredDistance;
 

@@ -38,9 +38,15 @@
 [ext_resource type="PackedScene" uid="uid://gbgcj1ms1bp7" path="res://Scenes/Buildings/Monastery/monastery.tscn" id="20_vae3x"]
 [ext_resource type="PackedScene" uid="uid://ciqpg25wy10i2" path="res://Scenes/Buildings/Tower/tower.tscn" id="21_h4gp5"]
 [ext_resource type="Resource" uid="uid://3fqpdgsfv17m" path="res://Scenes/Buildings/Types/r_tower.tres" id="21_vae3x"]
+[ext_resource type="PackedScene" uid="uid://cayxdltveqe5h" path="res://Scenes/Resources/Gold/gold_s.tscn" id="31_q50pj"]
+[ext_resource type="PackedScene" uid="uid://10iu7akqmve2" path="res://Scenes/Resources/Gold/gold_xs.tscn" id="32_pmku7"]
+[ext_resource type="PackedScene" uid="uid://b2khqdo8t3agy" path="res://Scenes/Resources/Gold/gold_m.tscn" id="33_fiicg"]
+[ext_resource type="PackedScene" uid="uid://cwmar2g8uyc5w" path="res://Scenes/Resources/Gold/gold_l.tscn" id="34_ji84r"]
 [ext_resource type="PackedScene" uid="uid://d3pi2yprbe584" path="res://Scenes/Players/HumanPlayer/human_player.tscn" id="34_ow7bd"]
 [ext_resource type="PackedScene" uid="uid://donhwiyp4wmh2" path="res://Scenes/Players/ComputerPlayer/computer_player.tscn" id="34_q50pj"]
 [ext_resource type="Script" uid="uid://ct1200h30twva" path="res://Scenes/Main/GlobalPlayers.cs" id="35_h4gp5"]
+[ext_resource type="PackedScene" uid="uid://jcp0jsdqqvj1" path="res://Scenes/Resources/Gold/gold_xl.tscn" id="35_n806l"]
+[ext_resource type="PackedScene" uid="uid://dpjsny8jsmyxp" path="res://Scenes/Resources/Gold/gold_xxl.tscn" id="36_qp3dn"]
 [ext_resource type="PackedScene" uid="uid://88o7aad1m0ln" path="res://Scenes/UI/Buildings/building_grid.tscn" id="37_fy12w"]
 [ext_resource type="PackedScene" uid="uid://cbefxm40y2qgw" path="res://Scenes/Resources/Wood/tree_2.tscn" id="43_vae3x"]
 [ext_resource type="PackedScene" uid="uid://c2rq1i35scosp" path="res://Scenes/Resources/Wood/tree_3.tscn" id="44_h4gp5"]
@@ -105,6 +111,14 @@ BuildingScenes = Dictionary[int, PackedScene]({
 3: ExtResource("19_eo50k"),
 4: ExtResource("20_vae3x"),
 5: ExtResource("21_h4gp5")
+})
+GoldScenes = Dictionary[int, PackedScene]({
+0: ExtResource("31_q50pj"),
+1: ExtResource("32_pmku7"),
+2: ExtResource("33_fiicg"),
+3: ExtResource("34_ji84r"),
+4: ExtResource("35_n806l"),
+5: ExtResource("36_qp3dn")
 })
 World = NodePath("../Map/World")
 Ground = NodePath("../Map/FlatGround")

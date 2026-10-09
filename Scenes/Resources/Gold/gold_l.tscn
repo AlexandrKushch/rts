@@ -10,6 +10,7 @@ size = Vector2(32, 28)
 size = Vector2(44, 51)
 
 [node name="Gold_L" unique_id=1085272693 instance=ExtResource("1_2fqlm")]
+GoldSize = 3
 Quantity = 200
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=750160817]

@@ -54,7 +54,7 @@ public partial class PawnGatheringResourceState : PawnStateBase
     {
         if (IsInstanceValid(PawnStateMachine.Pawn.TargetResource))
         {
-            PawnStateMachine.Pawn.TargetResource.CollectOne();
+            PawnStateMachine.Pawn.TargetResource.CollectOne(Pawn);
             PawnStateMachine.Pawn.ResourceToCollectData.CollectedCount++;
         }
     }

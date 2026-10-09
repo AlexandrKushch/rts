@@ -5,9 +5,9 @@ public partial class MeatResourceBase : ResourceBase
     [Export] private UnitBase AttachedTo;
     [Export] private UnitVisualBase Visual;
     
-    public override void CollectOne()
+    public override void CollectOne(Pawn by)
     {
-        base.CollectOne();
+        base.CollectOne(by);
 
         Visual.TakeDamage(1);
     }

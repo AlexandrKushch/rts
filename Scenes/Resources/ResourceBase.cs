@@ -17,7 +17,7 @@ public partial class ResourceBase : Node2D
         TreeExited += OnExitTree;
     }
 
-    public virtual void CollectOne()
+    public virtual void CollectOne(Pawn by)
     {
         Quantity -= 1;
 

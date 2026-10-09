@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://b2khqdo8t3agy" path="res://Scenes/Resources/Gold/gold_m.tscn" id="1_wfr5h"]
 [ext_resource type="PackedScene" uid="uid://cwmar2g8uyc5w" path="res://Scenes/Resources/Gold/gold_l.tscn" id="2_mdvnf"]
 [ext_resource type="PackedScene" uid="uid://dpjsny8jsmyxp" path="res://Scenes/Resources/Gold/gold_xxl.tscn" id="3_051eu"]
-[ext_resource type="PackedScene" uid="uid://10iu7akqmve2" path="res://Scenes/Resources/Gold/gold_s.tscn" id="4_u0o7l"]
-[ext_resource type="PackedScene" uid="uid://cayxdltveqe5h" path="res://Scenes/Resources/Gold/gold_xs.tscn" id="5_5h4ic"]
+[ext_resource type="PackedScene" uid="uid://10iu7akqmve2" path="res://Scenes/Resources/Gold/gold_xs.tscn" id="4_u0o7l"]
+[ext_resource type="PackedScene" uid="uid://cayxdltveqe5h" path="res://Scenes/Resources/Gold/gold_s.tscn" id="5_5h4ic"]
 [ext_resource type="PackedScene" uid="uid://jcp0jsdqqvj1" path="res://Scenes/Resources/Gold/gold_xl.tscn" id="6_qt2vy"]
 
 [node name="GoldPreset" type="Node2D" unique_id=304495028]

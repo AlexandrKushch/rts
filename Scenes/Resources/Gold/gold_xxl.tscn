@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dpjsny8jsmyxp"]
 
 [ext_resource type="PackedScene" uid="uid://c4h614j6kq5yr" path="res://Scenes/Resources/Gold/gold_base.tscn" id="1_t0wh3"]
-[ext_resource type="Texture2D" uid="uid://dsuxch5iwmusg" path="res://Assets/Terrain/Resources/Gold/Gold Stones/Gold Stone 6_Highlight.png" id="2_pb2ot"]
+[ext_resource type="Texture2D" uid="uid://ceb7duqhh8rsx" path="res://Assets/Terrain/Resources/Gold/Gold Stones/Gold Stone 5_Highlight.png" id="2_t0wh3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t0wh3"]
 size = Vector2(40, 38)
@@ -10,6 +10,7 @@ size = Vector2(40, 38)
 size = Vector2(74, 72)
 
 [node name="Gold_XXL" unique_id=1085272693 instance=ExtResource("1_t0wh3")]
+GoldSize = 5
 Quantity = 500
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=750160817]
@@ -29,7 +30,7 @@ position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_pb2ot")
 
 [node name="Sprite2D" parent="Visual" parent_id_path=PackedInt32Array(4682082) index="0" unique_id=686199178]
-texture = ExtResource("2_pb2ot")
+texture = ExtResource("2_t0wh3")
 frame = 5
 
 [editable path="BuildingSelectableComponent"]

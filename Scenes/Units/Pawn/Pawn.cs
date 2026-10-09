@@ -113,6 +113,15 @@ public partial class Pawn : UnitHasVisualBase
         }
     }
 
+    public void SetTargetResourceWithoutChangingState(ResourceBase resource)
+    {
+        if (StateMachine.GetCurrentStateType() == PawnStateIds.GatheringResource)
+        {
+            TargetObject = resource;
+            TargetResource = resource;
+        }
+    }
+
     public void UpdateTargetObject()
     {
         if (IsInstanceValid(TargetObject))
