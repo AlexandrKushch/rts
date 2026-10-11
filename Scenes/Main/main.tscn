@@ -48,6 +48,9 @@
 [ext_resource type="PackedScene" uid="uid://jcp0jsdqqvj1" path="res://Scenes/Resources/Gold/gold_xl.tscn" id="35_n806l"]
 [ext_resource type="PackedScene" uid="uid://dpjsny8jsmyxp" path="res://Scenes/Resources/Gold/gold_xxl.tscn" id="36_qp3dn"]
 [ext_resource type="PackedScene" uid="uid://88o7aad1m0ln" path="res://Scenes/UI/Buildings/building_grid.tscn" id="37_fy12w"]
+[ext_resource type="PackedScene" uid="uid://dq1onv83hufil" path="res://Scenes/Effects/HealEffect/heal_effect.tscn" id="37_ji84r"]
+[ext_resource type="PackedScene" uid="uid://dwprh1fh872nx" path="res://Scenes/Effects/Dust01/dust_01.tscn" id="38_n806l"]
+[ext_resource type="PackedScene" uid="uid://b5m1rijdffgws" path="res://Scenes/Effects/Dust02/dust_02.tscn" id="39_qp3dn"]
 [ext_resource type="PackedScene" uid="uid://cbefxm40y2qgw" path="res://Scenes/Resources/Wood/tree_2.tscn" id="43_vae3x"]
 [ext_resource type="PackedScene" uid="uid://c2rq1i35scosp" path="res://Scenes/Resources/Wood/tree_3.tscn" id="44_h4gp5"]
 [ext_resource type="PackedScene" uid="uid://bfbkv3onjobpd" path="res://Scenes/Resources/Wood/tree_4.tscn" id="45_gw1lt"]
@@ -119,6 +122,11 @@ GoldScenes = Dictionary[int, PackedScene]({
 3: ExtResource("34_ji84r"),
 4: ExtResource("35_n806l"),
 5: ExtResource("36_qp3dn")
+})
+EffectScenes = Dictionary[int, PackedScene]({
+0: ExtResource("37_ji84r"),
+1: ExtResource("38_n806l"),
+2: ExtResource("39_qp3dn")
 })
 World = NodePath("../Map/World")
 Ground = NodePath("../Map/FlatGround")
@@ -294,10 +302,6 @@ Team = 3
 [node name="Sheep" parent="Map/World" unique_id=499778597 instance=ExtResource("17_es6iu")]
 position = Vector2(690, 192)
 Team = 1
-
-[node name="Lancer" parent="Map/World" unique_id=573939914 instance=ExtResource("17_h4gp5")]
-position = Vector2(802, 510)
-Team = 3
 
 [node name="Sheep2" parent="Map/World" unique_id=1263932040 instance=ExtResource("17_es6iu")]
 position = Vector2(690, 192)

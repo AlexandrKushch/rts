@@ -12,6 +12,7 @@ public partial class GlobalResources : Node
     [Export] public Dictionary<UnitTypeIds, PackedScene> UnitScenes { get; set; }
     [Export] public Dictionary<BuildingTypeIds, PackedScene> BuildingScenes { get; set; }
     [Export] public Dictionary<GoldSize, PackedScene> GoldScenes { get; set; }
+    [Export] public Dictionary<EffectType, PackedScene> EffectScenes { get; set; }
 
     [ExportGroup("Nodes")]
     [Export] public Node2D World;

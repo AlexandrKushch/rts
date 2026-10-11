@@ -354,20 +354,24 @@ hframes = 8
 script = ExtResource("8_dhetd")
 DuplicateThe = NodePath("../Sprite2D")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" index="2" unique_id=1839081757]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Visual" index="2" unique_id=1052037464]
+visible = false
+rect = Rect2(-32, -64, 64, 74)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" index="3" unique_id=1839081757]
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_5husr")
 
-[node name="ArrowDetector" parent="." index="7" unique_id=1175189121 instance=ExtResource("15_ih0oj")]
+[node name="ArrowDetector" parent="." index="8" unique_id=1175189121 instance=ExtResource("15_ih0oj")]
 visible = false
 
-[node name="EnemyDetector" parent="." index="8" unique_id=1958789508 instance=ExtResource("21_ih0oj")]
+[node name="EnemyDetector" parent="." index="9" unique_id=1958789508 instance=ExtResource("21_ih0oj")]
 visible = false
 
 [node name="CollisionShape2D" parent="EnemyDetector" index="0" unique_id=368633700]
 shape = SubResource("CircleShape2D_mpskv")
 
-[node name="StateMachine" type="Node" parent="." index="9" unique_id=1697989344 node_paths=PackedStringArray("Warrior")]
+[node name="StateMachine" type="Node" parent="." index="10" unique_id=1697989344 node_paths=PackedStringArray("Warrior")]
 script = ExtResource("15_sp1vb")
 Warrior = NodePath("..")
 
@@ -389,10 +393,10 @@ script = ExtResource("20_yuf4r")
 [node name="Guard" type="Node" parent="StateMachine" index="5" unique_id=807963043]
 script = ExtResource("21_7dhpc")
 
-[node name="AttackReloadTimer" type="Timer" parent="." index="10" unique_id=383657286]
+[node name="AttackReloadTimer" type="Timer" parent="." index="11" unique_id=383657286]
 one_shot = true
 
-[node name="GuardReloadTimer" type="Timer" parent="." index="11" unique_id=13804463]
+[node name="GuardReloadTimer" type="Timer" parent="." index="12" unique_id=13804463]
 wait_time = 10.0
 one_shot = true
 

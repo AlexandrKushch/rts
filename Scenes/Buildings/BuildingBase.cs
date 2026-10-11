@@ -15,7 +15,11 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
     public Vector2[] SpaceAroundPoints { get; private set; }
 
     public bool Built { get; private set; } = false;
-    public Sprite2D Visual { get; private set; }
+    public int BuildersCount { get; set; } = 0;
+    public Vector2? TargetToSpawnedUnits { get; set; }
+    public Node2D TargetObjectToSpawnedUnits { get; set; }
+
+    public BuildingBaseVisual Visual { get; private set; }
     public CollisionPolygon2D CollisionPolygon2D { get; private set; }
     public NavigationObstacle2D[] Obstacles { get; private set; }
 
@@ -29,7 +33,7 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
     {
         UiBuildingPopup = GetNode<UiBuildingPopup>(nameof(UiBuildingPopup));
         ProducingQueueManager = GetNode<ProducingQueueManager>(nameof(ProducingQueueManager));
-        Visual = GetNode<Sprite2D>(nameof(Visual));
+        Visual = GetNode<BuildingBaseVisual>(nameof(Visual));
         CollisionPolygon2D = GetNode<CollisionPolygon2D>(nameof(CollisionPolygon2D));
         Obstacles = GetChildren().Where(x => x is NavigationObstacle2D).Select(x => x as NavigationObstacle2D).ToArray();
 
@@ -50,30 +54,38 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
         }
 
         SpaceAroundPoints = GetSpaceAround();
-        
+
+        Visual.UpdateProgress(0.0f);
+        Visual.Deploy();
+
         _player = GlobalPlayers.Instance.Players[Team] as HumanPlayer;
         _player.SelectionController.SelectionChanged += OnSelectionChanged;
     }
 
     public void SpawnUnit(UnitTypeIds id)
     {
-        TryGetOpenSpaceAround(out var occupiedPoints, out var openSpacePoints);
+        TryGetOpenSpaceAround(out var _, out var openSpacePoints);
 
         var player = GlobalPlayers.Instance.Players[Team];
         var unit = player.GlobalResources.UnitScenes[id].Instantiate<UnitBase>();
         unit.GlobalPosition = openSpacePoints[0];
+        unit.Target = TargetObjectToSpawnedUnits?.GlobalPosition ?? TargetToSpawnedUnits;
+        unit.TargetObject = TargetObjectToSpawnedUnits;
         GlobalResources.Instance.World.AddChild(unit);
     }
 
     public bool TryBuildProgressOne()
     {
-        if (HP + 1 > MaxHp)
+        HP++;
+
+        Visual.UpdateProgress(Mathf.Remap(HP, 0, MaxHp, 0, 1));
+
+        if (HP == MaxHp)
         {
-            Built = true;
+            HaveBeenBuilt();
             return false;
         }
 
-        HP++;
         return true;
     }
 
@@ -115,8 +127,20 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
         QueueFree();
     }
 
+    private void HaveBeenBuilt()
+    {
+        Built = true;
+        Visual.Built();
+        OnSelectionChanged();
+    }
+
     private void OnSelectionChanged()
     {
+        if (!Built)
+        {
+            return;
+        }
+
         bool wasSelected = UiBuildingPopup.Selected;
         UiBuildingPopup.Selected = _player.SelectionController.Selections.Count == 1 && _player.SelectionController.Selections.Any(x => x.EffectedOn.GetInstanceId() == GetInstanceId());
 

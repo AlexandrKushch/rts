@@ -5,11 +5,12 @@ public partial class UnitVisualBase : Node2D
     protected const int TextureKeyId = 2;
 
     private ShaderMaterial SpriteShaderMaterial;
-    private PackedScene HealEffect;
 
     protected Sprite2D Sprite2D;
     protected OutlineVisual Outline;
     protected AnimationPlayer AnimationPlayer;
+    protected GpuParticles2D SpawnParticles;
+    protected VisibleOnScreenNotifier2D VisibleOnScreenNotifier2D;
 
     [Signal]
     public delegate void OnInteractAnimationFinishedEventHandler();
@@ -21,12 +22,27 @@ public partial class UnitVisualBase : Node2D
         Sprite2D.Material = SpriteShaderMaterial;
         Outline = GetNode<OutlineVisual>(nameof(Outline));
         AnimationPlayer = GetNode<AnimationPlayer>(nameof(AnimationPlayer));
-        HealEffect = ResourceLoader.Load<PackedScene>("uid://dq1onv83hufil");
+        SpawnParticles = GetParent().GetNode<GpuParticles2D>(nameof(SpawnParticles));
+        VisibleOnScreenNotifier2D = GetNode<VisibleOnScreenNotifier2D>(nameof(VisibleOnScreenNotifier2D));
     }
 
     public virtual void SetDirection(bool flipH)
     {
         Sprite2D.FlipH = flipH;
+    }
+
+    public virtual async void Spawn()
+    {
+        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+        if (VisibleOnScreenNotifier2D.IsOnScreen())
+        {
+            SpawnParticles.Emitting = true;
+            var tween = CreateTween();
+            float tweenDuration = 0.15f;
+            tween.TweenProperty(this, "scale", new Vector2(0.9f, 1.1f), tweenDuration * 0.5f);
+            tween.TweenProperty(this, "scale", new Vector2(1, 1), tweenDuration * 0.5f);
+        }
     }
 
     public virtual void UpdateMovement(Vector2 velocity, string animationLibraryName)
@@ -90,6 +106,6 @@ public partial class UnitVisualBase : Node2D
 
     public void Heal()
     {
-        AddChild(HealEffect.Instantiate());
+        AddChild(GlobalResources.Instance.EffectScenes[EffectType.Heal].Instantiate());
     }
 }

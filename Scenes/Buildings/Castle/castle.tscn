@@ -7,6 +7,15 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d1o4y"]
 size = Vector2(284, 180)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4g0xq"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(100, 50, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+scale_max = 2.0
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
 [node name="Castle" unique_id=548953940 instance=ExtResource("1_xfw4a")]
 Resource = ExtResource("2_4g0xq")
 
@@ -24,18 +33,25 @@ position = Vector2(0, -53)
 shape = SubResource("RectangleShape2D_d1o4y")
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="2" unique_id=82442801]
+visible = false
 position = Vector2(-111, -3)
 radius = 30.0
 
 [node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="3" unique_id=692338129]
+visible = false
 position = Vector2(111, -3)
 radius = 30.0
 
-[node name="Visual" parent="." index="4" unique_id=1679201315]
+[node name="Sprite2D" parent="Visual" parent_id_path=PackedInt32Array(1843020465) index="0" unique_id=1679201315]
 position = Vector2(0, -71)
 texture = ExtResource("2_n84d7")
 
+[node name="BuildProgressParticles" parent="Visual" parent_id_path=PackedInt32Array(1843020465) index="1" unique_id=2143245483]
+position = Vector2(0, -57)
+process_material = SubResource("ParticleProcessMaterial_4g0xq")
+
 [node name="CollisionPolygon2D" parent="." index="5" unique_id=168278068]
+visible = false
 polygon = PackedVector2Array(0, 25, -120, 25, -130, -25, 0, -25, 130, -25, 120, 25)
 
 [node name="UiBuildingPopup" parent="." index="6" unique_id=540837747]

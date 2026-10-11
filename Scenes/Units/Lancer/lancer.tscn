@@ -586,14 +586,18 @@ hframes = 8
 script = ExtResource("8_t8ae6")
 DuplicateThe = NodePath("../Sprite2D")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" index="2" unique_id=1960499430]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Visual" index="2" unique_id=1124816542]
+visible = false
+rect = Rect2(-32, -64, 64, 74)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" index="3" unique_id=1960499430]
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_dsmhd")
 
-[node name="EnemyDetector" parent="." index="7" unique_id=1958789508 instance=ExtResource("25_ir3on")]
+[node name="EnemyDetector" parent="." index="8" unique_id=1958789508 instance=ExtResource("25_ir3on")]
 visible = false
 
-[node name="StateMachine" type="Node" parent="." index="8" unique_id=2117356038 node_paths=PackedStringArray("Lancer")]
+[node name="StateMachine" type="Node" parent="." index="9" unique_id=2117356038 node_paths=PackedStringArray("Lancer")]
 script = ExtResource("21_ir3on")
 Lancer = NodePath("..")
 
@@ -603,10 +607,10 @@ script = ExtResource("21_721oo")
 [node name="MoveTo" type="Node" parent="StateMachine" index="1" unique_id=71935101]
 script = ExtResource("22_ir3on")
 
-[node name="ToIdleStateTimer" type="Timer" parent="." index="9" unique_id=1941924993]
+[node name="ToIdleStateTimer" type="Timer" parent="." index="10" unique_id=1941924993]
 one_shot = true
 
-[node name="UpdateAttackTargetTimer" type="Timer" parent="." index="10" unique_id=1522213301]
+[node name="UpdateAttackTargetTimer" type="Timer" parent="." index="11" unique_id=1522213301]
 
 [connection signal="animation_finished" from="Visual/AnimationPlayer" to="Visual" method="OnAnimationFinished"]
 

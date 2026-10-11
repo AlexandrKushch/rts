@@ -8,6 +8,7 @@ public partial class PawnBuildOrRepairState : PawnStateBase
 
         Pawn.Target = null;
         Pawn.PawnVisual.Connect(PawnVisual.SignalName.OnInteractAnimationFinished, Callable.From(Build));
+        Pawn.TargetBuilding.BuildersCount++;
 
         Build();
     }
@@ -17,6 +18,7 @@ public partial class PawnBuildOrRepairState : PawnStateBase
         base.Deactivate();
         PawnStateMachine.Pawn.PawnVisual.Stop();
         PawnStateMachine.Pawn.PawnVisual.Disconnect(PawnVisual.SignalName.OnInteractAnimationFinished, Callable.From(Build));
+        Pawn.TargetBuilding.BuildersCount--;
     }
 
     private void Build()
@@ -41,9 +43,14 @@ public partial class PawnBuildOrRepairState : PawnStateBase
                 }
                 else
                 {
-                    PawnStateMachine.Pawn.SetTarget(null, null);
                     PawnStateMachine.ChangeState(PawnStateIds.None);
+                    PawnStateMachine.Pawn.SetTarget(null, null);
                 }
+            }
+            else
+            {
+                PawnStateMachine.ChangeState(PawnStateIds.None);
+                PawnStateMachine.Pawn.SetTarget(null, null);
             }
             return;
         }

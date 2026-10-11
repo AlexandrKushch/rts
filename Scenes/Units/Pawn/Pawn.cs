@@ -22,10 +22,16 @@ public partial class Pawn : UnitHasVisualBase
     public override void _Ready()
     {
         base._Ready();
+        
+		if (Meta != null && !Setup)
+		{
+            return;
+        }
+        
         StateMachine = GetNode<PawnStateManagerBase>(nameof(StateMachine));
+		SetTarget(Target, TargetObject);
 
         PawnVisual = Visual as PawnVisual;
-        _updateMovementAnimation = (v, _) => { PawnVisual.UpdateMovement(v, string.Empty); };
     }
 
     public override void _Process(double delta)
@@ -102,15 +108,15 @@ public partial class Pawn : UnitHasVisualBase
 
         UpdateTargetObject();
 
-        if (!NavigationAgent2D.IsTargetReachable())
-        {
-            if (TargetBuilding == null && TargetResource == null)
-            {
-                GD.Print("NOT REACHABLE");
-                NavigationAgent2D.TargetPosition = GlobalPosition;
-                SetTarget(null, null);
-            }
-        }
+        // if (!NavigationAgent2D.IsTargetReachable())
+        // {
+        //     if (TargetBuilding == null && TargetResource == null)
+        //     {
+        //         GD.Print("NOT REACHABLE");
+        //         NavigationAgent2D.TargetPosition = GlobalPosition;
+        //         SetTarget(null, null);
+        //     }
+        // }
     }
 
     public void SetTargetResourceWithoutChangingState(ResourceBase resource)
@@ -126,6 +132,9 @@ public partial class Pawn : UnitHasVisualBase
     {
         if (IsInstanceValid(TargetObject))
         {
+            StateMachine.ChangeState(PawnStateIds.MoveTo);
+            StateMachine.SetProcess(true);
+
             if (TargetObject is ResourceBase resource)
             {
                 TargetResource = resource;
@@ -158,14 +167,11 @@ public partial class Pawn : UnitHasVisualBase
                     _updateMovementAnimation = (v, _) => { PawnVisual.UpdateMovement(v, "build"); };
                 }
             }
-
-            StateMachine.ChangeState(PawnStateIds.MoveTo);
-            StateMachine.SetProcess(true);
         }
         else
         {
-            TargetBuilding = null;
             StateMachine.ChangeState(PawnStateIds.None);
+            TargetBuilding = null;
 
             if (ResourceToCollectData == null
                 || ResourceToCollectData.CollectedCount == 0)

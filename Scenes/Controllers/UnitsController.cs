@@ -39,6 +39,7 @@ public partial class UnitsController : Node2D
         {
             TryPointCastSelectable(out SelectableComponent targetObject);
             var units = HumanPlayer.SelectionController.Selections.Select(x => x.EffectedOn as UnitBase).Where(x => x != null).ToHashSet();
+            var buildings = HumanPlayer.SelectionController.Selections.Select(x => x.EffectedOn as BuildingBase).Where(x => x != null).ToHashSet();
 
             int i = 0;
             foreach (var unit in units)
@@ -65,6 +66,12 @@ public partial class UnitsController : Node2D
                 }
 
                 i++;
+            }
+
+            foreach (var building in buildings)
+            {
+                building.TargetToSpawnedUnits = GetGlobalMousePosition();
+                building.TargetObjectToSpawnedUnits = targetObject?.EffectedOn;
             }
         }
     }

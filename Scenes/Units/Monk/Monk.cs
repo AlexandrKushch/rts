@@ -5,7 +5,6 @@ public partial class Monk : UnitHasVisualBase
     public const float RangeHealDistance = 100;
     public const float MaxDistanceToLeaveFromAttachedPoint = 200;
 
-    public Vector2 AttachedToPoint { get; set; }
     public MonkVisual MonkVisual { get; private set; }
     public UnitBase HealTarget { get; private set; }
     public MonkStateMachine StateMachine { get; private set; }
@@ -19,8 +18,6 @@ public partial class Monk : UnitHasVisualBase
 
         StateMachine = GetNode<MonkStateMachine>(nameof(StateMachine));
         AllyDetector = GetNode<AllyDetector>(nameof(AllyDetector));
-
-        AttachedToPoint = GlobalPosition;
 
         StateMachine.ChangeState(MonkStateIds.Idle);
     }
@@ -46,20 +43,6 @@ public partial class Monk : UnitHasVisualBase
     {
         HealTarget = unit;
         StateMachine.ChangeState(MonkStateIds.MoveToUnit);
-    }
-
-    public bool FarFromAttachedPoint()
-    {
-        if (Target.HasValue && Target.Value == AttachedToPoint)
-        {
-            return false;
-        }
-        return GlobalPosition.DistanceTo(AttachedToPoint) > MaxDistanceToLeaveFromAttachedPoint;
-    }
-
-    public bool ReachedAttachedPoint()
-    {
-        return GlobalPosition.DistanceTo(AttachedToPoint) < 10;
     }
 
     public bool HealTargetInRange()

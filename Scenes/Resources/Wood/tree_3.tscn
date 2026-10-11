@@ -4,10 +4,17 @@
 [ext_resource type="Texture2D" uid="uid://ddbc14a7tx5pu" path="res://Assets/Terrain/Resources/Wood/Trees/Tree3.png" id="2_es5jn"]
 [ext_resource type="Texture2D" uid="uid://cct07hhn0q4ac" path="res://Assets/Terrain/Resources/Wood/Trees/Stump 3.png" id="3_es5jn"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_es5jn"]
+size = Vector2(64, 168)
+
 [node name="Tree3" unique_id=1936357647 instance=ExtResource("1_c27bk")]
 
 [node name="BuildingSelectableComponent" parent="." index="2" unique_id=550510253]
 position = Vector2(0, -16)
+
+[node name="CollisionShape2D" parent="BuildingSelectableComponent" index="1" unique_id=1060696685]
+position = Vector2(0, -61)
+shape = SubResource("RectangleShape2D_es5jn")
 
 [node name="Visual" parent="." index="3" unique_id=1800092084]
 position = Vector2(0, 22)

@@ -255,14 +255,18 @@ hframes = 8
 script = ExtResource("8_bem2y")
 DuplicateThe = NodePath("../Sprite2D")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" index="2" unique_id=1700615018]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Visual" index="2" unique_id=1872493190]
+rect = Rect2(-32, -64, 64, 74)
+show_rect = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" index="3" unique_id=1700615018]
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_iuv1g")
 
-[node name="ShootPoint" type="Marker2D" parent="." index="7" unique_id=553381415]
+[node name="ShootPoint" type="Marker2D" parent="." index="8" unique_id=553381415]
 position = Vector2(33, -49)
 
-[node name="StateMachine" type="Node" parent="." index="8" unique_id=364302710 node_paths=PackedStringArray("Archer")]
+[node name="StateMachine" type="Node" parent="." index="9" unique_id=364302710 node_paths=PackedStringArray("Archer")]
 script = ExtResource("11_cjf6y")
 Archer = NodePath("..")
 
@@ -278,7 +282,7 @@ script = ExtResource("14_ki8vg")
 [node name="MoveToEnemy" type="Node" parent="StateMachine" index="3" unique_id=234535291]
 script = ExtResource("16_vcr0m")
 
-[node name="EnemyDetector" parent="." index="9" unique_id=1958789508 instance=ExtResource("13_syvfn")]
+[node name="EnemyDetector" parent="." index="10" unique_id=1958789508 instance=ExtResource("13_syvfn")]
 visible = false
 
 [connection signal="animation_finished" from="Visual/AnimationPlayer" to="Visual" method="OnAnimationFinished"]

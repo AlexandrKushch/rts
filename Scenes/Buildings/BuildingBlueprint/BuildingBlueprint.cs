@@ -19,7 +19,7 @@ public partial class BuildingBlueprint : Node2D
             Building = itemScene.Instantiate<BuildingBase>();
             Building.Resource = Resource;
             AddChild(Building);
-            Building.Visual.Texture = Resource.Icon;
+            Building.Visual.Sprite2D.Texture = Resource.Icon;
             SetAsBlueprint();
         }
     }

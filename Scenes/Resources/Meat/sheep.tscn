@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://c27dwm3x8mii4" path="res://Scenes/Resources/Meat/SheepStateMachine/SheepStateMachine.cs" id="8_fbmh2"]
 [ext_resource type="Script" uid="uid://cs48ychew8beq" path="res://Scenes/Resources/Meat/SheepStateMachine/SheepIdleState.cs" id="9_00pu4"]
 [ext_resource type="Script" uid="uid://7mt0wwcx4e1i" path="res://Scenes/Resources/Meat/SheepStateMachine/SheepMoveState.cs" id="10_104yu"]
+[ext_resource type="Texture2D" uid="uid://rspxfu0a4470" path="res://Assets/Particle FX/Dust_01.png" id="11_ckux8"]
 [ext_resource type="Script" uid="uid://dl5ep55d2svw1" path="res://Scenes/Resources/Meat/SheepEatState.cs" id="12_xv0un"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q3rmq"]
@@ -180,6 +181,20 @@ _data = {
 &"Run": SubResource("Animation_8louv")
 }
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jdeet"]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ynp17"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(8, 2, 0)
+emission_shape = 1
+emission_sphere_radius = 5.0
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
 [node name="Sheep" type="CharacterBody2D" unique_id=499778597]
 collision_layer = 0
 collision_mask = 0
@@ -234,9 +249,25 @@ hframes = 8
 script = ExtResource("7_ckux8")
 DuplicateThe = NodePath("../Sprite2D")
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Visual" unique_id=738961668]
+visible = false
+rect = Rect2(-23, -26, 46, 47)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" unique_id=1262780307]
 libraries/ = SubResource("AnimationLibrary_8louv")
 autoplay = &"Idle"
+
+[node name="SpawnParticles" type="GPUParticles2D" parent="." unique_id=668743337]
+material = SubResource("CanvasItemMaterial_jdeet")
+emitting = false
+amount = 3
+texture = ExtResource("11_ckux8")
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.8
+use_fixed_seed = true
+seed = 2447860154
+process_material = SubResource("ParticleProcessMaterial_ynp17")
 
 [node name="Resource" type="Node2D" parent="." unique_id=1411045899 node_paths=PackedStringArray("AttachedTo", "Visual")]
 script = ExtResource("7_c3se6")

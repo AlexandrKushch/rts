@@ -8,7 +8,19 @@ public partial class UnitBase : CharacterBody2D, IDestroyableWithHp
 	public virtual float MovementSpeed { get; protected set; } = 100f;
 	public bool Dashed { get; set; } = false;
 
-	public NavigationAgent2D NavigationAgent2D { get; private set; }
+	private NavigationAgent2D _navigation;
+	public NavigationAgent2D NavigationAgent2D
+	{
+		get
+		{
+			if (!IsInstanceValid(_navigation))
+			{
+				_navigation = GetNode<NavigationAgent2D>(nameof(NavigationAgent2D));
+			}
+
+			return _navigation;
+		}
+	}
 
 	public Vector2? Target { get; set; }
 
@@ -30,6 +42,8 @@ public partial class UnitBase : CharacterBody2D, IDestroyableWithHp
 			var unit = GlobalPlayers.Instance.Players[Team].GlobalResources.UnitScenes[Meta.Id].Instantiate<UnitBase>();
 			unit.GlobalPosition = GlobalPosition;
 			unit.Setup = true;
+			unit.Target = Target ?? GlobalPosition;
+			unit.TargetObject = TargetObject;
 			GetParent().CallDeferred("add_child", unit);
 			SetPhysicsProcess(false);
 			QueueFree();
@@ -41,8 +55,7 @@ public partial class UnitBase : CharacterBody2D, IDestroyableWithHp
 			HP = Meta.MaxHP;
 		}
 		
-		NavigationAgent2D = GetNode<NavigationAgent2D>(nameof(NavigationAgent2D));
-		Target = GlobalPosition;
+		Target = Target ?? GlobalPosition;
 		UpdatePath();
 
 		_deadScene = ResourceLoader.Load<PackedScene>("uid://d0k60hnpsewgk");
