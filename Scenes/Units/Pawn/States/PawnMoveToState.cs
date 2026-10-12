@@ -11,7 +11,12 @@ public partial class PawnMoveToState : PawnStateBase
         base.Activate();
 
         _defaultTargetDesiredDistance = PawnStateMachine.Pawn.NavigationAgent2D.TargetDesiredDistance;
-        PawnStateMachine.Pawn.NavigationAgent2D.TargetDesiredDistance = PawnStateMachine.Pawn.TargetObject is ResourceBase ? ResourceDesiredDistance : BuildingDesiredDistance;
+        PawnStateMachine.Pawn.NavigationAgent2D.TargetDesiredDistance =
+            PawnStateMachine.Pawn.TargetObject is ResourceBase
+                ? ResourceDesiredDistance
+                : PawnStateMachine.Pawn.TargetObject is BuildingBase
+                    ? BuildingDesiredDistance
+                    : 10;
     }
 
     public override void Deactivate()
@@ -59,6 +64,10 @@ public partial class PawnMoveToState : PawnStateBase
                         PawnStateMachine.ChangeState(PawnStateIds.None);
                     }
                 }
+            }
+            else
+            {
+                Pawn.Target = null;
             }
         }
     }

@@ -9,4 +9,5 @@ Type = 1
 DefaultValue = 10000
 Name = "wood"
 Icon = ExtResource("1_fcucr")
+CollisionMask = 6
 metadata/_custom_type_script = "uid://caks0w8rk10ox"

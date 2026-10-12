@@ -71,7 +71,7 @@ public partial class UnitsController : Node2D
             foreach (var building in buildings)
             {
                 building.TargetToSpawnedUnits = GetGlobalMousePosition();
-                building.TargetObjectToSpawnedUnits = targetObject?.EffectedOn;
+                building.TargetObjectToSpawnedUnits = targetObject?.EffectedOn is ResourceBase ? targetObject?.EffectedOn : null;
             }
         }
     }

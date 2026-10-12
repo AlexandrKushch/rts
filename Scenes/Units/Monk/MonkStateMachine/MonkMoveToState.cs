@@ -5,6 +5,7 @@ public partial class MonkMoveToState : MonkStateBase
         if (Monk.NavigationAgent2D.IsNavigationFinished())
         {
             ChangeState(MonkStateIds.Idle);
+            Monk.Target = null;
         }
     }
 }

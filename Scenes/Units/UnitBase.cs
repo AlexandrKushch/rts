@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 
 public partial class UnitBase : CharacterBody2D, IDestroyableWithHp
@@ -34,6 +35,15 @@ public partial class UnitBase : CharacterBody2D, IDestroyableWithHp
 
 	public bool Setup { get; set; } = false;
 	public int HP { get; set; }
+	
+    protected static Dictionary<string, uint> ObstacleCollisionMasks = new Dictionary<string, uint>
+    {
+        [nameof(UnitBase)] = 2,
+        [nameof(BuildingBase)] = 16,
+        [nameof(TreeBase)] = 32,
+        [nameof(GoldBase)] = 64,
+        [nameof(MeatResourceBase)] = 128
+    };
 
 	public override void _Ready()
 	{
@@ -54,9 +64,6 @@ public partial class UnitBase : CharacterBody2D, IDestroyableWithHp
 		{
 			HP = Meta.MaxHP;
 		}
-		
-		Target = Target ?? GlobalPosition;
-		UpdatePath();
 
 		_deadScene = ResourceLoader.Load<PackedScene>("uid://d0k60hnpsewgk");
 	}
@@ -138,4 +145,57 @@ public partial class UnitBase : CharacterBody2D, IDestroyableWithHp
 		GetParent().AddChild(dead);
 		QueueFree();
 	}
+	
+    protected bool TryGetClosestTarget(Vector2 to, Node2D target, uint collissionMask, out Node2D collider, out Vector2? collisionPoint)
+    {
+        collider = null;
+        collisionPoint = null;
+
+        var spaceState = GetWorld2D().DirectSpaceState;
+        var query = new PhysicsRayQueryParameters2D
+        {
+            From = GlobalPosition,
+            To = to,
+            CollideWithAreas = false,
+            CollideWithBodies = true,
+            CollisionMask = collissionMask
+        };
+
+        var excluded = new Godot.Collections.Array<Rid>();
+
+        while (true)
+        {
+            var result = spaceState.IntersectRay(query);
+
+            if (result.Count == 0)
+                break;
+
+            collider = result.ContainsKey("collider") ? result["collider"].As<Node2D>() : null;
+            collisionPoint = result.ContainsKey("position") ? result["position"].As<Vector2>() : null;
+
+            if (collider is BuildingBase building
+                && building.GetInstanceId() != target.GetInstanceId())
+            {
+                excluded.Add(building.GetRid());
+                query.Exclude = excluded;
+                continue;
+            }
+            else if (collider is UnitBase unit
+                && !unit.GlobalPosition.IsEqualApprox(to, 1f))
+            {
+                excluded.Add(unit.GetRid());
+                query.Exclude = excluded;
+                continue;                
+            }
+
+            if (collider != null && collisionPoint != null)
+            {
+                return true;
+            }
+
+            break;
+        }
+
+        return false;
+    }
 }

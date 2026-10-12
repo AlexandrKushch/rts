@@ -1,5 +1,3 @@
-using Godot;
-
 public partial class LancerMoveToState : LancerStateBase
 {
     public override void Activate()
@@ -27,6 +25,7 @@ public partial class LancerMoveToState : LancerStateBase
             && Lancer.ToIdleStateTimer.TimeLeft == 0)
         {
             Lancer.ToIdleStateTimer.Start();
+            Lancer.Target = null;
         }
         else if (!Lancer.NavigationAgent2D.IsNavigationFinished()
             && Lancer.ToIdleStateTimer.TimeLeft > 0)

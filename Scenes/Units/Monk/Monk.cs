@@ -13,13 +13,36 @@ public partial class Monk : UnitHasVisualBase
     public override void _Ready()
     {
         base._Ready();
+        
+		if (Meta != null && !Setup)
+		{
+            return;
+        }
 
         MonkVisual = Visual as MonkVisual;
 
         StateMachine = GetNode<MonkStateMachine>(nameof(StateMachine));
         AllyDetector = GetNode<AllyDetector>(nameof(AllyDetector));
 
-        StateMachine.ChangeState(MonkStateIds.Idle);
+        SetTarget(Target, TargetObject);
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        base._PhysicsProcess(delta);
+        
+		if (StateMachine.GetCurrentStateType() == MonkStateIds.MoveTo)
+        {
+            Node2D target;
+            Vector2? point;
+
+            if (Target != null
+                && TryGetClosestTarget(Target.Value, null, ObstacleCollisionMasks[nameof(UnitBase)], out target, out point))
+            {
+                point += point.Value.DirectionTo(GlobalPosition) * 25;
+                SetTarget(point, null);
+            }
+        }
     }
 
     public override void SetTarget(Vector2? targetPosition, Node2D targetObject)

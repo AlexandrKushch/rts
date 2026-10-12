@@ -14,7 +14,6 @@ public partial class UnitHasVisualBase : UnitBase
         UnitSelectableComponent = GetNode<SelectableComponent>(nameof(UnitSelectableComponent));
         Visual = GetNode<UnitVisualBase>(nameof(Visual));
         Visual.Spawn();
-        // Visual.CallDeferred(nameof(Visual.Spawn));
     }
 
     public override void _Process(double delta)

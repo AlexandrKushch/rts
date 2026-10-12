@@ -47,25 +47,30 @@ public partial class Pawn : UnitHasVisualBase
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
+        if (StateMachine.GetCurrentStateType() == PawnStateIds.MoveTo)
+        {
+            Node2D target;
+            Vector2? point;
 
-        // if (StateMachine.GetCurrentStateType() == PawnStateIds.MoveTo)
-        // {
-        //     Node2D target;
-        //     Vector2? point;
-
-        //     if (IsInstanceValid(TargetResource)
-        //         && TryGetClosestTarget(TargetResource.GlobalPosition, out target, out point)
-        //         && target is ResourceBase resource)
-        //     {
-        //         SetTarget(point, resource);
-        //     }
-        //     else if (IsInstanceValid(TargetBuilding)
-        //         && TryGetClosestTarget(TargetBuilding.GlobalPosition, out target, out point)
-        //         && target is BuildingBase building)
-        //     {
-        //         SetTarget(point, building);
-        //     }
-        // }
+            if (IsInstanceValid(TargetResource)
+                && TryGetClosestTarget(TargetResource.GlobalPosition, TargetResource, ObstacleCollisionMasks[TargetResource.GetType().ToString()], out target, out point)
+                && target is ResourceBase resource)
+            {
+                SetTarget(point, resource);
+            }
+            else if (IsInstanceValid(TargetBuilding)
+                && TryGetClosestTarget(TargetBuilding.GlobalPosition, TargetBuilding, ObstacleCollisionMasks[nameof(BuildingBase)], out target, out point)
+                && target is BuildingBase building)
+            {
+                SetTarget(point, building);
+            }
+            else if (Target != null
+                && TryGetClosestTarget(Target.Value, null, ObstacleCollisionMasks[nameof(UnitBase)], out target, out point))
+            {
+                point += point.Value.DirectionTo(GlobalPosition) * 25;
+                SetTarget(point, null);
+            }
+        }
     }
 
     public BuildingBase GetClosestResourceStorageBuilding()
@@ -97,14 +102,7 @@ public partial class Pawn : UnitHasVisualBase
 
     public override void SetTarget(Vector2? targetPosition, Node2D targetObject)
     {
-        if (IsInstanceValid(targetObject))
-        {
-            base.SetTarget(targetObject.GlobalPosition, targetObject);
-        }
-        else
-        {
-            base.SetTarget(targetPosition, targetObject);
-        }
+        base.SetTarget(targetPosition, targetObject);
 
         UpdateTargetObject();
 
@@ -170,7 +168,7 @@ public partial class Pawn : UnitHasVisualBase
         }
         else
         {
-            StateMachine.ChangeState(PawnStateIds.None);
+            StateMachine.ChangeState(PawnStateIds.MoveTo);
             TargetBuilding = null;
 
             if (ResourceToCollectData == null
@@ -208,56 +206,6 @@ public partial class Pawn : UnitHasVisualBase
 
         GlobalPlayers.Instance.Players[Team].ResourceController.Collect(ResourceToCollectData.ResourceType.Type, ResourceToCollectData.CollectedCount);
         ResourceToCollectData.CollectedCount = 0;
-    }
-
-    // private void SetTargetToNode()
-    // {
-    //     Node2D target;
-    //     Vector2? point;
-
-    //     if (IsInstanceValid(TargetResource)
-    //         && TryGetClosestTarget(TargetResource.GlobalPosition, out target, out point)
-    //         && target is ResourceBase resource)
-    //     {
-    //         base.SetTarget(point, resource);
-    //     }
-    //     else if (IsInstanceValid(TargetBuilding)
-    //         && TryGetClosestTarget(TargetBuilding.GlobalPosition, out target, out point)
-    //         && target is BuildingBase building)
-    //     {
-    //         base.SetTarget(point, building);
-    //     }
-    // }
-
-    private bool TryGetClosestTarget(Vector2 to, out Node2D collider, out Vector2? collisionPoint)
-    {
-        collider = null;
-        collisionPoint = null;
-
-        var spaceState = GetWorld2D().DirectSpaceState;
-        var query = new PhysicsRayQueryParameters2D
-        {
-            From = GlobalPosition,
-            To = to,
-            CollideWithAreas = false,
-            CollideWithBodies = true,
-            CollisionMask = 1
-        };
-
-        var result = spaceState.IntersectRay(query);
-
-        if (result != null)
-        {
-            collider = result.ContainsKey("collider") ? result["collider"].As<Node2D>() : null;
-            collisionPoint = result.ContainsKey("position") ? result["position"].As<Vector2>() : null;
-
-            if (collider != null && collisionPoint != null)
-            {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     private IEnumerable<ResourceBase> QueryResource()

@@ -18,6 +18,11 @@ public partial class Lancer : UnitHasVisualBase
     public override void _Ready()
     {
         base._Ready();
+        
+		if (Meta != null && !Setup)
+		{
+            return;
+        }
 
         LancerVisual = Visual as LancerVisual;
 
@@ -26,8 +31,8 @@ public partial class Lancer : UnitHasVisualBase
         ToIdleStateTimer = GetNode<Timer>(nameof(ToIdleStateTimer));
         UpdateAttackTargetTimer = GetNode<Timer>(nameof(UpdateAttackTargetTimer));
 
-        AttachedToPoint = GlobalPosition;
-        StateMachine.ChangeState(LancerStateIds.Idle);
+        AttachedToPoint = Target ?? GlobalPosition;
+        SetTarget(Target, TargetObject);
 
         LancerVisual.OnAttackAnimationFinished += () => { IsAttacking = false; };
     }
@@ -35,6 +40,24 @@ public partial class Lancer : UnitHasVisualBase
     public override void _Process(double delta)
     {
         Visual.UpdateOutlineVisible(UnitOverlapedDetector.GetOverlappingAreas().Count > 0);
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        base._PhysicsProcess(delta);
+        
+		if (StateMachine.GetCurrentStateType() == LancerStateIds.MoveTo)
+        {
+            Node2D target;
+            Vector2? point;
+
+            if (Target != null
+                && TryGetClosestTarget(Target.Value, null, ObstacleCollisionMasks[nameof(UnitBase)], out target, out point))
+            {
+                point += point.Value.DirectionTo(GlobalPosition) * 25;
+                SetTarget(point, null);
+            }
+        }
     }
 
     public override void SetTarget(Vector2? targetPosition, Node2D targetObject)

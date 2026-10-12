@@ -7,6 +7,7 @@ public partial class ArcherMoveToState : ArcherStateBase
         if (ArcherStateMachine.Archer.NavigationAgent2D.IsNavigationFinished())
         {
             ArcherStateMachine.ChangeState(ArcherStateIds.Idle);
+            ArcherStateMachine.Archer.Target = null;
         }
     }
 }

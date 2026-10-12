@@ -76,6 +76,10 @@ mmb={
 
 2d_physics/layer_1="world"
 2d_physics/layer_2="units"
+2d_physics/layer_5="buildings"
+2d_physics/layer_6="trees"
+2d_physics/layer_7="golds"
+2d_physics/layer_8="sheeps"
 2d_physics/layer_9="hitbox"
 avoidance/layer_1="world"
 avoidance/layer_2="units"

@@ -31,6 +31,11 @@ public partial class Warrior : UnitHasVisualBase
     public override void _Ready()
     {
         base._Ready();
+        
+		if (Meta != null && !Setup)
+		{
+            return;
+        }
 
         WarriorVisual = Visual as WarriorVisual;
         ArrowDetector = GetNode<ArrowDetector>(nameof(ArrowDetector));
@@ -39,8 +44,8 @@ public partial class Warrior : UnitHasVisualBase
         AttackReloadTimer = GetNode<Timer>(nameof(AttackReloadTimer));
         GuardReloadTimer = GetNode<Timer>(nameof(GuardReloadTimer));
 
-        AttachedToPoint = GlobalPosition;
-        StateMachine.ChangeState(WarriorStateIds.Idle);
+        AttachedToPoint = Target ?? GlobalPosition;
+        SetTarget(Target, TargetObject);
 
         AttackReloadTimer.Timeout += () => { CanAttack = true; };
         GuardReloadTimer.Timeout += () => { GD.Print("TIMEOUT"); GuardingCount = MaxGuardingCount; };
@@ -89,6 +94,19 @@ public partial class Warrior : UnitHasVisualBase
         {
             CanCharge = false;
             _chargeTimer = 0.0f;
+        }
+        
+		if (StateMachine.GetCurrentStateType() == WarriorStateIds.MoveTo)
+        {
+            Node2D target;
+            Vector2? point;
+
+            if (Target != null
+                && TryGetClosestTarget(Target.Value, null, ObstacleCollisionMasks[nameof(UnitBase)], out target, out point))
+            {
+                point += point.Value.DirectionTo(GlobalPosition) * 25;
+                SetTarget(point, null);
+            }
         }
     }
 
@@ -153,8 +171,8 @@ public partial class Warrior : UnitHasVisualBase
     }
 
     public bool ReachedAttachedPoint()
-    {
-        return GlobalPosition.DistanceTo(AttachedToPoint) < 10;
+    {        
+        return GlobalPosition.IsEqualApprox(AttachedToPoint, 50);
     }
 
     public void HitAttackTarget()

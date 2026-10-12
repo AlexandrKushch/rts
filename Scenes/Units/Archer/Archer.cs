@@ -22,13 +22,18 @@ public partial class Archer : UnitHasVisualBase
     public override void _Ready()
     {
         base._Ready();
+        
+		if (Meta != null && !Setup)
+		{
+            return;
+        }
 
         ArcherVisual = Visual as ArcherVisual;
         StateMachine = GetNode<ArcherStateMachine>(nameof(StateMachine));
         EnemyDetector = GetNode<EnemyDetector>(nameof(EnemyDetector));
         ShootPoint = GetNode<Marker2D>(nameof(ShootPoint));
 
-        StateMachine.ChangeState(ArcherStateIds.Idle);
+        SetTarget(Target, TargetObject);
 
         Radius = (EnemyDetector.GetNode<CollisionShape2D>(nameof(CollisionShape2D)).Shape as CircleShape2D).Radius;
     }
@@ -47,13 +52,27 @@ public partial class Archer : UnitHasVisualBase
                 _attackReloadTimer = 0.0f;
             }
         }
+        
+		if (StateMachine.GetCurrentStateType() == ArcherStateIds.MoveTo)
+        {
+            Node2D target;
+            Vector2? point;
+
+            if (Target != null
+                && TryGetClosestTarget(Target.Value, null, ObstacleCollisionMasks[nameof(UnitBase)], out target, out point))
+            {
+                point += point.Value.DirectionTo(GlobalPosition) * 25;
+                SetTarget(point, null);
+            }
+        }
     }
 
     public override void SetTarget(Vector2? targetPosition, Node2D targetObject)
     {
         var changeToState = ArcherStateIds.MoveTo;
 
-        if (targetObject is UnitBase)
+        if (targetObject is UnitBase unit
+            && unit.Team != Team)
         {
             changeToState = ArcherStateIds.MoveToEnemy;
         }
