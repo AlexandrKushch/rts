@@ -16,6 +16,7 @@ public partial class MonkHealState : MonkStateBase
     {
         base.Deactivate();
         Monk.MonkVisual.Stop();
+        _accumulatedPower = 0;
     }
 
     public override void _Process(double delta)
@@ -49,7 +50,10 @@ public partial class MonkHealState : MonkStateBase
 
     private void OnHealEndAnimationKeyReached()
     {
-        Monk.HealTheTarget();
+        foreach (var unit in Monk.AllyDetector.Items)
+        {
+            Monk.HealTheUnit(unit);
+        }
         ChangeState(MonkStateIds.Idle);
     }
 }

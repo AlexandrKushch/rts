@@ -7,7 +7,7 @@ public partial class MonkIdleState : MonkStateBase
     {
         var toHealUnit = Monk.AllyDetector.Items
             .Where(x => x.HP < x.Meta.MaxHP)
-            .MinBy(x => x.GlobalPosition.DirectionTo(Monk.GlobalPosition));
+            ?.MinBy(x => x.GlobalPosition.DistanceTo(Monk.GlobalPosition));
 
         if (toHealUnit != null)
         {

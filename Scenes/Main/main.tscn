@@ -345,3 +345,23 @@ CollisionShapes = [NodePath("../Tree12/CollisionShape2D"), NodePath("../Tree12/B
 [node name="Tree16" parent="Map/World" unique_id=795485057 node_paths=PackedStringArray("CollisionShapes") instance=ExtResource("10_6t3k2")]
 position = Vector2(563, 170)
 CollisionShapes = [NodePath("../Tree12/CollisionShape2D"), NodePath("../Tree12/BuildingSelectableComponent/CollisionShape2D")]
+
+[node name="Monk" parent="Map/World" unique_id=1102525714 instance=ExtResource("18_gw1lt")]
+position = Vector2(1008, 414)
+Team = 4
+
+[node name="Monk2" parent="Map/World" unique_id=1706751527 instance=ExtResource("18_gw1lt")]
+position = Vector2(917, 448)
+Team = 4
+
+[node name="Monk3" parent="Map/World" unique_id=1494129591 instance=ExtResource("18_gw1lt")]
+position = Vector2(990, 475)
+Team = 4
+
+[node name="Monk4" parent="Map/World" unique_id=210399117 instance=ExtResource("18_gw1lt")]
+position = Vector2(1058, 458)
+Team = 4
+
+[node name="Monk5" parent="Map/World" unique_id=1128402582 instance=ExtResource("18_gw1lt")]
+position = Vector2(958, 412)
+Team = 4

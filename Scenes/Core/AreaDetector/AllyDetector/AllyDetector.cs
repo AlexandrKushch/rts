@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class AllyDetector : AreaDetector<UnitBase>
 {
@@ -9,7 +10,7 @@ public partial class AllyDetector : AreaDetector<UnitBase>
     public override void _Ready()
     {
         base._Ready();
-        
+
         _attachedToUnit = GetParent<UnitBase>();
 
         if (_attachedToUnit == null)
@@ -19,7 +20,14 @@ public partial class AllyDetector : AreaDetector<UnitBase>
 
         _team = _attachedToUnit.Team;
     }
-    
+
+    public override void _Process(double delta)
+    {
+        Items = Items
+            .Where(unit => unit.Team == _team && unit.GetInstanceId() != _attachedToUnit.GetInstanceId())
+            .ToHashSet();
+    }
+
     public override void OnBodyEntered(Node2D body)
     {
         if (body is UnitBase unit
@@ -29,7 +37,7 @@ public partial class AllyDetector : AreaDetector<UnitBase>
             Items.Add(unit);
         }
     }
-    
+
     public override void OnBodyExited(Node2D body)
     {
         if (body is UnitBase unit

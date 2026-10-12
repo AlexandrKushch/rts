@@ -3,7 +3,6 @@ using Godot;
 public partial class Monk : UnitHasVisualBase
 {
     public const float RangeHealDistance = 100;
-    public const float MaxDistanceToLeaveFromAttachedPoint = 200;
 
     public MonkVisual MonkVisual { get; private set; }
     public UnitBase HealTarget { get; private set; }
@@ -81,8 +80,8 @@ public partial class Monk : UnitHasVisualBase
         return distanceToAttackTarget < RangeHealDistance;
     }
 
-    public void HealTheTarget()
+    public void HealTheUnit(UnitBase unit)
     {
-        HealTarget.Heal(1);   
+        unit.Heal(1);   
     }
 }
