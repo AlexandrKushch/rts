@@ -43,6 +43,30 @@ public partial class CameraController : Node2D
 		}
 	}
 
+	// public void Shake()
+	// {
+	// 	var tween = CreateTween().SetParallel();
+
+	// 	var tweenZoom = CreateTween().SetTrans(Tween.TransitionType.Bounce);
+	// 	var originalZoom = Camera.Zoom;
+	// 	float tweenZoomDuration = 0.1f;
+	// 	float zoomShakePower = Mathf.Remap(_zoom, 0, 1, 0.05f, 0.3f);
+	// 	tweenZoom.TweenProperty(Camera, "zoom", originalZoom - Vector2.One * zoomShakePower, tweenZoomDuration * 0.5f);
+	// 	tweenZoom.TweenProperty(Camera, "zoom", originalZoom, tweenZoomDuration * 0.5f);
+
+	// 	var originalPosition = Camera.GlobalPosition;
+	// 	var tweenPosition = CreateTween();
+	// 	float tweenPositionDuration = 0.7f;
+	// 	float positionShakePower = Mathf.Remap(_zoom, 0, 1, 10, 20f);
+
+	// 	tweenPosition.TweenProperty(Camera, "position", originalPosition + Vector2.One * positionShakePower, tweenPositionDuration * 0.3f);
+	// 	tweenPosition.TweenProperty(Camera, "position", originalPosition - Vector2.One * positionShakePower, tweenPositionDuration * 0.3f);
+	// 	tweenPosition.TweenProperty(Camera, "position", originalPosition, tweenPositionDuration * 0.3f);
+
+	// 	tween.TweenSubtween(tweenZoom);
+	// 	tween.TweenSubtween(tweenPosition);
+	// }
+
 	private void ProcessDrag(float delta)
 	{
 		if (Input.IsActionJustPressed(InputMapGlobal.Mmb))

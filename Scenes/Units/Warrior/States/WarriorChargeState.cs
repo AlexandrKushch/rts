@@ -6,7 +6,6 @@ public partial class WarriorChargeState : WarriorStateBase
     {
         base.Activate();
 
-        GD.Print("CHARGE");
         WarriorStateMachine.Warrior.NavigationAgent2D.TargetPosition = WarriorStateMachine.Warrior.GlobalPosition;
 		var direction = WarriorStateMachine.Warrior.GlobalPosition.DirectionTo(WarriorStateMachine.Warrior.AttackTarget.GlobalPosition);
 		WarriorStateMachine.Warrior.Velocity += direction * 2000;
@@ -18,10 +17,17 @@ public partial class WarriorChargeState : WarriorStateBase
     {
         var collision = WarriorStateMachine.Warrior.GetLastSlideCollision();
 
-        if (collision != null
-            && collision.GetCollider() is UnitBase)
+        if (collision != null)
         {
-            WarriorStateMachine.Warrior.HitWithChargeTarget();
+            if (collision.GetCollider() is UnitBase)
+            {
+                WarriorStateMachine.Warrior.HitWithChargeTarget();
+            }
+            else
+            {
+                WarriorStateMachine.Warrior.HitAttackTarget();
+            }
+            
             WarriorStateMachine.ChangeState(WarriorStateIds.MoveToEnemy);
         }
     }

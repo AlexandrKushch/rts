@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cpgcarva0gl8n"]
+
+[ext_resource type="Texture2D" uid="uid://x53mbdyaty4t" path="res://Assets/Particle FX/Fire_03.png" id="1_q7xo2"]
+[ext_resource type="Material" uid="uid://djow8s61ackgj" path="res://Scenes/Effects/Fire/m_particle.tres" id="2_5a0wq"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wjd3s"]
+particles_animation = true
+particles_anim_h_frames = 12
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[node name="Fire_03" type="Node2D" unique_id=1708253936]
+
+[node name="FireParticles" type="GPUParticles2D" parent="." unique_id=1083468489]
+material = SubResource("CanvasItemMaterial_wjd3s")
+amount = 3
+texture = ExtResource("1_q7xo2")
+explosiveness = 0.1
+process_material = ExtResource("2_5a0wq")

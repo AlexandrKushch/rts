@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Godot;
 
-public partial class UnitBase : CharacterBody2D, IDestroyableWithHp
+public partial class UnitBase : CharacterBody2D, IDestroyableWithHp, IHasTeam
 {
 	private PackedScene _deadScene;
 
@@ -14,7 +14,7 @@ public partial class UnitBase : CharacterBody2D, IDestroyableWithHp
 	{
 		get
 		{
-			if (!IsInstanceValid(_navigation))
+			if (!IsInstanceValid(_navigation) && IsInstanceValid(this))
 			{
 				_navigation = GetNode<NavigationAgent2D>(nameof(NavigationAgent2D));
 			}
@@ -173,7 +173,8 @@ public partial class UnitBase : CharacterBody2D, IDestroyableWithHp
             collider = result.ContainsKey("collider") ? result["collider"].As<Node2D>() : null;
             collisionPoint = result.ContainsKey("position") ? result["position"].As<Vector2>() : null;
 
-            if (collider is BuildingBase building
+            if (target != null
+				&& collider is BuildingBase building
                 && building.GetInstanceId() != target.GetInstanceId())
             {
                 excluded.Add(building.GetRid());

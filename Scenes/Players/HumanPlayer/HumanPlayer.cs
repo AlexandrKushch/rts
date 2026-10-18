@@ -27,4 +27,18 @@ public partial class HumanPlayer : PlayerBase
             return _customMouseCursors;
         }
     }
+    
+    private CameraController _cameraController;
+    public CameraController CameraController
+    {
+        get
+        {
+            if (_cameraController == null)
+            {
+                _cameraController = GetNode<CameraController>(nameof(CameraController));
+            }
+
+            return _cameraController;
+        }
+    }
 }

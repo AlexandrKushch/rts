@@ -42,6 +42,7 @@ public partial class BuildingBlueprint : Node2D
     {
         Building.SetProcess(false);
         Building.CollisionPolygon2D.Disabled = true;
+        Building.HurtBox.CollisionShape2D.Disabled = true;
 
         foreach (var obstacle in Building.Obstacles)
         {

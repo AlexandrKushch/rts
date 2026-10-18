@@ -34,7 +34,7 @@ public partial class ArcherAttackState : ArcherStateBase
 
         if (ArcherStateMachine.Archer.GlobalPosition
             .DistanceTo(ArcherStateMachine.Archer.AttackTarget.GlobalPosition)
-            > ArcherStateMachine.Archer.Radius + ArcherStateMachine.Archer.Radius / 1)
+            > ArcherStateMachine.Archer.Radius + ArcherStateMachine.Archer.Radius / 10)
         {
             ArcherStateMachine.ChangeState(ArcherStateIds.Idle);
             return;

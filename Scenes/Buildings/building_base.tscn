@@ -8,6 +8,9 @@
 [ext_resource type="Shader" uid="uid://dv23pjvgx4fnl" path="res://Shaders/building.gdshader" id="5_xgsxx"]
 [ext_resource type="Script" uid="uid://bgjp3u8kai0nd" path="res://Scenes/Buildings/BuildingBaseVisual.cs" id="6_8auwt"]
 [ext_resource type="Texture2D" uid="uid://rspxfu0a4470" path="res://Assets/Particle FX/Dust_01.png" id="8_81c4c"]
+[ext_resource type="Texture2D" uid="uid://6s8hneppn5el" path="res://Assets/Particle FX/Explosion_01.png" id="8_o5t4p"]
+[ext_resource type="PackedScene" uid="uid://cb8citwk61klx" path="res://Scenes/Core/HurtBox/hurt_box.tscn" id="9_h2foa"]
+[ext_resource type="Texture2D" uid="uid://3ekub2y0nhum" path="res://Assets/Particle FX/Explosion_02.png" id="9_i28m2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4g0xq"]
 shader = ExtResource("5_xgsxx")
@@ -29,6 +32,12 @@ scale_max = 2.0
 anim_speed_min = 1.0
 anim_speed_max = 1.0
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2xlkg"]
+particles_animation = true
+particles_anim_h_frames = 10
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
 [node name="BuildingBase" type="StaticBody2D" unique_id=548953940]
 collision_layer = 17
 script = ExtResource("1_8grwn")
@@ -38,6 +47,7 @@ MarkerScene = ExtResource("2_5ffdn")
 script = ExtResource("2_hc4xp")
 
 [node name="BuildingSelectableComponent" parent="." unique_id=550510253 node_paths=PackedStringArray("EffectedOn") instance=ExtResource("2_d1o4y")]
+collision_layer = 17
 EffectedOn = NodePath("..")
 
 [node name="Visual" type="Node2D" parent="." unique_id=1843020465]
@@ -52,6 +62,27 @@ emitting = false
 texture = ExtResource("8_81c4c")
 lifetime = 0.8
 process_material = SubResource("ParticleProcessMaterial_vtjyd")
+
+[node name="DestroyParticles01" type="GPUParticles2D" parent="Visual" unique_id=409021009]
+material = SubResource("CanvasItemMaterial_h2foa")
+emitting = false
+amount = 2
+texture = ExtResource("8_o5t4p")
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_vtjyd")
+
+[node name="DestroyParticles02" type="GPUParticles2D" parent="Visual" unique_id=910122631]
+material = SubResource("CanvasItemMaterial_2xlkg")
+emitting = false
+amount = 3
+texture = ExtResource("9_i28m2")
+one_shot = true
+explosiveness = 0.5
+process_material = SubResource("ParticleProcessMaterial_vtjyd")
+
+[node name="HurtBox" parent="." unique_id=799690141 instance=ExtResource("9_h2foa")]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=168278068]
 polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)

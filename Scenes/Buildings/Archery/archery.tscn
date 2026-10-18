@@ -16,6 +16,9 @@ scale_max = 2.0
 anim_speed_min = 1.0
 anim_speed_max = 1.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_10o7v"]
+size = Vector2(172, 120)
+
 [node name="Archery" unique_id=548953940 instance=ExtResource("1_hclp5")]
 Resource = ExtResource("2_10o7v")
 
@@ -36,26 +39,41 @@ texture = ExtResource("2_yami0")
 [node name="BuildProgressParticles" parent="Visual" parent_id_path=PackedInt32Array(1843020465) index="1" unique_id=2143245483]
 process_material = SubResource("ParticleProcessMaterial_10o7v")
 
+[node name="DestroyParticles01" parent="Visual" parent_id_path=PackedInt32Array(1843020465) index="2" unique_id=409021009]
+amount = 4
+
+[node name="DestroyParticles02" parent="Visual" parent_id_path=PackedInt32Array(1843020465) index="3" unique_id=910122631]
+amount = 2
+
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="3" unique_id=56571997]
+visible = false
 position = Vector2(-66, 42)
 radius = 15.0
 
 [node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="4" unique_id=1306437490]
+visible = false
 position = Vector2(61, 42)
 radius = 15.0
 
 [node name="NavigationObstacle2D3" type="NavigationObstacle2D" parent="." index="5" unique_id=754091099]
+visible = false
 position = Vector2(61, -46)
 radius = 15.0
 
 [node name="NavigationObstacle2D4" type="NavigationObstacle2D" parent="." index="6" unique_id=1351582374]
+visible = false
 position = Vector2(-60, -46)
 radius = 15.0
 
-[node name="CollisionPolygon2D" parent="." index="7" unique_id=168278068]
+[node name="CollisionShape2D" parent="HurtBox" parent_id_path=PackedInt32Array(799690141) index="0" unique_id=930546286]
+shape = SubResource("RectangleShape2D_10o7v")
+
+[node name="CollisionPolygon2D" parent="." index="8" unique_id=168278068]
+visible = false
 polygon = PackedVector2Array(0, 50, 70, 50, 69, -50, -70, -50, -75, 50)
 
-[node name="UiBuildingPopup" parent="." index="8" unique_id=540837747]
+[node name="UiBuildingPopup" parent="." index="9" unique_id=540837747]
 Radius = 100.0
 
 [editable path="BuildingSelectableComponent"]
+[editable path="HurtBox"]

@@ -36,7 +36,7 @@ public partial class PawnMoveToState : PawnStateBase
             }
             else if (PawnStateMachine.Pawn.TargetObject is BuildingBase building)
             {
-                if (!building.Built)
+                if (!building.BuiltAndNotDamaged)
                 {
                     PawnStateMachine.ChangeState(PawnStateIds.BuildOrRepair);
                 }

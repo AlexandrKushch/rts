@@ -30,8 +30,6 @@ public partial class WarriorMoveToEnemyState : WarriorStateBase
             && WarriorStateMachine.Warrior.CanAttack
             && WarriorStateMachine.Warrior.ChargeTargetInRange())
         {
-            GD.Print("REACHED CHARGE DISTANCE");
-
             WarriorStateMachine.ChangeState(WarriorStateIds.Charge);
         }
         else if (WarriorStateMachine.Warrior.AttackTargetInRange())

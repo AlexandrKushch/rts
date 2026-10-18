@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot;
 
 public partial class SelectableComponent : Area2D
@@ -24,6 +25,16 @@ public partial class SelectableComponent : Area2D
     public override void _ExitTree()
     {
         base._ExitTree();
+
+        foreach (var player in GlobalPlayers.Instance.Players)
+        {
+            if (player.Value is HumanPlayer humanPlayer
+                && humanPlayer.SelectionController.Selections.Any(x => x.GetInstanceId() == GetInstanceId()))
+            {
+                humanPlayer.SelectionController.Selections.Remove(this);
+                humanPlayer.SelectionController.EmitSignal(SelectionController.SignalName.SelectionChanged);
+            }
+        }
 
         CustomMouseCursors.Instance.UpdateCursorPointerCount(-1);
     }

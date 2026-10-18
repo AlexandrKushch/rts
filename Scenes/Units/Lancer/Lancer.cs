@@ -8,7 +8,7 @@ public partial class Lancer : UnitHasVisualBase
     public bool IsAttacking { get; set; } = false;
 
     public Vector2 AttachedToPoint { get; set; }
-    public UnitBase AttackTarget { get; set; }
+    public Node2D AttackTarget { get; set; }
     public LancerVisual LancerVisual { get; private set; }
     public LancerStateMachine StateMachine { get; private set; }
     public EnemyDetector EnemyDetector { get; private set; }
@@ -52,7 +52,7 @@ public partial class Lancer : UnitHasVisualBase
             Vector2? point;
 
             if (Target != null
-                && TryGetClosestTarget(Target.Value, null, ObstacleCollisionMasks[nameof(UnitBase)], out target, out point))
+                && TryGetClosestTarget(Target.Value, null, ObstacleCollisionMasks[nameof(UnitBase)] | ObstacleCollisionMasks[nameof(BuildingBase)], out target, out point))
             {
                 point += point.Value.DirectionTo(GlobalPosition) * 25;
                 SetTarget(point, null);
@@ -87,7 +87,14 @@ public partial class Lancer : UnitHasVisualBase
 
     public void Attack()
     {
-        AttackTarget.TakeDamageWithDash(GlobalPosition, 0, 1.5f);
+        if (AttackTarget is UnitBase unit)
+        {
+            unit.TakeDamageWithDash(GlobalPosition, 0, 1.5f);
+        }
+        else
+        {
+            (AttackTarget as IDestroyableWithHp).TakeDamage(1);
+        }
         IsAttacking = true;
         LancerVisual.Attack();
     }

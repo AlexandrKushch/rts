@@ -160,7 +160,7 @@ public partial class Pawn : UnitHasVisualBase
                 TargetBuilding = building;
                 TargetResource = null;
 
-                if (!building.Built)
+                if (!building.BuiltAndNotDamaged)
                 {
                     _updateMovementAnimation = (v, _) => { PawnVisual.UpdateMovement(v, "build"); };
                 }

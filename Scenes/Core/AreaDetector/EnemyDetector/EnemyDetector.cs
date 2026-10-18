@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-public partial class EnemyDetector : AreaDetector<UnitBase>
+public partial class EnemyDetector : AreaDetector<Node2D>
 {
     private TeamType _team;
 
@@ -21,19 +21,19 @@ public partial class EnemyDetector : AreaDetector<UnitBase>
     
     public override void OnBodyEntered(Node2D body)
     {
-        if (body is UnitBase unit
-            && unit.Team != _team)
+        if ((body is UnitBase unit && unit.Team != _team)
+            || (body is BuildingBase building && building.Team != _team))
         {
-            Items.Add(unit);
+            Items.Add(body);
         }
     }
     
     public override void OnBodyExited(Node2D body)
     {
-        if (body is UnitBase unit
-            && unit.Team != _team)
+        if ((body is UnitBase unit && unit.Team != _team)
+            || (body is BuildingBase building && building.Team != _team))
         {
-            Items.Remove(unit);
+            Items.Remove(body);
         }
     }
 }

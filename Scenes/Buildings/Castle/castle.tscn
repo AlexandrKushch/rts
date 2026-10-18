@@ -16,6 +16,9 @@ scale_max = 2.0
 anim_speed_min = 1.0
 anim_speed_max = 1.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4g0xq"]
+size = Vector2(274, 140)
+
 [node name="Castle" unique_id=548953940 instance=ExtResource("1_xfw4a")]
 Resource = ExtResource("2_4g0xq")
 
@@ -50,14 +53,30 @@ texture = ExtResource("2_n84d7")
 position = Vector2(0, -57)
 process_material = SubResource("ParticleProcessMaterial_4g0xq")
 
-[node name="CollisionPolygon2D" parent="." index="5" unique_id=168278068]
+[node name="DestroyParticles01" parent="Visual" parent_id_path=PackedInt32Array(1843020465) index="2" unique_id=409021009]
+position = Vector2(0, -57)
+amount = 3
+
+[node name="DestroyParticles02" parent="Visual" parent_id_path=PackedInt32Array(1843020465) index="3" unique_id=910122631]
+position = Vector2(0, -57)
+amount = 2
+
+[node name="HurtBox" parent="." index="5" unique_id=799690141]
+visible = false
+
+[node name="CollisionShape2D" parent="HurtBox" index="0" unique_id=930546286]
+position = Vector2(0, -34)
+shape = SubResource("RectangleShape2D_4g0xq")
+
+[node name="CollisionPolygon2D" parent="." index="6" unique_id=168278068]
 visible = false
 polygon = PackedVector2Array(0, 25, -120, 25, -130, -25, 0, -25, 130, -25, 120, 25)
 
-[node name="UiBuildingPopup" parent="." index="6" unique_id=540837747]
+[node name="UiBuildingPopup" parent="." index="7" unique_id=540837747]
 offset_top = -156.0
 offset_bottom = -156.0
 Radius = 125.0
 OffsetCenter = Vector2(0, 75)
 
 [editable path="BuildingSelectableComponent"]
+[editable path="HurtBox"]

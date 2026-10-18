@@ -16,6 +16,27 @@ scale_max = 2.0
 anim_speed_min = 1.0
 anim_speed_max = 1.0
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d8t17"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(50, 100, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+scale_max = 2.0
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mx8be"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(50, 100, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+scale_max = 2.0
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fwii4"]
+size = Vector2(80, 141)
+
 [node name="Tower" unique_id=548953940 instance=ExtResource("1_ykvt5")]
 Resource = ExtResource("2_d8t17")
 
@@ -37,15 +58,34 @@ texture = ExtResource("2_fwii4")
 position = Vector2(0, -68)
 process_material = SubResource("ParticleProcessMaterial_fwii4")
 
+[node name="DestroyParticles01" parent="Visual" parent_id_path=PackedInt32Array(1843020465) index="2" unique_id=409021009]
+position = Vector2(0, -68)
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_d8t17")
+
+[node name="DestroyParticles02" parent="Visual" parent_id_path=PackedInt32Array(1843020465) index="3" unique_id=910122631]
+position = Vector2(0, -68)
+amount = 2
+process_material = SubResource("ParticleProcessMaterial_mx8be")
+
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="3" unique_id=841865287]
+visible = false
 position = Vector2(-23, 0)
 radius = 15.0
 
 [node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="4" unique_id=508235830]
+visible = false
 position = Vector2(20, 0)
 radius = 15.0
 
-[node name="CollisionPolygon2D" parent="." index="5" unique_id=168278068]
+[node name="CollisionShape2D" parent="HurtBox" parent_id_path=PackedInt32Array(799690141) index="0" unique_id=930546286]
+visible = false
+position = Vector2(0, -48.5)
+shape = SubResource("RectangleShape2D_fwii4")
+
+[node name="CollisionPolygon2D" parent="." index="6" unique_id=168278068]
+visible = false
 polygon = PackedVector2Array(-30, -10, 30, -10, 25, 10, -25, 10)
 
 [editable path="BuildingSelectableComponent"]
+[editable path="HurtBox"]

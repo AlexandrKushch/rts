@@ -14,12 +14,14 @@ public partial class StateBase<T> : Node
 
     public virtual void Activate()
     {
-        SetProcess(true);        
+        SetProcess(true);
+        // GD.Print(Name);
     }
 
     public virtual void Deactivate()
     {
         SetProcess(false);
+        // GD.Print(Name);
     }
 
     protected void ChangeState(T t)

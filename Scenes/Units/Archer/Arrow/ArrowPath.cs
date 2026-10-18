@@ -103,14 +103,22 @@ public partial class ArrowPath : Path2D, IDestroyable
 
     private void OnHitBoxEntered(Area2D area)
     {
-        if (area is HurtBox hurtBox
-            && hurtBox.EffectedOn is UnitBase unit
-            && unit.Team != Team)
+        if (area is HurtBox hurtBox)
         {
-            Destroy();
-            ArrowBrokenVisual.Visible = false;
-
-            unit.TakeDamageWithDash(GlobalPosition, 1, 1.0f);
+            if (hurtBox.EffectedOn is UnitBase unit
+                && unit.Team != Team)
+            {
+                Destroy();
+                ArrowBrokenVisual.Visible = false;
+                unit.TakeDamageWithDash(GlobalPosition, 1, 1.0f);
+            }
+            else if (hurtBox.EffectedOn is BuildingBase building
+                && building.Team != Team)
+            {
+                Destroy();
+                ArrowBrokenVisual.Visible = false;
+                building.TakeDamage(1);
+            }
         }
     }
 }

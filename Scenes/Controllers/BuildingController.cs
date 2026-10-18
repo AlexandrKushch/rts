@@ -4,7 +4,7 @@ using System.Linq;
 
 public partial class BuildingController : Node2D
 {
-    private const int TileSize = 64;
+    public const int TileSize = 64;
 
     private bool _showBuildingControl;
     private Control _buildControl;
@@ -13,7 +13,6 @@ public partial class BuildingController : Node2D
 
     [Export] private PackedScene BuildingBlueprintScene;
 
-    public HashSet<Vector2> OccupiedTiles { get; private set; } = new HashSet<Vector2>();
     public bool BlueprintActive { get; private set; }
 
     public override void _Ready()
@@ -45,8 +44,11 @@ public partial class BuildingController : Node2D
 
                     foreach (var point in _blueprint.Building.Resource.TileRequiresToBuild)
                     {
-                        var posOnLayer = GlobalResources.Instance.Ground.LocalToMap(GlobalResources.Instance.Ground.ToLocal(_blueprint.Building.GlobalPosition + point * TileSize));
-                        OccupiedTiles.Add(posOnLayer);
+                        foreach (var ground in GlobalResources.Instance.Grounds)
+                        {
+                            var posOnLayer = ground.LocalToMap(ground.ToLocal(_blueprint.Building.GlobalPosition + point * TileSize));
+                            GlobalResources.Instance.OccupiedTiles.Add(posOnLayer);
+                        }
                     }
 
                     _blueprint.QueueFree();
@@ -69,20 +71,24 @@ public partial class BuildingController : Node2D
     {
         if (IsInstanceValid(_blueprint) && !_blueprint.Deployed)
         {
-            var mousePosOnTileMap = GlobalResources.Instance.Ground.LocalToMap(GetLocalMousePosition());
-            var mousePos = ToGlobal(GlobalResources.Instance.Ground.MapToLocal(mousePosOnTileMap));
-            float weight = 1f - Mathf.Exp(-25 * (float)delta);
-            _blueprint.GlobalPosition = _blueprint.GlobalPosition.Lerp(mousePos, weight);
+            foreach (var ground in GlobalResources.Instance.Grounds)
+            {
+                var mousePosOnTileMap = ground.LocalToMap(GetLocalMousePosition());
+                var mousePos = ToGlobal(ground.MapToLocal(mousePosOnTileMap));
+                float weight = 1f - Mathf.Exp(-25 * (float)delta);
+                _blueprint.GlobalPosition = _blueprint.GlobalPosition.Lerp(mousePos, weight);
 
-            if (CheckAbleToBuild())
-            {
-                _blueprint.Building.Modulate = Colors.Green;
-                _blueprint.ValidToDeploy = true;
-            }
-            else
-            {
-                _blueprint.Building.Modulate = Colors.Red;
-                _blueprint.ValidToDeploy = false;
+                if (CheckAbleToBuild(ground))
+                {
+                    _blueprint.Building.Modulate = Colors.Green;
+                    _blueprint.ValidToDeploy = true;
+                    break;
+                }
+                else
+                {
+                    _blueprint.Building.Modulate = Colors.Red;
+                    _blueprint.ValidToDeploy = false;
+                }
             }
         }
     }
@@ -104,7 +110,7 @@ public partial class BuildingController : Node2D
         GlobalResources.Instance.BuildingGrid.Visible = BlueprintActive;
     }
 
-    private bool CheckAbleToBuild()
+    private bool CheckAbleToBuild(TileMapLayer ground)
     {
         var spaceState = GetWorld2D().DirectSpaceState;
         var query = new PhysicsShapeQueryParameters2D
@@ -129,14 +135,14 @@ public partial class BuildingController : Node2D
 
         foreach (var point in _blueprint.Building.Resource.TileRequiresToBuild)
         {
-            var posOnLayer = GlobalResources.Instance.Ground.LocalToMap(GlobalResources.Instance.Ground.ToLocal(_blueprint.Building.GlobalPosition + point * TileSize));
+            var posOnLayer = ground.LocalToMap(ground.ToLocal(_blueprint.Building.GlobalPosition + point * TileSize));
 
-            if (OccupiedTiles.Contains(posOnLayer))
+            if (GlobalResources.Instance.OccupiedTiles.Contains(posOnLayer))
             {
                 return false;
             }
 
-            var cell = GlobalResources.Instance.Ground.GetCellTileData(posOnLayer);
+            var cell = ground.GetCellTileData(posOnLayer);
 
             if (cell == null)
             {

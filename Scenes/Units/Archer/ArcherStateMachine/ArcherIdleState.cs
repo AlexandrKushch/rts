@@ -8,7 +8,8 @@ public partial class ArcherIdleState : ArcherStateBase
 
         if (enemies.Length > 0)
         {
-            var enemy = enemies[RandomExtension.RandomLong(enemies.Length)];
+            // var enemy = enemies[RandomExtension.RandomLong(enemies.Length)];
+            var enemy = enemies.MinBy(x => x.GlobalPosition.DistanceTo(Archer.GlobalPosition));
             ArcherStateMachine.Archer.SetAttackTarget(enemy);
         }
     }

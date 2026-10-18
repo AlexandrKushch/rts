@@ -1,9 +1,12 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
+public partial class BuildingBase : StaticBody2D, IDestroyableWithHp, IHasTeam
 {
+    private bool _active = true;
+
     private UiBuildingPopup UiBuildingPopup;
     private ProducingQueueManager ProducingQueueManager;
 
@@ -14,20 +17,48 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
 
     public Vector2[] SpaceAroundPoints { get; private set; }
 
-    public bool Built { get; private set; } = false;
+    private bool _built = false;
+    public bool BuiltAndNotDamaged
+    {
+        get
+        {
+            return _built && HP >= MaxHp;
+        }
+        private set
+        {
+            _built = value;
+        }
+    }
+
+    public bool Built
+    {
+        get
+        {
+            return _built;
+        }
+        private set
+        {
+            _built = value;
+        }
+    }
     public int BuildersCount { get; set; } = 0;
     public Vector2? TargetToSpawnedUnits { get; set; }
     public Node2D TargetObjectToSpawnedUnits { get; set; }
 
     public BuildingBaseVisual Visual { get; private set; }
     public CollisionPolygon2D CollisionPolygon2D { get; private set; }
+    public HurtBox HurtBox { get; private set; }
     public NavigationObstacle2D[] Obstacles { get; private set; }
 
     [Export] public BuildResource Resource { get; set; }
 
     [Export] private PackedScene MarkerScene;
 
+    [Export]
     public TeamType Team { get; set; }
+
+    [Export]
+    public bool Predeployed { get; set; } = false;
 
     public override void _Ready()
     {
@@ -35,11 +66,24 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
         ProducingQueueManager = GetNode<ProducingQueueManager>(nameof(ProducingQueueManager));
         Visual = GetNode<BuildingBaseVisual>(nameof(Visual));
         CollisionPolygon2D = GetNode<CollisionPolygon2D>(nameof(CollisionPolygon2D));
+        HurtBox = GetNode<HurtBox>(nameof(HurtBox));
         Obstacles = GetChildren().Where(x => x is NavigationObstacle2D).Select(x => x as NavigationObstacle2D).ToArray();
 
         MaxHp = Resource.MaxHp;
 
+        if (Predeployed)
+        {
+            Resource = GlobalPlayers.Instance.Players[Team].GlobalResources.Buildings[Resource.Id];
+            Visual.Sprite2D.Texture = Resource.Icon;
+            HP = Resource.MaxHp;
+            Deploy();
+            HaveBeenBuilt();
+            Visual.UpdateProgress(Mathf.Remap(HP, 0, MaxHp, 0, 1));
+        }
+
         ProducingQueueManager.ProgressComplete += SpawnUnit;
+        Visual.DestroyParticles01.Finished += QueueFree;
+        TreeExited += OnExitTree;
     }
 
     public void Deploy()
@@ -47,6 +91,7 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
         Modulate = Colors.White;
         SetProcess(true);
         CollisionPolygon2D.Disabled = false;
+        HurtBox.CollisionShape2D.Disabled = false;
 
         foreach (var obstacle in Obstacles)
         {
@@ -78,9 +123,16 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
     {
         HP++;
 
-        Visual.UpdateProgress(Mathf.Remap(HP, 0, MaxHp, 0, 1));
+        if (Built)
+        {
+            Visual.UpdateFireParticles(HP, MaxHp);
+        }
+        else
+        {
+            Visual.UpdateProgress(Mathf.Remap(HP, 0, MaxHp, 0, 1));
+        }
 
-        if (HP == MaxHp)
+        if (HP >= MaxHp)
         {
             HaveBeenBuilt();
             return false;
@@ -91,12 +143,27 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
 
     public void TakeDamage(int value)
     {
+        if (!_active)
+        {
+            return;
+        }
+
         HP -= value;
+
+        if (Built)
+        {
+            Visual.UpdateFireParticles(HP, MaxHp);
+        }
 
         if (HP <= 0)
         {
             Destroy();
         }
+    }
+
+    public void TakeDamageWithDash(Vector2 from, int value, float power)
+    {
+        throw new NotImplementedException();
     }
 
     public override void _EnterTree()
@@ -122,16 +189,53 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
         }
     }
 
+    public void OnExitTree()
+    {
+        if (_active)
+        {
+            return;
+        }
+        GD.Print(1);
+        NavigationRegionController.Instance.Bake();
+    }
+
     public void Destroy()
     {
-        QueueFree();
+        foreach (var point in Resource.TileRequiresToBuild)
+        {
+            foreach (var ground in GlobalResources.Instance.Grounds)
+            {
+                var posOnLayer = ground.LocalToMap(ground.ToLocal(GlobalPosition + point * BuildingController.TileSize));
+                GlobalResources.Instance.OccupiedTiles.Remove(posOnLayer);
+            }
+        }
+
+        // TO-do
+        // check is on screen
+        // Shake camera
+
+        Visual.Destroy();
+        _active = false;
     }
 
     private void HaveBeenBuilt()
     {
-        Built = true;
+        BuiltAndNotDamaged = true;
+        HP = MaxHp;
         Visual.Built();
         OnSelectionChanged();
+
+        var bushesCount = SpaceAroundPoints.Length / 10;
+        for (int i = 0; i < bushesCount; i++)
+        {
+            var pointIndex = RandomExtension.RandomLong(SpaceAroundPoints.Length);
+            var point = SpaceAroundPoints[pointIndex];
+            var bushIndex = RandomExtension.RandomLong(4);
+
+            var bush = GlobalResources.Instance.DecorationScenes[(DecorationType)bushIndex].Instantiate<Node2D>();
+            bush.GlobalPosition = GlobalPosition + point;
+            GlobalResources.Instance.World.CallDeferred("add_child", bush);
+        }
     }
 
     private void OnSelectionChanged()
@@ -208,10 +312,5 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp
         }
 
         return aroundPoints.ToArray();
-    }
-
-    public void TakeDamageWithDash(Vector2 from, int value, float power)
-    {
-        throw new System.NotImplementedException();
     }
 }

@@ -284,6 +284,7 @@ script = ExtResource("16_vcr0m")
 
 [node name="EnemyDetector" parent="." index="10" unique_id=1958789508 instance=ExtResource("13_syvfn")]
 visible = false
+collision_mask = 18
 
 [connection signal="animation_finished" from="Visual/AnimationPlayer" to="Visual" method="OnAnimationFinished"]
 

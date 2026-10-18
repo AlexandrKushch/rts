@@ -8,7 +8,7 @@ public partial class Archer : UnitHasVisualBase
     private double _attackReloadTimer = 0.0f;
 
     public override float MovementSpeed { get; protected set; } = 150f;
-    public UnitBase AttackTarget { get; private set; }
+    public Node2D AttackTarget { get; private set; }
 
     public ArcherVisual ArcherVisual { get; private set; }
     public ArcherStateMachine StateMachine { get; private set; }
@@ -81,9 +81,9 @@ public partial class Archer : UnitHasVisualBase
         StateMachine.ChangeState(changeToState);
     }
 
-    public void SetAttackTarget(UnitBase unit)
+    public void SetAttackTarget(Node2D attackTarget)
     {
-        AttackTarget = unit;
+        AttackTarget = attackTarget;
         StateMachine.ChangeState(ArcherStateIds.Attack);
     }
 

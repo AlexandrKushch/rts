@@ -14,12 +14,15 @@ public partial class NavigationRegionController : NavigationRegion2D
 
     public void Bake()
     {
+        GD.Print("BAKE START");
         if (IsBaking())
         {
+            GD.Print("ALREADY BAKING");
             return;
         }
 
         BakeNavigationPolygon(true);
+        GD.Print("BAKED");
     }
 
     public bool IsPointInside(Vector2 point)

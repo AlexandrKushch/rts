@@ -4,7 +4,7 @@ using System.Linq;
 public partial class WarriorIdleState : WarriorStateBase
 {
     private double _timerBeforeAttack = 0.0f;
-    private UnitBase _enemy;
+    private Node2D _enemy;
 
     public override void Activate()
     {
@@ -51,14 +51,13 @@ public partial class WarriorIdleState : WarriorStateBase
         }
     }
 
-    private UnitBase GetEnemyOrGoToBasePoint()
+    private Node2D GetEnemyOrGoToBasePoint()
     {
         var enemy = WarriorStateMachine.Warrior.EnemyDetector.Items.MinBy(x => WarriorStateMachine.Warrior.GlobalPosition.DistanceTo(x.GlobalPosition));
      
         if ((enemy == null && !WarriorStateMachine.Warrior.ReachedAttachedPoint())
             || WarriorStateMachine.Warrior.FarFromAttachedPoint())
         {
-            GD.Print("GO HOME WALTER");
             WarriorStateMachine.Warrior.SetTarget(WarriorStateMachine.Warrior.AttachedToPoint, null);
             return null;
         }

@@ -12,12 +12,15 @@ public partial class GlobalResources : Node
     [Export] public Dictionary<UnitTypeIds, PackedScene> UnitScenes { get; set; }
     [Export] public Dictionary<BuildingTypeIds, PackedScene> BuildingScenes { get; set; }
     [Export] public Dictionary<GoldSize, PackedScene> GoldScenes { get; set; }
+    [Export] public Dictionary<DecorationType, PackedScene> DecorationScenes { get; set; }
     [Export] public Dictionary<EffectType, PackedScene> EffectScenes { get; set; }
 
     [ExportGroup("Nodes")]
     [Export] public Node2D World;
-    [Export] public TileMapLayer Ground;
+    [Export] public TileMapLayer[] Grounds;
     [Export] public Control BuildingGrid;
+
+    public System.Collections.Generic.HashSet<Vector2> OccupiedTiles { get; private set; } = new System.Collections.Generic.HashSet<Vector2>();
 
     public static GlobalResources Instance { get; private set; }
 

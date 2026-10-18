@@ -47,7 +47,7 @@ public partial class SelectArea : Area2D
         var selections = GetOverlappingAreas()
             .Where(x => x is SelectableComponent selectable && selectable != null)
             .Select(x => x as SelectableComponent)
-            .Where(x => x.EffectedOn is not UnitBase || (x.EffectedOn is UnitBase unit && unit.Team == team))
+            .Where(x => x.EffectedOn is not UnitBase || (x.EffectedOn is IHasTeam node && node.Team == team))
             .ToHashSet();
 
         return selections;

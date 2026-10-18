@@ -16,6 +16,9 @@ scale_max = 2.0
 anim_speed_min = 1.0
 anim_speed_max = 1.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1uhux"]
+size = Vector2(172, 148)
+
 [node name="Barracks" unique_id=548953940 instance=ExtResource("1_wjwem")]
 Resource = ExtResource("2_3q5wo")
 
@@ -37,6 +40,14 @@ texture = ExtResource("2_1uhux")
 position = Vector2(0, -68)
 process_material = SubResource("ParticleProcessMaterial_1uhux")
 
+[node name="DestroyParticles01" parent="Visual" parent_id_path=PackedInt32Array(1843020465) index="2" unique_id=409021009]
+position = Vector2(0, -84)
+amount = 4
+
+[node name="DestroyParticles02" parent="Visual" parent_id_path=PackedInt32Array(1843020465) index="3" unique_id=910122631]
+position = Vector2(0, -84)
+amount = 2
+
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="3" unique_id=378447270]
 position = Vector2(-50, 2)
 radius = 15.0
@@ -53,10 +64,16 @@ radius = 15.0
 position = Vector2(-65, -54)
 radius = 15.0
 
-[node name="CollisionPolygon2D" parent="." index="7" unique_id=168278068]
+[node name="CollisionShape2D" parent="HurtBox" parent_id_path=PackedInt32Array(799690141) index="0" unique_id=930546286]
+position = Vector2(0, -55)
+shape = SubResource("RectangleShape2D_1uhux")
+
+[node name="CollisionPolygon2D" parent="." index="8" unique_id=168278068]
+visible = false
 polygon = PackedVector2Array(0, 10, 55, 10, 70, -60, -70, -60, -55, 10)
 
-[node name="UiBuildingPopup" parent="." index="8" unique_id=540837747]
+[node name="UiBuildingPopup" parent="." index="9" unique_id=540837747]
 Radius = 125.0
 
 [editable path="BuildingSelectableComponent"]
+[editable path="HurtBox"]

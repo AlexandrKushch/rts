@@ -35,10 +35,10 @@ public partial class SelectionController : Node2D
 				&& buttonInput.ButtonIndex == MouseButton.Middle)
 			{
 				if (TryPointCastSelectable(out var selection)
-					&& selection.EffectedOn is UnitBase unit)
+					&& selection.EffectedOn is IDestroyableWithHp unit)
 				{
 					unit.TakeDamage(1);
-					GD.Print(unit.Meta.Name, unit.HP);
+					GD.Print(unit.HP);
 				}
 			}
 		}
@@ -137,9 +137,9 @@ public partial class SelectionController : Node2D
 			Selections = Selections.Where(x => x.EffectedOn is UnitBase && x != null).ToHashSet();
 		}
 
-		foreach (var unit in Selections)
+		foreach (var selection in Selections)
 		{
-			unit.UpdateSelection(true);
+			selection.UpdateSelection(true);
 		}
 	}
 
@@ -153,7 +153,7 @@ public partial class SelectionController : Node2D
 			Position = GetGlobalMousePosition(),
 			CollideWithAreas = true,
 			CollideWithBodies = false,
-			CollisionMask = 2
+			CollisionMask = 2 | 16
 		};
 
 		var results = spaceState.IntersectPoint(query);

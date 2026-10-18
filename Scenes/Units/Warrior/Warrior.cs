@@ -18,7 +18,7 @@ public partial class Warrior : UnitHasVisualBase
     public const float MaxDistanceToLeaveFromAttachedPoint = 200;
 
     public Vector2 AttachedToPoint { get; set; }
-    public UnitBase AttackTarget { get; private set; }
+    public Node2D AttackTarget { get; private set; }
     public WarriorVisual WarriorVisual { get; private set; }
     public ArrowDetector ArrowDetector { get; private set; }
     public EnemyDetector EnemyDetector { get; private set; }
@@ -31,9 +31,9 @@ public partial class Warrior : UnitHasVisualBase
     public override void _Ready()
     {
         base._Ready();
-        
-		if (Meta != null && !Setup)
-		{
+
+        if (Meta != null && !Setup)
+        {
             return;
         }
 
@@ -48,7 +48,7 @@ public partial class Warrior : UnitHasVisualBase
         SetTarget(Target, TargetObject);
 
         AttackReloadTimer.Timeout += () => { CanAttack = true; };
-        GuardReloadTimer.Timeout += () => { GD.Print("TIMEOUT"); GuardingCount = MaxGuardingCount; };
+        GuardReloadTimer.Timeout += () => { GuardingCount = MaxGuardingCount; };
 
         _updateMovementAnimation = (v) => { WarriorVisual.UpdateMovement(v, string.Empty); };
     }
@@ -64,7 +64,7 @@ public partial class Warrior : UnitHasVisualBase
             && CanGuard())
         {
             bool shouldGuardCuaseOfEnemy = EnemyDetector.Items
-                    .Any(x => x is Lancer && x.GlobalPosition.DistanceTo(GlobalPosition) < Lancer.AttackRangeDistance + 20);
+                .Any(x => x is Lancer && x.GlobalPosition.DistanceTo(GlobalPosition) < Lancer.AttackRangeDistance + 20);
             bool shouldGuardCauseOfArrow = ArrowDetector.Items
                 .Any(x => x.GetParent().GetParent<ArrowPath>().Team != Team);
 
@@ -95,14 +95,15 @@ public partial class Warrior : UnitHasVisualBase
             CanCharge = false;
             _chargeTimer = 0.0f;
         }
-        
-		if (StateMachine.GetCurrentStateType() == WarriorStateIds.MoveTo)
+
+        if (StateMachine.GetCurrentStateType() == WarriorStateIds.MoveTo
+            || StateMachine.GetCurrentStateType() == WarriorStateIds.MoveToEnemy)
         {
             Node2D target;
             Vector2? point;
 
             if (Target != null
-                && TryGetClosestTarget(Target.Value, null, ObstacleCollisionMasks[nameof(UnitBase)], out target, out point))
+                && TryGetClosestTarget(Target.Value, null, ObstacleCollisionMasks[nameof(UnitBase)] | ObstacleCollisionMasks[nameof(BuildingBase)], out target, out point))
             {
                 point += point.Value.DirectionTo(GlobalPosition) * 25;
                 SetTarget(point, null);
@@ -114,10 +115,9 @@ public partial class Warrior : UnitHasVisualBase
     {
         var changeToState = WarriorStateIds.MoveTo;
 
-        if (targetObject is UnitBase unit
-            && unit.Team != Team)
+        if (targetObject is IHasTeam node && node.Team != Team)
         {
-            AttackTarget = unit;
+            AttackTarget = targetObject;
             changeToState = WarriorStateIds.MoveToEnemy;
         }
 
@@ -129,7 +129,7 @@ public partial class Warrior : UnitHasVisualBase
         }
     }
 
-    public void SetAttackTarget(UnitBase unit)
+    public void SetAttackTarget(Node2D unit)
     {
         AttackTarget = unit;
         StateMachine.ChangeState(WarriorStateIds.MoveToEnemy);
@@ -156,6 +156,11 @@ public partial class Warrior : UnitHasVisualBase
             return false;
         }
 
+        if (AttackTarget is BuildingBase)
+        {
+            return false;
+        }
+
         var distanceToAttackTarget = GlobalPosition.DistanceTo(AttackTarget.GlobalPosition);
 
         return distanceToAttackTarget < RangeChargeDistance;
@@ -171,7 +176,7 @@ public partial class Warrior : UnitHasVisualBase
     }
 
     public bool ReachedAttachedPoint()
-    {        
+    {
         return GlobalPosition.IsEqualApprox(AttachedToPoint, 50);
     }
 
@@ -185,7 +190,7 @@ public partial class Warrior : UnitHasVisualBase
             return;
         }
 
-        AttackTarget.TakeDamage(1);
+        (AttackTarget as IDestroyableWithHp).TakeDamage(1);
     }
 
     public void HitWithChargeTarget()
@@ -198,7 +203,7 @@ public partial class Warrior : UnitHasVisualBase
             return;
         }
 
-        AttackTarget.TakeDamageWithDash(GlobalPosition, 1, 2.2f);
+        (AttackTarget as UnitBase).TakeDamageWithDash(GlobalPosition, 1, 2.2f);
         CanCharge = false;
     }
 
