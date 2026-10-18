@@ -27,14 +27,16 @@ public partial class UnitBase : CharacterBody2D, IDestroyableWithHp, IHasTeam
 
 	public Node2D TargetObject { get; set; }
 
+	public int HP { get; set; }
+
 	[Export]
 	public UnitType Meta { get; set; }
 
 	[Export]
 	public TeamType Team { get; set; }
-
-	public bool Setup { get; set; } = false;
-	public int HP { get; set; }
+	
+	[Export]
+	public bool Predeployed { get; set; } = false;
 	
     protected static Dictionary<string, uint> ObstacleCollisionMasks = new Dictionary<string, uint>
     {
@@ -47,11 +49,10 @@ public partial class UnitBase : CharacterBody2D, IDestroyableWithHp, IHasTeam
 
 	public override void _Ready()
 	{
-		if (Meta != null && !Setup)
+		if (Meta != null && Predeployed)
 		{
 			var unit = GlobalPlayers.Instance.Players[Team].GlobalResources.UnitScenes[Meta.Id].Instantiate<UnitBase>();
 			unit.GlobalPosition = GlobalPosition;
-			unit.Setup = true;
 			unit.Target = Target ?? GlobalPosition;
 			unit.TargetObject = TargetObject;
 			GetParent().CallDeferred("add_child", unit);

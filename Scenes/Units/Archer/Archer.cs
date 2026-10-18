@@ -23,7 +23,7 @@ public partial class Archer : UnitHasVisualBase
     {
         base._Ready();
         
-		if (Meta != null && !Setup)
+        if (Meta != null && Predeployed)
 		{
             return;
         }

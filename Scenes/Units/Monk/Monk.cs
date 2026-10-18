@@ -13,7 +13,7 @@ public partial class Monk : UnitHasVisualBase
     {
         base._Ready();
         
-		if (Meta != null && !Setup)
+        if (Meta != null && Predeployed)
 		{
             return;
         }

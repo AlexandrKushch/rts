@@ -23,7 +23,7 @@ public partial class Pawn : UnitHasVisualBase
     {
         base._Ready();
         
-		if (Meta != null && !Setup)
+        if (Meta != null && Predeployed)
 		{
             return;
         }

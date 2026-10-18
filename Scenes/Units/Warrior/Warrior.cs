@@ -32,7 +32,7 @@ public partial class Warrior : UnitHasVisualBase
     {
         base._Ready();
 
-        if (Meta != null && !Setup)
+        if (Meta != null && Predeployed)
         {
             return;
         }

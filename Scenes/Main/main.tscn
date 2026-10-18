@@ -205,26 +205,31 @@ y_sort_enabled = true
 position = Vector2(656, 76)
 collision_mask = 1
 Team = 4
+Predeployed = true
 
 [node name="Pawn2" parent="Map/World" unique_id=157610075 instance=ExtResource("9_hryqi")]
 position = Vector2(583, 65)
 collision_mask = 1
 Team = 4
+Predeployed = true
 
 [node name="Pawn5" parent="Map/World" unique_id=1734289473 instance=ExtResource("9_hryqi")]
 position = Vector2(521, 78)
 collision_mask = 1
 Team = 4
+Predeployed = true
 
 [node name="Pawn3" parent="Map/World" unique_id=620398878 instance=ExtResource("9_hryqi")]
 position = Vector2(643, 136)
 collision_mask = 1
 Team = 4
+Predeployed = true
 
 [node name="Pawn4" parent="Map/World" unique_id=400829926 instance=ExtResource("9_hryqi")]
 position = Vector2(596, 135)
 collision_mask = 1
 Team = 4
+Predeployed = true
 
 [node name="Tree1" parent="Map/World" unique_id=1936357647 node_paths=PackedStringArray("CollisionShapes") instance=ExtResource("10_6t3k2")]
 position = Vector2(35, 22)
@@ -362,18 +367,22 @@ Predeployed = true
 [node name="Archer" parent="Map/World" unique_id=1621880785 instance=ExtResource("16_vae3x")]
 position = Vector2(66, 556)
 Team = 3
+Predeployed = true
 
 [node name="Archer2" parent="Map/World" unique_id=335136820 instance=ExtResource("16_vae3x")]
 position = Vector2(28, 510)
 Team = 3
+Predeployed = true
 
 [node name="Archer3" parent="Map/World" unique_id=1037403338 instance=ExtResource("16_vae3x")]
 position = Vector2(83, 461)
 Team = 3
+Predeployed = true
 
 [node name="Archer4" parent="Map/World" unique_id=1807902747 instance=ExtResource("16_vae3x")]
 position = Vector2(14, 398)
 Team = 3
+Predeployed = true
 
 [node name="Bush_01" parent="Map/World" unique_id=1708253936 instance=ExtResource("41_dw0e8")]
 position = Vector2(285, 78)

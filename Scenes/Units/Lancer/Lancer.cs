@@ -19,7 +19,7 @@ public partial class Lancer : UnitHasVisualBase
     {
         base._Ready();
         
-		if (Meta != null && !Setup)
+        if (Meta != null && Predeployed)
 		{
             return;
         }

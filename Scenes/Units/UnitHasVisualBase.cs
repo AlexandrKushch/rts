@@ -13,6 +13,7 @@ public partial class UnitHasVisualBase : UnitBase
         UnitOverlapedDetector = GetNode<Area2D>(nameof(UnitOverlapedDetector));
         UnitSelectableComponent = GetNode<SelectableComponent>(nameof(UnitSelectableComponent));
         Visual = GetNode<UnitVisualBase>(nameof(Visual));
+
         Visual.Spawn();
     }
 
