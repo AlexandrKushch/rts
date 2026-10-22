@@ -22,13 +22,16 @@ size = Vector2(116, 148)
 [node name="Monastery" unique_id=548953940 instance=ExtResource("1_l2qa8")]
 Resource = ExtResource("2_titpi")
 
+[node name="BuildingSelectableComponent" parent="." index="1" unique_id=550510253 node_paths=PackedStringArray("EffectedOn")]
+EffectedOn = NodePath("..")
+
 [node name="NinePatchRect" parent="BuildingSelectableComponent/Visual" parent_id_path=PackedInt32Array(550510253, 946751036) index="0" unique_id=584840865]
 offset_left = -86.0
 offset_top = -15.0
 offset_right = 86.0
 offset_bottom = 65.0
 
-[node name="CollisionShape2D" parent="BuildingSelectableComponent" parent_id_path=PackedInt32Array(550510253) index="1" unique_id=1060696685]
+[node name="CollisionShape2D" parent="BuildingSelectableComponent" index="1" unique_id=1060696685]
 position = Vector2(0, -80)
 shape = SubResource("RectangleShape2D_10o7v")
 

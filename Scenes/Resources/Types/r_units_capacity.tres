@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ResourceInfo" format=3 uid="uid://55t2kn3m5moh"]
+
+[ext_resource type="Texture2D" uid="uid://djwej2vsm21x6" path="res://Assets/UI Elements/UI Elements/units_icon.png" id="1_qm3p5"]
+[ext_resource type="Script" uid="uid://caks0w8rk10ox" path="res://Scenes/Resources/ResourceInfo.cs" id="2_fyxe5"]
+
+[resource]
+script = ExtResource("2_fyxe5")
+Type = 4
+DefaultValue = -5
+Name = "units_capacity"
+Icon = ExtResource("1_qm3p5")
+metadata/_custom_type_script = "uid://caks0w8rk10ox"

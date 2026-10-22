@@ -151,6 +151,7 @@ public partial class UnitBase : CharacterBody2D, IDestroyableWithHp, IHasTeam
 		var dead = _deadScene.Instantiate<Dead>();
 		dead.GlobalPosition = GlobalPosition;
 		GetParent().AddChild(dead);
+		GlobalPlayers.Instance.Players[Team].ResourceController.Collect(ResourceTypeIds.UnitsCapacity, Meta.Cost[ResourceTypeIds.UnitsCapacity]);
 		QueueFree();
 	}
 	

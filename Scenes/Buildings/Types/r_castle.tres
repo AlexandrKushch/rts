@@ -15,6 +15,7 @@ Cost = Dictionary[int, int]({
 2: 150,
 3: 100
 })
+RestoreUnitsCapacity = 20
 TileRequiresToBuild = PackedVector2Array(0, 0, 1, 0, 2, 0, 2, -1, 1, -1, 0, -1, -1, -1, -2, -1, -2, 0, -1, 0)
 Produces = Array[Object]([ExtResource("2_4h5ph")])
 metadata/_custom_type_script = "uid://ck4k0rwiv3nec"

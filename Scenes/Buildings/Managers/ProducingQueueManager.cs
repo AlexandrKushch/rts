@@ -72,17 +72,21 @@ public partial class ProducingQueueManager : Node
         }
     }
 
-    public void RemoveFromQueue(UnitTypeIds id, bool cashback = false)
+    public void RemoveFromQueue(UnitTypeIds id, bool cashback = false, int capacity = 1)
     {
         SetProcess(false);
         if (QueueCapacity.ContainsKey(id))
         {
-            QueueCapacity[id] -= 1;
+            QueueCapacity[id] -= capacity;
 
             if (cashback)
             {
                 var costs = GlobalResources.Instance.Units[id].Cost.ToDictionary();
-                Player.ResourceController.CollectCost(costs);
+
+                for (int i = 0; i < capacity; i++)
+                {
+                    Player.ResourceController.CollectCost(costs);
+                }
             }
 
             if (QueueCapacity[id] <= 0)
@@ -93,5 +97,15 @@ public partial class ProducingQueueManager : Node
             }
         }
         SetProcess(true);
+    }
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+
+        foreach (var item in QueueCapacity)
+        {
+            RemoveFromQueue(item.Key, true, item.Value);
+        }
     }
 }

@@ -40,13 +40,16 @@ size = Vector2(80, 141)
 [node name="Tower" unique_id=548953940 instance=ExtResource("1_ykvt5")]
 Resource = ExtResource("2_d8t17")
 
+[node name="BuildingSelectableComponent" parent="." index="1" unique_id=550510253 node_paths=PackedStringArray("EffectedOn")]
+EffectedOn = NodePath("..")
+
 [node name="NinePatchRect" parent="BuildingSelectableComponent/Visual" parent_id_path=PackedInt32Array(550510253, 946751036) index="0" unique_id=584840865]
 offset_left = -66.0
 offset_top = -3.0
 offset_right = 66.0
 offset_bottom = 65.0
 
-[node name="CollisionShape2D" parent="BuildingSelectableComponent" parent_id_path=PackedInt32Array(550510253) index="1" unique_id=1060696685]
+[node name="CollisionShape2D" parent="BuildingSelectableComponent" index="1" unique_id=1060696685]
 position = Vector2(0, -61)
 shape = SubResource("RectangleShape2D_1uhux")
 
@@ -68,24 +71,21 @@ position = Vector2(0, -68)
 amount = 2
 process_material = SubResource("ParticleProcessMaterial_mx8be")
 
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="3" unique_id=841865287]
-visible = false
-position = Vector2(-23, 0)
-radius = 15.0
-
-[node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="4" unique_id=508235830]
-visible = false
-position = Vector2(20, 0)
-radius = 15.0
-
 [node name="CollisionShape2D" parent="HurtBox" parent_id_path=PackedInt32Array(799690141) index="0" unique_id=930546286]
 visible = false
 position = Vector2(0, -48.5)
 shape = SubResource("RectangleShape2D_fwii4")
 
-[node name="CollisionPolygon2D" parent="." index="6" unique_id=168278068]
-visible = false
+[node name="CollisionPolygon2D" parent="." index="4" unique_id=168278068]
 polygon = PackedVector2Array(-30, -10, 30, -10, 25, 10, -25, 10)
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="6" unique_id=841865287]
+position = Vector2(-23, 0)
+radius = 15.0
+
+[node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="7" unique_id=508235830]
+position = Vector2(20, 0)
+radius = 15.0
 
 [editable path="BuildingSelectableComponent"]
 [editable path="HurtBox"]

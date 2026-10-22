@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bera2oguud3bl" path="res://Assets/UI Elements/UI Elements/Icons/Icon_03.png" id="4_wdaot"]
 [ext_resource type="Texture2D" uid="uid://bn106wh6cfjw" path="res://Assets/UI Elements/UI Elements/Icons/Icon_04.png" id="5_swh2m"]
 [ext_resource type="Texture2D" uid="uid://ckj0epo2gp5cd" path="res://Assets/UI Elements/UI Elements/Icons/Icon_02.png" id="6_2rp1a"]
+[ext_resource type="Texture2D" uid="uid://djwej2vsm21x6" path="res://Assets/UI Elements/UI Elements/units_icon.png" id="8_bjua6"]
 
 [node name="UiResources" type="Control" unique_id=303616494]
 layout_mode = 3
@@ -26,9 +27,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -273.3333
+offset_left = -356.0
 offset_top = -30.0
-offset_right = 273.3333
+offset_right = 356.0
 offset_bottom = 34.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -89,5 +90,19 @@ expand_mode = 2
 stretch_mode = 3
 
 [node name="Value" type="Label" parent="UiResourcesGrid/Item3" unique_id=1355821164]
+layout_mode = 2
+text = "250"
+
+[node name="Item4" type="HBoxContainer" parent="UiResourcesGrid" unique_id=951327816]
+layout_mode = 2
+script = ExtResource("2_isdm4")
+
+[node name="Icon" type="TextureRect" parent="UiResourcesGrid/Item4" unique_id=68419582]
+layout_mode = 2
+texture = ExtResource("8_bjua6")
+expand_mode = 2
+stretch_mode = 3
+
+[node name="Value" type="Label" parent="UiResourcesGrid/Item4" unique_id=1436566289]
 layout_mode = 2
 text = "250"

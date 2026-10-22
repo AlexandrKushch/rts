@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="BuildResource" format=3 uid="uid://l03x2hwe542u"]
+
+[ext_resource type="Texture2D" uid="uid://dtglmrooyt3vd" path="res://Assets/Buildings/Blue Buildings/House1.png" id="1_sne30"]
+[ext_resource type="Script" uid="uid://ck4k0rwiv3nec" path="res://Scenes/Buildings/BuildResource.cs" id="3_g0pvo"]
+
+[resource]
+script = ExtResource("3_g0pvo")
+Id = 6
+Name = "house"
+Icon = ExtResource("1_sne30")
+MaxHp = 20
+Cost = Dictionary[int, int]({
+1: 50
+})
+RestoreUnitsCapacity = 10
+TileRequiresToBuild = PackedVector2Array(0, 0, 1, 0, -1, 0)
+Produces = Array[Object]([])
+metadata/_custom_type_script = "uid://ck4k0rwiv3nec"

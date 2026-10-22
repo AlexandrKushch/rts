@@ -20,6 +20,9 @@ public partial class BuildResource : Resource
     public Dictionary<ResourceTypeIds, int> Cost { get; set; }
 
     [Export]
+    public int RestoreUnitsCapacity { get; set; }
+
+    [Export]
     public Vector2[] TileRequiresToBuild { get; set; } = [Vector2.Zero];
 
     [Export]

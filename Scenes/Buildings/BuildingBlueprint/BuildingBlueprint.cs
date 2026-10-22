@@ -10,16 +10,18 @@ public partial class BuildingBlueprint : Node2D
 
     public BuildResource Resource { get; set; }
 
+    public TeamType Team { get; set; }
+
     public override void _Ready()
     {
-        var itemScene = GlobalResources.Instance.BuildingScenes[Resource.Id];
+        var itemScene = GlobalPlayers.Instance.Players[Team].GlobalResources.BuildingScenes[Resource.Id];
 
         if (itemScene != null)
         {
             Building = itemScene.Instantiate<BuildingBase>();
             Building.Resource = Resource;
+            Building.Team = Team;
             AddChild(Building);
-            Building.Visual.Sprite2D.Texture = Resource.Icon;
             SetAsBlueprint();
         }
     }

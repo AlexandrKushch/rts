@@ -69,6 +69,8 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp, IHasTeam
         HurtBox = GetNode<HurtBox>(nameof(HurtBox));
         Obstacles = GetChildren().Where(x => x is NavigationObstacle2D).Select(x => x as NavigationObstacle2D).ToArray();
 
+        Visual.Sprite2D.Texture = Resource.Icon;
+
         MaxHp = Resource.MaxHp;
 
         if (Predeployed)
@@ -134,7 +136,10 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp, IHasTeam
 
         if (HP >= MaxHp)
         {
-            HaveBeenBuilt();
+            if (!Built)
+            {
+                HaveBeenBuilt();
+            }
             return false;
         }
 
@@ -215,14 +220,18 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp, IHasTeam
 
         Visual.Destroy();
         _active = false;
+
+        _player.ResourceController.Spent(ResourceTypeIds.UnitsCapacity, Resource.RestoreUnitsCapacity);
     }
 
-    private void HaveBeenBuilt()
+    protected virtual void HaveBeenBuilt()
     {
         BuiltAndNotDamaged = true;
         HP = MaxHp;
         Visual.Built();
         OnSelectionChanged();
+        
+        _player.ResourceController.Collect(ResourceTypeIds.UnitsCapacity, Resource.RestoreUnitsCapacity);
 
         var bushesCount = SpaceAroundPoints.Length / 10;
         for (int i = 0; i < bushesCount; i++)

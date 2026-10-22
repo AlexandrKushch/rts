@@ -10,11 +10,13 @@
 [ext_resource type="Script" uid="uid://dvhbrbxcby3w0" path="res://Globals/Resources/GlobalResources.cs" id="11_1j4pb"]
 [ext_resource type="Script" uid="uid://uygj6w2ift33" path="res://Scenes/Controllers/NavigationRegionController.cs" id="11_es6iu"]
 [ext_resource type="Resource" uid="uid://cj7uk3l8yh8rq" path="res://Scenes/Resources/Types/r_wood.tres" id="11_ifk88"]
+[ext_resource type="Resource" uid="uid://55t2kn3m5moh" path="res://Scenes/Resources/Types/r_units_capacity.tres" id="11_uklyp"]
 [ext_resource type="Resource" uid="uid://us5gsh240dda" path="res://Scenes/Units/Types/r_archer.tres" id="12_0uxpu"]
 [ext_resource type="Resource" uid="uid://cm5nt1ekod7b8" path="res://Scenes/Units/Types/r_lancer.tres" id="13_fy12w"]
 [ext_resource type="Resource" uid="uid://hq8cctjvc4r1" path="res://Scenes/Units/Types/r_monk.tres" id="14_hvw5u"]
 [ext_resource type="Resource" uid="uid://cmmqwgiyv1amy" path="res://Scenes/Units/Types/r_pawn.tres" id="15_go6uc"]
 [ext_resource type="Texture2D" uid="uid://ckj0epo2gp5cd" path="res://Assets/UI Elements/UI Elements/Icons/Icon_02.png" id="16_4a3kt"]
+[ext_resource type="Resource" uid="uid://l03x2hwe542u" path="res://Scenes/Buildings/Types/r_house.tres" id="16_bq7c0"]
 [ext_resource type="Resource" uid="uid://8o6rwtbamayv" path="res://Scenes/Teams/Types/r_team_black.tres" id="16_gw1lt"]
 [ext_resource type="Resource" uid="uid://7mnimmigckos" path="res://Scenes/Teams/Types/r_team_blue.tres" id="16_ji84r"]
 [ext_resource type="PackedScene" uid="uid://bdj83x5vkxdjx" path="res://Scenes/Resources/Gold/gold_preset.tscn" id="16_koken"]
@@ -40,6 +42,7 @@
 [ext_resource type="Resource" uid="uid://3fqpdgsfv17m" path="res://Scenes/Buildings/Types/r_tower.tres" id="21_vae3x"]
 [ext_resource type="PackedScene" uid="uid://cayxdltveqe5h" path="res://Scenes/Resources/Gold/gold_s.tscn" id="31_q50pj"]
 [ext_resource type="PackedScene" uid="uid://10iu7akqmve2" path="res://Scenes/Resources/Gold/gold_xs.tscn" id="32_pmku7"]
+[ext_resource type="PackedScene" uid="uid://yhv3ldt2ba8d" path="res://Scenes/Buildings/House/house.tscn" id="32_uklyp"]
 [ext_resource type="PackedScene" uid="uid://b2khqdo8t3agy" path="res://Scenes/Resources/Gold/gold_m.tscn" id="33_fiicg"]
 [ext_resource type="PackedScene" uid="uid://cwmar2g8uyc5w" path="res://Scenes/Resources/Gold/gold_l.tscn" id="34_ji84r"]
 [ext_resource type="PackedScene" uid="uid://d3pi2yprbe584" path="res://Scenes/Players/HumanPlayer/human_player.tscn" id="34_ow7bd"]
@@ -91,14 +94,16 @@ Units = Dictionary[int, Object]({
 GatheringResources = Dictionary[int, Object]({
 1: ExtResource("11_ifk88"),
 2: ExtResource("10_4a3kt"),
-3: ExtResource("9_4o5wv")
+3: ExtResource("9_4o5wv"),
+4: ExtResource("11_uklyp")
 })
 Buildings = Dictionary[int, Object]({
 1: ExtResource("17_37bn8"),
 2: ExtResource("18_gw8t2"),
 3: ExtResource("19_nsdex"),
 4: ExtResource("20_eo50k"),
-5: ExtResource("21_vae3x")
+5: ExtResource("21_vae3x"),
+6: ExtResource("16_bq7c0")
 })
 Teams = Dictionary[int, Object]({
 0: ExtResource("16_ji84r"),
@@ -119,7 +124,8 @@ BuildingScenes = Dictionary[int, PackedScene]({
 2: ExtResource("18_nsdex"),
 3: ExtResource("19_eo50k"),
 4: ExtResource("20_vae3x"),
-5: ExtResource("21_h4gp5")
+5: ExtResource("21_h4gp5"),
+6: ExtResource("32_uklyp")
 })
 GoldScenes = Dictionary[int, PackedScene]({
 0: ExtResource("31_q50pj"),
@@ -358,11 +364,6 @@ CollisionShapes = [NodePath("../Tree12/CollisionShape2D"), NodePath("../Tree12/B
 [node name="Tree16" parent="Map/World" unique_id=795485057 node_paths=PackedStringArray("CollisionShapes") instance=ExtResource("10_6t3k2")]
 position = Vector2(563, 170)
 CollisionShapes = [NodePath("../Tree12/CollisionShape2D"), NodePath("../Tree12/BuildingSelectableComponent/CollisionShape2D")]
-
-[node name="Barracks" parent="Map/World" unique_id=548953940 instance=ExtResource("18_nsdex")]
-position = Vector2(944, 146)
-Team = 4
-Predeployed = true
 
 [node name="Archer" parent="Map/World" unique_id=1621880785 instance=ExtResource("16_vae3x")]
 position = Vector2(66, 556)

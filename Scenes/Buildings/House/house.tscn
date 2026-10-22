@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://yhv3ldt2ba8d"]
+
+[ext_resource type="PackedScene" uid="uid://bericglgvv4m8" path="res://Scenes/Buildings/building_base.tscn" id="1_f8cg6"]
+[ext_resource type="Texture2D" uid="uid://dtglmrooyt3vd" path="res://Assets/Buildings/Blue Buildings/House1.png" id="2_mneqk"]
+[ext_resource type="Script" uid="uid://codka8lbg2o8w" path="res://Scenes/Buildings/House/House.cs" id="2_ypeay"]
+[ext_resource type="Resource" uid="uid://l03x2hwe542u" path="res://Scenes/Buildings/Types/r_house.tres" id="3_v7r2n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tqhcv"]
+size = Vector2(102, 142)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v7r2n"]
+size = Vector2(84, 68)
+
+[node name="House" unique_id=548953940 instance=ExtResource("1_f8cg6")]
+script = ExtResource("2_ypeay")
+Resource = ExtResource("3_v7r2n")
+
+[node name="BuildingSelectableComponent" parent="." index="1" unique_id=550510253 node_paths=PackedStringArray("EffectedOn")]
+EffectedOn = NodePath("..")
+
+[node name="NinePatchRect" parent="BuildingSelectableComponent/Visual" parent_id_path=PackedInt32Array(550510253, 946751036) index="0" unique_id=584840865]
+offset_left = -60.0
+offset_top = -8.0
+offset_right = 60.0
+offset_bottom = 72.0
+
+[node name="CollisionShape2D" parent="BuildingSelectableComponent" index="1" unique_id=1060696685]
+visible = false
+position = Vector2(0, -44)
+shape = SubResource("RectangleShape2D_tqhcv")
+
+[node name="Sprite2D" parent="Visual" parent_id_path=PackedInt32Array(1843020465) index="0" unique_id=1679201315]
+position = Vector2(0, -46)
+texture = ExtResource("2_mneqk")
+
+[node name="CollisionShape2D" parent="HurtBox" parent_id_path=PackedInt32Array(799690141) index="0" unique_id=930546286]
+visible = false
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_v7r2n")
+
+[node name="CollisionPolygon2D" parent="." index="4" unique_id=168278068]
+polygon = PackedVector2Array(-30, -10, 30, -10, 25, 10, -25, 10)
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="6" unique_id=1517582379]
+position = Vector2(-23, 0)
+radius = 15.0
+
+[node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="7" unique_id=1769730212]
+position = Vector2(20, 0)
+radius = 15.0
+
+[editable path="BuildingSelectableComponent"]
+[editable path="HurtBox"]

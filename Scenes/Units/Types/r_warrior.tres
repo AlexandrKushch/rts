@@ -9,6 +9,7 @@ Id = 5
 Name = "warrior"
 Icon = ExtResource("1_pd55f")
 Cost = Dictionary[int, int]({
-3: 100
+3: 100,
+4: 1
 })
 metadata/_custom_type_script = "uid://b3jham1omyu5f"

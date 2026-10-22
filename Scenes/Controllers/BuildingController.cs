@@ -6,6 +6,7 @@ public partial class BuildingController : Node2D
 {
     public const int TileSize = 64;
 
+    private PlayerBase _player;
     private bool _showBuildingControl;
     private Control _buildControl;
 
@@ -17,6 +18,7 @@ public partial class BuildingController : Node2D
 
     public override void _Ready()
     {
+        _player = GetParent<PlayerBase>();
     }
 
     public override void _UnhandledInput(InputEvent input)
@@ -102,6 +104,7 @@ public partial class BuildingController : Node2D
 
         _blueprint = BuildingBlueprintScene.Instantiate<BuildingBlueprint>();
         _blueprint.Resource = resource;
+        _blueprint.Team = _player.Team;
         GlobalResources.Instance.World.AddChild(_blueprint);
 
         _blueprint.Building.Team = team;

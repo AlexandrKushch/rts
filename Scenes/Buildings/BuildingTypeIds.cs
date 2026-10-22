@@ -5,4 +5,5 @@ public enum BuildingTypeIds
     Castle = 3,
     Monastery = 4,
     Tower = 5,
+    House = 6
 }

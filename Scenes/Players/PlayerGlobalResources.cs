@@ -14,6 +14,7 @@ public partial class PlayerGlobalResources : Node
     public Dictionary<BuildingTypeIds, BuildResource> Buildings { get; private set; } = new Dictionary<BuildingTypeIds, BuildResource>();
 
     public Dictionary<UnitTypeIds, PackedScene> UnitScenes { get; private set; } = new Dictionary<UnitTypeIds, PackedScene>();
+    public Dictionary<BuildingTypeIds, PackedScene> BuildingScenes { get; private set; } = new Dictionary<BuildingTypeIds, PackedScene>();
 
     public override void _Ready()
     {
@@ -46,7 +47,7 @@ public partial class PlayerGlobalResources : Node
 
         foreach (var unit in GlobalResources.Instance.UnitScenes)
         {
-            var unitDuplicate = unit.Value.Instantiate().Duplicate() as UnitBase;
+            var unitDuplicate = unit.Value.Instantiate<UnitBase>();
             SetupColorAnimations(unitDuplicate);
             unitDuplicate.Team = _player.Team;
             unitDuplicate.Meta = Units[unit.Key];
@@ -65,17 +66,40 @@ public partial class PlayerGlobalResources : Node
 
         foreach (var building in GlobalResources.Instance.Buildings)
         {
+            string name = building.Value.Id == BuildingTypeIds.House
+                ? $"{building.Value.Name}1".Capitalize().Replace(" ", string.Empty)
+                : building.Value.Name.Capitalize();
+
             var buildingDuplicate = new BuildResource
             {
                 Id = building.Value.Id,
                 Cost = building.Value.Cost,
                 Name = building.Value.Name,
                 MaxHp = building.Value.MaxHp,
+                RestoreUnitsCapacity = building.Value.RestoreUnitsCapacity,
                 TileRequiresToBuild = building.Value.TileRequiresToBuild.ToArray(),
                 Produces = building.Value.Produces.Select(x => Units[x.Id]).ToArray(),
-                Icon = ResourceLoader.Load<Texture2D>($"{GlobalResources.Instance.Teams[_player.Team].BuildingsPath}/{building.Value.Name.Capitalize()}.png")
+                Icon = ResourceLoader.Load<Texture2D>($"{GlobalResources.Instance.Teams[_player.Team].BuildingsPath}/{name}.png")
             };
             Buildings.Add(building.Key, buildingDuplicate);
+        }
+
+        foreach (var building in GlobalResources.Instance.BuildingScenes)
+        {
+            var buildingDuplicate = building.Value.Instantiate<BuildingBase>();
+            buildingDuplicate.Team = _player.Team;
+            buildingDuplicate.Resource = Buildings[building.Key];
+            var scene = new PackedScene();
+            var result = scene.Pack(buildingDuplicate);
+
+            if (result == Error.Ok)
+            {
+                BuildingScenes.Add(building.Key, scene);
+            }
+            else
+            {
+                GD.PushError($"{building.Key} with color {_player.Team} has error to create packed scene");
+            }
         }
     }
 
