@@ -38,21 +38,39 @@ public partial class UnitsController : Node2D
         if (input.IsReleased())
         {
             TryPointCastSelectable(out SelectableComponent targetObject);
+            var formations = HumanPlayer.SelectionController.Selections.Select(x => x.EffectedOn as Formation).Where(x => x != null).ToHashSet();
             var units = HumanPlayer.SelectionController.Selections.Select(x => x.EffectedOn as UnitBase).Where(x => x != null).ToHashSet();
             var buildings = HumanPlayer.SelectionController.Selections.Select(x => x.EffectedOn as BuildingBase).Where(x => x != null).ToHashSet();
 
             int i = 0;
+
+            foreach (var formation in formations)
+            {
+                formation.SetTarget(GetGlobalMousePosition(), null);
+            }
+
             foreach (var unit in units)
             {
+                var hasFormationUnit = unit as IHasFormationUnit;
                 if (targetObject != null)
                 {
                     unit.SetTarget(
                         GetGlobalMousePosition(),
-                        targetObject.EffectedOn);
+                        targetObject.EffectedOn as Node2D);
+
+                    if (hasFormationUnit != null)
+                    {
+                        hasFormationUnit.AttachTo(targetObject.EffectedOn as Node2D);
+                    }
                 }
                 else
                 {
                     unit.SetTarget(GetGlobalMousePosition() + RandomExtension.GetRandomPointInCircle(i * 20), null);
+                    
+                    if (hasFormationUnit != null)
+                    {
+                        hasFormationUnit.Detach();
+                    }
                 }
 
                 if (unit is Warrior warrior)
@@ -68,10 +86,33 @@ public partial class UnitsController : Node2D
                 i++;
             }
 
+            if (units.Count > 1
+                && units.All(x => x.Meta.Id == units.First().Meta.Id && x is IHasFormationUnit formationUnit && formationUnit.Formation == null))
+            {
+                var formation = Formation.Create();
+                foreach (var unit in units)
+                {
+                    formation.AddUnit(unit as IHasFormationUnit);
+                }
+
+                formation.Ready += () =>
+                {
+                    HumanPlayer.SelectionController.SelectFormation(formation);
+                    InputMoveCommand(input);
+                };
+                return;
+            }
+
             foreach (var building in buildings)
             {
                 building.TargetToSpawnedUnits = GetGlobalMousePosition();
-                building.TargetObjectToSpawnedUnits = targetObject?.EffectedOn is ResourceBase ? targetObject?.EffectedOn : null;
+                building.TargetObjectToSpawnedUnits = targetObject?.EffectedOn is ResourceBase resource ? resource : null;
+            }
+
+            if (HumanPlayer.SelectionController.Selections.All(x => x.EffectedOn is UnitBase || x.EffectedOn is Formation))
+            {
+                HumanPlayer.SelectionController.ClearSelections();                
+		        HumanPlayer.SelectionController.EmitSignal(SelectionController.SignalName.SelectionChanged);
             }
         }
     }

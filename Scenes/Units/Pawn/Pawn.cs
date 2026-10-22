@@ -40,8 +40,6 @@ public partial class Pawn : UnitHasVisualBase
         {
             _updateMovementAnimation(Velocity, ResourceToCollectData?.CollectedCount ?? 0);
         }
-
-        Visual.UpdateOutlineVisible(UnitOverlapedDetector.GetOverlappingAreas().Count(x => x.GetInstanceId() != UnitSelectableComponent.GetInstanceId()) > 0);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -170,11 +168,11 @@ public partial class Pawn : UnitHasVisualBase
         {
             StateMachine.ChangeState(PawnStateIds.MoveTo);
             TargetBuilding = null;
+            TargetResource = null;
 
             if (ResourceToCollectData == null
                 || ResourceToCollectData.CollectedCount == 0)
             {
-                TargetResource = null;
                 ResourceToCollectData = null;
                 _updateMovementAnimation = (v, _) => { PawnVisual.UpdateMovement(v, string.Empty); };
             }

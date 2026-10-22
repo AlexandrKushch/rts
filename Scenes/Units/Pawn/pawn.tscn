@@ -1014,16 +1014,16 @@ _data = {
 script = ExtResource("2_8igw0")
 Meta = ExtResource("3_8fvhf")
 
-[node name="UnitSelectableComponent" parent="." index="3" unique_id=550510253 node_paths=PackedStringArray("EffectedOn")]
+[node name="SelectableComponent" parent="." index="3" unique_id=550510253 node_paths=PackedStringArray("EffectedOn")]
 EffectedOn = NodePath("..")
 
-[node name="Visual" parent="UnitSelectableComponent" index="0" unique_id=946751036]
+[node name="Visual" parent="SelectableComponent" index="0" unique_id=946751036]
 position = Vector2(0, -28)
 
-[node name="SelectionTriangleSprite" parent="UnitSelectableComponent/Visual" index="0" unique_id=205670872]
+[node name="SelectionTriangleSprite" parent="SelectableComponent/Visual" index="0" unique_id=205670872]
 position = Vector2(0, -49)
 
-[node name="CollisionShape2D" parent="UnitSelectableComponent" index="1" unique_id=1060696685]
+[node name="CollisionShape2D" parent="SelectableComponent" index="1" unique_id=1060696685]
 position = Vector2(0, -28.5)
 shape = SubResource("RectangleShape2D_6t8ju")
 
@@ -1080,5 +1080,5 @@ script = ExtResource("18_5n0ob")
 
 [connection signal="animation_finished" from="Visual/AnimationPlayer" to="Visual" method="OnAnimationFinished"]
 
-[editable path="UnitSelectableComponent"]
+[editable path="SelectableComponent"]
 [editable path="HurtBox"]

@@ -360,7 +360,7 @@ position = Vector2(563, 170)
 CollisionShapes = [NodePath("../Tree12/CollisionShape2D"), NodePath("../Tree12/BuildingSelectableComponent/CollisionShape2D")]
 
 [node name="Barracks" parent="Map/World" unique_id=548953940 instance=ExtResource("18_nsdex")]
-position = Vector2(383, 319)
+position = Vector2(944, 146)
 Team = 4
 Predeployed = true
 
@@ -389,3 +389,23 @@ position = Vector2(285, 78)
 
 [node name="Bush_02" parent="Map/World" unique_id=1148779680 instance=ExtResource("41_dw0e8")]
 position = Vector2(678, 183)
+
+[node name="Warrior" parent="Map/World" unique_id=1037282678 instance=ExtResource("20_c8mgu")]
+position = Vector2(951, 212)
+Team = 4
+Predeployed = true
+
+[node name="Warrior2" parent="Map/World" unique_id=1885083785 instance=ExtResource("20_c8mgu")]
+position = Vector2(983, 203)
+Team = 4
+Predeployed = true
+
+[node name="Warrior3" parent="Map/World" unique_id=1076910242 instance=ExtResource("20_c8mgu")]
+position = Vector2(1008, 197)
+Team = 4
+Predeployed = true
+
+[node name="Warrior4" parent="Map/World" unique_id=1974536826 instance=ExtResource("20_c8mgu")]
+position = Vector2(1040, 191)
+Team = 4
+Predeployed = true

@@ -8,11 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://nx6qj76be3eg" path="res://Assets/Units/Blue Units/Warrior/Warrior_Attack1.png" id="4_kvhdx"]
 [ext_resource type="Material" uid="uid://dvulgksriyeti" path="res://Shaders/m_unit_visual.tres" id="5_5husr"]
 [ext_resource type="Texture2D" uid="uid://cpfl3rpyy5btc" path="res://Assets/Units/Blue Units/Warrior/Warrior_Run.png" id="5_intd2"]
-[ext_resource type="Shader" uid="uid://cr5ubxgqx01e6" path="res://Shaders/outline.gdshader" id="6_kk860"]
 [ext_resource type="Texture2D" uid="uid://b65d2n0ixixel" path="res://Assets/Units/Blue Units/Pawn/Pawn_Idle.png" id="7_5husr"]
 [ext_resource type="Texture2D" uid="uid://bvp3vvvdtdg3m" path="res://Assets/Units/Blue Units/Warrior/Warrior_Guard.png" id="7_546yd"]
 [ext_resource type="Texture2D" uid="uid://daulrfkfskpeh" path="res://Assets/Units/Blue Units/Warrior/Warrior_Attack2.png" id="7_bbpbx"]
+[ext_resource type="Material" uid="uid://b5ivatfoc4qge" path="res://Shaders/m_outline.tres" id="7_ih0oj"]
 [ext_resource type="Script" uid="uid://bp0pnxnktf4kt" path="res://Scenes/Units/Pawn/OutlineVisual.cs" id="8_dhetd"]
+[ext_resource type="PackedScene" uid="uid://qmbdx123twrb" path="res://Scenes/Core/AreaDetector/AllyDetector/ally_detector.tscn" id="14_x230b"]
 [ext_resource type="PackedScene" uid="uid://bqjyu20ma3xo5" path="res://Scenes/Core/AreaDetector/ArrowDetecter/arrow_detector.tscn" id="15_ih0oj"]
 [ext_resource type="Script" uid="uid://dvn078hltenve" path="res://Scenes/Units/Warrior/States/WarriorStateMachine.cs" id="15_sp1vb"]
 [ext_resource type="Script" uid="uid://25rdpnr81ut4" path="res://Scenes/Units/Warrior/States/WarriorIdleState.cs" id="16_yuf4r"]
@@ -28,12 +29,6 @@ size = Vector2(72, 97)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kk860"]
 size = Vector2(70, 89)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_o1m4s"]
-shader = ExtResource("6_kk860")
-shader_parameter/clr = Color(0.28235295, 0.34509805, 0.5176471, 1)
-shader_parameter/type = 1
-shader_parameter/thickness = 4.0
 
 [sub_resource type="Animation" id="Animation_wscwa"]
 resource_name = "run"
@@ -322,15 +317,12 @@ radius = 250.0
 script = ExtResource("2_bbpbx")
 Meta = ExtResource("3_intd2")
 
-[node name="UnitSelectableComponent" parent="." index="3" unique_id=550510253 node_paths=PackedStringArray("EffectedOn")]
+[node name="SelectableComponent" parent="." index="3" unique_id=550510253 node_paths=PackedStringArray("EffectedOn")]
 EffectedOn = NodePath("..")
 
-[node name="CollisionShape2D" parent="UnitSelectableComponent" index="1" unique_id=1060696685]
+[node name="CollisionShape2D" parent="SelectableComponent" index="1" unique_id=1060696685]
 position = Vector2(0, -34.5)
 shape = SubResource("RectangleShape2D_nhsra")
-
-[node name="UnitOverlapedDetector" parent="." index="4" unique_id=1906555247]
-visible = false
 
 [node name="CollisionShape2D" parent="HurtBox" parent_id_path=PackedInt32Array(799690141) index="0" unique_id=930546286]
 shape = SubResource("RectangleShape2D_kk860")
@@ -347,7 +339,7 @@ hframes = 8
 [node name="Outline" type="Sprite2D" parent="Visual" index="1" unique_id=989331758 node_paths=PackedStringArray("DuplicateThe")]
 visible = false
 z_index = 5
-material = SubResource("ShaderMaterial_o1m4s")
+material = ExtResource("7_ih0oj")
 position = Vector2(0, -29)
 texture = ExtResource("7_5husr")
 hframes = 8
@@ -361,6 +353,9 @@ rect = Rect2(-32, -64, 64, 74)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" index="3" unique_id=1839081757]
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_5husr")
+
+[node name="AllyDetector" parent="." index="7" unique_id=362746832 instance=ExtResource("14_x230b")]
+visible = false
 
 [node name="ArrowDetector" parent="." index="8" unique_id=1175189121 instance=ExtResource("15_ih0oj")]
 visible = false
@@ -402,7 +397,7 @@ one_shot = true
 
 [connection signal="animation_finished" from="Visual/AnimationPlayer" to="Visual" method="OnAnimationFinished"]
 
-[editable path="UnitSelectableComponent"]
+[editable path="SelectableComponent"]
 [editable path="HurtBox"]
 [editable path="ArrowDetector"]
 [editable path="EnemyDetector"]

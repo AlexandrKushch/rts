@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://kn5afehh6n2a"]
+
+[ext_resource type="Script" uid="uid://cska62dx6kalu" path="res://Scenes/Units/Formation/Formation.cs" id="1_d1dbg"]
+[ext_resource type="PackedScene" uid="uid://c1skwp03bakoh" path="res://Scenes/Core/SelectableComponent/UnitSelectableComponent/unit_selectable_component.tscn" id="1_vvcwr"]
+
+[node name="Formation" type="Node" unique_id=164102772]
+script = ExtResource("1_d1dbg")
+
+[node name="UnitSelectableComponent" parent="." unique_id=550510253 node_paths=PackedStringArray("EffectedOn") instance=ExtResource("1_vvcwr")]
+EffectedOn = NodePath("..")
+
+[node name="SelectionTriangleSprite" parent="UnitSelectableComponent/Visual" parent_id_path=PackedInt32Array(550510253, 946751036) index="0" unique_id=205670872]
+scale = Vector2(3, 3)
+
+[editable path="UnitSelectableComponent"]

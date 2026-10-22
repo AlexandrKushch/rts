@@ -1,11 +1,10 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 public partial class SelectionController : Node2D
 {
-	private const double ClickedTimer = 0.2f;
-
 	private double _clickTimer = 0.0f;
 	private PlayerBase PlayerBase;
 	private SelectArea _selectArea;
@@ -14,11 +13,12 @@ public partial class SelectionController : Node2D
 
 	[Signal] public delegate void SelectionChangedEventHandler();
 
-	public HashSet<SelectableComponent> Selections { get; private set; } = new HashSet<SelectableComponent>();
+	public HashSet<SelectableComponent> Selections { get; private set; }
 
 	public override void _Ready()
 	{
 		PlayerBase = GetParent<PlayerBase>();
+		Selections = new HashSet<SelectableComponent>();
 	}
 
 	public override void _UnhandledInput(InputEvent input)
@@ -43,58 +43,30 @@ public partial class SelectionController : Node2D
 			}
 		}
 	}
-	
-	public override void _Process(double delta)
-	{
-		SelectionProcess(delta);
-	}
 
 	private void SelectionInput(InputEventMouseButton input)
 	{
-		if (input.Pressed)
+		if (!input.Pressed)
 		{
-			ClearUnits();
-
-			_selectArea = SelectAreaScene.Instantiate<SelectArea>();
-			GetTree().Root.AddChild(_selectArea);
-
-			_selectArea.GlobalPosition = GetGlobalMousePosition();
-
-			_clickTimer = 0.0f;
-		}
-		else if (IsInstanceValid(_selectArea))
-		{
-			if (_clickTimer <= ClickedTimer
-				&& _selectArea.Start.IsEqualApprox(_selectArea.End)
-				&& TryPointCastSelectable(out var selection))
+			if (TryPointCastSelectable(out var selection))
 			{
-				if (selection.EffectedOn is not UnitBase || (selection.EffectedOn is UnitBase unit && unit.Team == PlayerBase.Team))
+				if (selection.EffectedOn is UnitBase)
 				{
-					Selections = new HashSet<SelectableComponent> { selection };
+					ProcessUnitSelection(selection);
 				}
 				else
 				{
-					Selections = new HashSet<SelectableComponent>();
+					ClearSelections();
+					Selections.Add(selection);
 				}
 			}
 			else
 			{
-				Selections = _selectArea.GetSelection(PlayerBase.Team);
+				ClearSelections();
 			}
 
 			SelectUnits();
 			EmitSignal(SignalName.SelectionChanged);
-			_selectArea.QueueFree();
-		}
-	}
-
-	private void SelectionProcess(double delta)
-	{
-		if (IsInstanceValid(_selectArea))
-		{
-			_selectArea.End = GetGlobalMousePosition();
-
-			_clickTimer += delta;
 		}
 	}
 
@@ -114,18 +86,71 @@ public partial class SelectionController : Node2D
 		{
 			unit.UpdateSelection(true);
 		}
-		
+
 		EmitSignal(SignalName.SelectionChanged);
 	}
 
-	private void ClearUnits()
+	public void SelectFormation(Formation formation)
 	{
-		foreach (var unit in Selections)
+		ClearSelections();
+		Selections = new HashSet<SelectableComponent> { formation.UnitSelectableComponent };
+	}
+
+	public void ClearSelections()
+	{
+		foreach (var selection in Selections)
 		{
-			unit.UpdateSelection(false);
+			selection.UpdateSelection(false);
 		}
 
 		Selections.Clear();
+	}
+
+	private void ProcessUnitSelection(SelectableComponent selection)
+	{
+		var toDeselect = Selections.Where(x => x.EffectedOn is not UnitBase).ToHashSet();
+
+		foreach (var x in toDeselect)
+		{
+			x.UpdateSelection(false);
+			Selections.Remove(x);
+		}
+
+		if (Selections.Contains(selection))
+		{
+			if (Selections.Count == 1)
+			{
+				if (selection.EffectedOn is IHasFormationUnit hasFormationUnit
+					&& hasFormationUnit.Formation != null)
+				{
+					SelectFormation(hasFormationUnit.Formation);
+				}
+				else
+				{
+					var selectables = QuerySelectablesOfType(selection.EffectedOn.GetType(), selection.GlobalPosition, 200);
+
+					foreach (var selectable in selectables)
+					{
+						Selections.Add(selectable);
+					}
+				}
+			}
+			else
+			{
+				selection.UpdateSelection(false);
+				Selections.Remove(selection);
+			}
+		}
+		else if (selection.EffectedOn is IHasFormationUnit hasFormationUnit
+			&& hasFormationUnit.Formation != null)
+		{
+			ClearSelections();
+			SelectFormation(hasFormationUnit.Formation);
+		}
+		else
+		{
+			Selections.Add(selection);
+		}
 	}
 
 	private void SelectUnits()
@@ -143,6 +168,19 @@ public partial class SelectionController : Node2D
 		}
 	}
 
+	private SelectableComponent[] QuerySelectablesOfType(Type type, Vector2 from, float distance)
+	{
+		var nodes = GlobalResources.Instance.World
+			.GetChildren()
+			.Where(x => x.GetType() == type && from.DistanceTo((x as Node2D).GlobalPosition) < distance);
+
+		var selectables = nodes
+			.Select(x => x.GetNode<SelectableComponent>(nameof(SelectableComponent)))
+			.ToArray();
+
+		return selectables;
+	}
+
 	private bool TryPointCastSelectable(out SelectableComponent collider)
 	{
 		collider = null;
@@ -153,7 +191,7 @@ public partial class SelectionController : Node2D
 			Position = GetGlobalMousePosition(),
 			CollideWithAreas = true,
 			CollideWithBodies = false,
-			CollisionMask = 2 | 16
+			CollisionMask = 512
 		};
 
 		var results = spaceState.IntersectPoint(query);

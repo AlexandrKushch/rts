@@ -38,6 +38,14 @@ public partial class UiSelectedUnitsContainer : HBoxContainer
             .Where(x => x != null)
             .GroupBy(x => x.Meta.Id);
 
+        if (UiSelectedUnits.HumanPlayer.SelectionController.Selections.Count == 1
+            && UiSelectedUnits.HumanPlayer.SelectionController.Selections.First().EffectedOn is Formation formation)
+        {
+            newSelectedUnitsQuery = formation.Units
+                .Select(x => x as UnitBase)
+                .GroupBy(x => x.Meta.Id);
+        }
+
         var newSelectedUnitsCount = newSelectedUnitsQuery
             .ToDictionary(x => x.Key, x => x.Count());
 

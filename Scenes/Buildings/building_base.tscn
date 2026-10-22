@@ -47,7 +47,6 @@ MarkerScene = ExtResource("2_5ffdn")
 script = ExtResource("2_hc4xp")
 
 [node name="BuildingSelectableComponent" parent="." unique_id=550510253 node_paths=PackedStringArray("EffectedOn") instance=ExtResource("2_d1o4y")]
-collision_layer = 17
 EffectedOn = NodePath("..")
 
 [node name="Visual" type="Node2D" parent="." unique_id=1843020465]

@@ -23,6 +23,8 @@ public partial class UnitBase : CharacterBody2D, IDestroyableWithHp, IHasTeam
 		}
 	}
 
+	public SelectableComponent SelectableComponent { get; private set; }
+
 	public Vector2? Target { get; set; }
 
 	public Node2D TargetObject { get; set; }
@@ -66,6 +68,11 @@ public partial class UnitBase : CharacterBody2D, IDestroyableWithHp, IHasTeam
 			HP = Meta.MaxHP;
 		}
 
+		if (HasNode(nameof(SelectableComponent)))
+		{
+			SelectableComponent = GetNode<SelectableComponent>(nameof(SelectableComponent));
+		}
+		
 		_deadScene = ResourceLoader.Load<PackedScene>("uid://d0k60hnpsewgk");
 	}
 
@@ -139,7 +146,7 @@ public partial class UnitBase : CharacterBody2D, IDestroyableWithHp, IHasTeam
 		HP = Math.Min(HP + value, Meta.MaxHP);
 	}
 
-	public void Destroy()
+	public virtual void Destroy()
 	{
 		var dead = _deadScene.Instantiate<Dead>();
 		dead.GlobalPosition = GlobalPosition;

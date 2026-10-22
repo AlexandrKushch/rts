@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class Archer : UnitHasVisualBase
+public partial class Archer : UnitHasVisualBase, IHasFormationUnit
 {
     public const float ReloadSpeed = 1f;
 
@@ -14,7 +14,7 @@ public partial class Archer : UnitHasVisualBase
     public ArcherStateMachine StateMachine { get; private set; }
     public EnemyDetector EnemyDetector { get; private set; }
     public Marker2D ShootPoint { get; set; }
-
+    public Formation Formation { get; set; }
     public float Radius { get; private set; }
 
     [Export] public PackedScene ArrowScene { get; private set; }
@@ -22,9 +22,9 @@ public partial class Archer : UnitHasVisualBase
     public override void _Ready()
     {
         base._Ready();
-        
+
         if (Meta != null && Predeployed)
-		{
+        {
             return;
         }
 
@@ -52,8 +52,8 @@ public partial class Archer : UnitHasVisualBase
                 _attackReloadTimer = 0.0f;
             }
         }
-        
-		if (StateMachine.GetCurrentStateType() == ArcherStateIds.MoveTo)
+
+        if (StateMachine.GetCurrentStateType() == ArcherStateIds.MoveTo)
         {
             Node2D target;
             Vector2? point;
@@ -110,5 +110,41 @@ public partial class Archer : UnitHasVisualBase
             100);
         var randomTargetPosition = AttackTarget.GlobalPosition + RandomExtension.GetRandomPointInCircle(randomness);
         arrowPath.SetTarget(ShootPoint.Position, randomTargetPosition, Radius);
+    }
+
+    public void AttachTo(Node2D targetObject)
+    {
+        if (targetObject is IHasFormationUnit hasFormation)
+        {            
+            if (hasFormation.Formation == null)
+            {
+                var formation = Formation.Create();
+                formation.AddUnit(this);
+                formation.AddUnit(hasFormation);
+            }
+            else
+            {
+                hasFormation.Formation.AddUnit(this);
+            }
+        }
+    }
+
+    public void Detach()
+    {
+        if (Formation == null)
+        {
+            return;
+        }
+        
+        Formation.RemoveUnit(this);
+    }
+
+    public override void Destroy()
+    {
+        if (Formation != null)
+        {
+            Formation.RemoveUnit(this);
+        }
+        base.Destroy();
     }
 }

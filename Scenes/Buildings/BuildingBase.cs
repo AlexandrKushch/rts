@@ -195,7 +195,6 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp, IHasTeam
         {
             return;
         }
-        GD.Print(1);
         NavigationRegionController.Instance.Bake();
     }
 

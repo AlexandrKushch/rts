@@ -6,12 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://b30e35p1ctttl" path="res://Scenes/Units/Archer/Arrow/arrow.tscn" id="3_h6b1n"]
 [ext_resource type="Resource" uid="uid://us5gsh240dda" path="res://Scenes/Units/Types/r_archer.tres" id="3_x40ju"]
 [ext_resource type="Script" uid="uid://badwdam6585pp" path="res://Scenes/Units/Archer/ArcherVisual.cs" id="4_81b8j"]
-[ext_resource type="Shader" uid="uid://cr5ubxgqx01e6" path="res://Shaders/outline.gdshader" id="6_81b8j"]
 [ext_resource type="Texture2D" uid="uid://dt8ty838i5wcs" path="res://Assets/Units/Blue Units/Archer/Archer_Shoot.png" id="6_iuvmd"]
 [ext_resource type="Material" uid="uid://dvulgksriyeti" path="res://Shaders/m_unit_visual.tres" id="6_mmmmp"]
 [ext_resource type="Texture2D" uid="uid://b65d2n0ixixel" path="res://Assets/Units/Blue Units/Pawn/Pawn_Idle.png" id="7_cjf6y"]
 [ext_resource type="Texture2D" uid="uid://bmyipbb8iuj44" path="res://Assets/Units/Blue Units/Archer/Archer_Run.png" id="7_x40ju"]
 [ext_resource type="Script" uid="uid://bp0pnxnktf4kt" path="res://Scenes/Units/Pawn/OutlineVisual.cs" id="8_bem2y"]
+[ext_resource type="Material" uid="uid://b5ivatfoc4qge" path="res://Shaders/m_outline.tres" id="8_syvfn"]
 [ext_resource type="Script" uid="uid://c4si3w1en870t" path="res://Scenes/Units/Archer/ArcherStateMachine/ArcherStateMachine.cs" id="11_cjf6y"]
 [ext_resource type="Script" uid="uid://dqwcrb7h6o8l0" path="res://Scenes/Units/Archer/ArcherStateMachine/ArcherIdleState.cs" id="12_bem2y"]
 [ext_resource type="Script" uid="uid://4xot23nfpvfg" path="res://Scenes/Units/Archer/ArcherStateMachine/ArcherMoveToState.cs" id="13_02drl"]
@@ -24,12 +24,6 @@ size = Vector2(70, 88)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vcr0m"]
 size = Vector2(44, 64)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_02drl"]
-shader = ExtResource("6_81b8j")
-shader_parameter/clr = Color(0.28235295, 0.34509805, 0.5176471, 1)
-shader_parameter/type = 1
-shader_parameter/thickness = 4.0
 
 [sub_resource type="Animation" id="Animation_byvkr"]
 resource_name = "idle"
@@ -225,10 +219,10 @@ Meta = ExtResource("3_x40ju")
 [node name="NavigationAgent2D" parent="." index="1" unique_id=1325708388]
 max_speed = 1000.0
 
-[node name="UnitSelectableComponent" parent="." index="3" unique_id=550510253 node_paths=PackedStringArray("EffectedOn")]
+[node name="SelectableComponent" parent="." index="3" unique_id=550510253 node_paths=PackedStringArray("EffectedOn")]
 EffectedOn = NodePath("..")
 
-[node name="CollisionShape2D" parent="UnitSelectableComponent" index="1" unique_id=1060696685]
+[node name="CollisionShape2D" parent="SelectableComponent" index="1" unique_id=1060696685]
 position = Vector2(0, -34)
 shape = SubResource("RectangleShape2D_lirip")
 
@@ -248,7 +242,7 @@ hframes = 6
 [node name="Outline" type="Sprite2D" parent="Visual" index="1" unique_id=1667719366 node_paths=PackedStringArray("DuplicateThe")]
 visible = false
 z_index = 5
-material = SubResource("ShaderMaterial_02drl")
+material = ExtResource("8_syvfn")
 position = Vector2(0, -29)
 texture = ExtResource("7_cjf6y")
 hframes = 8
@@ -284,9 +278,8 @@ script = ExtResource("16_vcr0m")
 
 [node name="EnemyDetector" parent="." index="10" unique_id=1958789508 instance=ExtResource("13_syvfn")]
 visible = false
-collision_mask = 18
 
 [connection signal="animation_finished" from="Visual/AnimationPlayer" to="Visual" method="OnAnimationFinished"]
 
-[editable path="UnitSelectableComponent"]
+[editable path="SelectableComponent"]
 [editable path="HurtBox"]

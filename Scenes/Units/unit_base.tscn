@@ -9,9 +9,6 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_igbku"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xrivr"]
-size = Vector2(44, 20)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ccatd"]
 size = Vector2(44, 77)
 
@@ -53,19 +50,10 @@ debug_path_custom_color = Color(0, 1, 1, 1)
 wait_time = 0.5
 autostart = true
 
-[node name="UnitSelectableComponent" parent="." unique_id=550510253 instance=ExtResource("2_igbku")]
-collision_layer = 2
-collision_mask = 0
+[node name="SelectableComponent" parent="." unique_id=550510253 instance=ExtResource("2_igbku")]
 
-[node name="CollisionShape2D" parent="UnitSelectableComponent" index="1" unique_id=1060696685]
+[node name="CollisionShape2D" parent="SelectableComponent" index="1" unique_id=1060696685]
 shape = SubResource("CircleShape2D_igbku")
-
-[node name="UnitOverlapedDetector" type="Area2D" parent="." unique_id=1906555247]
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="UnitOverlapedDetector" unique_id=1591378200]
-position = Vector2(0, 10)
-shape = SubResource("RectangleShape2D_xrivr")
 
 [node name="HurtBox" parent="." unique_id=799690141 instance=ExtResource("3_hw2f8")]
 visible = false
@@ -89,5 +77,5 @@ process_material = SubResource("ParticleProcessMaterial_xrivr")
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="OnVelocityComputed"]
 [connection signal="timeout" from="UpdatePathTimer" to="." method="UpdatePath"]
 
-[editable path="UnitSelectableComponent"]
+[editable path="SelectableComponent"]
 [editable path="HurtBox"]

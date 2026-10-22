@@ -9,7 +9,7 @@ public partial class SelectableComponent : Area2D
     public bool Selected { get; private set; }
 
     [Export]
-    public Node2D EffectedOn { get; private set; }
+    public Node EffectedOn { get; private set; }
 
     public override void _Ready()
     {

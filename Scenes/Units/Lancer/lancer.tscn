@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dqlraj8web2cw" path="res://Assets/Units/Blue Units/Lancer/Lancer_Right_Attack.png" id="4_ixymf"]
 [ext_resource type="Texture2D" uid="uid://jb0k48q5pvdq" path="res://Assets/Units/Blue Units/Lancer/Lancer_Run.png" id="5_680ec"]
 [ext_resource type="Material" uid="uid://dvulgksriyeti" path="res://Shaders/m_unit_visual.tres" id="5_h0ltc"]
-[ext_resource type="Shader" uid="uid://cr5ubxgqx01e6" path="res://Shaders/outline.gdshader" id="6_13wat"]
+[ext_resource type="Material" uid="uid://b5ivatfoc4qge" path="res://Shaders/m_outline.tres" id="7_721oo"]
 [ext_resource type="Texture2D" uid="uid://b65d2n0ixixel" path="res://Assets/Units/Blue Units/Pawn/Pawn_Idle.png" id="7_h0ltc"]
 [ext_resource type="Script" uid="uid://bp0pnxnktf4kt" path="res://Scenes/Units/Pawn/OutlineVisual.cs" id="8_t8ae6"]
 [ext_resource type="Texture2D" uid="uid://bpt154ld6rbhf" path="res://Assets/Units/Blue Units/Lancer/Lancer_DownRight_Attack.png" id="10_yqjad"]
@@ -30,12 +30,6 @@ size = Vector2(58, 87)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_13wat"]
 size = Vector2(44, 64)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dsmhd"]
-shader = ExtResource("6_13wat")
-shader_parameter/clr = Color(0.28235295, 0.34509805, 0.5176471, 1)
-shader_parameter/type = 1
-shader_parameter/thickness = 4.0
 
 [sub_resource type="Animation" id="Animation_4us4c"]
 resource_name = "run"
@@ -556,10 +550,10 @@ _data = {
 script = ExtResource("2_koi2g")
 Meta = ExtResource("3_ixymf")
 
-[node name="UnitSelectableComponent" parent="." index="3" unique_id=550510253 node_paths=PackedStringArray("EffectedOn")]
+[node name="SelectableComponent" parent="." index="3" unique_id=550510253 node_paths=PackedStringArray("EffectedOn")]
 EffectedOn = NodePath("..")
 
-[node name="CollisionShape2D" parent="UnitSelectableComponent" index="1" unique_id=1060696685]
+[node name="CollisionShape2D" parent="SelectableComponent" index="1" unique_id=1060696685]
 position = Vector2(0, -31.5)
 shape = SubResource("RectangleShape2D_ypcdl")
 
@@ -573,13 +567,13 @@ script = ExtResource("4_0nlk7")
 [node name="Sprite2D" type="Sprite2D" parent="Visual" index="0" unique_id=1176692145]
 material = ExtResource("5_h0ltc")
 position = Vector2(0, -29)
-texture = ExtResource("3_cbjpg")
-hframes = 12
+texture = ExtResource("10_yqjad")
+hframes = 3
 
 [node name="Outline" type="Sprite2D" parent="Visual" index="1" unique_id=1960704067 node_paths=PackedStringArray("DuplicateThe")]
 visible = false
 z_index = 5
-material = SubResource("ShaderMaterial_dsmhd")
+material = ExtResource("7_721oo")
 position = Vector2(0, -29)
 texture = ExtResource("7_h0ltc")
 hframes = 8
@@ -614,5 +608,5 @@ one_shot = true
 
 [connection signal="animation_finished" from="Visual/AnimationPlayer" to="Visual" method="OnAnimationFinished"]
 
-[editable path="UnitSelectableComponent"]
+[editable path="SelectableComponent"]
 [editable path="HurtBox"]

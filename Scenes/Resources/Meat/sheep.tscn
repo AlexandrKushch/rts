@@ -24,9 +24,6 @@ radius = 8.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fbmh2"]
 size = Vector2(46, 43)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xrivr"]
-size = Vector2(96, 20)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jdeet"]
 shader = ExtResource("5_mcfp1")
 shader_parameter/clr = Color(0.28235295, 0.34509805, 0.5176471, 1)
@@ -209,26 +206,17 @@ avoidance_layers = 0
 position = Vector2(0, -11)
 shape = SubResource("CircleShape2D_q3rmq")
 
-[node name="UnitSelectableComponent" parent="." unique_id=550510253 node_paths=PackedStringArray("EffectedOn") instance=ExtResource("2_5savk")]
+[node name="SelectableComponent" parent="." unique_id=550510253 node_paths=PackedStringArray("EffectedOn") instance=ExtResource("2_5savk")]
 position = Vector2(0, -11)
 collision_layer = 2
-collision_mask = 0
 EffectedOn = NodePath("../Resource")
 
-[node name="Visual" parent="UnitSelectableComponent" index="0" unique_id=946751036]
+[node name="Visual" parent="SelectableComponent" index="0" unique_id=946751036]
 position = Vector2(-2, -20)
 
-[node name="CollisionShape2D" parent="UnitSelectableComponent" index="1" unique_id=1060696685]
+[node name="CollisionShape2D" parent="SelectableComponent" index="1" unique_id=1060696685]
 position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_fbmh2")
-
-[node name="UnitOverlapedDetector" type="Area2D" parent="." unique_id=718295326]
-position = Vector2(0, -11)
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="UnitOverlapedDetector" unique_id=625527422]
-position = Vector2(0, 10)
-shape = SubResource("RectangleShape2D_xrivr")
 
 [node name="Visual" type="Node2D" parent="." unique_id=296800109]
 position = Vector2(0, -11)
@@ -295,4 +283,4 @@ one_shot = true
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="OnVelocityComputed"]
 [connection signal="animation_finished" from="Visual/AnimationPlayer" to="Visual" method="OnAnimationFinished"]
 
-[editable path="UnitSelectableComponent"]
+[editable path="SelectableComponent"]

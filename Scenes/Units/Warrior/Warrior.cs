@@ -1,7 +1,7 @@
 using Godot;
 using System.Linq;
 
-public partial class Warrior : UnitHasVisualBase
+public partial class Warrior : UnitHasVisualBase, IHasFormationUnit
 {
     private const double ChargeTimeout = 3f;
     private const int MaxGuardingCount = 3;
@@ -18,8 +18,11 @@ public partial class Warrior : UnitHasVisualBase
     public const float MaxDistanceToLeaveFromAttachedPoint = 200;
 
     public Vector2 AttachedToPoint { get; set; }
+	public Formation Formation { get; set; }
+
     public Node2D AttackTarget { get; private set; }
     public WarriorVisual WarriorVisual { get; private set; }
+    public AllyDetector AllyDetector { get; private set; }
     public ArrowDetector ArrowDetector { get; private set; }
     public EnemyDetector EnemyDetector { get; private set; }
     public WarriorStateMachine StateMachine { get; private set; }
@@ -38,6 +41,7 @@ public partial class Warrior : UnitHasVisualBase
         }
 
         WarriorVisual = Visual as WarriorVisual;
+        AllyDetector = GetNode<AllyDetector>(nameof(AllyDetector));
         ArrowDetector = GetNode<ArrowDetector>(nameof(ArrowDetector));
         EnemyDetector = GetNode<EnemyDetector>(nameof(EnemyDetector));
         StateMachine = GetNode<WarriorStateMachine>(nameof(StateMachine));
@@ -73,8 +77,6 @@ public partial class Warrior : UnitHasVisualBase
                 StateMachine.ChangeState(WarriorStateIds.Guard);
             }
         }
-
-        Visual.UpdateOutlineVisible(UnitOverlapedDetector.GetOverlappingAreas().Count > 0);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -127,6 +129,33 @@ public partial class Warrior : UnitHasVisualBase
         {
             StateMachine.ChangeState(changeToState);
         }
+    }
+
+    public void AttachTo(Node2D targetObject)
+    {
+        if (targetObject is IHasFormationUnit hasFormation)
+        {            
+            if (hasFormation.Formation == null)
+            {
+                var formation = Formation.Create();
+                formation.AddUnit(this);
+                formation.AddUnit(hasFormation);
+            }
+            else
+            {
+                hasFormation.Formation.AddUnit(this);
+            }
+        }
+    }
+
+    public void Detach()
+    {
+        if (Formation == null)
+        {
+            return;
+        }
+        
+        Formation.RemoveUnit(this);
     }
 
     public void SetAttackTarget(Node2D unit)
@@ -245,5 +274,14 @@ public partial class Warrior : UnitHasVisualBase
         base.TakeDamageWithDash(from, !inGuard ? value : 0, !inGuard ? power : power / 2);
 
         StateMachine.ChangeState(WarriorStateIds.Idle);
+    }
+
+    public override void Destroy()
+    {
+        if (Formation != null)
+        {
+            Formation.RemoveUnit(this);
+        }
+        base.Destroy();
     }
 }

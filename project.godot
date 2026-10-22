@@ -81,6 +81,7 @@ mmb={
 2d_physics/layer_7="golds"
 2d_physics/layer_8="sheeps"
 2d_physics/layer_9="hitbox"
+2d_physics/layer_10="selectable"
 avoidance/layer_1="world"
 avoidance/layer_2="units"
 
