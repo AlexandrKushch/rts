@@ -75,7 +75,7 @@ public partial class Pawn : UnitHasVisualBase
     {
         return GetParent()
             .GetChildren()
-            .Where(x => x is BuildingBase && x != null)
+            .Where(x => x is BuildingBase building && building != null && building.Team == Team)
             .Select(x => x as BuildingBase)
             .MinBy(x => GlobalPosition.DistanceTo(x.GlobalPosition));
     }
@@ -158,7 +158,8 @@ public partial class Pawn : UnitHasVisualBase
                 TargetBuilding = building;
                 TargetResource = null;
 
-                if (!building.BuiltAndNotDamaged)
+                if (!building.BuiltAndNotDamaged
+                    && (building is not ShelterBuildingBase shelter || shelter.EnemyDetector.Items.Count == 0))
                 {
                     _updateMovementAnimation = (v, _) => { PawnVisual.UpdateMovement(v, "build"); };
                 }

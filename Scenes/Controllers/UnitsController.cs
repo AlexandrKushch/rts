@@ -73,15 +73,15 @@ public partial class UnitsController : Node2D
                     }
                 }
 
-                if (unit is Warrior warrior)
-                {
-                    warrior.AttachedToPoint = warrior.Target.Value;
-                }
+                // if (unit is Warrior warrior)
+                // {
+                //     warrior.AttachedToPoint = warrior.Target.Value;
+                // }
 
-                if (unit is Lancer lancer)
-                {
-                    lancer.AttachedToPoint = lancer.Target.Value;
-                }
+                // if (unit is Lancer lancer)
+                // {
+                //     lancer.AttachedToPoint = lancer.Target.Value;
+                // }
 
                 i++;
             }

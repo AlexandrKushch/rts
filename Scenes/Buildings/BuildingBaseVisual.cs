@@ -136,8 +136,14 @@ public partial class BuildingBaseVisual : Node2D
         else if (newParticlesCount < currentParticlesCount)
         {
             var toRemove = _fireParticles.LastOrDefault(IsInstanceValid);
-            toRemove.QueueFree();
-            _fireParticles.Remove(toRemove);
+            if (toRemove != null)
+            {
+                if (IsInstanceValid(toRemove))
+                {
+                    toRemove.QueueFree();
+                }
+                _fireParticles.Remove(toRemove);
+            }
         }
     }
 }

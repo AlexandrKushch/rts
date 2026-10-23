@@ -7,10 +7,10 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp, IHasTeam
 {
     private bool _active = true;
 
-    private UiBuildingPopup UiBuildingPopup;
+    protected UiBuildingPopup UiBuildingPopup;
     private ProducingQueueManager ProducingQueueManager;
 
-    private HumanPlayer _player;
+    private PlayerBase _player;
 
     public int MaxHp { get; set; }
     public int HP { get; set; }
@@ -105,8 +105,11 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp, IHasTeam
         Visual.UpdateProgress(0.0f);
         Visual.Deploy();
 
-        _player = GlobalPlayers.Instance.Players[Team] as HumanPlayer;
-        _player.SelectionController.SelectionChanged += OnSelectionChanged;
+        _player = GlobalPlayers.Instance.Players[Team];
+        if (_player is HumanPlayer humanPlayer)
+        {
+            humanPlayer.SelectionController.SelectionChanged += OnSelectionChanged;
+        }
     }
 
     public void SpawnUnit(UnitTypeIds id)
@@ -178,7 +181,11 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp, IHasTeam
         if (IsNodeReady())
         {
             ProducingQueueManager.ProgressComplete += SpawnUnit;
-            _player.SelectionController.SelectionChanged += OnSelectionChanged;
+
+            if (_player is HumanPlayer humanPlayer)
+            {
+                humanPlayer.SelectionController.SelectionChanged += OnSelectionChanged;
+            }
         }
     }
 
@@ -188,9 +195,9 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp, IHasTeam
 
         ProducingQueueManager.ProgressComplete -= SpawnUnit;
 
-        if (_player != null)
+        if (_player is HumanPlayer humanPlayer)
         {
-            _player.SelectionController.SelectionChanged -= OnSelectionChanged;
+            humanPlayer.SelectionController.SelectionChanged -= OnSelectionChanged;
         }
     }
 
@@ -246,15 +253,15 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp, IHasTeam
         }
     }
 
-    private void OnSelectionChanged()
+    protected virtual void OnSelectionChanged()
     {
-        if (!Built)
+        if (!Built || _player is not HumanPlayer humanPlayer)
         {
             return;
         }
 
         bool wasSelected = UiBuildingPopup.Selected;
-        UiBuildingPopup.Selected = _player.SelectionController.Selections.Count == 1 && _player.SelectionController.Selections.Any(x => x.EffectedOn.GetInstanceId() == GetInstanceId());
+        UiBuildingPopup.Selected = humanPlayer.SelectionController.Selections.Count == 1 && humanPlayer.SelectionController.Selections.Any(x => x.EffectedOn.GetInstanceId() == GetInstanceId());
 
         if (UiBuildingPopup.Selected)
         {
@@ -266,7 +273,7 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp, IHasTeam
         }
     }
 
-    private void TryGetOpenSpaceAround(out List<Vector2> occupiedPoints, out List<Vector2> openSpacePoints)
+    protected void TryGetOpenSpaceAround(out List<Vector2> occupiedPoints, out List<Vector2> openSpacePoints)
     {
         occupiedPoints = [];
         openSpacePoints = [];

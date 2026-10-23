@@ -192,7 +192,10 @@ public partial class UiBuildingPopup : Control
     public void AddToQueue(UnitTypeIds id)
     {
         ProducingQueueManager.AddToQueue(id);
-        UpdateLabel(id, ProducingQueueManager.QueueCapacity[id]);
+        if (ProducingQueueManager.QueueCapacity.ContainsKey(id))
+        {
+            UpdateLabel(id, ProducingQueueManager.QueueCapacity[id]);
+        }
     }
 
     public void RemoveFromQueue(UnitTypeIds id, bool cashback = false)

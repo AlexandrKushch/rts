@@ -1,8 +1,12 @@
 [gd_scene format=3 uid="uid://ciqpg25wy10i2"]
 
 [ext_resource type="PackedScene" uid="uid://bericglgvv4m8" path="res://Scenes/Buildings/building_base.tscn" id="1_ykvt5"]
-[ext_resource type="Resource" uid="uid://3fqpdgsfv17m" path="res://Scenes/Buildings/Types/r_tower.tres" id="2_d8t17"]
+[ext_resource type="Script" uid="uid://bij8curhnie6u" path="res://Scenes/Buildings/ShelterBase/ShelterBuildingBase.cs" id="2_d8t17"]
 [ext_resource type="Texture2D" uid="uid://bym0fx237u6be" path="res://Assets/Buildings/Blue Buildings/Tower.png" id="2_fwii4"]
+[ext_resource type="PackedScene" uid="uid://b30e35p1ctttl" path="res://Scenes/Units/Archer/Arrow/arrow.tscn" id="3_mx8be"]
+[ext_resource type="Resource" uid="uid://3fqpdgsfv17m" path="res://Scenes/Buildings/Types/r_tower.tres" id="4_2c6cj"]
+[ext_resource type="PackedScene" uid="uid://7neisewoma26" path="res://Scenes/Core/AreaDetector/EnemyDetector/enemy_detector.tscn" id="4_d8t17"]
+[ext_resource type="PackedScene" uid="uid://bl3drp0h0eqn1" path="res://Scenes/UI/UiUnitsCapacity/ui_units_capacity.tscn" id="7_4r1w1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1uhux"]
 size = Vector2(92, 174)
@@ -38,7 +42,10 @@ anim_speed_max = 1.0
 size = Vector2(80, 141)
 
 [node name="Tower" unique_id=548953940 instance=ExtResource("1_ykvt5")]
-Resource = ExtResource("2_d8t17")
+script = ExtResource("2_d8t17")
+ArrowScene = ExtResource("3_mx8be")
+MaxArrowsCount = 5
+Resource = ExtResource("4_2c6cj")
 
 [node name="BuildingSelectableComponent" parent="." index="1" unique_id=550510253 node_paths=PackedStringArray("EffectedOn")]
 EffectedOn = NodePath("..")
@@ -50,6 +57,7 @@ offset_right = 66.0
 offset_bottom = 65.0
 
 [node name="CollisionShape2D" parent="BuildingSelectableComponent" index="1" unique_id=1060696685]
+visible = false
 position = Vector2(0, -61)
 shape = SubResource("RectangleShape2D_1uhux")
 
@@ -86,6 +94,23 @@ radius = 15.0
 [node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="7" unique_id=508235830]
 position = Vector2(20, 0)
 radius = 15.0
+
+[node name="EnemyDetector" parent="." index="8" unique_id=1958789508 instance=ExtResource("4_d8t17")]
+visible = false
+collision_mask = 2
+
+[node name="ShootPoint" type="Marker2D" parent="." index="9" unique_id=1682788177]
+position = Vector2(0, -93)
+
+[node name="ReloadArrowTimer" type="Timer" parent="." index="10" unique_id=1420556278]
+wait_time = 0.4
+one_shot = true
+
+[node name="ReloadMagTimer" type="Timer" parent="." index="11" unique_id=1210890321]
+wait_time = 2.5
+one_shot = true
+
+[node name="UiUnitsCapacity" parent="." index="12" unique_id=2021113642 instance=ExtResource("7_4r1w1")]
 
 [editable path="BuildingSelectableComponent"]
 [editable path="HurtBox"]

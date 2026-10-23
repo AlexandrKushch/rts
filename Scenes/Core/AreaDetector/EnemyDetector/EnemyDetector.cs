@@ -9,11 +9,11 @@ public partial class EnemyDetector : AreaDetector<Node2D>
     {
         base._Ready();
         
-        var parent = GetParent<UnitBase>();
+        var parent = GetParent<IHasTeam>();
 
         if (parent == null)
         {
-            throw new Exception($"{Name} should be attached to {nameof(UnitBase)}");
+            throw new Exception($"{Name} should be attached to {nameof(IHasTeam)}");
         }
 
         _team = parent.Team;
