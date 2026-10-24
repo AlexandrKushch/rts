@@ -75,8 +75,12 @@ shape = SubResource("RectangleShape2D_10o7v")
 visible = false
 polygon = PackedVector2Array(0, 50, 70, 50, 69, -50, -70, -50, -75, 50)
 
-[node name="UiBuildingPopup" parent="." index="9" unique_id=540837747]
-Radius = 100.0
+[node name="UiQueue" parent="." index="10" unique_id=1779588501]
+offset_left = -148.0
+offset_top = -147.0
+offset_right = 152.0
+offset_bottom = -97.0
 
 [editable path="BuildingSelectableComponent"]
 [editable path="HurtBox"]
+[editable path="UiPie"]

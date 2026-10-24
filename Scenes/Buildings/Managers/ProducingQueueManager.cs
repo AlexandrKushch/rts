@@ -42,7 +42,7 @@ public partial class ProducingQueueManager : Node
             Progressing = true;
         }
 
-        CurrentProgress += 100 * (float)delta;
+        CurrentProgress += 50 * (float)delta;
 
         if (CurrentProgress >= MaxProgress)
         {
@@ -89,10 +89,13 @@ public partial class ProducingQueueManager : Node
                 }
             }
 
-            if (QueueCapacity[id] <= 0)
+            if (id == CurrentProgressItem)
             {
                 CurrentProgress = 0;
                 Progressing = false;
+            }
+            if (QueueCapacity[id] <= 0)
+            {
                 QueueCapacity.Remove(id);
             }
         }

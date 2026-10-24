@@ -4,13 +4,15 @@
 [ext_resource type="PackedScene" uid="uid://dym5jgkjbyec6" path="res://mesh_instance_2d.tscn" id="2_5ffdn"]
 [ext_resource type="PackedScene" uid="uid://dmh6f0dnp4ebk" path="res://Scenes/Core/SelectableComponent/BuildingSelectableComponent/building_selectable_component.tscn" id="2_d1o4y"]
 [ext_resource type="Script" uid="uid://0oygj18fcd3q" path="res://Scenes/Buildings/Managers/ProducingQueueManager.cs" id="2_hc4xp"]
-[ext_resource type="PackedScene" uid="uid://c784niqlcupmb" path="res://Scenes/UI/Buildings/UiBuildingPopup/ui_building_popup.tscn" id="3_8lk13"]
+[ext_resource type="PackedScene" uid="uid://75y4i6gxnve3" path="res://Scenes/UI/UiQuableItem/ui_quable_item.tscn" id="3_i28m2"]
 [ext_resource type="Shader" uid="uid://dv23pjvgx4fnl" path="res://Shaders/building.gdshader" id="5_xgsxx"]
 [ext_resource type="Script" uid="uid://bgjp3u8kai0nd" path="res://Scenes/Buildings/BuildingBaseVisual.cs" id="6_8auwt"]
 [ext_resource type="Texture2D" uid="uid://rspxfu0a4470" path="res://Assets/Particle FX/Dust_01.png" id="8_81c4c"]
 [ext_resource type="Texture2D" uid="uid://6s8hneppn5el" path="res://Assets/Particle FX/Explosion_01.png" id="8_o5t4p"]
 [ext_resource type="PackedScene" uid="uid://cb8citwk61klx" path="res://Scenes/Core/HurtBox/hurt_box.tscn" id="9_h2foa"]
 [ext_resource type="Texture2D" uid="uid://3ekub2y0nhum" path="res://Assets/Particle FX/Explosion_02.png" id="9_i28m2"]
+[ext_resource type="PackedScene" uid="uid://dmtwkvw8jr03o" path="res://Scenes/UI/UiPie/ui_pie.tscn" id="11_o5t4p"]
+[ext_resource type="PackedScene" uid="uid://fgt1cdxy2y4m" path="res://Scenes/UI/UiQueue/ui_queue.tscn" id="13_2xlkg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4g0xq"]
 shader = ExtResource("5_xgsxx")
@@ -42,6 +44,7 @@ particles_anim_loop = false
 collision_layer = 17
 script = ExtResource("1_8grwn")
 MarkerScene = ExtResource("2_5ffdn")
+UiQuableItemScene = ExtResource("3_i28m2")
 
 [node name="ProducingQueueManager" type="Node" parent="." unique_id=915224856]
 script = ExtResource("2_hc4xp")
@@ -85,7 +88,39 @@ process_material = SubResource("ParticleProcessMaterial_vtjyd")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=168278068]
 polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
 
-[node name="UiBuildingPopup" parent="." unique_id=540837747 node_paths=PackedStringArray("ProducingQueueManager") instance=ExtResource("3_8lk13")]
-ProducingQueueManager = NodePath("../ProducingQueueManager")
+[node name="UiPie" parent="." unique_id=608295903 instance=ExtResource("11_o5t4p")]
+offset_left = -32.0
+offset_top = -147.0
+offset_right = -32.0
+offset_bottom = -147.0
+Radius = 120.0
+DefaultOffset = 50.0
+
+[node name="UiBuildingPopupItem" parent="UiPie" index="0" unique_id=41689300]
+offset_left = -115.911095
+offset_top = -31.058296
+offset_right = -51.91146
+offset_bottom = 32.94207
+
+[node name="UiBuildingPopupItem2" parent="UiPie" index="1" unique_id=673623114]
+offset_left = -50.7142
+offset_top = -108.75693
+offset_right = 13.285801
+offset_bottom = -44.756927
+
+[node name="UiBuildingPopupItem3" parent="UiPie" index="2" unique_id=1685411494]
+offset_left = 50.714188
+offset_top = -108.756935
+offset_right = 114.71417
+offset_bottom = -44.756935
+
+[node name="UiBuildingPopupItem4" parent="UiPie" index="3" unique_id=518191847]
+offset_left = 115.911095
+offset_top = -31.058285
+offset_right = 179.9112
+offset_bottom = 32.941776
+
+[node name="UiQueue" parent="." unique_id=1779588501 instance=ExtResource("13_2xlkg")]
 
 [editable path="BuildingSelectableComponent"]
+[editable path="UiPie"]

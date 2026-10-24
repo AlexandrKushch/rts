@@ -411,11 +411,6 @@ position = Vector2(1040, 191)
 Team = 4
 Predeployed = true
 
-[node name="Tower" parent="Map/World" unique_id=548953940 instance=ExtResource("21_h4gp5")]
-position = Vector2(611, 447)
-Team = 4
-Predeployed = true
-
 [node name="Castle" parent="Map/World" unique_id=1438727988 instance=ExtResource("19_eo50k")]
 position = Vector2(884, 103)
 Team = 4

@@ -13,6 +13,7 @@ config_version=5
 config/name="RTS"
 run/main_scene="uid://bhvkbg1ds3qtu"
 config/features=PackedStringArray("4.7", "C#", "Forward Plus")
+config/icon="uid://dsesm828u14vn"
 
 [display]
 

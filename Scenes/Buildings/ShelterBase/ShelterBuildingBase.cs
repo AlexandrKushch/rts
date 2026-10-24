@@ -75,7 +75,7 @@ public partial class ShelterBuildingBase : BuildingBase
 
         if (UiUnitsCapacity != null && UiUnitsCapacity.Capacity > 0)
         {
-            UiUnitsCapacity.Visible = !UiBuildingPopup.Selected;
+            UiUnitsCapacity.Visible = !UiPie.Selected;
         }
     }
 

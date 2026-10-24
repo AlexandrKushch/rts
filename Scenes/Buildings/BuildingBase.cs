@@ -7,8 +7,8 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp, IHasTeam
 {
     private bool _active = true;
 
-    protected UiBuildingPopup UiBuildingPopup;
-    private ProducingQueueManager ProducingQueueManager;
+    protected UiPie UiPie;
+    protected UiQueue UiQueue;
 
     private PlayerBase _player;
 
@@ -49,10 +49,12 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp, IHasTeam
     public CollisionPolygon2D CollisionPolygon2D { get; private set; }
     public HurtBox HurtBox { get; private set; }
     public NavigationObstacle2D[] Obstacles { get; private set; }
+    public ProducingQueueManager ProducingQueueManager { get; private set; }
 
     [Export] public BuildResource Resource { get; set; }
 
     [Export] private PackedScene MarkerScene;
+    [Export] private PackedScene UiQuableItemScene;
 
     [Export]
     public TeamType Team { get; set; }
@@ -62,7 +64,8 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp, IHasTeam
 
     public override void _Ready()
     {
-        UiBuildingPopup = GetNode<UiBuildingPopup>(nameof(UiBuildingPopup));
+        UiPie = GetNode<UiPie>(nameof(UiPie));
+        UiQueue = GetNode<UiQueue>(nameof(UiQueue));
         ProducingQueueManager = GetNode<ProducingQueueManager>(nameof(ProducingQueueManager));
         Visual = GetNode<BuildingBaseVisual>(nameof(Visual));
         CollisionPolygon2D = GetNode<CollisionPolygon2D>(nameof(CollisionPolygon2D));
@@ -81,6 +84,37 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp, IHasTeam
             Deploy();
             HaveBeenBuilt();
             Visual.UpdateProgress(Mathf.Remap(HP, 0, MaxHp, 0, 1));
+        }
+
+        UiPie.Visible = false;
+        UiQueue.Visible = false;
+        UiQueue.ProducingQueueManager = ProducingQueueManager;
+        UiQueue.ProducingQueueManager.ProgressComplete += UiQueue.ProgressComplete;
+
+        foreach (var item in UiPie.GetChildren())
+        {
+            item.QueueFree();
+        }
+        foreach (var item in UiQueue.QueueContainer.GetChildren())
+        {
+            item.QueueFree();
+        }
+        foreach (var produce in Resource.Produces)
+        {
+            var pieItem = UiQuableItemScene.Instantiate<UiQuableItem>();
+            pieItem.Id = produce.Id;
+            var icon = pieItem.GetNode<TextureRect>("Icon");
+            icon.Texture = produce.Icon;
+            pieItem.ProducingQueueManager = ProducingQueueManager;
+            UiPie.AddChild(pieItem);
+
+            var queueItem = UiQuableItemScene.Instantiate<UiQuableItem>();
+            queueItem.Id = produce.Id;
+            queueItem.Readonly = true;
+            var queueIcon = queueItem.GetNode<TextureRect>("Icon");
+            queueIcon.Texture = produce.Icon;
+            queueItem.ProducingQueueManager = ProducingQueueManager;
+            UiQueue.QueueContainer.AddChild(queueItem);
         }
 
         ProducingQueueManager.ProgressComplete += SpawnUnit;
@@ -260,16 +294,17 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp, IHasTeam
             return;
         }
 
-        bool wasSelected = UiBuildingPopup.Selected;
-        UiBuildingPopup.Selected = humanPlayer.SelectionController.Selections.Count == 1 && humanPlayer.SelectionController.Selections.Any(x => x.EffectedOn.GetInstanceId() == GetInstanceId());
+        UiPie.Selected = humanPlayer.SelectionController.Selections.Count == 1 && humanPlayer.SelectionController.Selections.Any(x => x.EffectedOn.GetInstanceId() == GetInstanceId());
 
-        if (UiBuildingPopup.Selected)
+        if (UiPie.Selected)
         {
-            UiBuildingPopup.Expand(wasSelected != UiBuildingPopup.Selected);
+            UiPie.Expand();
+            UiQueue.Colapse();
         }
         else
         {
-            UiBuildingPopup.Colapse();
+            UiPie.Colapse();
+            UiQueue.Expand();
         }
     }
 
@@ -319,9 +354,9 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp, IHasTeam
                 if (NavigationRegionController.Instance.IsPointInside(globalStart))
                 {
                     aroundPoints.Add(start);
-                    var marker = MarkerScene.Instantiate<Node2D>();
-                    AddChild(marker);
-                    marker.GlobalPosition = globalStart;
+                    // var marker = MarkerScene.Instantiate<Node2D>();
+                    // AddChild(marker);
+                    // marker.GlobalPosition = globalStart;
                 }
             }
         }

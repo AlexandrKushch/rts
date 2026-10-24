@@ -2,6 +2,7 @@ using Godot;
 
 public partial class UiButton : TextureButton
 {
+    public bool Readonly { get; set; }
     [Export] private Control TweenWith;
 
     public override void _Ready()
@@ -14,6 +15,11 @@ public partial class UiButton : TextureButton
 
     public void OnButtonDown()
     {
+        if (Readonly)
+        {
+            return;
+        }
+
         var tween = CreateTween().SetParallel();
         tween.TweenProperty(this, "scale", new Vector2(0.9f, 0.9f), 0.1f);
 
@@ -25,6 +31,11 @@ public partial class UiButton : TextureButton
 
     public void OnButtonUp()
     {
+        if (Readonly)
+        {
+            return;
+        }
+        
         var tween = CreateTween().SetParallel();
         tween.TweenProperty(this, "scale", new Vector2(1.0f, 1.0f), 0.1f);
 

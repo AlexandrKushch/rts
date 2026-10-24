@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://dmtwkvw8jr03o"]
+
+[ext_resource type="Script" uid="uid://wdfkeqm1op2y" path="res://Scenes/UI/UiPie/UiPie.cs" id="1_xnd2r"]
+[ext_resource type="PackedScene" uid="uid://75y4i6gxnve3" path="res://Scenes/UI/UiQuableItem/ui_quable_item.tscn" id="2_603ew"]
+
+[node name="UiPie" type="Control" unique_id=608295903]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xnd2r")
+Radius = 300.0
+
+[node name="UiBuildingPopupItem" parent="." unique_id=41689300 instance=ExtResource("2_603ew")]
+layout_mode = 1
+offset_left = -788.132
+offset_top = -536.132
+offset_right = -724.1325
+offset_bottom = -472.1314
+scale = Vector2(1, 1)
+
+[node name="UiBuildingPopupItem2" parent="." unique_id=673623114 instance=ExtResource("2_603ew")]
+layout_mode = 1
+offset_left = -653.6457
+offset_top = -613.7777
+offset_right = -589.64606
+offset_bottom = -549.77783
+scale = Vector2(1, 1)
+
+[node name="UiBuildingPopupItem3" parent="." unique_id=1685411494 instance=ExtResource("2_603ew")]
+layout_mode = 1
+offset_left = -498.35428
+offset_top = -613.7777
+offset_right = -434.355
+offset_bottom = -549.77783
+scale = Vector2(1, 1)
+
+[node name="UiBuildingPopupItem4" parent="." unique_id=518191847 instance=ExtResource("2_603ew")]
+layout_mode = 1
+offset_left = -363.86798
+offset_top = -536.132
+offset_right = -299.86786
+offset_bottom = -472.13196
+scale = Vector2(1, 1)

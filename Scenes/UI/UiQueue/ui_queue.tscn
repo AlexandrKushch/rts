@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://fgt1cdxy2y4m"]
+
+[ext_resource type="Script" uid="uid://yntm5g7eo6d3" path="res://Scenes/UI/UiQueue/UiQueue.cs" id="1_bkplu"]
+[ext_resource type="Texture2D" uid="uid://b2pch1h077dfi" path="res://Assets/Terrain/Tileset/Shadow.png" id="2_jkjjj"]
+[ext_resource type="PackedScene" uid="uid://75y4i6gxnve3" path="res://Scenes/UI/UiQuableItem/ui_quable_item.tscn" id="3_tfymh"]
+
+[node name="UiQueue" type="Control" unique_id=1779588501]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 226.0
+offset_top = 242.0
+offset_right = -226.0
+offset_bottom = -242.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+script = ExtResource("1_bkplu")
+
+[node name="BG" type="NinePatchRect" parent="." unique_id=492809818]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_transform_enabled = true
+texture = ExtResource("2_jkjjj")
+patch_margin_left = 80
+patch_margin_top = 80
+patch_margin_right = 80
+patch_margin_bottom = 80
+
+[node name="QueueContainer" type="HBoxContainer" parent="." unique_id=1089455713]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -216.0
+offset_top = -38.0
+offset_right = 216.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_constants/separation = 44
+alignment = 1
+
+[node name="UiBuildingPopupItem" parent="QueueContainer" unique_id=41689300 instance=ExtResource("3_tfymh")]
+layout_mode = 2
+
+[node name="UiBuildingPopupItem2" parent="QueueContainer" unique_id=339378210 instance=ExtResource("3_tfymh")]
+layout_mode = 2
+
+[node name="UiBuildingPopupItem3" parent="QueueContainer" unique_id=1567898255 instance=ExtResource("3_tfymh")]
+layout_mode = 2
+
+[node name="UiBuildingPopupItem4" parent="QueueContainer" unique_id=1005839832 instance=ExtResource("3_tfymh")]
+layout_mode = 2

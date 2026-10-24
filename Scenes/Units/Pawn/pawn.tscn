@@ -31,6 +31,7 @@
 [ext_resource type="Script" uid="uid://cukibtuwlw4pa" path="res://Scenes/Units/Pawn/States/PawnBuildOrRepairState.cs" id="18_5n0ob"]
 [ext_resource type="Texture2D" uid="uid://bsw0alb2na82x" path="res://Assets/Units/Blue Units/Pawn/Pawn_Meat_Interact.png" id="18_65j2d"]
 [ext_resource type="Texture2D" uid="uid://cdy84ksjalnea" path="res://Assets/Units/Blue Units/Pawn/Pawn_Meat_Run.png" id="19_1iohd"]
+[ext_resource type="Script" uid="uid://tpv525q4e7qm" path="res://Scenes/Units/Pawn/States/PawnMoveToShelterState.cs" id="30_qgydd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6t8ju"]
 size = Vector2(58, 69)
@@ -1072,10 +1073,13 @@ Pawn = NodePath("..")
 [node name="MoveTo" type="Node" parent="StateMachine" index="0" unique_id=456544966]
 script = ExtResource("11_e66ud")
 
-[node name="GatheringResource" type="Node" parent="StateMachine" index="1" unique_id=413276014]
+[node name="MoveToShelter" type="Node" parent="StateMachine" index="1" unique_id=1530804788]
+script = ExtResource("30_qgydd")
+
+[node name="GatheringResource" type="Node" parent="StateMachine" index="2" unique_id=413276014]
 script = ExtResource("12_r6u5m")
 
-[node name="BuildOrRepair" type="Node" parent="StateMachine" index="2" unique_id=1202392068]
+[node name="BuildOrRepair" type="Node" parent="StateMachine" index="3" unique_id=1202392068]
 script = ExtResource("18_5n0ob")
 
 [connection signal="animation_finished" from="Visual/AnimationPlayer" to="Visual" method="OnAnimationFinished"]

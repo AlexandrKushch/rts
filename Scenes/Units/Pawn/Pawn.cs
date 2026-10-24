@@ -22,14 +22,14 @@ public partial class Pawn : UnitHasVisualBase
     public override void _Ready()
     {
         base._Ready();
-        
+
         if (Meta != null && Predeployed)
-		{
+        {
             return;
         }
-        
+
         StateMachine = GetNode<PawnStateManagerBase>(nameof(StateMachine));
-		SetTarget(Target, TargetObject);
+        SetTarget(Target, TargetObject);
 
         PawnVisual = Visual as PawnVisual;
     }
@@ -103,16 +103,19 @@ public partial class Pawn : UnitHasVisualBase
         base.SetTarget(targetPosition, targetObject);
 
         UpdateTargetObject();
+    }
 
-        // if (!NavigationAgent2D.IsTargetReachable())
-        // {
-        //     if (TargetBuilding == null && TargetResource == null)
-        //     {
-        //         GD.Print("NOT REACHABLE");
-        //         NavigationAgent2D.TargetPosition = GlobalPosition;
-        //         SetTarget(null, null);
-        //     }
-        // }
+    public void MoveToShelter()
+    {
+        var shelter = GlobalResources.Instance.World.GetChildren()
+            .Select(x => x as ShelterBuildingBase)
+            .MinBy(x => x.GlobalPosition.DistanceTo(GlobalPosition));
+        
+        if (IsInstanceValid(shelter))
+        {
+            base.SetTarget(shelter.GlobalPosition, shelter);
+            StateMachine.ChangeState(PawnStateIds.MoveToShelter);
+        }
     }
 
     public void SetTargetResourceWithoutChangingState(ResourceBase resource)
@@ -129,7 +132,6 @@ public partial class Pawn : UnitHasVisualBase
         if (IsInstanceValid(TargetObject))
         {
             StateMachine.ChangeState(PawnStateIds.MoveTo);
-            StateMachine.SetProcess(true);
 
             if (TargetObject is ResourceBase resource)
             {
@@ -158,8 +160,7 @@ public partial class Pawn : UnitHasVisualBase
                 TargetBuilding = building;
                 TargetResource = null;
 
-                if (!building.BuiltAndNotDamaged
-                    && (building is not ShelterBuildingBase shelter || shelter.EnemyDetector.Items.Count == 0))
+                if (!building.BuiltAndNotDamaged)
                 {
                     _updateMovementAnimation = (v, _) => { PawnVisual.UpdateMovement(v, "build"); };
                 }

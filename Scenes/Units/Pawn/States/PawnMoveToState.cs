@@ -36,13 +36,7 @@ public partial class PawnMoveToState : PawnStateBase
             }
             else if (PawnStateMachine.Pawn.TargetObject is BuildingBase building)
             {
-                if (building is ShelterBuildingBase shelter
-                    && (shelter.BuiltAndNotDamaged || shelter.EnemyDetector.Items.Count > 0))
-                {
-                    shelter.ConsumeUnit(Pawn);
-                    PawnStateMachine.ChangeState(PawnStateIds.None);
-                }
-                else if (!building.BuiltAndNotDamaged)
+                if (!building.BuiltAndNotDamaged)
                 {
                     PawnStateMachine.ChangeState(PawnStateIds.BuildOrRepair);
                 }

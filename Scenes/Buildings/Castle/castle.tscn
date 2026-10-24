@@ -70,38 +70,63 @@ shape = SubResource("RectangleShape2D_4g0xq")
 visible = false
 polygon = PackedVector2Array(0, 25, -120, 25, -130, -25, 0, -25, 130, -25, 120, 25)
 
-[node name="UiBuildingPopup" parent="." index="5" unique_id=540837747]
-offset_top = -156.0
-offset_bottom = -156.0
-Radius = 125.0
-OffsetCenter = Vector2(0, 75)
-
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="6" unique_id=82442801]
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="5" unique_id=82442801]
 visible = false
 position = Vector2(-111, -3)
 radius = 30.0
 
-[node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="7" unique_id=692338129]
+[node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="6" unique_id=692338129]
 visible = false
 position = Vector2(111, -3)
 radius = 30.0
 
-[node name="EnemyDetector" parent="." index="8" unique_id=1958789508 instance=ExtResource("6_ocnkx")]
+[node name="EnemyDetector" parent="." index="7" unique_id=1958789508 instance=ExtResource("6_ocnkx")]
 visible = false
 collision_mask = 2
 
-[node name="ShootPoint" type="Marker2D" parent="." index="9" unique_id=763550148]
+[node name="ShootPoint" type="Marker2D" parent="." index="8" unique_id=763550148]
 position = Vector2(0, -93)
 
-[node name="ReloadArrowTimer" type="Timer" parent="." index="10" unique_id=1453029037]
+[node name="ReloadArrowTimer" type="Timer" parent="." index="9" unique_id=1453029037]
 wait_time = 0.4
 one_shot = true
 
-[node name="ReloadMagTimer" type="Timer" parent="." index="11" unique_id=1761925247]
+[node name="ReloadMagTimer" type="Timer" parent="." index="10" unique_id=1761925247]
 wait_time = 2.5
 one_shot = true
 
-[node name="UiUnitsCapacity" parent="." index="12" unique_id=2021113642 instance=ExtResource("7_nhlnt")]
+[node name="UiUnitsCapacity" parent="." index="11" unique_id=2021113642 instance=ExtResource("7_nhlnt")]
+offset_top = -238.0
+offset_bottom = -198.0
+
+[node name="UiBuildingPopupItem" parent="UiPie" parent_id_path=PackedInt32Array(608295903) index="0" unique_id=41689300]
+offset_left = -129.90381
+offset_top = -75.00001
+offset_right = -65.904175
+offset_bottom = -10.999641
+
+[node name="UiBuildingPopupItem2" parent="UiPie" parent_id_path=PackedInt32Array(608295903) index="1" unique_id=673623114]
+offset_left = -51.30302
+offset_top = -140.95389
+offset_right = 12.6969795
+offset_bottom = -76.95389
+
+[node name="UiBuildingPopupItem3" parent="UiPie" parent_id_path=PackedInt32Array(608295903) index="2" unique_id=1685411494]
+offset_left = 51.303024
+offset_top = -140.95389
+offset_right = 115.30296
+offset_bottom = -76.95389
+
+[node name="UiBuildingPopupItem4" parent="UiPie" parent_id_path=PackedInt32Array(608295903) index="3" unique_id=518191847]
+offset_left = 129.90381
+offset_top = -75.0
+offset_right = 193.90393
+offset_bottom = -10.999939
+
+[node name="UiQueue" parent="." index="13" unique_id=1779588501]
+offset_top = -192.0
+offset_bottom = -142.0
 
 [editable path="BuildingSelectableComponent"]
 [editable path="HurtBox"]
+[editable path="UiPie"]
