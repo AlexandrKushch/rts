@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://b30e35p1ctttl" path="res://Scenes/Units/Archer/Arrow/arrow.tscn" id="3_mx8be"]
 [ext_resource type="Resource" uid="uid://3fqpdgsfv17m" path="res://Scenes/Buildings/Types/r_tower.tres" id="4_2c6cj"]
 [ext_resource type="PackedScene" uid="uid://7neisewoma26" path="res://Scenes/Core/AreaDetector/EnemyDetector/enemy_detector.tscn" id="4_d8t17"]
+[ext_resource type="PackedScene" uid="uid://qmbdx123twrb" path="res://Scenes/Core/AreaDetector/AllyDetector/ally_detector.tscn" id="6_kff2d"]
+[ext_resource type="PackedScene" uid="uid://75y4i6gxnve3" path="res://Scenes/UI/UiQuableItem/ui_quable_item.tscn" id="6_on6xg"]
 [ext_resource type="PackedScene" uid="uid://bl3drp0h0eqn1" path="res://Scenes/UI/UiUnitsCapacity/ui_units_capacity.tscn" id="7_4r1w1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1uhux"]
@@ -40,6 +42,9 @@ anim_speed_max = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fwii4"]
 size = Vector2(80, 141)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_on6xg"]
+radius = 1024.0
 
 [node name="Tower" unique_id=548953940 instance=ExtResource("1_ykvt5")]
 script = ExtResource("2_d8t17")
@@ -87,30 +92,73 @@ shape = SubResource("RectangleShape2D_fwii4")
 [node name="CollisionPolygon2D" parent="." index="4" unique_id=168278068]
 polygon = PackedVector2Array(-30, -10, 30, -10, 25, 10, -25, 10)
 
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="6" unique_id=841865287]
+[node name="UnitsPie" parent="." index="5" unique_id=608295903]
+visible = false
+
+[node name="AdditionalItemsPie" parent="." index="6" unique_id=198066264]
+offset_top = -130.0
+offset_bottom = -130.0
+Radius = 125.0
+DefaultOffset = 35.0
+
+[node name="UiBuildingPopupItem" parent="AdditionalItemsPie" index="0" unique_id=41689300]
+offset_left = -71.69706
+offset_top = -102.394
+offset_right = -7.6970596
+offset_bottom = -38.393997
+
+[node name="UiBuildingPopupItem2" parent="AdditionalItemsPie" index="1" unique_id=1138148765 instance=ExtResource("6_on6xg")]
+layout_mode = 1
+offset_left = -5.4639236e-06
+offset_top = -125.0
+offset_right = 63.999996
+offset_bottom = -61.0
+scale = Vector2(0.75, 0.75)
+
+[node name="UiBuildingPopupItem3" parent="AdditionalItemsPie" index="2" unique_id=2105747695 instance=ExtResource("6_on6xg")]
+layout_mode = 1
+offset_left = 71.69706
+offset_top = -102.394005
+offset_right = 135.69705
+offset_bottom = -38.394005
+scale = Vector2(0.75, 0.75)
+
+[node name="UiQueue" parent="." index="7" unique_id=1779588501]
+visible = false
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="8" unique_id=841865287]
 position = Vector2(-23, 0)
 radius = 15.0
 
-[node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="7" unique_id=508235830]
+[node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="9" unique_id=508235830]
 position = Vector2(20, 0)
 radius = 15.0
 
-[node name="EnemyDetector" parent="." index="8" unique_id=1958789508 instance=ExtResource("4_d8t17")]
+[node name="AllyDetector" parent="." index="10" unique_id=362746832 instance=ExtResource("6_kff2d")]
+visible = false
+
+[node name="CollisionShape2D" parent="AllyDetector" index="0" unique_id=307189913]
+shape = SubResource("CircleShape2D_on6xg")
+
+[node name="EnemyDetector" parent="." index="11" unique_id=1958789508 instance=ExtResource("4_d8t17")]
 visible = false
 collision_mask = 2
 
-[node name="ShootPoint" type="Marker2D" parent="." index="9" unique_id=1682788177]
+[node name="ShootPoint" type="Marker2D" parent="." index="12" unique_id=1682788177]
 position = Vector2(0, -93)
 
-[node name="ReloadArrowTimer" type="Timer" parent="." index="10" unique_id=1420556278]
+[node name="ReloadArrowTimer" type="Timer" parent="." index="13" unique_id=1420556278]
 wait_time = 0.4
 one_shot = true
 
-[node name="ReloadMagTimer" type="Timer" parent="." index="11" unique_id=1210890321]
+[node name="ReloadMagTimer" type="Timer" parent="." index="14" unique_id=1210890321]
 wait_time = 2.5
 one_shot = true
 
-[node name="UiUnitsCapacity" parent="." index="12" unique_id=2021113642 instance=ExtResource("7_4r1w1")]
+[node name="UiUnitsCapacity" parent="." index="15" unique_id=2021113642 instance=ExtResource("7_4r1w1")]
 
 [editable path="BuildingSelectableComponent"]
 [editable path="HurtBox"]
+[editable path="UnitsPie"]
+[editable path="AdditionalItemsPie"]
+[editable path="AllyDetector"]

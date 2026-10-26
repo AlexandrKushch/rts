@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://dxcguemvfqkjc"]
+
+[ext_resource type="PackedScene" uid="uid://c5l1cgfanyjkf" path="res://Scenes/UI/UiButton/ui_button.tscn" id="1_smfdl"]
+[ext_resource type="Texture2D" uid="uid://d16r56ns05ce3" path="res://Assets/UI Elements/UI Elements/Buttons/SmallWoodRoundButton_Regular.png" id="2_mj2nn"]
+[ext_resource type="Texture2D" uid="uid://de5a1gx0t3pdk" path="res://Assets/UI Elements/UI Elements/Buttons/SmallWoodRoundButton_Hover.png" id="3_437ni"]
+[ext_resource type="BitMap" uid="uid://ys3odowxtrp2" path="res://Assets/UI Elements/UI Elements/Buttons/SmallBlueRoundButton_Bitmap.png" id="4_j5egf"]
+[ext_resource type="Texture2D" uid="uid://djwej2vsm21x6" path="res://Assets/UI Elements/UI Elements/units_icon.png" id="5_j5egf"]
+
+[node name="UiRoundButton" type="Control" unique_id=756710963]
+custom_minimum_size = Vector2(64, 64)
+custom_maximum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="UiButton" parent="." unique_id=710057526 instance=ExtResource("1_smfdl")]
+layout_mode = 1
+anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+texture_normal = ExtResource("2_mj2nn")
+texture_hover = ExtResource("3_437ni")
+texture_click_mask = ExtResource("4_j5egf")
+
+[node name="Icon" type="TextureRect" parent="." unique_id=1567400733]
+custom_maximum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0, -0.05)
+mouse_filter = 2
+texture = ExtResource("5_j5egf")
+expand_mode = 3
+stretch_mode = 5

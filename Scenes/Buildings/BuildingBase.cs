@@ -7,8 +7,11 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp, IHasTeam
 {
     private bool _active = true;
 
-    protected UiPie UiPie;
+    protected UiPie UnitsPie;
+    protected UiPie AdditionalItemsPie;
     protected UiQueue UiQueue;
+
+    protected List<UiButtonData> AdditionalItems;
 
     private PlayerBase _player;
 
@@ -64,7 +67,8 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp, IHasTeam
 
     public override void _Ready()
     {
-        UiPie = GetNode<UiPie>(nameof(UiPie));
+        UnitsPie = GetNode<UiPie>(nameof(UnitsPie));
+        AdditionalItemsPie = GetNode<UiPie>(nameof(AdditionalItemsPie));
         UiQueue = GetNode<UiQueue>(nameof(UiQueue));
         ProducingQueueManager = GetNode<ProducingQueueManager>(nameof(ProducingQueueManager));
         Visual = GetNode<BuildingBaseVisual>(nameof(Visual));
@@ -86,12 +90,19 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp, IHasTeam
             Visual.UpdateProgress(Mathf.Remap(HP, 0, MaxHp, 0, 1));
         }
 
-        UiPie.Visible = false;
+        SetupAdditionalButtons();
+
+        UnitsPie.Visible = false;
+        AdditionalItemsPie.Visible = false;
         UiQueue.Visible = false;
         UiQueue.ProducingQueueManager = ProducingQueueManager;
         UiQueue.ProducingQueueManager.ProgressComplete += UiQueue.ProgressComplete;
 
-        foreach (var item in UiPie.GetChildren())
+        foreach (var item in UnitsPie.GetChildren())
+        {
+            item.QueueFree();
+        }
+        foreach (var item in AdditionalItemsPie.GetChildren())
         {
             item.QueueFree();
         }
@@ -106,7 +117,7 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp, IHasTeam
             var icon = pieItem.GetNode<TextureRect>("Icon");
             icon.Texture = produce.Icon;
             pieItem.ProducingQueueManager = ProducingQueueManager;
-            UiPie.AddChild(pieItem);
+            UnitsPie.AddChild(pieItem);
 
             var queueItem = UiQuableItemScene.Instantiate<UiQuableItem>();
             queueItem.Id = produce.Id;
@@ -115,6 +126,15 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp, IHasTeam
             queueIcon.Texture = produce.Icon;
             queueItem.ProducingQueueManager = ProducingQueueManager;
             UiQueue.QueueContainer.AddChild(queueItem);
+        }
+        var uiRoundButton = ResourceLoader.Load<PackedScene>("uid://dxcguemvfqkjc");
+        foreach (var additionalItem in AdditionalItems)
+        {
+            var pieItem = uiRoundButton.Instantiate<Control>();
+            var icon = pieItem.GetNode<TextureRect>("Icon");
+            icon.Texture = additionalItem.Icon;
+            pieItem.GetNode<UiButton>(nameof(UiButton)).ButtonDown += additionalItem.Action;
+            AdditionalItemsPie.AddChild(pieItem);
         }
 
         ProducingQueueManager.ProgressComplete += SpawnUnit;
@@ -246,6 +266,19 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp, IHasTeam
 
     public void Destroy()
     {
+        if (IsInstanceValid(UnitsPie))
+        {
+            UnitsPie.QueueFree();
+        }
+        if (IsInstanceValid(AdditionalItemsPie))
+        {
+            AdditionalItemsPie.QueueFree();
+        }
+        if (IsInstanceValid(UiQueue))
+        {
+            UiQueue.QueueFree();
+        }
+
         foreach (var point in Resource.TileRequiresToBuild)
         {
             foreach (var ground in GlobalResources.Instance.Grounds)
@@ -271,7 +304,7 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp, IHasTeam
         HP = MaxHp;
         Visual.Built();
         OnSelectionChanged();
-        
+
         _player.ResourceController.Collect(ResourceTypeIds.UnitsCapacity, Resource.RestoreUnitsCapacity);
 
         var bushesCount = SpaceAroundPoints.Length / 10;
@@ -289,23 +322,37 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp, IHasTeam
 
     protected virtual void OnSelectionChanged()
     {
-        if (!Built || _player is not HumanPlayer humanPlayer)
+        if (!Built || !_active || _player is not HumanPlayer humanPlayer)
         {
             return;
         }
 
-        UiPie.Selected = humanPlayer.SelectionController.Selections.Count == 1 && humanPlayer.SelectionController.Selections.Any(x => x.EffectedOn.GetInstanceId() == GetInstanceId());
+        UnitsPie.Selected = humanPlayer.SelectionController.Selections.Count == 1 && humanPlayer.SelectionController.Selections.Any(x => x.EffectedOn.GetInstanceId() == GetInstanceId());
 
-        if (UiPie.Selected)
+        if (UnitsPie.Selected)
         {
-            UiPie.Expand();
+            UnitsPie.Expand();
+            AdditionalItemsPie.Expand();
             UiQueue.Colapse();
         }
         else
         {
-            UiPie.Colapse();
+            UnitsPie.Colapse();
+            AdditionalItemsPie.Colapse();
             UiQueue.Expand();
         }
+    }
+
+    protected virtual void SetupAdditionalButtons()
+    {
+        AdditionalItems = new List<UiButtonData>
+        {
+            new UiButtonData
+            {
+                Icon = ResourceLoader.Load<Texture2D>("uid://cbrd3fpll0nn"),
+                Action = Destroy
+            }
+        };
     }
 
     protected void TryGetOpenSpaceAround(out List<Vector2> occupiedPoints, out List<Vector2> openSpacePoints)

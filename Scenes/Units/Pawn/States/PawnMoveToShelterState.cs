@@ -3,19 +3,26 @@ using System;
 
 public partial class PawnMoveToShelterState : PawnStateBase
 {
+    private const float BuildingDesiredDistance = 80;
+
+    public override void Activate()
+    {
+        base.Activate();
+        Pawn.NavigationAgent2D.TargetDesiredDistance = BuildingDesiredDistance;
+    }
+
     public override void _Process(double delta)
     {
         if (PawnStateMachine.Pawn.NavigationAgent2D.IsNavigationFinished()
-            && PawnStateMachine.Pawn.TargetObject is BuildingBase building
-            && building is ShelterBuildingBase shelter
-            && (shelter.BuiltAndNotDamaged || shelter.EnemyDetector.Items.Count > 0))
+            && IsInstanceValid(Pawn.TargetShelter))
         {
-            shelter.ConsumeUnit(Pawn);
+            Pawn.TargetShelter.ConsumeUnit(Pawn);
             PawnStateMachine.ChangeState(PawnStateIds.None);
         }
-        else
+
+        if (!IsInstanceValid(Pawn.TargetShelter))
         {
-            PawnStateMachine.ChangeState(PawnStateIds.MoveTo);            
+            Pawn.MoveToShelter();
         }
     }
 }

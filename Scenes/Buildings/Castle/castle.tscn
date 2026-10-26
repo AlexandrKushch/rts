@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b30e35p1ctttl" path="res://Scenes/Units/Archer/Arrow/arrow.tscn" id="3_ocnkx"]
 [ext_resource type="Resource" uid="uid://u24n2a8v85ov" path="res://Scenes/Buildings/Types/r_castle.tres" id="4_nhlnt"]
 [ext_resource type="PackedScene" uid="uid://7neisewoma26" path="res://Scenes/Core/AreaDetector/EnemyDetector/enemy_detector.tscn" id="6_ocnkx"]
+[ext_resource type="PackedScene" uid="uid://qmbdx123twrb" path="res://Scenes/Core/AreaDetector/AllyDetector/ally_detector.tscn" id="7_hu5e2"]
 [ext_resource type="PackedScene" uid="uid://bl3drp0h0eqn1" path="res://Scenes/UI/UiUnitsCapacity/ui_units_capacity.tscn" id="7_nhlnt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d1o4y"]
@@ -22,6 +23,9 @@ anim_speed_max = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4g0xq"]
 size = Vector2(274, 140)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hu5e2"]
+radius = 1024.0
 
 [node name="Castle" unique_id=548953940 instance=ExtResource("1_xfw4a")]
 script = ExtResource("2_cce1t")
@@ -80,53 +84,41 @@ visible = false
 position = Vector2(111, -3)
 radius = 30.0
 
-[node name="EnemyDetector" parent="." index="7" unique_id=1958789508 instance=ExtResource("6_ocnkx")]
+[node name="AllyDetector" parent="." index="7" unique_id=362746832 instance=ExtResource("7_hu5e2")]
+visible = false
+
+[node name="CollisionShape2D" parent="AllyDetector" index="0" unique_id=307189913]
+shape = SubResource("CircleShape2D_hu5e2")
+
+[node name="EnemyDetector" parent="." index="8" unique_id=1958789508 instance=ExtResource("6_ocnkx")]
 visible = false
 collision_mask = 2
 
-[node name="ShootPoint" type="Marker2D" parent="." index="8" unique_id=763550148]
+[node name="ShootPoint" type="Marker2D" parent="." index="9" unique_id=763550148]
 position = Vector2(0, -93)
 
-[node name="ReloadArrowTimer" type="Timer" parent="." index="9" unique_id=1453029037]
+[node name="ReloadArrowTimer" type="Timer" parent="." index="10" unique_id=1453029037]
 wait_time = 0.4
 one_shot = true
 
-[node name="ReloadMagTimer" type="Timer" parent="." index="10" unique_id=1761925247]
+[node name="ReloadMagTimer" type="Timer" parent="." index="11" unique_id=1761925247]
 wait_time = 2.5
 one_shot = true
 
-[node name="UiUnitsCapacity" parent="." index="11" unique_id=2021113642 instance=ExtResource("7_nhlnt")]
+[node name="UiUnitsCapacity" parent="." index="12" unique_id=2021113642 instance=ExtResource("7_nhlnt")]
 offset_top = -238.0
 offset_bottom = -198.0
 
-[node name="UiBuildingPopupItem" parent="UiPie" parent_id_path=PackedInt32Array(608295903) index="0" unique_id=41689300]
-offset_left = -129.90381
-offset_top = -75.00001
-offset_right = -65.904175
-offset_bottom = -10.999641
+[node name="AdditionalItemsPie" parent="." index="14" unique_id=198066264]
+offset_top = -114.0
+offset_bottom = -114.0
 
-[node name="UiBuildingPopupItem2" parent="UiPie" parent_id_path=PackedInt32Array(608295903) index="1" unique_id=673623114]
-offset_left = -51.30302
-offset_top = -140.95389
-offset_right = 12.6969795
-offset_bottom = -76.95389
-
-[node name="UiBuildingPopupItem3" parent="UiPie" parent_id_path=PackedInt32Array(608295903) index="2" unique_id=1685411494]
-offset_left = 51.303024
-offset_top = -140.95389
-offset_right = 115.30296
-offset_bottom = -76.95389
-
-[node name="UiBuildingPopupItem4" parent="UiPie" parent_id_path=PackedInt32Array(608295903) index="3" unique_id=518191847]
-offset_left = 129.90381
-offset_top = -75.0
-offset_right = 193.90393
-offset_bottom = -10.999939
-
-[node name="UiQueue" parent="." index="13" unique_id=1779588501]
+[node name="UiQueue" parent="." index="15" unique_id=1779588501]
 offset_top = -192.0
 offset_bottom = -142.0
 
 [editable path="BuildingSelectableComponent"]
 [editable path="HurtBox"]
-[editable path="UiPie"]
+[editable path="AllyDetector"]
+[editable path="UnitsPie"]
+[editable path="AdditionalItemsPie"]

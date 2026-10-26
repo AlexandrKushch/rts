@@ -17,30 +17,6 @@ Radius = 300.0
 layout_mode = 1
 offset_left = -788.132
 offset_top = -536.132
-offset_right = -724.1325
-offset_bottom = -472.1314
-scale = Vector2(1, 1)
-
-[node name="UiBuildingPopupItem2" parent="." unique_id=673623114 instance=ExtResource("2_603ew")]
-layout_mode = 1
-offset_left = -653.6457
-offset_top = -613.7777
-offset_right = -589.64606
-offset_bottom = -549.77783
-scale = Vector2(1, 1)
-
-[node name="UiBuildingPopupItem3" parent="." unique_id=1685411494 instance=ExtResource("2_603ew")]
-layout_mode = 1
-offset_left = -498.35428
-offset_top = -613.7777
-offset_right = -434.355
-offset_bottom = -549.77783
-scale = Vector2(1, 1)
-
-[node name="UiBuildingPopupItem4" parent="." unique_id=518191847 instance=ExtResource("2_603ew")]
-layout_mode = 1
-offset_left = -363.86798
-offset_top = -536.132
-offset_right = -299.86786
-offset_bottom = -472.13196
+offset_right = -724.132
+offset_bottom = -472.13202
 scale = Vector2(1, 1)

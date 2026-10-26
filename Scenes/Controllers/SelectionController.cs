@@ -56,6 +56,12 @@ public partial class SelectionController : Node2D
 				}
 				else
 				{
+					if (selection.EffectedOn is BuildingBase building
+						&& PlayerBase is HumanPlayer humanPlayer)
+					{
+						humanPlayer.CameraController.AlignWith(building.GlobalPosition);
+					}
+					
 					ClearSelections();
 					Selections.Add(selection);
 				}

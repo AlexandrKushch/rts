@@ -14,6 +14,7 @@ public partial class Pawn : UnitHasVisualBase
     public PawnVisual PawnVisual { get; private set; }
     public ResourceBase TargetResource { get; private set; }
     public BuildingBase TargetBuilding { get; private set; }
+    public ShelterBuildingBase TargetShelter { get; private set; }
 
     public PawnResourceToCollectData ResourceToCollectData { get; private set; }
 
@@ -69,6 +70,18 @@ public partial class Pawn : UnitHasVisualBase
                 SetTarget(point, null);
             }
         }
+        else if (StateMachine.GetCurrentStateType() == PawnStateIds.MoveToShelter)
+        {
+            Node2D target;
+            Vector2? point;
+
+            if (IsInstanceValid(TargetShelter)
+                && TryGetClosestTarget(TargetShelter.GlobalPosition, TargetShelter, ObstacleCollisionMasks[nameof(BuildingBase)], out target, out point)
+                && target is ShelterBuildingBase building)
+            {
+                base.SetTarget(point, building);
+            }
+        }
     }
 
     public BuildingBase GetClosestResourceStorageBuilding()
@@ -109,12 +122,18 @@ public partial class Pawn : UnitHasVisualBase
     {
         var shelter = GlobalResources.Instance.World.GetChildren()
             .Select(x => x as ShelterBuildingBase)
+            .Where(x => x != null && x.Built && x.Team == Team)
             .MinBy(x => x.GlobalPosition.DistanceTo(GlobalPosition));
-        
+
         if (IsInstanceValid(shelter))
         {
             base.SetTarget(shelter.GlobalPosition, shelter);
+            TargetShelter = shelter;
             StateMachine.ChangeState(PawnStateIds.MoveToShelter);
+        }
+        else
+        {
+            SetTarget(GlobalPosition, null);
         }
     }
 
@@ -135,6 +154,11 @@ public partial class Pawn : UnitHasVisualBase
 
             if (TargetObject is ResourceBase resource)
             {
+                if (!IsInstanceValid(resource))
+                {
+                    resource = GetNextResource();
+                }
+
                 TargetResource = resource;
                 TargetBuilding = null;
 

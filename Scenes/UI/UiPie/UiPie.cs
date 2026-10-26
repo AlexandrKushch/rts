@@ -11,6 +11,7 @@ public partial class UiPie : Control
     [ExportToolButton("Colapse")] public Callable ColapseButton => Callable.From(Colapse);
 
     [Export] private float Radius;
+    [Export] private float ButtonScale = 1.0f;
     [Export] private float DefaultOffset = 30;
 
     public void Expand()
@@ -43,7 +44,7 @@ public partial class UiPie : Control
 
             item.Visible = true;
 
-            item.Scale = Vector2.One * 0.5f;
+            item.Scale = Vector2.One * ButtonScale * 0.5f;
             item.Position = Vector2.Zero;
             var itemTween = CreateTween()
                 .SetTrans(Tween.TransitionType.Sine)
@@ -52,7 +53,7 @@ public partial class UiPie : Control
             var tweenToPos = new Vector2(Radius * Mathf.Cos(angle), Radius * Mathf.Sin(angle));
 
             tween.TweenSubtween(itemTween).SetDelay(index * itemTweenDuration / 10);
-            itemTween.TweenProperty(item, "scale", Vector2.One, itemTweenDuration);
+            itemTween.TweenProperty(item, "scale", Vector2.One * ButtonScale, itemTweenDuration);
             itemTween.TweenProperty(item, "position", tweenToPos, itemTweenDuration);
 
             index++;
@@ -81,7 +82,7 @@ public partial class UiPie : Control
                 .SetParallel();
             float itemTweenDuration = 0.2f;
             tween.TweenSubtween(itemTween).SetDelay(i * itemTweenDuration / 10);
-            itemTween.TweenProperty(item, "scale", Vector2.One * 0.5f, itemTweenDuration);
+            itemTween.TweenProperty(item, "scale", Vector2.One * ButtonScale * 0.5f, itemTweenDuration);
             itemTween.TweenProperty(item, "position", Vector2.Zero, itemTweenDuration);
         }
 

@@ -43,6 +43,13 @@ public partial class CameraController : Node2D
 		}
 	}
 
+    public void AlignWith(Vector2 position)
+    {
+		// GlobalPosition = position + Vector2.Up * 200;
+		var tween = CreateTween();
+		tween.TweenProperty(this, "position", position + Vector2.Up * 200, 0.2f);
+    }
+
 	// public void Shake()
 	// {
 	// 	var tween = CreateTween().SetParallel();

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Godot;
 
@@ -8,18 +9,20 @@ public partial class ShelterBuildingBase : BuildingBase
     private int _maxMag = 1;
 
     private UnitBase _target;
-    private HashSet<UnitBase> _units;
+    private HashSet<PackedScene> _unitPackedScenes;
+    private List<Node2D> _unitTargetObjects;
 
     private float _radius;
     private double _attackReloadTimer = 0.0f;
 
     public bool Reloaded { get; private set; } = true;
+    public AllyDetector AllyDetector { get; private set; }
     public EnemyDetector EnemyDetector { get; private set; }
     public Marker2D ShootPoint { get; private set; }
     public Timer ReloadArrowTimer { get; private set; }
     public Timer ReloadMagTimer { get; private set; }
     public UiUnitsCapacity UiUnitsCapacity { get; private set; }
-    
+
     [Export] public PackedScene ArrowScene { get; private set; }
     [Export] public int MaxArrowsCount = 5;
 
@@ -27,8 +30,10 @@ public partial class ShelterBuildingBase : BuildingBase
     {
         base._Ready();
 
-        _units = new HashSet<UnitBase>();
+        _unitPackedScenes = new HashSet<PackedScene>();
+        _unitTargetObjects = new List<Node2D>();
 
+        AllyDetector = GetNode<AllyDetector>(nameof(AllyDetector));
         EnemyDetector = GetNode<EnemyDetector>(nameof(EnemyDetector));
         ShootPoint = GetNode<Marker2D>(nameof(ShootPoint));
         ReloadArrowTimer = GetNode<Timer>(nameof(ReloadArrowTimer));
@@ -56,53 +61,107 @@ public partial class ShelterBuildingBase : BuildingBase
         }
     }
 
-    public void ConsumeUnit(UnitBase unit)
+    public void ConsumeUnit(Pawn pawn)
     {
         if (!Built)
         {
             return;
         }
 
-        _units.Add(unit);
-        unit.QueueFree();
+        Node2D targetObjectToSave = pawn.TargetResource != null ? pawn.TargetResource : pawn.TargetBuilding;
+        if (targetObjectToSave != null)
+        {
+            _unitTargetObjects.Add(targetObjectToSave);
+        }
+
+        var unitScene = new PackedScene();
+        var result = unitScene.Pack(pawn);
+
+        if (result != Error.Ok)
+        {
+            GD.PushError($"{pawn.Meta.Id} has error to be consumed by shelter");
+        }
+
+        _unitPackedScenes.Add(unitScene);
+        pawn.QueueFree();
         UpdateMaxMag();
-        UiUnitsCapacity.Capacity = _units.Count;
+        UiUnitsCapacity.Capacity = _unitPackedScenes.Count;
+
+        UiUnitsCapacity.Visible = !UnitsPie.Selected && UiUnitsCapacity.Capacity > 0;
     }
 
     protected override void OnSelectionChanged()
     {
         base.OnSelectionChanged();
 
-        if (UiUnitsCapacity != null && UiUnitsCapacity.Capacity > 0)
+        if (UiUnitsCapacity != null)
         {
-            UiUnitsCapacity.Visible = !UiPie.Selected;
+            UiUnitsCapacity.Visible = !UnitsPie.Selected && UiUnitsCapacity.Capacity > 0;
         }
+    }
+
+    protected override void SetupAdditionalButtons()
+    {
+        base.SetupAdditionalButtons();
+        AdditionalItems.Add(new UiButtonData
+        {
+            Icon = ResourceLoader.Load<Texture2D>("uid://dnf252vbnihiq"),
+            Action = RingBell
+        });
     }
 
     public void LetUnitsOut()
     {
-        foreach (var unit in _units)
+        TryGetOpenSpaceAround(out var _, out var openSpacePoints);
+        int index = 0;
+        foreach (var unitScene in _unitPackedScenes)
         {
-            TryGetOpenSpaceAround(out var _, out var openSpacePoints);
-            unit.GlobalPosition = openSpacePoints[0];
-            unit.Target = TargetObjectToSpawnedUnits?.GlobalPosition ?? TargetToSpawnedUnits;
-            unit.TargetObject = TargetObjectToSpawnedUnits;
+            var unit = unitScene.Instantiate<UnitBase>();
+            unit.GlobalPosition = openSpacePoints[index];
             GlobalResources.Instance.World.AddChild(unit);
+            
+            if (index < _unitTargetObjects.Count
+                && IsInstanceValid(_unitTargetObjects[index]))
+            {
+                unit.SetTarget(_unitTargetObjects[index].GlobalPosition, _unitTargetObjects[index]);
+                // unit.CallDeferred(nameof(unit.SetTarget), _unitTargetObjects[index].GlobalPosition, _unitTargetObjects[index]);
+            }
+            
+            index++;
         }
-        
+
+        _unitPackedScenes.Clear();
+        _unitTargetObjects.Clear();
+
         UpdateMaxMag();
-        UiUnitsCapacity.Capacity = _units.Count;
+        UiUnitsCapacity.Capacity = _unitPackedScenes.Count;
+    }
+
+    private void RingBell()
+    {
+        if (_unitPackedScenes.Count == 0)
+        {
+            var pawns = AllyDetector.Items.Select(x => x as Pawn).Where(x => x != null).ToArray();
+            foreach (var pawn in pawns)
+            {
+                pawn.MoveToShelter();
+            }
+        }
+        else
+        {
+            LetUnitsOut();
+        }
     }
 
     private void UpdateMaxMag()
     {
-        _maxMag = (int)Mathf.Remap(_units.Count, 0, MaxArrowsCount, 1, MaxArrowsCount);
+        _maxMag = (int)Mathf.Remap(_unitPackedScenes.Count, 0, MaxArrowsCount, 1, MaxArrowsCount);
     }
 
     private void ShootArrow(Vector2 shootPoint, Vector2 attackTargetPosition)
     {
         _mag--;
-        
+
         if (_mag <= 0)
         {
             ReloadMagTimer.Start();
