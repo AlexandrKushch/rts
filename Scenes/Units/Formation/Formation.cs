@@ -59,7 +59,7 @@ public partial class Formation : Node
         {
             return;
         }
-        
+
         Units.Add(unit);
         unit.Formation = this;
     }
@@ -80,6 +80,14 @@ public partial class Formation : Node
     {
         if (!Check())
         {
+            return;
+        }
+
+        if (targetObject is IHasFormationUnit hasFormation
+            && targetObject.GetType() == Units.First().GetType())
+        {
+            CombineWith(target, hasFormation.Formation);
+            hasFormation.Formation.SetTarget(target, null);
             return;
         }
 
@@ -128,5 +136,16 @@ public partial class Formation : Node
         var formation = ResourceLoader.Load<PackedScene>("uid://kn5afehh6n2a").Instantiate<Formation>();
         GlobalResources.Instance.World.CallDeferred("add_child", formation);
         return formation;
+    }
+
+    public void CombineWith(Vector2 target, Formation formation)
+    {
+        var units = Units.ToArray();
+
+        foreach (var unit in units)
+        {
+            unit.Detach();
+            unit.AttachTo(formation.Units.First() as Node2D);
+        }
     }
 }

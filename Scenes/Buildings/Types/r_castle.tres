@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://hq8cctjvc4r1" path="res://Scenes/Units/Types/r_monk.tres" id="3_7nnjy"]
 [ext_resource type="Resource" uid="uid://cm5nt1ekod7b8" path="res://Scenes/Units/Types/r_lancer.tres" id="4_jogrh"]
 [ext_resource type="Resource" uid="uid://us5gsh240dda" path="res://Scenes/Units/Types/r_archer.tres" id="5_0beql"]
+[ext_resource type="Resource" uid="uid://b81s8vll42xy2" path="res://Scenes/Units/Types/r_warrior.tres" id="6_jogrh"]
 
 [resource]
 script = ExtResource("1_2dvea")
@@ -20,5 +21,5 @@ Cost = Dictionary[int, int]({
 })
 RestoreUnitsCapacity = 20
 TileRequiresToBuild = PackedVector2Array(0, 0, 1, 0, 2, 0, 2, -1, 1, -1, 0, -1, -1, -1, -2, -1, -2, 0, -1, 0)
-Produces = Array[Object]([ExtResource("2_4h5ph"), ExtResource("3_7nnjy"), ExtResource("4_jogrh"), ExtResource("5_0beql")])
+Produces = Array[Object]([ExtResource("2_4h5ph"), ExtResource("3_7nnjy"), ExtResource("4_jogrh"), ExtResource("5_0beql"), ExtResource("6_jogrh")])
 metadata/_custom_type_script = "uid://ck4k0rwiv3nec"

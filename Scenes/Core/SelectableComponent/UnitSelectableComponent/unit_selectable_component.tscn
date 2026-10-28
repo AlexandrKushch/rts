@@ -9,6 +9,7 @@
 [node name="UnitSelectableComponent" unique_id=550510253 instance=ExtResource("1_6uo5u")]
 
 [node name="SelectionTriangleSprite" type="Sprite2D" parent="Visual" parent_id_path=PackedInt32Array(946751036) index="0" unique_id=205670872]
+z_index = 1
 position = Vector2(0, -64)
 texture = ExtResource("3_luj8k")
 script = ExtResource("3_23xt1")

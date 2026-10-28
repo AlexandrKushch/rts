@@ -182,9 +182,8 @@ public partial class UnitBase : CharacterBody2D, IDestroyableWithHp, IHasTeam
             collider = result.ContainsKey("collider") ? result["collider"].As<Node2D>() : null;
             collisionPoint = result.ContainsKey("position") ? result["position"].As<Vector2>() : null;
 
-            if (target != null
-				&& collider is BuildingBase building
-                && building.GetInstanceId() != target.GetInstanceId())
+            if (collider is BuildingBase building
+                && (target == null || building.GetInstanceId() != target.GetInstanceId()))
             {
                 excluded.Add(building.GetRid());
                 query.Exclude = excluded;

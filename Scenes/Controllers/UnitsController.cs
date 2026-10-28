@@ -46,7 +46,7 @@ public partial class UnitsController : Node2D
 
             foreach (var formation in formations)
             {
-                formation.SetTarget(GetGlobalMousePosition(), null);
+                formation.SetTarget(GetGlobalMousePosition(), targetObject?.EffectedOn as Node2D);
             }
 
             foreach (var unit in units)
@@ -73,15 +73,15 @@ public partial class UnitsController : Node2D
                     }
                 }
 
-                // if (unit is Warrior warrior)
-                // {
-                //     warrior.AttachedToPoint = warrior.Target.Value;
-                // }
+                if (unit is Warrior warrior)
+                {
+                    warrior.AttachedToPoint = warrior.Target.Value;
+                }
 
-                // if (unit is Lancer lancer)
-                // {
-                //     lancer.AttachedToPoint = lancer.Target.Value;
-                // }
+                if (unit is Lancer lancer)
+                {
+                    lancer.AttachedToPoint = lancer.Target.Value;
+                }
 
                 i++;
             }

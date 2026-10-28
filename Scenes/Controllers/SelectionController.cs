@@ -49,7 +49,7 @@ public partial class SelectionController : Node2D
 		if (!input.Pressed)
 		{
 			if (TryPointCastSelectable(out var selection))
-			{
+			{				
 				if (selection.EffectedOn is UnitBase)
 				{
 					ProcessUnitSelection(selection);
@@ -133,7 +133,7 @@ public partial class SelectionController : Node2D
 				}
 				else
 				{
-					var selectables = QuerySelectablesOfType(selection.EffectedOn.GetType(), selection.GlobalPosition, 200);
+					var selectables = QueryNearUnits(selection.GlobalPosition, 200);
 
 					foreach (var selectable in selectables)
 					{
@@ -174,6 +174,22 @@ public partial class SelectionController : Node2D
 		}
 	}
 
+	private SelectableComponent[] QueryNearUnits(Vector2 from, float distance)
+	{
+		var nodes = GlobalResources.Instance.World
+			.GetChildren()
+			.Where(x => x is UnitBase
+				&& (x is not IHasTeam hasTeam || hasTeam.Team == PlayerBase.Team)
+				&& from.DistanceTo((x as Node2D).GlobalPosition) < distance
+				&& (x is not IHasFormationUnit hasFormation || hasFormation.Formation == null));
+
+		var selectables = nodes
+			.Select(x => x.GetNode<SelectableComponent>(nameof(SelectableComponent)))
+			.ToArray();
+
+		return selectables;
+	}
+
 	private SelectableComponent[] QuerySelectablesOfType(Type type, Vector2 from, float distance)
 	{
 		var nodes = GlobalResources.Instance.World
@@ -192,24 +208,36 @@ public partial class SelectionController : Node2D
 		collider = null;
 
 		var spaceState = GetWorld2D().DirectSpaceState;
+		var mouse = GetGlobalMousePosition();
 		var query = new PhysicsPointQueryParameters2D
 		{
-			Position = GetGlobalMousePosition(),
+			Position = mouse,
 			CollideWithAreas = true,
 			CollideWithBodies = false,
 			CollisionMask = 512
 		};
 
 		var results = spaceState.IntersectPoint(query);
-
-		foreach (var result in results)
-		{
-			var selectable = result["collider"].As<SelectableComponent>();
-			if (selectable != null)
+		var selectables = results
+			.Select(x => x["collider"].As<SelectableComponent>())
+			.Where(
+				x => x != null
+					&& (x.EffectedOn is not IHasTeam hasTeam || hasTeam.Team == PlayerBase.Team))
+			.OrderBy(item => item.EffectedOn switch
 			{
-				collider = selectable;
-				return true;
-			}
+				UnitBase => 0,
+				ResourceBase => 1,
+				BuildingBase => 2,
+				_ => 3
+			})
+			.ThenBy(x => (x.EffectedOn as Node2D)?.GlobalPosition.DistanceTo(mouse) ?? float.MaxValue)
+			.ThenBy(x => !x.Selected)
+			.ToArray();
+
+		if (selectables.Length > 0)
+		{
+			collider = selectables[0];
+			return true;
 		}
 
 		return false;
