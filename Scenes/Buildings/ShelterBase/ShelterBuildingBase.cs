@@ -50,6 +50,11 @@ public partial class ShelterBuildingBase : BuildingBase
     {
         base._Process(delta);
 
+        if (!Built)
+        {
+            return;
+        }
+
         if (!IsInstanceValid(_target) && EnemyDetector.Items.Count > 0)
         {
             _target = EnemyDetector.Items.MinBy(x => x.GlobalPosition.DistanceTo(GlobalPosition)) as UnitBase;

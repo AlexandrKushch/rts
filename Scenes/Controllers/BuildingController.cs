@@ -44,11 +44,15 @@ public partial class BuildingController : Node2D
                             _blueprint.Building);
                     }
 
+                    int tileSize = _blueprint.Building.Resource.RequiresOneTileToBuild
+                        ? TileSize / 2
+                        : TileSize;
+
                     foreach (var point in _blueprint.Building.Resource.TileRequiresToBuild)
                     {
                         foreach (var ground in GlobalResources.Instance.Grounds)
                         {
-                            var posOnLayer = ground.LocalToMap(ground.ToLocal(_blueprint.Building.GlobalPosition + point * TileSize));
+                            var posOnLayer = ground.LocalToMap(ground.ToLocal(_blueprint.Building.GlobalPosition + point * tileSize));
                             GlobalResources.Instance.OccupiedTiles.Add(posOnLayer);
                         }
                     }
@@ -77,6 +81,15 @@ public partial class BuildingController : Node2D
             {
                 var mousePosOnTileMap = ground.LocalToMap(GetLocalMousePosition());
                 var mousePos = ToGlobal(ground.MapToLocal(mousePosOnTileMap));
+
+                if (_blueprint.Building.Resource.RequiresOneTileToBuild)
+                {
+                    const float offset = TileSize / 2;
+                    var direction = mousePos.DirectionTo(GetLocalMousePosition());
+                    direction = new Vector2(Mathf.Sign(direction.X), Mathf.Sign(direction.Y));
+                    mousePos += direction * offset;
+                }
+
                 float weight = 1f - Mathf.Exp(-25 * (float)delta);
                 _blueprint.GlobalPosition = _blueprint.GlobalPosition.Lerp(mousePos, weight);
 
@@ -131,14 +144,18 @@ public partial class BuildingController : Node2D
         var colliders = results.Select(x => x["collider"].AsGodotObject()).ToArray();
         if (colliders.Length > 0 && !colliders.Any(x => x == null))
         {
-            return false;   
+            return false;
         }
 
         var occupiedTilesData = new List<int>();
 
+        int tileSize = _blueprint.Building.Resource.RequiresOneTileToBuild
+            ? TileSize / 2
+            : TileSize;
+
         foreach (var point in _blueprint.Building.Resource.TileRequiresToBuild)
         {
-            var posOnLayer = ground.LocalToMap(ground.ToLocal(_blueprint.Building.GlobalPosition + point * TileSize));
+            var posOnLayer = ground.LocalToMap(ground.ToLocal(_blueprint.Building.GlobalPosition + point * tileSize));
 
             if (GlobalResources.Instance.OccupiedTiles.Contains(posOnLayer))
             {

@@ -23,6 +23,7 @@ size = Vector2(172, 148)
 Resource = ExtResource("2_3q5wo")
 
 [node name="BuildingSelectableComponent" parent="." index="1" unique_id=550510253 node_paths=PackedStringArray("EffectedOn")]
+position = Vector2(0, -8)
 EffectedOn = NodePath("..")
 
 [node name="NinePatchRect" parent="BuildingSelectableComponent/Visual" parent_id_path=PackedInt32Array(550510253, 946751036) index="0" unique_id=584840865]
@@ -35,39 +36,45 @@ offset_bottom = 65.48889
 position = Vector2(0, -68.5)
 shape = SubResource("RectangleShape2D_eioss")
 
-[node name="Sprite2D" parent="Visual" parent_id_path=PackedInt32Array(1843020465) index="0" unique_id=1679201315]
+[node name="Visual" parent="." index="2" unique_id=1843020465]
+position = Vector2(0, -8)
+
+[node name="Sprite2D" parent="Visual" index="0" unique_id=1679201315]
 position = Vector2(0, -86)
 texture = ExtResource("2_1uhux")
 
-[node name="BuildProgressParticles" parent="Visual" parent_id_path=PackedInt32Array(1843020465) index="1" unique_id=2143245483]
+[node name="BuildProgressParticles" parent="Visual" index="1" unique_id=2143245483]
 position = Vector2(0, -68)
 process_material = SubResource("ParticleProcessMaterial_1uhux")
 
-[node name="DestroyParticles01" parent="Visual" parent_id_path=PackedInt32Array(1843020465) index="2" unique_id=409021009]
+[node name="DestroyParticles01" parent="Visual" index="2" unique_id=409021009]
 position = Vector2(0, -84)
 amount = 4
 
-[node name="DestroyParticles02" parent="Visual" parent_id_path=PackedInt32Array(1843020465) index="3" unique_id=910122631]
+[node name="DestroyParticles02" parent="Visual" index="3" unique_id=910122631]
 position = Vector2(0, -84)
 amount = 2
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="3" unique_id=378447270]
-position = Vector2(-50, 2)
+position = Vector2(-50, -6)
 radius = 15.0
 
 [node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="4" unique_id=1113444261]
-position = Vector2(50, 2)
+position = Vector2(50, -6)
 radius = 15.0
 
 [node name="NavigationObstacle2D3" type="NavigationObstacle2D" parent="." index="5" unique_id=730362715]
-position = Vector2(65, -54)
+position = Vector2(65, -62)
 radius = 15.0
 
 [node name="NavigationObstacle2D4" type="NavigationObstacle2D" parent="." index="6" unique_id=1942465228]
-position = Vector2(-65, -54)
+position = Vector2(-65, -62)
 radius = 15.0
 
-[node name="CollisionShape2D" parent="HurtBox" parent_id_path=PackedInt32Array(799690141) index="0" unique_id=930546286]
+[node name="HurtBox" parent="." index="7" unique_id=799690141]
+position = Vector2(0, -8)
+
+[node name="CollisionShape2D" parent="HurtBox" index="0" unique_id=930546286]
 position = Vector2(0, -55)
 shape = SubResource("RectangleShape2D_1uhux")
 
@@ -75,12 +82,21 @@ shape = SubResource("RectangleShape2D_1uhux")
 visible = false
 polygon = PackedVector2Array(0, 10, 55, 10, 70, -60, -70, -60, -55, 10)
 
-[node name="UiQueue" parent="." index="10" unique_id=1779588501]
+[node name="UnitsPie" parent="." index="9" unique_id=608295903]
+offset_top = -155.0
+offset_bottom = -155.0
+
+[node name="AdditionalItemsPie" parent="." index="10" unique_id=198066264]
+offset_top = -155.0
+offset_bottom = -155.0
+
+[node name="UiQueue" parent="." index="11" unique_id=1779588501]
 offset_left = -148.0
-offset_top = -208.0
+offset_top = -216.0
 offset_right = 152.0
-offset_bottom = -158.0
+offset_bottom = -166.0
 
 [editable path="BuildingSelectableComponent"]
 [editable path="HurtBox"]
-[editable path="UiPie"]
+[editable path="UnitsPie"]
+[editable path="AdditionalItemsPie"]

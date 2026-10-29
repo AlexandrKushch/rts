@@ -390,8 +390,8 @@ public partial class BuildingBase : StaticBody2D, IDestroyableWithHp, IHasTeam
 
         for (int i = 0; i < points.Length; i++)
         {
-            var point = points[i];
-            var nextPoint = points[(i + 1) % points.Length];
+            var point = points[i] + CollisionPolygon2D.Position;
+            var nextPoint = points[(i + 1) % points.Length] + CollisionPolygon2D.Position;
             var direction = point.DirectionTo(nextPoint);
             float step = 25;
 

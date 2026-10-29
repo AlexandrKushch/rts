@@ -96,32 +96,32 @@ polygon = PackedVector2Array(-30, -10, 30, -10, 25, 10, -25, 10)
 visible = false
 
 [node name="AdditionalItemsPie" parent="." index="6" unique_id=198066264]
+visible = false
 offset_top = -130.0
 offset_bottom = -130.0
 Radius = 125.0
 DefaultOffset = 35.0
 
 [node name="UiBuildingPopupItem" parent="AdditionalItemsPie" index="0" unique_id=41689300]
-offset_left = -71.69706
-offset_top = -102.394
-offset_right = -7.6970596
-offset_bottom = -38.393997
+offset_top = 0.0
+offset_bottom = 64.0
+scale = Vector2(0.375, 0.375)
 
 [node name="UiBuildingPopupItem2" parent="AdditionalItemsPie" index="1" unique_id=1138148765 instance=ExtResource("6_on6xg")]
 layout_mode = 1
-offset_left = -5.4639236e-06
-offset_top = -125.0
-offset_right = 63.999996
-offset_bottom = -61.0
-scale = Vector2(0.75, 0.75)
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 64.0
+offset_bottom = 64.0
+scale = Vector2(0.375, 0.375)
 
 [node name="UiBuildingPopupItem3" parent="AdditionalItemsPie" index="2" unique_id=2105747695 instance=ExtResource("6_on6xg")]
 layout_mode = 1
-offset_left = 71.69706
-offset_top = -102.394005
-offset_right = 135.69705
-offset_bottom = -38.394005
-scale = Vector2(0.75, 0.75)
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 64.0
+offset_bottom = 64.0
+scale = Vector2(0.375, 0.375)
 
 [node name="UiQueue" parent="." index="7" unique_id=1779588501]
 visible = false

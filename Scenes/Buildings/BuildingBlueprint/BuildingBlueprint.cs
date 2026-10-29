@@ -14,6 +14,21 @@ public partial class BuildingBlueprint : Node2D
 
     public override void _Ready()
     {
+        var tileToOccupie = GetNode<Sprite2D>(nameof(Sprite2D));
+
+        int tileSize = Resource.RequiresOneTileToBuild
+            ? BuildingController.TileSize / 2
+            : BuildingController.TileSize;
+
+        foreach (var tile in Resource.TileRequiresToBuild)
+        {
+            var newTile = tileToOccupie.Duplicate() as Sprite2D;
+            newTile.Position = tile * tileSize;
+            AddChild(newTile);
+        }
+
+        tileToOccupie.QueueFree();
+
         var itemScene = GlobalPlayers.Instance.Players[Team].GlobalResources.BuildingScenes[Resource.Id];
 
         if (itemScene != null)

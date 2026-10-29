@@ -75,5 +75,21 @@ shape = SubResource("RectangleShape2D_eioss")
 visible = false
 polygon = PackedVector2Array(0, 15, 55, 15, 65, -50, -65, -50, -55, 15)
 
+[node name="AdditionalItemsPie" parent="." index="10" unique_id=198066264]
+Radius = 210.0
+
+[node name="UiBuildingPopupItem" parent="AdditionalItemsPie" index="0" unique_id=41689300]
+offset_top = -210.0
+offset_bottom = -146.0
+
+[node name="UiQueue" parent="." index="11" unique_id=1779588501]
+visible = false
+offset_left = -150.0
+offset_top = -263.0
+offset_right = 150.0
+offset_bottom = -213.0
+
 [editable path="BuildingSelectableComponent"]
 [editable path="HurtBox"]
+[editable path="UnitsPie"]
+[editable path="AdditionalItemsPie"]

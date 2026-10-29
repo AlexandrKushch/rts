@@ -14,6 +14,7 @@ Cost = Dictionary[int, int]({
 2: 25,
 3: 100
 })
-TileRequiresToBuild = PackedVector2Array(0, 0, 1, 0, -1, 0)
+TileRequiresToBuild = PackedVector2Array(1, 1, 1, -1, -1, 1, -1, -1)
+RequiresOneTileToBuild = true
 Produces = Array[Object]([])
 metadata/_custom_type_script = "uid://ck4k0rwiv3nec"

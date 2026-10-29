@@ -13,6 +13,6 @@ MaxHp = 20
 Cost = Dictionary[int, int]({
 1: 50
 })
-TileRequiresToBuild = PackedVector2Array(0, 0, 1, 0, 1, -1, 0, -1, -1, -1, -1, 0, -1, 1, 0, 1, 1, 1)
+TileRequiresToBuild = PackedVector2Array(0, 0, 1, 0, 1, -1, 0, -1, -1, -1, -1, 0)
 Produces = Array[Object]([ExtResource("2_0l34e")])
 metadata/_custom_type_script = "uid://ck4k0rwiv3nec"

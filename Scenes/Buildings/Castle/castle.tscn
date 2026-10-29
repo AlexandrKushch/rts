@@ -34,7 +34,7 @@ MaxArrowsCount = 10
 Resource = ExtResource("4_nhlnt")
 
 [node name="BuildingSelectableComponent" parent="." index="1" unique_id=550510253 node_paths=PackedStringArray("EffectedOn")]
-position = Vector2(0, -4)
+position = Vector2(0, 22)
 EffectedOn = NodePath("..")
 
 [node name="NinePatchRect" parent="BuildingSelectableComponent/Visual" parent_id_path=PackedInt32Array(550510253, 946751036) index="0" unique_id=584840865]
@@ -47,24 +47,28 @@ offset_bottom = 70.0
 position = Vector2(0, -53)
 shape = SubResource("RectangleShape2D_d1o4y")
 
-[node name="Sprite2D" parent="Visual" parent_id_path=PackedInt32Array(1843020465) index="0" unique_id=1679201315]
+[node name="Visual" parent="." index="2" unique_id=1843020465]
+position = Vector2(0, 26)
+
+[node name="Sprite2D" parent="Visual" index="0" unique_id=1679201315]
 position = Vector2(0, -71)
 texture = ExtResource("2_n84d7")
 
-[node name="BuildProgressParticles" parent="Visual" parent_id_path=PackedInt32Array(1843020465) index="1" unique_id=2143245483]
+[node name="BuildProgressParticles" parent="Visual" index="1" unique_id=2143245483]
 position = Vector2(0, -57)
 process_material = SubResource("ParticleProcessMaterial_4g0xq")
 
-[node name="DestroyParticles01" parent="Visual" parent_id_path=PackedInt32Array(1843020465) index="2" unique_id=409021009]
+[node name="DestroyParticles01" parent="Visual" index="2" unique_id=409021009]
 position = Vector2(0, -57)
 amount = 3
 
-[node name="DestroyParticles02" parent="Visual" parent_id_path=PackedInt32Array(1843020465) index="3" unique_id=910122631]
+[node name="DestroyParticles02" parent="Visual" index="3" unique_id=910122631]
 position = Vector2(0, -57)
 amount = 2
 
 [node name="HurtBox" parent="." index="3" unique_id=799690141]
 visible = false
+position = Vector2(0, 17)
 
 [node name="CollisionShape2D" parent="HurtBox" index="0" unique_id=930546286]
 position = Vector2(0, -34)
@@ -72,16 +76,17 @@ shape = SubResource("RectangleShape2D_4g0xq")
 
 [node name="CollisionPolygon2D" parent="." index="4" unique_id=168278068]
 visible = false
+position = Vector2(0, 17)
 polygon = PackedVector2Array(0, 25, -120, 25, -130, -25, 0, -25, 130, -25, 120, 25)
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="5" unique_id=82442801]
 visible = false
-position = Vector2(-111, -3)
+position = Vector2(-111, 14)
 radius = 30.0
 
 [node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="." index="6" unique_id=692338129]
 visible = false
-position = Vector2(111, -3)
+position = Vector2(111, 14)
 radius = 30.0
 
 [node name="AllyDetector" parent="." index="7" unique_id=362746832 instance=ExtResource("7_hu5e2")]
@@ -95,7 +100,7 @@ visible = false
 collision_mask = 2
 
 [node name="ShootPoint" type="Marker2D" parent="." index="9" unique_id=763550148]
-position = Vector2(0, -93)
+position = Vector2(0, -67)
 
 [node name="ReloadArrowTimer" type="Timer" parent="." index="10" unique_id=1453029037]
 wait_time = 0.4
@@ -106,16 +111,22 @@ wait_time = 2.5
 one_shot = true
 
 [node name="UiUnitsCapacity" parent="." index="12" unique_id=2021113642 instance=ExtResource("7_nhlnt")]
-offset_top = -238.0
-offset_bottom = -198.0
+offset_top = -212.0
+offset_bottom = -172.0
+
+[node name="UnitsPie" parent="." index="13" unique_id=608295903]
+offset_top = -121.0
+offset_bottom = -121.0
 
 [node name="AdditionalItemsPie" parent="." index="14" unique_id=198066264]
-offset_top = -114.0
-offset_bottom = -114.0
+offset_top = -88.0
+offset_bottom = -88.0
 
 [node name="UiQueue" parent="." index="15" unique_id=1779588501]
-offset_top = -192.0
-offset_bottom = -142.0
+offset_left = -150.0
+offset_top = -166.0
+offset_right = 150.0
+offset_bottom = -116.0
 
 [editable path="BuildingSelectableComponent"]
 [editable path="HurtBox"]

@@ -78,6 +78,7 @@ public partial class PlayerGlobalResources : Node
                 MaxHp = building.Value.MaxHp,
                 RestoreUnitsCapacity = building.Value.RestoreUnitsCapacity,
                 TileRequiresToBuild = building.Value.TileRequiresToBuild.ToArray(),
+                RequiresOneTileToBuild = building.Value.RequiresOneTileToBuild,
                 Produces = building.Value.Produces.Select(x => Units[x.Id]).ToArray(),
                 Icon = ResourceLoader.Load<Texture2D>($"{GlobalResources.Instance.Teams[_player.Team].BuildingsPath}/{name}.png")
             };
